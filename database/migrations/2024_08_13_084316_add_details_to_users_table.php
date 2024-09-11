@@ -20,14 +20,14 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('avatar')->nullable();
-            $table->string('gender')->nullable();
+            $table->enum('gender',['male','female']);
             $table->string('date_of_birth')->nullable();
             $table->string('nationality')->nullable();
             $table->string('country_of_residence')->nullable();
-            $table->string('marital_status')->nullable();
+            $table->enum('marital_status',['single','married','divorced','widowed'])->default('single')->nullable();
             $table->string('primary_email_addres')->nullable();
-            $table->enum('role', ['admin', 'student', 'teacher'])->default('student');
-        });
+            $table->string('secondary_email_address')->nullable();
+            });
     }
 
     /**
