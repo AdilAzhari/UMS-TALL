@@ -25,6 +25,12 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->id('admin')
             ->path('admin')
+            ->registration()
+            ->passwordReset()
+            ->emailVerification()
+            ->profile()
+            ->login()
+            ->default()
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -37,6 +43,9 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
+            ])
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
             ])
             ->middleware([
                 EncryptCookies::class,

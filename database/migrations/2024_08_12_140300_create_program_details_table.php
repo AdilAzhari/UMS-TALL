@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('program_details', function (Blueprint $table) {
             $table->id();
+            $table->char('program_code')->unique();
+            $table->text('description');
+            $table->integer('duration_years');
+            $table->foreignId('department_id')->constrained();
             $table->string('program_name')->nullable();
             $table->enum('program_status', ['Graduated', 'Enrolled', 'Suspended', 'Expelled']);
             $table->string('student_iD')->nullable();

@@ -13,7 +13,7 @@ class EnrollmentPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class EnrollmentPolicy
      */
     public function view(User $user, enrollment $enrollment): bool
     {
-        //
+        return true;
     }
 
     /**

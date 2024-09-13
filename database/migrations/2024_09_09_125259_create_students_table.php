@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('current_semester');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('program_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('department_id')->constrained();
+            $table->foreignId('current_term_id')->constrained('terms')->cascadeOnDelete();
             $table->timestamps();
         });
     }

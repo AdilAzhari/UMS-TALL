@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->string('middle_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('Preferred_name')->nullable();
@@ -27,7 +28,12 @@ return new class extends Migration
             $table->enum('marital_status',['single','married','divorced','widowed'])->default('single')->nullable();
             $table->string('primary_email_addres')->nullable();
             $table->string('secondary_email_address')->nullable();
-            });
+            $table->boolean('is_admin')->default(0);
+            $table->enum('role', ['admin', 'student', 'teacher']);
+            $table->boolean('is_active')->default(1);
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
+        });
     }
 
     /**

@@ -13,18 +13,17 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('description');
             $table->string('code')->unique();
-            $table->string('image');
-            $table->string('duration');
-            $table->enum('level', ['first_year', 'second_year', 'third_year', 'fourth_year']);
-            $table->string('students');
-            $table->integer('credits');
-            $table->string('assessments');
+            $table->string('name');
+            $table->text('description');
+            $table->integer('credit_hours');
+            $table->foreignId('program_id')->constrained()->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained('teachers')->cascadeOnDelete();
             $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();
             $table->foreignId('course_status_id')->constrained('course_statuses')->cascadeOnDelete();
+            $table->boolean('requires_proctor')->default(false);
+            $table->boolean('is_paid')->default(false);
+            $table->decimal('cost', 10, 2)->nullable();
             $table->timestamps();
         });
     }

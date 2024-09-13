@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
-            $table->string('room_number')->nullable();
-            $table->string('schedule'); // "Mon-Wed-Fri 10:00-11:00"
+            $table->string('group_number')->nullable();
             $table->string('semester');
+            $table->string('schedule');
             $table->integer('year');
             $table->integer('max_students')->default(30);
             $table->integer('current_students')->default(0);
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('semester_id')->constrained();
+            $table->foreignId('term_id')->constrained();
             $table->timestamps();
         });
     }
