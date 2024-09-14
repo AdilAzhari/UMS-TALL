@@ -17,7 +17,12 @@ class GradingScaleFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'grade' => $this->faker->word(),
+            'course_id' => \App\Models\Course::inRandomOrder()->first()->id(),
+            'created_at' => $this->faker->dateTimeThisYear(),
+            'min_score' => $this->faker->randomFloat(2, 0, 100),
+            'max_score' => $this->faker->randomFloat(2, 0, 100),
+            'gpa_point' => $this->faker->randomFloat(2, 0, 4),
         ];
     }
 }

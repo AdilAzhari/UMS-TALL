@@ -14,6 +14,7 @@ class ExamResultPolicy
     public function viewAny(User $user): bool
     {
         //
+        return true;
     }
 
     /**
@@ -22,6 +23,7 @@ class ExamResultPolicy
     public function view(User $user, Exam_result $examResult): bool
     {
         //
+        return true;
     }
 
     /**
@@ -30,6 +32,7 @@ class ExamResultPolicy
     public function create(User $user): bool
     {
         //
+        return true;
     }
 
     /**
@@ -38,6 +41,7 @@ class ExamResultPolicy
     public function update(User $user, Exam_result $examResult): bool
     {
         //
+        return true;
     }
 
     /**
@@ -46,6 +50,7 @@ class ExamResultPolicy
     public function delete(User $user, Exam_result $examResult): bool
     {
         //
+        return true;
     }
 
     /**
@@ -54,6 +59,7 @@ class ExamResultPolicy
     public function restore(User $user, Exam_result $examResult): bool
     {
         //
+        return true;
     }
 
     /**

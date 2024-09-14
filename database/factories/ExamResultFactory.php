@@ -17,7 +17,12 @@ class ExamResultFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'exam_id' => \App\Models\Exam::inRandomOrder()->first()->id(),
+            'student_id' => \App\Models\Student::inRandomOrder()->first()->id(),
+            'score' => $this->faker->randomFloat(2, 0, 100),
+            'status' => $this->faker->randomElement(['pass', 'fail']),
+            'note' => $this->faker->sentence(),
+            'created_at' => $this->faker->dateTimeThisYear(),
         ];
     }
 }

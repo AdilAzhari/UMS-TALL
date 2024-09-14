@@ -11,13 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(schema::hasTable('attendances')){
+            return;
+        }
+
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->date('date');
             $table->enum('status', ['present', 'absent']);
             $table->enum('reason',['sick', 'vacation', 'other'])->nullable();
-            $table->string('notes')->nullable();
-            $table->foreignId('enrollment_id')->constrained()->cascadeOnDelete();
+            $table->text('notes')->nullable();
+            $table->foreignId('enrollment_id')->constrained('enrollments')->cascadeOnDelete();
             $table->foreignId('class_id')->constrained()->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();

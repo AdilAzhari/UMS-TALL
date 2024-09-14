@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Term;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class TermSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Term::factory(10)->create();
     }
 }

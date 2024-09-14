@@ -41,7 +41,6 @@ class User extends Authenticatable implements FilamentUser
         'nationality',
         'country_of_residence',
         'marital_status',
-        'primary_email_addres',
         'secondary_email_address',
         'is_admin',
         'role',
@@ -79,5 +78,39 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->is_admin == 0;
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function createdAssignments()
+    {
+        return $this->hasMany(Assignment::class, 'created_by');
+    }
+
+    public function updatedAssignments()
+    {
+        return $this->hasMany(Assignment::class, 'updated_by');
+    }
+
+    public function createdExams()
+    {
+        return $this->hasMany(Exam::class, 'created_by');
+    }
+    public function updatedExams()
+    {
+        return $this->hasMany(Exam::class, 'updated_by');
     }
 }

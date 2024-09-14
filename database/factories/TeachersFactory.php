@@ -17,7 +17,14 @@ class TeachersFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => \App\Models\User::inRandomOrder()->first()->id(),
+            'department_id' => \App\Models\Department::inRandomOrder()->first()->id(),
+            'created_at' => $this->faker->dateTimeThisYear(),
+            'qualification' => $this->faker->word(),
+            'experience' => $this->faker->word(),
+            'specialization' => $this->faker->word(),
+            'designation' => $this->faker->word(),
+            'hire_date' => $this->faker->dateTimeThisYear(),
         ];
     }
 }

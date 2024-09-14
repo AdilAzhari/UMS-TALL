@@ -29,7 +29,7 @@ class AttendancePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,8 @@ class AttendancePolicy
      */
     public function update(User $user, Attendance $attendance): bool
     {
-        //
+
+        return true;
     }
 
     /**
@@ -45,7 +46,8 @@ class AttendancePolicy
      */
     public function delete(User $user, Attendance $attendance): bool
     {
-        //
+
+        return true;
     }
 
     /**
@@ -53,7 +55,8 @@ class AttendancePolicy
      */
     public function restore(User $user, Attendance $attendance): bool
     {
-        //
+
+        return true;
     }
 
     /**
@@ -61,6 +64,7 @@ class AttendancePolicy
      */
     public function forceDelete(User $user, Attendance $attendance): bool
     {
-        //
+
+        return true;
     }
 }

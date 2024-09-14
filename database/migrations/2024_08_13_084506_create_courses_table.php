@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::hasTable('courses')) {
+            return;
+        }
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->string('name');
-            $table->text('description');
-            $table->integer('credit_hours');
-            $table->foreignId('program_id')->constrained()->cascadeOnDelete();
+            $table->string('course_code')->unique();
+            $table->string('course_name');
+            $table->text('course_description');
+            $table->integer('course_credit');
+            $table->string('course_syllabus');
+            $table->string('course_image');
+            $table->boolean('course_status')->default(false);
             $table->foreignId('teacher_id')->constrained('teachers')->cascadeOnDelete();
             $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();
-            $table->foreignId('course_status_id')->constrained('course_statuses')->cascadeOnDelete();
             $table->boolean('requires_proctor')->default(false);
             $table->boolean('is_paid')->default(false);
             $table->decimal('cost', 10, 2)->nullable();

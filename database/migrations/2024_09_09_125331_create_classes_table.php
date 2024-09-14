@@ -11,6 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(schema::hasTable('classes')){
+            return;
+        }
+
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('group_number')->nullable();
@@ -21,8 +25,7 @@ return new class extends Migration
             $table->integer('current_students')->default(0);
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('semester_id')->constrained();
-            $table->foreignId('term_id')->constrained();
+            $table->foreignId('term_id')->constrained('terms')->cascadeOnDelete();
             $table->timestamps();
         });
     }

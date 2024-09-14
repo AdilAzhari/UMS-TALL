@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(Schema::hasTable('students')){
+           return;
+        }
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->date('enrollment_date');
             $table->integer('current_year');
-            $table->string('current_semester');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('program_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('department_id')->constrained();
+            $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();
+            $table->foreignId('department_id')->constrained('departments')->cascadeOnDelete();
             $table->foreignId('current_term_id')->constrained('terms')->cascadeOnDelete();
             $table->timestamps();
         });

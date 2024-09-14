@@ -17,7 +17,15 @@ class AssignmentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->sentence(),
+            'description' => $this->faker->sentence(),
+            'deadline' => $this->faker->dateTimeThisYear(),
+            'file' => $this->faker->word(),
+            'course_id' => \App\Models\Course::inRandomOrder()->first()->id(),
+            'created_at' => $this->faker->dateTimeThisYear(),
+            'class_id' => \App\Models\Classe::inRandomOrder()->first()->id(),
+            'teacher_id' => \App\Models\Teacher::inRandomOrder()->first()->id(),
+            'enrollment_id' => \App\Models\Enrollment::inRandomOrder()->first()->id(),
         ];
     }
 }

@@ -13,7 +13,7 @@ class AssignmentSubmissionPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -22,6 +22,7 @@ class AssignmentSubmissionPolicy
     public function view(User $user, Assignment_submission $assignmentSubmission): bool
     {
         //
+        return true;
     }
 
     /**
@@ -30,6 +31,7 @@ class AssignmentSubmissionPolicy
     public function create(User $user): bool
     {
         //
+        return true;
     }
 
     /**
@@ -38,6 +40,7 @@ class AssignmentSubmissionPolicy
     public function update(User $user, Assignment_submission $assignmentSubmission): bool
     {
         //
+        return true;
     }
 
     /**
@@ -46,6 +49,7 @@ class AssignmentSubmissionPolicy
     public function delete(User $user, Assignment_submission $assignmentSubmission): bool
     {
         //
+        return true;
     }
 
     /**
@@ -54,6 +58,7 @@ class AssignmentSubmissionPolicy
     public function restore(User $user, Assignment_submission $assignmentSubmission): bool
     {
         //
+        return true;
     }
 
     /**
@@ -62,5 +67,6 @@ class AssignmentSubmissionPolicy
     public function forceDelete(User $user, Assignment_submission $assignmentSubmission): bool
     {
         //
+        return true;
     }
 }

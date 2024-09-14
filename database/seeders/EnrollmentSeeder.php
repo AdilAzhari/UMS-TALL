@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\enrollment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class EnrollmentSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        enrollment::factory(10)->create();
     }
 }

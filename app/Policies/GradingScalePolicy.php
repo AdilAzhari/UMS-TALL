@@ -14,6 +14,7 @@ class GradingScalePolicy
     public function viewAny(User $user): bool
     {
         //
+        return true;
     }
 
     /**
@@ -22,6 +23,7 @@ class GradingScalePolicy
     public function view(User $user, Grading_scale $gradingScale): bool
     {
         //
+        return true;
     }
 
     /**
@@ -30,6 +32,7 @@ class GradingScalePolicy
     public function create(User $user): bool
     {
         //
+        return true;
     }
 
     /**
@@ -38,6 +41,7 @@ class GradingScalePolicy
     public function update(User $user, Grading_scale $gradingScale): bool
     {
         //
+        return true;
     }
 
     /**
@@ -46,6 +50,7 @@ class GradingScalePolicy
     public function delete(User $user, Grading_scale $gradingScale): bool
     {
         //
+        return true;
     }
 
     /**
@@ -54,6 +59,7 @@ class GradingScalePolicy
     public function restore(User $user, Grading_scale $gradingScale): bool
     {
         //
+        return true;
     }
 
     /**
@@ -62,5 +68,6 @@ class GradingScalePolicy
     public function forceDelete(User $user, Grading_scale $gradingScale): bool
     {
         //
+        return true;
     }
 }

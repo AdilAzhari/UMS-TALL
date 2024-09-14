@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(schema::hasTable('teachers')){
+            return;
+        }
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->string('qualification');
@@ -20,7 +23,7 @@ return new class extends Migration
             $table->string('designation');
             $table->date('hire_date');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('department_id')->constrained();
+            $table->foreignId('department_id')->constrained('departments')->cascadeOnDelete();
             $table->timestamps();
         });
     }

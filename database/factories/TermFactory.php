@@ -17,7 +17,10 @@ class TermFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->word(),
+            'start_date' => $this->faker->dateTimeThisYear(),
+            'end_date' => $this->faker->dateTimeThisYear(),
+            'is_current' => $this->faker->boolean(),
         ];
     }
 }

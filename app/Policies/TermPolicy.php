@@ -13,7 +13,7 @@ class TermPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -22,6 +22,7 @@ class TermPolicy
     public function view(User $user, Term $term): bool
     {
         //
+        return true;
     }
 
     /**
@@ -38,6 +39,7 @@ class TermPolicy
     public function update(User $user, Term $term): bool
     {
         //
+        return true;
     }
 
     /**
@@ -46,6 +48,7 @@ class TermPolicy
     public function delete(User $user, Term $term): bool
     {
         //
+        return true;
     }
 
     /**
@@ -54,6 +57,7 @@ class TermPolicy
     public function restore(User $user, Term $term): bool
     {
         //
+        return true;
     }
 
     /**
@@ -62,5 +66,6 @@ class TermPolicy
     public function forceDelete(User $user, Term $term): bool
     {
         //
+        return true;
     }
 }

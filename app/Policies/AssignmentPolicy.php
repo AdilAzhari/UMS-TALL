@@ -29,7 +29,8 @@ class AssignmentPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
+
     }
 
     /**
@@ -38,6 +39,7 @@ class AssignmentPolicy
     public function update(User $user, Assignment $assignment): bool
     {
         //
+        return true;
     }
 
     /**
@@ -45,7 +47,7 @@ class AssignmentPolicy
      */
     public function delete(User $user, Assignment $assignment): bool
     {
-        //
+        return true;
     }
 
     /**

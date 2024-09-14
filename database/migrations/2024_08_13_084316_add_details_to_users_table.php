@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('nationality')->nullable();
             $table->string('country_of_residence')->nullable();
             $table->enum('marital_status',['single','married','divorced','widowed'])->default('single')->nullable();
-            $table->string('primary_email_addres')->nullable();
             $table->string('secondary_email_address')->nullable();
             $table->boolean('is_admin')->default(0);
             $table->enum('role', ['admin', 'student', 'teacher']);

@@ -22,6 +22,7 @@ class TeacherPolicy
     public function view(User $user, Teacher $teacher): bool
     {
         //
+        return true;
     }
 
     /**
@@ -30,6 +31,7 @@ class TeacherPolicy
     public function create(User $user): bool
     {
         //
+        return true;
     }
 
     /**
@@ -38,6 +40,7 @@ class TeacherPolicy
     public function update(User $user, Teacher $teacher): bool
     {
         //
+        return true;
     }
 
     /**
@@ -46,6 +49,7 @@ class TeacherPolicy
     public function delete(User $user, Teacher $teacher): bool
     {
         //
+        return true;
     }
 
     /**
@@ -54,6 +58,7 @@ class TeacherPolicy
     public function restore(User $user, Teacher $teacher): bool
     {
         //
+        return true;
     }
 
     /**
@@ -62,5 +67,6 @@ class TeacherPolicy
     public function forceDelete(User $user, Teacher $teacher): bool
     {
         //
+        return true;
     }
 }

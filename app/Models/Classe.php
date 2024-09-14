@@ -8,4 +8,52 @@ use Illuminate\Database\Eloquent\Model;
 class Classe extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'group_number',
+        'schedule',
+        'year',
+        'max_students',
+        'current_students',
+        'course_id',
+        'teacher_id',
+        'term_id',
+    ];
+    protected $casts = [
+        'max_students' => 'integer',
+        'current_students' => 'integer',
+    ];
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+
+    public function semester()
+    {
+        return $this->belongsTo(Term::class);
+    }
+
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
+    }
+
+    public function exams()
+    {
+        return $this->hasMany(Exam::class);
+    }
 }

@@ -8,4 +8,34 @@ use Illuminate\Database\Eloquent\Model;
 class Assignment extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'subject_id',
+        'title',
+        'description',
+        'file',
+        'deadline',
+    ];
+    protected $casts = [
+        'deadline' => 'datetime',
+    ];
+    public function class()
+    {
+        return $this->belongsTo(Classe::class);
+    }
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+    public function submissions()
+    {
+        return $this->hasMany(AssignmentSubmission::class);
+    }
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }
