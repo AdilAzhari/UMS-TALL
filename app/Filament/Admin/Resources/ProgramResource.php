@@ -17,9 +17,8 @@ class ProgramResource extends Resource
 {
     protected static ?string $model = Program::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
     protected static ?string $navigationGroup = 'Administrative';
-
     public static function form(Form $form): Form
     {
         return $form
@@ -27,23 +26,30 @@ class ProgramResource extends Resource
                 Forms\Components\TextInput::make('program_code')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('description')
+                Forms\Components\MarkdownEditor::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('duration_years')
+                Forms\Components\Select::make('duration_years')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('department_id')
-                    ->required()
-                    ->numeric(),
+                    ->options([
+                        '1 year', '2 years', '3 years', '4 years', '5 years'
+                    ]),
+                Forms\Components\Select::make('department_id')
+                    ->multiple()
+                    ->label('Department')
+                    ->relationship('department', 'code'),
                 Forms\Components\TextInput::make('program_name')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('program_status')
+                Forms\Components\select::make('program_type')
+                    ->label('Program Type')
+                    ->options([
+                        'Undergraduate', 'Postgraduate', 'Diploma'
+                    ])
                     ->required(),
-                Forms\Components\TextInput::make('student_iD')
-                    ->maxLength(255)
-                    ->default(null),
+                Forms\Components\Select::make('student_id')
+                    ->label('Student')
+                    ->relationship('students', 'user_id'),
             ]);
     }
 
@@ -62,8 +68,10 @@ class ProgramResource extends Resource
                 Tables\Columns\TextColumn::make('program_name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('program_status'),
-                Tables\Columns\TextColumn::make('student_iD')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('program_type'),
+                Tables\Columns\TextColumn::make('student_id')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

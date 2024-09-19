@@ -9,18 +9,18 @@ class Course extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'course_name',
-        'course_code',
-        'course_credit',
-        'course_teacher',
-        'course_description',
-        'course_syllabus',
-        'course_image',
-        'course_status',
-        'requires_proctor',
-        'is_paid',
+        'name',
+        'code',
+        'credit',
+        'description',
+        'syllabus',
+        'image',
+        'status',
         'cost',
+        'is_paid',
+        'teacher_id',
         'program_id',
+        'proctor_id',
     ];
 
     public function program()
@@ -51,5 +51,9 @@ class Course extends Model
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+    public function proctor()
+    {
+        return $this->belongsTo(Proctor::class);
     }
 }

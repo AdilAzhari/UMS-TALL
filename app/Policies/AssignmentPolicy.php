@@ -55,7 +55,7 @@ class AssignmentPolicy
      */
     public function restore(User $user, Assignment $assignment): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -63,6 +63,6 @@ class AssignmentPolicy
      */
     public function forceDelete(User $user, Assignment $assignment): bool
     {
-        //
+        return true;
     }
 }

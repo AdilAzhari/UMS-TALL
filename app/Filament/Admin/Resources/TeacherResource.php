@@ -23,29 +23,30 @@ class TeacherResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('qualification')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('experience')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('specialization')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('department')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('designation')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\DatePicker::make('hire_date')
-                    ->required(),
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('department_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Section::make('Professional Information')
+                ->description('Enter professional and employment details')
+                ->schema([
+                    Forms\Components\TextInput::make('qualification')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('experience')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('specialization')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\select::make('department_id')
+                        ->relationship('department', 'code')
+                        ->required(),
+                    Forms\Components\TextInput::make('designation')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\DatePicker::make('hire_date')
+                        ->required(),
+                    Forms\Components\select::make('user_id')
+                        ->relationship('user', 'name')
+                        ->required(),
+                ])->columns(2),
             ]);
     }
 

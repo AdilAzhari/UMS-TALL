@@ -16,16 +16,15 @@ return new class extends Migration
         }
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('course_code')->unique();
-            $table->string('course_name');
-            $table->text('course_description');
-            $table->integer('course_credit');
-            $table->string('course_syllabus');
-            $table->string('course_image');
-            $table->boolean('course_status')->default(false);
-            $table->foreignId('teacher_id')->constrained('teachers')->cascadeOnDelete();
+            $table->string('code')->unique();
+            $table->string('name');
+            $table->text('description');
+            $table->integer('credit')->default(3);
+            $table->string('syllabus');
+            $table->string('image');
+            $table->boolean('status')->default(false);
             $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();
-            $table->boolean('requires_proctor')->default(false);
+            $table->boolean('proctor_id')->default(false);
             $table->boolean('is_paid')->default(false);
             $table->decimal('cost', 10, 2)->nullable();
             $table->timestamps();

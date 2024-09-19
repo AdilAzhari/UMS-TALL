@@ -15,6 +15,7 @@ class Student extends Model
         'program_id',
         'department_id',
         'current_term_id',
+        'status',
     ];
 
     public function user()
@@ -35,7 +36,7 @@ class Student extends Model
     {
         return $this->belongsTo(Department::class);
     }
-    public function currentSemester()
+    public function currentTerm()
     {
         return $this->belongsTo(Term::class, 'current_Term_id');
     }
@@ -49,5 +50,8 @@ class Student extends Model
     {
         return $this->hasMany(AssignmentSubmission::class);
     }
-
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
 }

@@ -28,8 +28,8 @@ class CourseFactory extends Factory
             'requires_proctor' => $this->faker->boolean(),
             'is_paid' => $this->faker->boolean(),
             'cost' => $this->faker->randomFloat(2, 0, 1000),
-            'program_id' => \App\Models\Program::inRandomOrder()->first()->id(),
-            'teacher_id' => \App\Models\Teacher::inRandomOrder()->first()->id(),
+            'program_id' => \App\Models\Program::inRandomOrder()->first()->id,
+            'teacher_id' => \App\Models\Teacher::inRandomOrder()->first()->id,
         ];
     }
 }

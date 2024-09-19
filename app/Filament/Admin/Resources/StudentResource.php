@@ -2,6 +2,7 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\DepartmentResource\RelationManagers\StudentsRelationManager;
 use App\Filament\Admin\Resources\StudentResource\Pages;
 use App\Filament\Admin\Resources\StudentResource\RelationManagers;
 use App\Models\Student;
@@ -23,23 +24,37 @@ class StudentResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('enrollment_date')
-                    ->required(),
-                Forms\Components\TextInput::make('current_year')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('program_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('department_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('current_term_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Section::make('Personal Information')
+                ->description('Enter your personal information')
+                ->schema([
+                    Forms\Components\DatePicker::make('enrollment_date')
+                        ->required(),
+                    Forms\Components\TextInput::make('current_year')
+                        ->required()
+                        ->numeric(),
+                    Forms\Components\Select::make('user_id')
+                        ->relationship('user', 'name')
+                        // ->searchable()
+                        ->required(),
+                ])->columns(2),
+                Forms\Components\Section::make('Academic Information')
+                ->description('Enter your academic information')
+                ->schema([
+                    Forms\Components\Select::make('current_term_id')
+                        ->label('Term')
+                        ->relationship('currentTerm', 'name'),
+                    Forms\Components\Select::make('program_id')
+                        ->label('Program')
+                        ->relationship('program', 'program_name'),
+                    Forms\Components\Select::make('department_id')
+                        ->label('Department')
+                        ->relationship('department', 'name'),
+                    Forms\Components\Select::make('status')
+                        ->options([
+                            'Active', 'Inactive'
+                        ]),
+                ])->columns(4),
+
             ]);
     }
 
@@ -54,9 +69,6 @@ class StudentResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('program_id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('department_id')
@@ -90,7 +102,7 @@ class StudentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            StudentsRelationManager::class
         ];
     }
 

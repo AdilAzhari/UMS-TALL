@@ -16,9 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ExamResource extends Resource
 {
     protected static ?string $model = Exam::class;
-    protected static ?string $navigationGroup = 'Academic';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+    protected static ?string $navigationGroup = 'Academic';
     public static function form(Form $form): Form
     {
         return $form
@@ -47,6 +47,9 @@ class ExamResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('teacher_id')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('course_id')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('created_by')
@@ -81,6 +84,9 @@ class ExamResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('teacher_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('course_id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_by')

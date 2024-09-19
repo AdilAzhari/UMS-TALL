@@ -11,11 +11,20 @@ class Teacher extends Model
     protected $fillable = [
         'user_id',
         'department_id',
+        'course_id',
+        'program_id',
         'qualification',
         'experience',
         'specialization',
         'designation',
         'hire_date',
+        'phone_number',
+        'status',
+    ];
+    protected $casts = [
+        'hire_date' => 'datetime',
+        'status' => 'boolean',
+        'experience' => 'integer',
     ];
     public function user()
     {

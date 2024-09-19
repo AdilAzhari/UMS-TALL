@@ -26,26 +26,7 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
-        'first_name',
-        'middle_name',
-        'last_name',
-        'is_active',
-        'Preferred_name',
-        'gender',
-        'avatar',
-        'zip_code',
-        'state',
-        'city_of_residence',
-        'phone_number',
-        'date_of_birth',
-        'nationality',
-        'country_of_residence',
-        'marital_status',
-        'secondary_email_address',
-        'is_admin',
         'role',
-        'created_by',
-        'updated_by',
     ];
 
     /**
@@ -70,8 +51,8 @@ class User extends Authenticatable implements FilamentUser
             'password' => 'hashed',
             'is_active' => 'boolean',
             'is_admin' => 'boolean',
+            'role' => 'string',
             'date_of_birth' => 'datetime',
-            'created_at' => 'datetime',
         ];
     }
 
@@ -112,5 +93,13 @@ class User extends Authenticatable implements FilamentUser
     public function updatedExams()
     {
         return $this->hasMany(Exam::class, 'updated_by');
+    }
+    public function createdCourses()
+    {
+        return $this->hasMany(Course::class, 'created_by');
+    }
+    public function TechnicalTeam()
+    {
+        return $this->hasOne(TechnicalTeam::class);
     }
 }

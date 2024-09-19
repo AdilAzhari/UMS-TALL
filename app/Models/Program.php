@@ -10,11 +10,14 @@ class Program extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'code',
+        'program_code',
+        'program_name',
         'description',
+        'program_status',
         'duration_years',
         'department_id',
+        'program_type',
+        'student_id',
     ];
     public function department()
     {

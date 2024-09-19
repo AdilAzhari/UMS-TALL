@@ -18,9 +18,9 @@ class EnrollmentFactory extends Factory
     {
         return [
             'enrollment_date' => $this->faker->dateTimeThisYear(),
-            'student_id' => \App\Models\Student::inRandomOrder()->first()->id(),
+            'student_id' => \App\Models\Student::inRandomOrder()->first()->id,
             'created_at' => $this->faker->dateTimeThisYear(),
-            'class_id' => \App\Models\Classe::inRandomOrder()->first()->id(),
+            'class_id' => \App\Models\Classe::inRandomOrder()->first()->id,
             'status' => $this->faker->randomElement(['enrolled', 'pending', 'completed']),
         ];
     }

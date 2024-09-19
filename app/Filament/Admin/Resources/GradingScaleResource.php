@@ -16,9 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class GradingScaleResource extends Resource
 {
     protected static ?string $model = GradingScale::class;
-    protected static ?string $navigationGroup = 'Academic';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+    protected static ?string $navigationGroup = 'Academic';
     public static function form(Form $form): Form
     {
         return $form

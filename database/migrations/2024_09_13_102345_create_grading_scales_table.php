@@ -17,6 +17,8 @@ return new class extends Migration
             $table->decimal('min_score', 5, 2);
             $table->decimal('max_score', 5, 2);
             $table->decimal('gpa_point', 3, 2);
+            $table->foreignId('student_id')->constrained('students')->cascadeOnDelete();
+            $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->timestamps();
         });
     }

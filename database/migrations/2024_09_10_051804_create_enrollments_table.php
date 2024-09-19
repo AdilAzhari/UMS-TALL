@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['enrolled', 'pending', 'completed']);
+            $table->enum('status', ['enrolled', 'pending', 'completed', 'dropped'])->default('pending');
             $table->date('enrollment_date');
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->foreignId('class_id')->constrained()->cascadeOnDelete();

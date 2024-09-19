@@ -16,7 +16,7 @@ return new class extends Migration
         }
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
-            $table->char('program_code')->unique();
+            $table->string('program_code')->unique();
             $table->text('description');
             $table->integer('duration_years');
             $table->foreignId('department_id')->constrained()->cascadeOnDelete();

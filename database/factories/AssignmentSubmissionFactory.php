@@ -17,16 +17,16 @@ class AssignmentSubmissionFactory extends Factory
     public function definition(): array
     {
         return [
-            'created_at' => $this->faker->dateTimeThisYear(),
+            'created_at' => $this->faker->dateTimeThisYear,
             'obtained_marks' => $this->faker->randomFloat(2, 0, 100),
             'status' => $this->faker->randomElement(['submitted', 'graded']),
             'remarks' => $this->faker->sentence(),
             'submitted_at' => $this->faker->dateTimeThisYear(),
             'graded_at' => $this->faker->dateTimeThisYear(),
-            'graded_by' => \App\Models\Teacher::inRandomOrder()->first()->id(),
+            'graded_by' => \App\Models\Teacher::inRandomOrder()->first()->id,
             'feedback' => $this->faker->sentence(),
-            'assignment_id' => \App\Models\Assignment::inRandomOrder()->first()->id(),
-            'student_id' => \App\Models\Student::inRandomOrder()->first()->id(),
+            'assignment_id' => \App\Models\Assignment::inRandomOrder()->first()->id,
+            'student_id' => \App\Models\Student::inRandomOrder()->first()->id,
         ];
     }
 }

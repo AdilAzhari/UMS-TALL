@@ -17,40 +17,36 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $navigationGroup = 'Users';
-
     public static function form(Form $form): Form
     {
         return $form
         ->schema([
-            // Personal Information Section
-            Forms\Components\Section::make('Personal Information')
-                ->description('Enter your personal information')
+            Forms\Components\Section::make('Basic Information')
+                ->description('Enter basic user information')
                 ->schema([
-                    Forms\Components\TextInput::make('first_name')
-                        ->maxLength(255)
-                        ->default(null),
+                    Forms\Components\TextInput::make('name')
+                        ->label('First Name')
+                        ->required()
+                        ->maxLength(255),
                     Forms\Components\TextInput::make('middle_name')
                         ->maxLength(255)
                         ->default(null),
                     Forms\Components\TextInput::make('last_name')
                         ->maxLength(255)
                         ->default(null),
-                    Forms\Components\TextInput::make('date_of_birth')
+                    Forms\Components\TextInput::make('Preferred_name')
+                        ->label('Preferred Name (Nickname) Optional')
                         ->maxLength(255)
                         ->default(null),
-                    Forms\Components\TextInput::make('nationality')
-                        ->maxLength(255)
-                        ->default(null),
-                    Forms\Components\TextInput::make('marital_status'),
-                ])->columns(3),
-        
-            // Contact Information Section
+                ])->columns(2),
+
             Forms\Components\Section::make('Contact Information')
-                ->description('Provide your contact details')
+                ->description('Enter user contact details')
                 ->schema([
-                    Forms\Components\TextInput::make('primary_email_address')
+                    Forms\Components\TextInput::make('email')
+                        ->label('Primary Email Address')
                         ->email()
                         ->required()
                         ->maxLength(255),
@@ -62,6 +58,43 @@ class UserResource extends Resource
                         ->tel()
                         ->maxLength(255)
                         ->default(null),
+                ])->columns(2),
+
+            Forms\Components\Section::make('Security')
+                ->description('Set user password')
+                ->schema([
+                    Forms\Components\TextInput::make('password')
+                        ->password()
+                        ->required()
+                        ->maxLength(255),
+                ])->columns(1),
+
+            Forms\Components\Section::make('Personal Details')
+                ->description('Enter additional personal information')
+                ->schema([
+                    Forms\Components\select::make('gender')
+                        ->options([
+                            'male',
+                            'female',
+                        ])
+                        ->required(),
+                    Forms\Components\DatePicker::make('date_of_birth')
+                        ->default(null),
+                    Forms\Components\TextInput::make('nationality')
+                        ->maxLength(255)
+                        ->default(null),
+                    Forms\Components\select::make('marital_status')
+                        ->options([
+                            'single',
+                            'married',
+                            'divorced',
+                            'widowed',
+                        ])->default('single'),
+                ])->columns(2),
+
+            Forms\Components\Section::make('Address Information')
+                ->description('Enter user address details')
+                ->schema([
                     Forms\Components\TextInput::make('city_of_residence')
                         ->maxLength(255)
                         ->default(null),
@@ -74,40 +107,30 @@ class UserResource extends Resource
                     Forms\Components\TextInput::make('country_of_residence')
                         ->maxLength(255)
                         ->default(null),
-                ])->columns(3),
-        
-            // Account Information Section
-            Forms\Components\Section::make('Account Information')
-                ->description('Manage account details')
-                ->schema([
-                    Forms\Components\TextInput::make('name')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('email')
-                        ->email()
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\DateTimePicker::make('email_verified_at'),
-                    Forms\Components\TextInput::make('avatar')
-                        ->maxLength(255)
-                        ->default(null),
                 ])->columns(2),
-        
-            // Role and Permissions Section
-            Forms\Components\Section::make('Role & Permissions')
-                ->description('Manage user roles and permissions')
+
+            Forms\Components\Section::make('Account Settings')
+                ->description('Configure user account settings')
                 ->schema([
-                    Forms\Components\TextInput::make('role')
-                        ->required(),
-                    Forms\Components\Toggle::make('is_admin')
+                    Forms\Components\select::make('role')
+                        ->options([
+                            'student',
+                            'teacher',
+                            'admin',
+                            'technical_team',
+                        ])
                         ->required(),
                     Forms\Components\Toggle::make('is_active')
                         ->required(),
+                    Forms\Components\fileupload::make('avatar')
+                        ->label('Profile Picture')
+                        ->image()
+                        ->disk('public')
+                        ->default(null),
                 ])->columns(2),
-        
-            // Metadata Section
-            Forms\Components\Section::make('Metadata')
-                ->description('System-generated information')
+
+            Forms\Components\Section::make('System Information')
+                ->description('System-managed fields')
                 ->schema([
                     Forms\Components\TextInput::make('created_by')
                         ->numeric()
@@ -116,8 +139,7 @@ class UserResource extends Resource
                         ->numeric()
                         ->default(null),
                 ])->columns(2),
-        ])->columns(3);
-        
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -165,8 +187,6 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('country_of_residence')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('marital_status'),
-                Tables\Columns\TextColumn::make('primary_email_addres')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('secondary_email_address')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_admin')

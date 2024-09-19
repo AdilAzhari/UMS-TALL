@@ -29,7 +29,7 @@ class ExamPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,8 @@ class ExamPolicy
      */
     public function update(User $user, Exam $exam): bool
     {
-        //
+        return true;
+
     }
 
     /**
@@ -45,7 +46,8 @@ class ExamPolicy
      */
     public function delete(User $user, Exam $exam): bool
     {
-        //
+        return true;
+
     }
 
     /**
@@ -53,7 +55,7 @@ class ExamPolicy
      */
     public function restore(User $user, Exam $exam): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +63,6 @@ class ExamPolicy
      */
     public function forceDelete(User $user, Exam $exam): bool
     {
-        //
+        return true;
     }
 }

@@ -16,9 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TermResource extends Resource
 {
     protected static ?string $model = Term::class;
-    protected static ?string $navigationGroup = 'Academic';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+    protected static ?string $navigationGroup = 'Administrative';
     public static function form(Form $form): Form
     {
         return $form

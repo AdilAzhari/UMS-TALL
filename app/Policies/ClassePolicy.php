@@ -29,7 +29,7 @@ class ClassePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,8 @@ class ClassePolicy
      */
     public function update(User $user, Classe $classe): bool
     {
-        //
+        return true;
+
     }
 
     /**
@@ -45,7 +46,8 @@ class ClassePolicy
      */
     public function delete(User $user, Classe $classe): bool
     {
-        //
+        return true;
+
     }
 
     /**
@@ -53,7 +55,7 @@ class ClassePolicy
      */
     public function restore(User $user, Classe $classe): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +63,6 @@ class ClassePolicy
      */
     public function forceDelete(User $user, Classe $classe): bool
     {
-        //
+        return true;
     }
 }

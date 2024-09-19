@@ -17,8 +17,9 @@ class CourseResource extends Resource
 {
     protected static ?string $model = Course::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
     protected static ?string $navigationGroup = 'Academic';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -47,9 +48,6 @@ class CourseResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('program_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('course_status_id')
                     ->required()
                     ->numeric(),
                 Forms\Components\Toggle::make('requires_proctor')
@@ -83,9 +81,6 @@ class CourseResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('program_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('course_status_id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('requires_proctor')

@@ -12,6 +12,8 @@ class GradingScale extends Model
         'grade',
         'min_score',
         'max_score',
+        'student_id ',
+        'course_id',
         'gpa_point',
     ];
 }

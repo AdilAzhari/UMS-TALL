@@ -6,7 +6,7 @@ use App\Models\Exam;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ExamsSeeder extends Seeder
+class ExamSeeder extends Seeder
 {
     /**
      * Run the database seeds.

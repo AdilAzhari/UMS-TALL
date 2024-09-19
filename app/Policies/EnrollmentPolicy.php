@@ -29,7 +29,7 @@ class EnrollmentPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class EnrollmentPolicy
      */
     public function update(User $user, enrollment $enrollment): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class EnrollmentPolicy
      */
     public function delete(User $user, enrollment $enrollment): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class EnrollmentPolicy
      */
     public function restore(User $user, enrollment $enrollment): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class EnrollmentPolicy
      */
     public function forceDelete(User $user, enrollment $enrollment): bool
     {
-        //
+        return true;
     }
 }

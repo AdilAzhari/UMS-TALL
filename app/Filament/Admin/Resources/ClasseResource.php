@@ -17,7 +17,7 @@ class ClasseResource extends Resource
 {
     protected static ?string $model = Classe::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
     protected static ?string $navigationGroup = 'Academic';
     public static function form(Form $form): Form
     {
@@ -26,12 +26,6 @@ class ClasseResource extends Resource
                 Forms\Components\TextInput::make('group_number')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('semester')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('schedule')
-                    ->required()
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('year')
                     ->required()
                     ->numeric(),
@@ -60,10 +54,6 @@ class ClasseResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('group_number')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('semester')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('schedule')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('year')
                     ->numeric()

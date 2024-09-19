@@ -17,9 +17,8 @@ class AttendanceResource extends Resource
 {
     protected static ?string $model = Attendance::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
     protected static ?string $navigationGroup = 'Academic';
-    
     public static function form(Form $form): Form
     {
         return $form
@@ -29,9 +28,8 @@ class AttendanceResource extends Resource
                 Forms\Components\TextInput::make('status')
                     ->required(),
                 Forms\Components\TextInput::make('reason'),
-                Forms\Components\TextInput::make('notes')
-                    ->maxLength(255)
-                    ->default(null),
+                Forms\Components\Textarea::make('notes')
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('enrollment_id')
                     ->required()
                     ->numeric(),
@@ -56,8 +54,6 @@ class AttendanceResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status'),
                 Tables\Columns\TextColumn::make('reason'),
-                Tables\Columns\TextColumn::make('notes')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('enrollment_id')
                     ->numeric()
                     ->sortable(),
