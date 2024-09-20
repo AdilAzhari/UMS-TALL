@@ -17,7 +17,6 @@ class Program extends Model
         'duration_years',
         'department_id',
         'program_type',
-        'student_id',
     ];
     public function department()
     {

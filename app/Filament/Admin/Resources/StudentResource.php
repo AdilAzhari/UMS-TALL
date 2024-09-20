@@ -5,6 +5,13 @@ namespace App\Filament\Admin\Resources;
 use App\Filament\Admin\Resources\DepartmentResource\RelationManagers\StudentsRelationManager;
 use App\Filament\Admin\Resources\StudentResource\Pages;
 use App\Filament\Admin\Resources\StudentResource\RelationManagers;
+use App\Filament\Admin\Resources\StudentResource\RelationManagers\AssignmentSubmissionsRelationManager;
+use App\Filament\Admin\Resources\StudentResource\RelationManagers\CoursesRelationManager;
+use App\Filament\Admin\Resources\StudentResource\RelationManagers\CurrentTermRelationManager;
+use App\Filament\Admin\Resources\StudentResource\RelationManagers\DepartmentRelationManager;
+use App\Filament\Admin\Resources\StudentResource\RelationManagers\EnrollmentsRelationManager;
+use App\Filament\Admin\Resources\StudentResource\RelationManagers\ExamResultsRelationManager;
+use App\Filament\Admin\Resources\StudentResource\RelationManagers\ProgramRelationManager;
 use App\Models\Student;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -102,7 +109,14 @@ class StudentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            StudentsRelationManager::class
+            StudentsRelationManager::class,
+            AssignmentSubmissionsRelationManager::class,
+            CoursesRelationManager::class,
+            CurrentTermRelationManager::class,
+            DepartmentRelationManager::class,
+            EnrollmentsRelationManager::class,
+            ExamResultsRelationManager::class,
+            ProgramRelationManager::class,
         ];
     }
 

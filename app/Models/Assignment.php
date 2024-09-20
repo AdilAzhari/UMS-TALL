@@ -9,11 +9,13 @@ class Assignment extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'subject_id',
         'title',
         'description',
         'file',
         'deadline',
+        'total_marks',
+        'course_id',
+        'created_by',
     ];
     protected $casts = [
         'deadline' => 'datetime',
@@ -38,4 +40,13 @@ class Assignment extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+    public function week()
+    {
+        return $this->belongsTo(Week::class);
+    }
+
 }

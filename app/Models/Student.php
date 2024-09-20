@@ -13,6 +13,7 @@ class Student extends Model
         'current_year',
         'user_id',
         'program_id',
+        'student_id',
         'department_id',
         'current_term_id',
         'status',

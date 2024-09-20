@@ -13,6 +13,7 @@ class Term extends Model
         'start_date',
         'end_date',
         'is_current',
+        'current_term_id',
     ];
     protected $casts = [
         'start_date' => 'datetime',
@@ -23,7 +24,6 @@ class Term extends Model
     {
         return $this->hasMany(Classe::class);
     }
-
     public function currentStudents()
     {
         return $this->hasMany(Student::class, 'current_term_id');

@@ -56,4 +56,20 @@ class Course extends Model
     {
         return $this->belongsTo(Proctor::class);
     }
+    public function weeks()
+    {
+        return $this->hasMany(Week::class);
+    }
+    public function quizzes()
+    {
+        return $this->hasMany(Quizze::class);
+    }
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }

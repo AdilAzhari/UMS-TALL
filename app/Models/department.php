@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class department extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'code','teacher_id','student_id'];//head_of_department
+    protected $fillable = ['name', 'description', 'code'];//head_of_department
     public function programs()
     {
         return $this->hasMany(Program::class);

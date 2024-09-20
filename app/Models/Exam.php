@@ -13,12 +13,14 @@ class Exam extends Model
         'exam_description',
         'exam_duration',
         'exam_rules',
-        'passing_score',
+        'exam_passing_score',
         'exam_questions',
+        'exam_answers',
         'created_by',
         'updated_by',
-        'exam_passing_score',
-        'exam_answers'
+        'created_by',
+        'updated_by',
+
     ];
     public function class()
     {
@@ -63,10 +65,5 @@ class Exam extends Model
     public function assignments()
     {
         return $this->hasMany(Assignment::class);
-    }
-
-    public function exams()
-    {
-        return $this->hasMany(Exam::class);
     }
 }
