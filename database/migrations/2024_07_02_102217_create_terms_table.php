@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('terms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('current_term_id')->constrained('terms')->cascadeOnDelete();
+            $table->foreignId('current_term_id')->nullable()->constrained('terms')->cascadeOnDelete();
             $table->string('name');
             $table->date('start_date');
             $table->date('end_date');

@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Teacher extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'user_id',
         'department_id',
-        'course_id',
         'program_id',
         'qualification',
         'experience',
@@ -20,6 +20,8 @@ class Teacher extends Model
         'hire_date',
         'phone_number',
         'status',
+        'created_by',
+        'updated_by',
     ];
     protected $casts = [
         'hire_date' => 'datetime',
@@ -57,5 +59,17 @@ class Teacher extends Model
     public function gradedAssignments()
     {
         return $this->hasMany(AssignmentSubmission::class, 'graded_by');
+    }
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+    public function TechnicalTeam()
+    {
+        return $this->hasOne(TechnicalTeam::class);
     }
 }

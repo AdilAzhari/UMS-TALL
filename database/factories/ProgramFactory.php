@@ -20,13 +20,11 @@ class ProgramFactory extends Factory
     {
         return [
             'program_name' => $this->faker->word(),
-            'created_at' => $this->faker->dateTimeThisYear(),
             'program_code' => $this->faker->word(),
             'description' => $this->faker->sentence(),
             'duration_years' => $this->faker->numberBetween(1, 4),
             'program_status' => $this->faker->randomElement(['Graduated', 'Enrolled', 'Suspended', 'Expelled']),
             'program_type' => $this->faker->randomElement(['Undergraduate', 'Postgraduate', 'Diploma']),
-            'student_id' => Student::inRandomOrder()->first()->id,
             'department_id' => department::inRandomOrder()->first()->id,
         ];
     }

@@ -16,41 +16,37 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CourseResource extends Resource
 {
     protected static ?string $model = Course::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-book-open';
-    protected static ?string $navigationGroup = 'Academic';
-
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+    protected static ?string $navigationGroup = 'Academic Structure';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('course_code')
+                Forms\Components\TextInput::make('code')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('course_name')
+                Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('course_description')
+                Forms\Components\Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('course_credit')
+                Forms\Components\TextInput::make('credit')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('course_syllabus')
+                    ->numeric()
+                    ->default(3),
+                Forms\Components\TextInput::make('syllabus')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\FileUpload::make('course_image')
+                Forms\Components\FileUpload::make('image')
                     ->image()
                     ->required(),
-                Forms\Components\Toggle::make('course_status')
+                Forms\Components\Toggle::make('status')
                     ->required(),
-                Forms\Components\TextInput::make('teacher_id')
+                Forms\Components\select::make('program_id')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('program_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\Toggle::make('requires_proctor')
+                    ->relationship('program', 'program_name'),
+                Forms\Components\Toggle::make('requier_proctor')
                     ->required(),
                 Forms\Components\Toggle::make('is_paid')
                     ->required(),
@@ -65,25 +61,22 @@ class CourseResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('course_code')
+                Tables\Columns\TextColumn::make('code')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('course_name')
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('course_credit')
+                Tables\Columns\TextColumn::make('credit')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('course_syllabus')
+                Tables\Columns\TextColumn::make('syllabus')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('course_image'),
-                Tables\Columns\IconColumn::make('course_status')
+                Tables\Columns\ImageColumn::make('image'),
+                Tables\Columns\IconColumn::make('status')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('teacher_id')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('program_id')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\IconColumn::make('requires_proctor')
+                Tables\Columns\IconColumn::make('requier_proctor')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('is_paid')
                     ->boolean(),

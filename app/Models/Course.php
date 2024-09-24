@@ -16,6 +16,7 @@ class Course extends Model
         'syllabus',
         'image',
         'status',
+        'requier_proctor',
         'cost',
         'is_paid',
         'teacher_id',

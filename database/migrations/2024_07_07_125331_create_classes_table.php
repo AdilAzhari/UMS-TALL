@@ -11,10 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(schema::hasTable('classes')){
-            return;
-        }
-
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('group_number')->nullable();

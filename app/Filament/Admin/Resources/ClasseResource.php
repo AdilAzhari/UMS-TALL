@@ -16,17 +16,18 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ClasseResource extends Resource
 {
     protected static ?string $model = Classe::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
-    protected static ?string $navigationGroup = 'Academic';
+    protected static ?string $navigationGroup = 'Academic Structure';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('group_number')
                     ->maxLength(255)
+                    ->placeholder('write the group number it should be unique and start with course code')
                     ->default(null),
                 Forms\Components\TextInput::make('year')
+                    ->placeholder('write the year of the group')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('max_students')
@@ -37,15 +38,15 @@ class ClasseResource extends Resource
                     ->required()
                     ->numeric()
                     ->default(0),
-                Forms\Components\TextInput::make('course_id')
+                Forms\Components\select::make('course_id')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('teacher_id')
+                    ->relationship('course', 'name'),
+                Forms\Components\select::make('teacher_id')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('term_id')
+                    ->relationship('teacher', 'user_id'),
+                Forms\Components\select::make('term_id')
                     ->required()
-                    ->numeric(),
+                    ->relationship('term', 'name'),
             ]);
     }
 

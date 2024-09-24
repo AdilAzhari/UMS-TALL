@@ -12,30 +12,36 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class ExamResource extends Resource
 {
     protected static ?string $model = Exam::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
-    protected static ?string $navigationGroup = 'Academic';
+    protected static ?string $navigationGroup = 'Assessment & Grading';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\DatePicker::make('exam_date')
                     ->required(),
-                Forms\Components\TextInput::make('exam_description')
+                Forms\Components\RichEditor::make('exam_description')
+                    ->label('Exam Description')
+                    ->placeholder('Enter the description of the exam')
                     ->required()
-                    ->maxLength(255),
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('exam_duration')
                     ->required()
-                    ->maxLength(255),
+                    ->label('Exam Duration')
+                    ->placeholder('Enter the duration of the exam'),
                 Forms\Components\TextInput::make('exam_rules')
+                    ->label('Exam Rules')
+                    ->placeholder('Enter the rules of the exam')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('exam_passing_score')
                     ->required()
+                    ->default('60%')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('exam_questions')
                     ->required()
@@ -43,21 +49,32 @@ class ExamResource extends Resource
                 Forms\Components\TextInput::make('exam_answers')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('class_id')
+                Forms\Components\select::make('class_id')
+                    ->label('Select The Class')
+                    ->relationship('class', 'group_number')
+                    ->required(),
+                Forms\Components\select::make('teacher_id')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('teacher_id')
+                    ->label('Select The Teacher')
+                    ->relationship('teacher', 'user_id',
+                    function ($query) {
+                            return $query->with('user')->where('id', 'user_id');
+                        }
+                    ),
+                Forms\Components\select::make('course_id')
+                    ->label('Select The Course')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('course_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('created_by')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('updated_by')
-                    ->numeric()
-                    ->default(null),
+                    ->relationship('course', 'name'),
+                Forms\Components\select::make('created_by')
+                    ->relationship('createdBy', 'name')
+                    ->default(function () {
+                        if (Auth::check() && Auth::user()->created_by === null) {
+                            return Auth::id();
+                        }
+                    })->disabled(),
+                Forms\Components\select::make('updated_by')
+                    ->relationship('updatedBy', 'name')
+                    ->default(Auth::id())->disabled(),
             ]);
     }
 

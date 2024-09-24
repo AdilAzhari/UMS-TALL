@@ -16,9 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ProgramResource extends Resource
 {
     protected static ?string $model = Program::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
-    protected static ?string $navigationGroup = 'Administrative';
+    protected static ?string $navigationGroup = 'Academic Structure';
     public static function form(Form $form): Form
     {
         return $form
@@ -26,30 +25,33 @@ class ProgramResource extends Resource
                 Forms\Components\TextInput::make('program_code')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\MarkdownEditor::make('description')
+                Forms\Components\Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\Select::make('duration_years')
+                Forms\Components\TextInput::make('duration_years')
                     ->required()
-                    ->options([
-                        '1 year', '2 years', '3 years', '4 years', '5 years'
-                    ]),
-                Forms\Components\Select::make('department_id')
-                    ->multiple()
-                    ->label('Department')
-                    ->relationship('department', 'code'),
+                    ->numeric(),
+                Forms\Components\select::make('department_id')
+                    ->required()
+                    ->relationship('department', 'name'),
                 Forms\Components\TextInput::make('program_name')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\select::make('program_type')
-                    ->label('Program Type')
+                Forms\Components\Radio::make('program_status')
                     ->options([
-                        'Undergraduate', 'Postgraduate', 'Diploma'
+                        'Graduated' => 'Graduated',
+                        'Enrolled' => 'Enrolled',
+                        'Suspended' => 'Suspended',
+                        'Expelled' => 'Expelled',
                     ])
                     ->required(),
-                Forms\Components\Select::make('student_id')
-                    ->label('Student')
-                    ->relationship('students', 'user_id'),
+                Forms\Components\select::make('program_type')
+                    ->options([
+                        'Undergraduate' => 'Undergraduate',
+                        'Postgraduate' => 'Postgraduate',
+                        'Diploma' => 'Diploma',
+                    ])
+                    ->required(),
             ]);
     }
 
@@ -69,9 +71,6 @@ class ProgramResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('program_status'),
                 Tables\Columns\TextColumn::make('program_type'),
-                Tables\Columns\TextColumn::make('student_id')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

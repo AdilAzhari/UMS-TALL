@@ -4,7 +4,6 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\DepartmentResource\Pages;
 use App\Filament\Admin\Resources\DepartmentResource\RelationManagers;
-use App\Filament\Admin\Resources\DepartmentResource\RelationManagers\StudentsRelationManager;
 use App\Models\Department;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -17,9 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class DepartmentResource extends Resource
 {
     protected static ?string $model = Department::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-building-library';
-    protected static ?string $navigationGroup = 'Administrative';
+    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+    protected static ?string $navigationGroup = 'Academic Structure';
     public static function form(Form $form): Form
     {
         return $form
@@ -68,7 +66,7 @@ class DepartmentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            StudentsRelationManager::class,
+            //
         ];
     }
 

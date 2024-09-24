@@ -16,26 +16,35 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ExamResultResource extends Resource
 {
     protected static ?string $model = ExamResult::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
-    protected static ?string $navigationGroup = 'Academic';
+    protected static ?string $navigationGroup = 'Assessment & Grading';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('exam_id')
+                Forms\Components\select::make('exam_id')
+                    ->label('Select The Exam')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('student_id')
+                    ->relationship('exam', 'id'),
+                Forms\Components\select::make('student_id')
                     ->required()
-                    ->numeric(),
+                    ->relationship('student', 'user_id',function($query){
+                        return $query->whereColumn('user_id', 'id');
+                    }),
                 Forms\Components\TextInput::make('score')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Radio::make('status')
+                    ->inline()
+                    ->options([
+                        'pass' => 'Pass',
+                        'fail' => 'Fail',
+                        'absent' => 'Absent',
+                    ])
                     ->required(),
                 Forms\Components\TextInput::make('notes')
                     ->maxLength(255)
+                    ->label('Notes')
                     ->default(null),
             ]);
     }

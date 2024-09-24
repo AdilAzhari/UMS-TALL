@@ -17,13 +17,19 @@ class EnrollmentResource extends Resource
 {
     protected static ?string $model = Enrollment::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
-    protected static ?string $navigationGroup = 'Academic';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Enrollments & Student Progress';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Radio::make('status')
+                    ->options([
+                        'enrolled'  => 'Enrolled',
+                        'pending'   => 'Pending',
+                        'completed' => 'Completed',
+                        'dropped'   => 'Dropped'
+                    ])
                     ->required(),
                 Forms\Components\DatePicker::make('enrollment_date')
                     ->required(),

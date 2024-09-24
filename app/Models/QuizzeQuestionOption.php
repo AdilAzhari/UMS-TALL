@@ -12,9 +12,14 @@ class QuizzeQuestionOption extends Model
         'quizze_question_id',
         'option',
         'is_correct',
+        'created_by',
+        'updated_by',
     ];
     public function quizzeQuestion()
     {
         return $this->belongsTo(QuizzeQuestion::class);
     }
+    // public function updatedBy(){
+    //     return $this->;
+    // }
 }

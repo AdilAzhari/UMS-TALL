@@ -2,18 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\department;
-use App\Models\enrollment;
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use WorldCitiesLocaleTableSeeder;
-use WorldCitiesTableSeeder;
-use WorldContinentsLocaleTableSeeder;
-use WorldContinentsTableSeeder;
-use WorldCountriesTableSeeder;
-use WorldDivisionsTableSeeder;
-use WorldTablesSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,38 +11,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
         $this->call([
-        //     // UserSeeder::class,
-        //     // departmentSeeder::class,
-        //     // StudentSeeder::class,
-        //     programSeeder::class,
-
-        //     // AttendanceSeeder::class,
-        //     CourseSeeder::class,
-        //     AssignmentSeeder::class,
-        //     AssignmentSubmissionSeeder::class,
-        //     // CourseRegistrationSeeder::class,
-        //     ExamSeeder::class,
-        //     ExamResultSeeder::class,
-        //     enrollmentSeeder::class,
-        //     // PaymentSeeder::class,
-        //     GradingScaleSeeder::class,
-        //     teacherSeeder::class,
-        //     TermSeeder::class,
-        //     classSeeder::class,
-        //     NotificationSeeder::class,
-        // ]);
-        WorldCountriesTableSeeder::class,
-        WorldCitiesLocaleTableSeeder::class,
-        WorldCitiesTableSeeder::class,
-        WorldContinentsTableSeeder::class,
-        WorldContinentsLocaleTableSeeder::class,
-        WorldTablesSeeder::class,
-        WorldDivisionsTableSeeder::class,
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
+            // UserSeeder::class,
+            // departmentSeeder::class,
+            // programSeeder::class,
+            // TermSeeder::class,
+            // CourseSeeder::class,
+            // TeacherSeeder::class,
+            // StudentSeeder::class,
+            // ProctorSeeder::class,
+            // ClassSeeder::class,
+            // enrollmentSeeder::class,
+            // ExamSeeder::class,
+            // AttendanceSeeder::class,
+            // AssignmentSeeder::class,
+            // QuizzeSeeder::class,
+            // WeekSeeder::class,
+            // GradingScaleSeeder::class,
+            // AssignmentSubmissionSeeder::class,
+            // ExamResultSeeder::class,
+            // TechnicalTeamSeeder::class,
+            // announcementSeeder::class,
+            // QuizzeQuestionSeeder::class,
+            // QuizzeQuestionOptionSeeder::class,
+            // QuizzeAnswerSeeder::class,
+            // QuizzeSubmissionSeeder::class,
+            MaterialSeeder::class,
+            ExamQuestionSeeder::class,
+            ExamAnswerSeeder::class,
+            ExamQuestionOptionSeeder::class,
         ]);
     }
 }

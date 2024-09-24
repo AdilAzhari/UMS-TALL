@@ -28,4 +28,8 @@ class Term extends Model
     {
         return $this->hasMany(Student::class, 'current_term_id');
     }
+    public function currentTerm()
+    {
+        return $this->belongsTo(Term::class, 'current_term_id');
+    }
 }

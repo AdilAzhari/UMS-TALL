@@ -18,13 +18,13 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
-    protected static ?string $navigationGroup = 'Users';
+    protected static ?string $navigationGroup = 'User Management';
     public static function form(Form $form): Form
     {
         return $form
@@ -85,6 +85,7 @@ class UserResource extends Resource
                         ])
                         ->required(),
                     Forms\Components\DatePicker::make('date_of_birth')
+                        ->firstDayOfWeek(1)
                         ->default(null),
                     Forms\Components\TextInput::make('nationality')
                         ->maxLength(255)
@@ -124,10 +125,7 @@ class UserResource extends Resource
                             'teacher',
                             'admin',
                             'technical_team',
-                        ])
-                        ->required(),
-                    Forms\Components\Toggle::make('is_active')
-                        ->required(),
+                        ]),
                     Forms\Components\fileupload::make('avatar')
                         ->label('Profile Picture')
                         ->image()
@@ -138,12 +136,26 @@ class UserResource extends Resource
             Forms\Components\Section::make('System Information')
                 ->description('System-managed fields')
                 ->schema([
-                    Forms\Components\TextInput::make('created_by')
-                        ->numeric()
-                        ->default(null),
-                    Forms\Components\TextInput::make('updated_by')
-                        ->numeric()
-                        ->default(null),
+                Forms\Components\Select::make('created_by')
+                    ->label('Created By')
+                    ->relationship('createdBy', 'name')
+                    ->default(function () {
+                        if (Auth::check() && Auth::user()->created_by === null) {
+                            return Auth::id();
+                        }
+                        return null;
+                    })
+                    ->disabled()
+                    ->dehydrated(false),
+                Forms\Components\Select::make('updated_by')
+                    ->relationship('updatedBy', 'name')
+                    ->default(function () {
+                        if (Auth::check()) {
+                            return Auth::id();
+                        }
+                        return null;
+                    })
+                    ->disabled(),
                 ])->columns(2),
         ]);
     }
@@ -153,6 +165,7 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('First Name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
@@ -168,8 +181,6 @@ class UserResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('middle_name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('first_name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('last_name')
                     ->searchable(),
@@ -198,13 +209,9 @@ class UserResource extends Resource
                 Tables\Columns\IconColumn::make('is_admin')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('role'),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('created_by')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('created_by.name')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('updated_by')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('updated_by.name')
                     ->sortable(),
             ])
             ->filters([

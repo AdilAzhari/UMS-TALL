@@ -18,14 +18,19 @@ class AttendanceResource extends Resource
     protected static ?string $model = Attendance::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
-    protected static ?string $navigationGroup = 'Academic';
+    protected static ?string $navigationGroup = 'Attendance Management';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\DatePicker::make('date')
                     ->required(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Radio::make('status')
+                    ->options([
+                        'present' => 'Present',
+                        'absent' => 'Absent',
+                    ])
                     ->required(),
                 Forms\Components\TextInput::make('reason'),
                 Forms\Components\Textarea::make('notes')

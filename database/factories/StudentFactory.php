@@ -20,14 +20,17 @@ class StudentFactory extends Factory
      */
     public function definition(): array
     {
+        $student_id = 'STU';
+        $year = date('Y');
+        $student_id .= $year.'-'. rand(1000,9999);
         return [
             'enrollment_date' => $this->faker->dateTimeThisYear(),
-            'current_year' => $this->faker->numberBetween(1, 4),
             'program_id' => Program::inRandomOrder()->first()->id,
             'department_id' => department::inRandomOrder()->first()->id,
-            'current_term_id' => Term::inRandomOrder()->first()->id,
+            'term_id' => Term::inRandomOrder()->first()->id,
             'created_at' => $this->faker->dateTimeThisYear(),
             'user_id' => User::inRandomOrder()->first()->id,
+            'student_camp_id' => 'STY' . $this->faker->unique()->randomNumber(5),
         ];
     }
 }

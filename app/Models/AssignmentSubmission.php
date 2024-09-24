@@ -10,6 +10,7 @@ class AssignmentSubmission extends Model
     use HasFactory;
     protected $fillable = [
         'obtained_marks',
+        'assignment_id',
         'status',
         'remarks',
         'submitted_at',

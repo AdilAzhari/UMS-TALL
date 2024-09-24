@@ -16,9 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class GradingScaleResource extends Resource
 {
     protected static ?string $model = GradingScale::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
-    protected static ?string $navigationGroup = 'Academic';
+    protected static ?string $navigationGroup = 'Assessment & Grading';
     public static function form(Form $form): Form
     {
         return $form
@@ -35,6 +34,14 @@ class GradingScaleResource extends Resource
                 Forms\Components\TextInput::make('gpa_point')
                     ->required()
                     ->numeric(),
+                Forms\Components\select::make('student_id')
+                    ->required()
+                    ->relationship('student', 'user_id',function ($query) {
+                        return $query->where('user_id', 'id');
+                    }),
+                Forms\Components\select::make('course_id')
+                    ->required()
+                    ->relationship('course', 'name'),
             ]);
     }
 
@@ -51,6 +58,12 @@ class GradingScaleResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('gpa_point')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('student_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('course_id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

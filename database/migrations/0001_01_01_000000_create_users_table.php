@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\ForeignIdColumnDefinition;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -34,6 +35,8 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
             $table->enum('role', ['student', 'teacher', 'admin','technical_team'])->default('student');
+            $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });

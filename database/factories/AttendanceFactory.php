@@ -19,12 +19,12 @@ class AttendanceFactory extends Factory
         return [
             'date' => $this->faker->dateTimeThisYear(),
             'status' => $this->faker->randomElement(['present', 'absent']),
+            'reason' => $this->faker->randomElement(['sick', 'vacation', 'other']),
+            'notes' => $this->faker->text(),
             'student_id' => \App\Models\Student::inRandomOrder()->first()->id,
-            'course_id' => \App\Models\Course::inRandomOrder()->first()->id,
-            'created_at' => $this->faker->dateTimeThisYear(),
             'enrollment_id' => \App\Models\Enrollment::inRandomOrder()->first()->id,
-            'reason' => $this->faker->sentence(),
-            'notes' => $this->faker->sentence(),
+            'class_id' => \App\Models\Classe::inRandomOrder()->first()->id,
+            'teacher_id' => \App\Models\Teacher::inRandomOrder()->first()->id,
         ];
     }
 }

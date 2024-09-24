@@ -17,7 +17,11 @@ class AnnouncementFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
+            'course_id' => \App\Models\Course::inRandomOrder()->first()->id,
+            'week_id' => \App\Models\Week::inRandomOrder()->first()->id,
+            'message' => $this->faker->sentence(),
+            'status' => $this->faker->randomElement(['active', 'inactive']),
         ];
     }
 }

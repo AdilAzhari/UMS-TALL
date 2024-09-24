@@ -16,14 +16,26 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class QuizzeQuestionOptionResource extends Resource
 {
     protected static ?string $model = QuizzeQuestionOption::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
-    protected static ?string $navigationGroup = 'Academic';
+    protected static ?string $navigationGroup = 'Assessment & Grading';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\select::make('quizz_question_id')
+                    ->required()
+                    ->relationship('quizzeQuestion', 'question'),
+                Forms\Components\TextInput::make('option')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Toggle::make('is_correct')
+                    ->required(),
+                Forms\Components\select::make('created_by')
+                    ->required()
+                    ->relationship(),
+                Forms\Components\select::make('updated_by')
+                    ->required()
+                    ->relationship(),
             ]);
     }
 
@@ -31,7 +43,31 @@ class QuizzeQuestionOptionResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('quizz_question_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('option')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('is_correct')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('created_by')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_by')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

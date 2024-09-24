@@ -19,6 +19,7 @@ class ClasseFactory extends Factory
         return [
             'group_number' => $this->faker->numberBetween(1, 10),
             'schedule' => $this->faker->word(),
+            'semester' => $this->faker->word(),
             'year' => $this->faker->numberBetween(1, 4),
             'max_students' => $this->faker->numberBetween(10, 30),
             'current_students' => $this->faker->numberBetween(10, 30),

@@ -24,9 +24,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class StudentResource extends Resource
 {
     protected static ?string $model = Student::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
-    protected static ?string $navigationGroup = 'Users';
+    protected static ?string $navigationGroup = 'User Management';
     public static function form(Form $form): Form
     {
         return $form
@@ -127,5 +126,14 @@ class StudentResource extends Resource
             'create' => Pages\CreateStudent::route('/create'),
             'edit' => Pages\EditStudent::route('/{record}/edit'),
         ];
+    }
+    public function beforeCreate(){
+        $data['student_id'] = $this->generateStudentId();
+    }
+    public function generateStudentId(){
+        $student_id = 'STU';
+        $year = date('Y');
+        $student_id .= $year.'-'. rand(1000,9999);
+        return $student_id;
     }
 }

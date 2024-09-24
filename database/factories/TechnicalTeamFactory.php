@@ -17,7 +17,9 @@ class TechnicalTeamFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
+            'role' => $this->faker->randomElement(['support', 'system_admin']),
+            'status' => $this->faker->randomElement(['active', 'inactive']),
         ];
     }
 }

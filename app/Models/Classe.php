@@ -32,7 +32,7 @@ class Classe extends Model
         return $this->belongsTo(Teacher::class);
     }
 
-    public function semester()
+    public function term()
     {
         return $this->belongsTo(Term::class);
     }

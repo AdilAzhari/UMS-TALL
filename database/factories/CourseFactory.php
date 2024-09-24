@@ -17,19 +17,17 @@ class CourseFactory extends Factory
     public function definition(): array
     {
         return [
-            'course_name' => $this->faker->word(),
-            'course_code' => $this->faker->word(),
-            'course_credit' => $this->faker->randomFloat(2, 0, 1000),
-            'course_teacher' => $this->faker->word(),
-            'course_description' => $this->faker->sentence(),
-            'course_syllabus' => $this->faker->word(),
-            'course_image' => $this->faker->word(),
-            'course_status' => $this->faker->word(),
-            'requires_proctor' => $this->faker->boolean(),
+            'name' => $this->faker->word(),
+            'code' => $this->faker->word(),
+            'credit' => $this->faker->randomFloat(2, 0, 1000),
+            'description' => $this->faker->sentence(),
+            'syllabus' => $this->faker->word(),
+            'image' => $this->faker->url(),
+            'status' => $this->faker->boolean(),
+            'requier_proctor' => $this->faker->boolean(),
             'is_paid' => $this->faker->boolean(),
             'cost' => $this->faker->randomFloat(2, 0, 1000),
             'program_id' => \App\Models\Program::inRandomOrder()->first()->id,
-            'teacher_id' => \App\Models\Teacher::inRandomOrder()->first()->id,
         ];
     }
 }

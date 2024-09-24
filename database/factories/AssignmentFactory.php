@@ -17,15 +17,17 @@ class AssignmentFactory extends Factory
     public function definition(): array
     {
         return [
+            'class_id' => \App\Models\Classe::inRandomOrder()->first()->id,
+            'course_id' => \App\Models\Course::inRandomOrder()->first()->id,
+            'teacher_id' => \App\Models\Teacher::inRandomOrder()->first()->id,
             'title' => $this->faker->sentence(),
             'description' => $this->faker->sentence(),
             'deadline' => $this->faker->dateTimeThisYear(),
+            'total_marks' => $this->faker->randomNumber(),
+            'status' => $this->faker->randomElement(['pending', 'completed', 'overdue']),
             'file' => $this->faker->word(),
-            'course_id' => \App\Models\Course::inRandomOrder()->first()->id,
-            'created_at' => $this->faker->dateTimeThisYear(),
-            'class_id' => \App\Models\Classe::inRandomOrder()->first()->id,
-            'teacher_id' => \App\Models\Teacher::inRandomOrder()->first()->id,
-            'enrollment_id' => \App\Models\Enrollment::inRandomOrder()->first()->id,
+            'created_by' => \App\Models\Teacher::inRandomOrder()->first()->id,
+            'updated_by' => \App\Models\Teacher::inRandomOrder()->first()->id,
         ];
     }
 }

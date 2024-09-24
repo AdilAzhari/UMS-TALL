@@ -25,12 +25,9 @@ class ExamFactory extends Factory
             'exam_description' => $this->faker->sentence(),
             'exam_duration' => $this->faker->randomNumber(),
             'exam_rules' => $this->faker->sentence(),
-            'passing_score' => $this->faker->randomNumber(),
-            'exam_questions' => $this->faker->randomNumber(),
             'created_by' => \App\Models\User::inRandomOrder()->first()->id,
             'updated_by' => \App\Models\User::inRandomOrder()->first()->id,
             'exam_passing_score' => $this->faker->randomNumber(),
-            'exam_answers' => $this->faker->randomNumber(),
-        ];
+            'exam_code' => $this->faker->word(),];
     }
 }

@@ -20,9 +20,8 @@ class ExamResultFactory extends Factory
             'exam_id' => \App\Models\Exam::inRandomOrder()->first()->id,
             'student_id' => \App\Models\Student::inRandomOrder()->first()->id,
             'score' => $this->faker->randomFloat(2, 0, 100),
-            'status' => $this->faker->randomElement(['pass', 'fail']),
-            'note' => $this->faker->sentence(),
-            'created_at' => $this->faker->dateTimeThisYear(),
+            'status' => $this->faker->randomElement(['passed', 'failed','absent']),
+            'notes' => $this->faker->sentence(),
         ];
     }
 }

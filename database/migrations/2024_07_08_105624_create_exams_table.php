@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->date('exam_date');
+            $table->string('exam_code')->unique();
             $table->string('exam_description');
             $table->string('exam_duration');
-            $table->string('exam_rules');
+            $table->text('exam_rules');
             $table->string('exam_passing_score');
-            $table->string('exam_questions');
-            $table->string('exam_answers');
             $table->foreignId('class_id')->constrained()->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
@@ -27,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

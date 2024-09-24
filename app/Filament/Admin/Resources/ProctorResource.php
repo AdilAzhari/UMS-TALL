@@ -16,9 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ProctorResource extends Resource
 {
     protected static ?string $model = Proctor::class;
+    protected static ?string $navigationGroup = 'Enrollments & Student Progress';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
-    protected static ?string $navigationGroup = 'Users';
     public static function form(Form $form): Form
     {
         return $form
@@ -46,17 +46,9 @@ class ProctorResource extends Resource
                 Forms\Components\TextInput::make('country')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->options(function () {
-                        return \App\Models\User::with('roles')->whereHas('roles', function ($query) {
-                            $query->where('name', 'student');
-                        })->get();
-                    })
-                    ->required(),
-                Forms\Components\select::make('course_id')
-                    ->relationship('course', 'id')
-                    ->required(),
+                Forms\Components\TextInput::make('user_id')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -79,9 +71,6 @@ class ProctorResource extends Resource
                 Tables\Columns\TextColumn::make('country')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('course_id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

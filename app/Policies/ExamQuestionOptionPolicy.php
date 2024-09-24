@@ -13,7 +13,9 @@ class ExamQuestionOptionPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        //r
+        return true;
+
     }
 
     /**
@@ -22,6 +24,8 @@ class ExamQuestionOptionPolicy
     public function view(User $user, ExamQuestionOption $examQuestionOption): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -30,7 +34,10 @@ class ExamQuestionOptionPolicy
     public function create(User $user): bool
     {
         //
+        return true;
+
     }
+
 
     /**
      * Determine whether the user can update the model.
@@ -38,6 +45,8 @@ class ExamQuestionOptionPolicy
     public function update(User $user, ExamQuestionOption $examQuestionOption): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -46,6 +55,8 @@ class ExamQuestionOptionPolicy
     public function delete(User $user, ExamQuestionOption $examQuestionOption): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -54,6 +65,8 @@ class ExamQuestionOptionPolicy
     public function restore(User $user, ExamQuestionOption $examQuestionOption): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -62,5 +75,7 @@ class ExamQuestionOptionPolicy
     public function forceDelete(User $user, ExamQuestionOption $examQuestionOption): bool
     {
         //
+        return true;
+
     }
 }

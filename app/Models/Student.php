@@ -10,12 +10,12 @@ class Student extends Model
     use HasFactory;
     protected $fillable = [
         'enrollment_date',
-        'current_year',
         'user_id',
         'program_id',
         'student_id',
+        'student_camp_id',
         'department_id',
-        'current_term_id',
+        'term_id',
         'status',
     ];
 
@@ -54,5 +54,13 @@ class Student extends Model
     public function courses()
     {
         return $this->belongsToMany(Course::class);
+    }
+    public function gradingScales()
+    {
+        return $this->hasMany(GradingScale::class);
+    }
+    public function terms()
+    {
+        return $this->belongsToMany(Term::class);
     }
 }

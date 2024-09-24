@@ -25,8 +25,24 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'password',
         'role',
+        'middle_name',
+        'last_name',
+        'phone_number',
+        'Preferred_name',
+        'secondary_email_address',
+        'gender',
+        'date_of_birth',
+        'address',
+        'marital_status',
+        'city_of_residence',
+        'country_of_residence',
+        'state',
+        'zip_code',
+        'avatar',
+        'status',
+        'created_by',
+        'updated_by',
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -99,5 +115,57 @@ class User extends Authenticatable implements FilamentUser
     public function TechnicalTeam()
     {
         return $this->hasOne(TechnicalTeam::class);
+    }
+    public function createdDepartments()
+    {
+        return $this->hasMany(Department::class, 'created_by');
+    }
+    public function updatedDepartments()
+    {
+        return $this->hasMany(Department::class, 'updated_by');
+    }
+    public function createdPrograms()
+    {
+        return $this->hasMany(Program::class, 'created_by');
+    }
+    public function updatedPrograms()
+    {
+        return $this->hasMany(Program::class, 'updated_by');
+    }
+    public function createdTerms()
+    {
+        return $this->hasMany(Term::class, 'created_by');
+    }
+    public function updatedTerms()
+    {
+        return $this->hasMany(Term::class, 'updated_by');
+    }
+    public function createdClasses()
+    {
+        return $this->hasMany(Classe::class, 'created_by');
+    }
+    public function updatedClasses()
+    {
+        return $this->hasMany(Classe::class, 'updated_by');
+    }
+    public function createdStudents()
+    {
+        return $this->hasMany(Student::class, 'created_by');
+    }
+    public function updatedStudents()
+    {
+        return $this->hasMany(Student::class, 'updated_by');
+    }
+    public function createdTeachers()
+    {
+        return $this->hasMany(Teacher::class, 'created_by');
+    }
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }

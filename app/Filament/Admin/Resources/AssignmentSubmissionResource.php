@@ -16,9 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class AssignmentSubmissionResource extends Resource
 {
     protected static ?string $model = AssignmentSubmission::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
-    protected static ?string $navigationGroup = 'Academic';
+    protected static ?string $navigationGroup = 'Assignments & Submissions';
     public static function form(Form $form): Form
     {
         return $form
@@ -32,7 +31,13 @@ class AssignmentSubmissionResource extends Resource
                 Forms\Components\TextInput::make('obtained_marks')
                     ->numeric()
                     ->default(null),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Radio::make('status')
+                    ->options([
+                      'submitted' => 'Submitted',
+                      'graded' => 'Graded',
+                      'late' => 'Late',
+                      'pending' => 'Pending',
+                    ])
                     ->required(),
                 Forms\Components\Textarea::make('remarks')
                     ->columnSpanFull(),
@@ -69,6 +74,10 @@ class AssignmentSubmissionResource extends Resource
                 Tables\Columns\TextColumn::make('graded_by')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

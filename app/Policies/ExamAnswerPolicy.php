@@ -14,6 +14,7 @@ class ExamAnswerPolicy
     public function viewAny(User $user): bool
     {
         //
+        return true;
     }
 
     /**
@@ -22,6 +23,8 @@ class ExamAnswerPolicy
     public function view(User $user, ExamAnswer $examAnswer): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -30,6 +33,8 @@ class ExamAnswerPolicy
     public function create(User $user): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -38,6 +43,8 @@ class ExamAnswerPolicy
     public function update(User $user, ExamAnswer $examAnswer): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -46,6 +53,8 @@ class ExamAnswerPolicy
     public function delete(User $user, ExamAnswer $examAnswer): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -54,6 +63,8 @@ class ExamAnswerPolicy
     public function restore(User $user, ExamAnswer $examAnswer): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -62,5 +73,7 @@ class ExamAnswerPolicy
     public function forceDelete(User $user, ExamAnswer $examAnswer): bool
     {
         //
+        return true;
+
     }
 }
