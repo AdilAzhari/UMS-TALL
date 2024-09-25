@@ -15,10 +15,11 @@ class Exam extends Model
         'exam_duration',
         'exam_rules',
         'exam_passing_score',
-        'exam_questions',
-        'exam_answers',
         'created_by',
         'updated_by',
+        'class_id',
+        'teacher_id',
+        'course_id',
         'exam_code'
     ];
     public function class()
@@ -37,7 +38,6 @@ class Exam extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
-
     public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');
@@ -59,10 +59,5 @@ class Exam extends Model
     public function attendances()
     {
         return $this->hasMany(Attendance::class);
-    }
-
-    public function assignments()
-    {
-        return $this->hasMany(Assignment::class);
     }
 }

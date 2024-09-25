@@ -54,13 +54,13 @@ class WeekResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('course_id')
+                Tables\Columns\TextColumn::make('course.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('assignment_id')
+                Tables\Columns\TextColumn::make('assignment.title')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('quizz_id')
+                Tables\Columns\TextColumn::make('quizze.title')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
@@ -103,7 +103,10 @@ class WeekResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            'course' => RelationManagers\CourseRelationManager::class,
+            'assignments' => RelationManagers\AssignmentsRelationManager::class,
+            'quizzes' => RelationManagers\QuizzesRelationManager::class,
+            'announcements' => RelationManagers\AnnouncementsRelationManager::class,
         ];
     }
 

@@ -22,7 +22,7 @@ class TeacherResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Professional Information')
+                Forms\Components\Section::make('Teacher Professional Information')
                 ->description('Enter professional and employment details')
                 ->schema([
                     Forms\Components\TextInput::make('qualification')
@@ -35,7 +35,7 @@ class TeacherResource extends Resource
                         ->required()
                         ->maxLength(255),
                     Forms\Components\select::make('department_id')
-                        ->relationship('department', 'code')
+                        ->relationship('department', 'name')
                         ->required(),
                     Forms\Components\TextInput::make('designation')
                         ->required()
@@ -44,6 +44,8 @@ class TeacherResource extends Resource
                         ->required(),
                     Forms\Components\select::make('user_id')
                         ->relationship('user', 'name')
+                        ->label('Teacher Name')
+                        ->disabled()
                         ->required(),
                 ])->columns(2),
             ]);
@@ -58,20 +60,22 @@ class TeacherResource extends Resource
                 Tables\Columns\TextColumn::make('experience')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('specialization')
+                    ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('department')
+                Tables\Columns\TextColumn::make('department.name')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('designation')
+                    ->searchable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('hire_date')
                     ->date()
+                    ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('department_id')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->searchable()
+                    ->sortable()
+                    ->label('Teacher Name'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -97,7 +101,11 @@ class TeacherResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            'courses' => RelationManagers\CoursesRelationManager::class,
+            'classes' => RelationManagers\ClassesRelationManager::class,
+            'exams' => RelationManagers\ExamsRelationManager::class,
+            'gradedAssignments' => RelationManagers\GradedAssignmentsRelationManager::class,
+            'user' => RelationManagers\UserRelationManager::class,
         ];
     }
 

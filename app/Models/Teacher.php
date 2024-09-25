@@ -68,8 +68,4 @@ class Teacher extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
-    public function TechnicalTeam()
-    {
-        return $this->hasOne(TechnicalTeam::class);
-    }
 }

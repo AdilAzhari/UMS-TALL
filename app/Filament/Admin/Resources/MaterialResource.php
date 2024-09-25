@@ -36,7 +36,7 @@ class MaterialResource extends Resource
                         ->required()
                         ->columnSpanFull(),
                     Forms\Components\Select::make('course_id')
-                        ->label('Course ID')
+                        ->label('Course Name')
                         ->required()
                         ->relationship('course', 'name'),
                     Forms\Components\radio::make('type')
@@ -63,8 +63,6 @@ class MaterialResource extends Resource
                     Forms\Components\TextInput::make('size')
                         ->label('Size')
                         ->placeholder('Size in bytes')
-                        ->maxLength(255)
-                        ->default(null)
                         ->numeric()
                         ->default(0),
                     Forms\Components\TextInput::make('path')
@@ -101,15 +99,18 @@ class MaterialResource extends Resource
                                 return Auth::id();
                             }
                         })->disabled(),
-                    Forms\Components\select::make('updated_by')
+                        Forms\Components\Select::make('updated_by')
                         ->label('Updated By')
-                        ->required()
                         ->relationship('updatedBy', 'name')
                         ->default(function () {
-                                return Auth::user()->id;
+                            return Auth::user()->id;
                         })
-                        ->disabled(),
-                ])->columns(2),
+                        ->disabled()
+                        ->dehydrated(true) // This ensures the field is included when the form is submitted
+                        ->default(function () {
+                            return Auth::user()->id;
+                        }),
+                    ])->columns(2),
         ]);
 
     }
@@ -118,7 +119,7 @@ class MaterialResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('course_id')
+                Tables\Columns\TextColumn::make('course.name')
                     ->numeric()
                     ->searchable()
                     ->sortable(),
@@ -185,5 +186,9 @@ class MaterialResource extends Resource
             'create' => Pages\CreateMaterial::route('/create'),
             'edit' => Pages\EditMaterial::route('/{record}/edit'),
         ];
+    }
+    public static function beforeSave($record)
+    {
+        $record->updated_by = Auth::id(); // Set the current user's ID as the updated_by value
     }
 }

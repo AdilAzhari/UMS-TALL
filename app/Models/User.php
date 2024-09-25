@@ -168,4 +168,8 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+    public function announcementComments()
+    {
+        return $this->hasMany(AnnouncementComment::class);
+    }
 }

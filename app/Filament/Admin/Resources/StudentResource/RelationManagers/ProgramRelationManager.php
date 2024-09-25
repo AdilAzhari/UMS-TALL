@@ -18,7 +18,7 @@ class ProgramRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id')
+                Forms\Components\TextInput::make('program_name')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -27,9 +27,9 @@ class ProgramRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('id')
+            ->recordTitleAttribute('program_name')
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
+                Tables\Columns\TextColumn::make('program_name'),
             ])
             ->filters([
                 //

@@ -27,7 +27,7 @@ class MaterialFactory extends Factory
             'description' => $this->faker->sentence(),
             'size' => $this->faker->randomNumber(),
             'path' => $this->faker->word(),
-            'url' => $this->faker->word(),
+            'url' => $this->faker->url(),
             'filename' => $this->faker->word(),
             'disk' => $this->faker->word(),
         ];

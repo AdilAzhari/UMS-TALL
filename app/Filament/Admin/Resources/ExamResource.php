@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources;
 use App\Filament\Admin\Resources\ExamResource\Pages;
 use App\Filament\Admin\Resources\ExamResource\RelationManagers;
 use App\Models\Exam;
+use App\Models\Teacher;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,6 +14,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 
 class ExamResource extends Resource
 {
@@ -25,42 +28,61 @@ class ExamResource extends Resource
             ->schema([
                 Forms\Components\DatePicker::make('exam_date')
                     ->required(),
+                Forms\Components\TextInput::make('exam_code')
+                    ->required(),
                 Forms\Components\RichEditor::make('exam_description')
                     ->label('Exam Description')
                     ->placeholder('Enter the description of the exam')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('exam_duration')
-                    ->required()
-                    ->label('Exam Duration')
-                    ->placeholder('Enter the duration of the exam'),
-                Forms\Components\TextInput::make('exam_rules')
+                Forms\Components\RichEditor::make('exam_rules')
                     ->label('Exam Rules')
                     ->placeholder('Enter the rules of the exam')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('exam_passing_score')
+                    ->columnSpanFull(),
+                Forms\Components\select::make('exam_passing_score')
                     ->required()
                     ->default('60%')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('exam_questions')
+                    ->options([
+                        '50' => '50%',
+                        '55' => '55%',
+                        '60' => '60%',
+                        '65' => '65%',
+                        '70' => '70%',
+                    ]),
+                Forms\Components\select::make('exam_duration')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('exam_answers')
-                    ->required()
-                    ->maxLength(255),
+                    ->label('Exam Duration')
+                    ->placeholder('Choce the duration of the exam')
+                    ->options([
+                        'one Houre' => '1/hr',
+                        'one and half'=> '1.5/hr',
+                        'two Houre' => '2/hr'
+
+                    ]),
                 Forms\Components\select::make('class_id')
                     ->label('Select The Class')
                     ->relationship('class', 'group_number')
                     ->required(),
                 Forms\Components\select::make('teacher_id')
-                    ->required()
                     ->label('Select The Teacher')
-                    ->relationship('teacher', 'user_id',
-                    function ($query) {
-                            return $query->with('user')->where('id', 'user_id');
-                        }
-                    ),
+                    ->searchable()
+                    ->options(function () {
+                        return User::whereHas('teacher')
+                            ->get()
+                            ->pluck('name', 'id');
+                    })
+                    ->getSearchResultsUsing(function (string $search) {
+                        return User::whereHas('teacher')
+                            ->where('name', 'like', "%{$search}%")
+                            ->limit(50)
+                            ->pluck('name', 'id');
+                    })
+                    ->getOptionLabelUsing(fn ($value): ?string => User::find($value)?->name)
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        $teacherId = Teacher::where('user_id', $state)->value('id');
+                        $set('teacher_id', $teacherId);
+                    }),
                 Forms\Components\select::make('course_id')
                     ->label('Select The Course')
                     ->required()
@@ -93,24 +115,18 @@ class ExamResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('exam_passing_score')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('exam_questions')
+                Tables\Columns\TextColumn::make('class.group_number')
+                    ->label('Class')
+                    ->sortable(['classes.group_number'])
                     ->searchable(),
-                Tables\Columns\TextColumn::make('exam_answers')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('class_id')
+                Tables\Columns\TextColumn::make('teacher.user.name')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('course.code')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('teacher_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('createdBy.name')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('course_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_by')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('updated_by')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('updatedBy.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -137,7 +153,8 @@ class ExamResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            'class' => RelationManagers\ClassRelationManager::class,
+            'course' => RelationManagers\CourseRelationManager::class,
         ];
     }
 

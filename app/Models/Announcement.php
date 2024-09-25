@@ -26,4 +26,8 @@ class Announcement extends Model
     {
         return $this->belongsTo(Week::class);
     }
+    public function announcementComment()
+    {
+        return $this->hasMany(AnnouncementComment::class);
+    }
 }

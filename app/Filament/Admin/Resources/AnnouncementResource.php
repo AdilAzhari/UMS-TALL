@@ -16,23 +16,25 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class AnnouncementResource extends Resource
 {
     protected static ?string $model = Announcement::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Enrollments & Student Progress';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center';
+    protected static ?string $navigationGroup = 'Announcement Management';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('user_id')
+                Forms\Components\select::make('user_id')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('course_id')
+                    ->label('User')
+                    ->relationship('user', 'name'),
+                Forms\Components\select::make('course_id')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('week_id')
+                    ->label('Course')
+                    ->relationship('course', 'course_name'),
+                Forms\Components\select::make('week_id')
                     ->required()
-                    ->numeric(),
+                    ->label('Week')
+                    ->relationship('week', 'week_number'),
                 Forms\Components\Textarea::make('message')
                     ->required()
                     ->columnSpanFull(),
@@ -49,13 +51,13 @@ class AnnouncementResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user_id')
+                Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('course_id')
+                Tables\Columns\TextColumn::make('course.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('week_id')
+                Tables\Columns\TextColumn::make('week.week_number')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status'),

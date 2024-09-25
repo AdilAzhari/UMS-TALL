@@ -35,9 +35,6 @@ class StudentResource extends Resource
                 ->schema([
                     Forms\Components\DatePicker::make('enrollment_date')
                         ->required(),
-                    Forms\Components\TextInput::make('current_year')
-                        ->required()
-                        ->numeric(),
                     Forms\Components\Select::make('user_id')
                         ->relationship('user', 'name')
                         // ->searchable()
@@ -46,7 +43,7 @@ class StudentResource extends Resource
                 Forms\Components\Section::make('Academic Information')
                 ->description('Enter your academic information')
                 ->schema([
-                    Forms\Components\Select::make('current_term_id')
+                    Forms\Components\Select::make('term_id')
                         ->label('Term')
                         ->relationship('currentTerm', 'name'),
                     Forms\Components\Select::make('program_id')
@@ -70,21 +67,22 @@ class StudentResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('enrollment_date')
                     ->date()
+                    ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('current_year')
+                Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user_id')
+                Tables\Columns\TextColumn::make('department.code')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('department_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('current_term_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('currentTerm.name')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
+                    ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -108,7 +106,6 @@ class StudentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            StudentsRelationManager::class,
             AssignmentSubmissionsRelationManager::class,
             CoursesRelationManager::class,
             CurrentTermRelationManager::class,

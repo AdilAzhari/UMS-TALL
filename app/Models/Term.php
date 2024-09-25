@@ -30,6 +30,6 @@ class Term extends Model
     }
     public function currentTerm()
     {
-        return $this->belongsTo(Term::class, 'current_term_id');
+        return $this->belongsTo(Term::class, 'term_id');
     }
 }

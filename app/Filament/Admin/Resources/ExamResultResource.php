@@ -2,6 +2,10 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Filament\Admin\Resources\AnnouncementResource\RelationManagers\CourseRelationManager;
+use App\Filament\Admin\Resources\AssignmentResource\RelationManagers\ClassRelationManager;
+use App\Filament\Admin\Resources\AttendancesResource\RelationManagers\TermRelationManager;
+use App\Filament\Admin\Resources\ClasseResource\RelationManagers\TeacherRelationManager;
 use App\Filament\Admin\Resources\ExamResultResource\Pages;
 use App\Filament\Admin\Resources\ExamResultResource\RelationManagers;
 use App\Models\ExamResult;
@@ -53,10 +57,9 @@ class ExamResultResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('exam_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('exam.exam_date')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('student_id')
+                Tables\Columns\TextColumn::make('student.user_id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('score')
@@ -90,7 +93,8 @@ class ExamResultResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            'exam' => RelationManagers\ExamRelationManager::class,
+            'student' => RelationManagers\StudentRelationManager::class,
         ];
     }
 

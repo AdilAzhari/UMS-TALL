@@ -36,10 +36,12 @@ class DatabaseSeeder extends Seeder
             // QuizzeQuestionOptionSeeder::class,
             // QuizzeAnswerSeeder::class,
             // QuizzeSubmissionSeeder::class,
-            MaterialSeeder::class,
-            ExamQuestionSeeder::class,
-            ExamAnswerSeeder::class,
-            ExamQuestionOptionSeeder::class,
+            // MaterialSeeder::class,
+            // ExamQuestionSeeder::class,
+            // ExamAnswerSeeder::class,
+            // ExamQuestionOptionSeeder::class,
+            // ExamSubmissionSeeder::class,
+            // AnnouncementCommentSeeder::class,
         ]);
     }
 }

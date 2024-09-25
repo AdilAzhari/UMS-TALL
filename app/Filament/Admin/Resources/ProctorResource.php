@@ -31,10 +31,12 @@ class ProctorResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone_number')
-                    ->tel()
+                    // ->tel()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('address')
+                    ->label('Full Address')
+                    ->placeholder('Enter full address')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('city')
@@ -46,9 +48,10 @@ class ProctorResource extends Resource
                 Forms\Components\TextInput::make('country')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\select::make('user_id')
+                    ->label('Student Name')
+                    ->relationship('user', 'name')
+                    ->required(),
             ]);
     }
 
@@ -70,8 +73,9 @@ class ProctorResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('country')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('user.name')
+                    ->searchable()
+                    ->label('Student Name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -98,7 +102,6 @@ class ProctorResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
         ];
     }
 
