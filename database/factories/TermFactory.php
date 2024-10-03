@@ -16,8 +16,11 @@ class TermFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->word();
+
         return [
-            'name' => $this->faker->word(),
+            'name' => $name,
+            'slug' => str($name),
             'start_date' => $this->faker->dateTimeThisYear(),
             'end_date' => $this->faker->dateTimeThisYear(),
             'is_current' => $this->faker->boolean(),

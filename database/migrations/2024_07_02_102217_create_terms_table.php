@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('current_term_id')->nullable()->constrained('terms')->cascadeOnDelete();
             $table->string('name');
+            $table->string('slug')->unique();
+            $table->integer('max_courses')->default(5);
             $table->date('start_date');
             $table->date('end_date');
             $table->boolean('is_current')->default(false);

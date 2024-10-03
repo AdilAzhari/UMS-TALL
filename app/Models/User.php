@@ -5,13 +5,15 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser , HasAvatar
 {
     use HasFactory, Notifiable, HasRoles, HasApiTokens;
 
@@ -42,6 +44,7 @@ class User extends Authenticatable implements FilamentUser
         'status',
         'created_by',
         'updated_by',
+        'avatar_url',
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -73,6 +76,10 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->is_admin == 0;
+    }
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url ? Storage::url("$this->avatar_url") : null;
     }
 
     public function student()
