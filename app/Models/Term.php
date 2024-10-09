@@ -25,8 +25,6 @@ class Term extends Model
     {
         return $this->hasMany(Classe::class);
     }
-
-    // public function
     public function currentStudents()
     {
         return $this->hasMany(Student::class, 'current_term_id');
@@ -34,5 +32,9 @@ class Term extends Model
     public function currentTerm()
     {
         return $this->belongsTo(Term::class, 'term_id');
+    }
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
     }
 }

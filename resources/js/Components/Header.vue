@@ -1,91 +1,147 @@
 <template>
-    <header class="bg-white shadow-sm flex items-center justify-between p-4">
-      <!-- Left side - any logo, menu button -->
-      <div class="flex items-center">
-        <img src="../../../public/images/logo Nova Horizon University (NHU).webp"
-        alt="Nova Horizon University (NHU)"
-        class="h-10" />
-      </div>
-
-      <!-- Right side - user profile -->
-      <div class="relative">
-        <button @click="toggleDropdown" class="flex items-center space-x-2">
-          <img
-            :src="profileImage"
-            alt="Profile Image"
-            class="w-10 h-10 rounded-full object-cover"
-          />
-          <span>{{ userName }}</span>
-        </button>
-
-        <!-- Dropdown Content -->
-        <div
-          v-if="isDropdownOpen"
-          class="absolute right-0 mt-2 w-64 bg-purple-700 text-white rounded-lg shadow-lg p-4"
-        >
-          <div class="flex items-center space-x-3">
-            <img
-              :src="profileImage"
-              alt="Profile Image"
-              class="w-12 h-12 rounded-full"
-            />
-            <div>
-              <p class="font-semibold">{{ userName }}</p>
-              <p class="text-sm">{{ userEmail }}</p>
-            </div>
-          </div>
-
-          <button class="mt-4 w-full bg-pink-600 text-white py-2 rounded-lg">
-            Manage My Account
-          </button>
-
-          <div class="mt-4">
-            <p class="text-sm font-medium">Bachelor's Degree in {{ degree }}</p>
-            <p class="text-xs">{{ studentID }}</p>
-            <p class="text-sm text-green-400">Active</p>
-          </div>
-
-          <button class="mt-4 w-full text-yellow-400 py-2 rounded-lg flex items-center">
+    <div
+        class="bg-white border-b border-gray-200 p-2 flex justify-between items-center"
+    >
+        <!-- Search Bar -->
+        <div class="flex items-center bg-gray-100 rounded-md px-2 py-1">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-gray-400 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M17 16l4-4m0 0l-4-4m4 4H7"
-              />
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
             </svg>
-            <span class="ml-2">Sign Out</span>
-          </button>
+            <input
+                type="search"
+                placeholder="Search for apps or actions"
+                class="bg-transparent text-sm text-gray-700 focus:outline-none"
+            />
         </div>
-      </div>
-    </header>
-  </template>
 
-  <script setup>
-  import { ref } from "vue";
+        <!-- Time, Date, and Profile -->
+        <div class="flex items-center space-x-4">
+            <!-- Time and Date components remain unchanged -->
 
-  // Mock user data (replace with actual data from the database)
-  const userName = ref("Zahra Ahmad");
-  const userEmail = ref("Aivoen630@hotmail.com");
-  const degree = ref("Computer Science");
-  const studentID = ref("S289883");
-  const profileImage = ref("/path-to-profile-image.jpg"); // Path to user image
+            <!-- User Profile -->
+            <div class="relative flex items-center">
+                <img
+                    :src="$page.props.auth.user.image"
+                    :alt="$page.props.auth.user.name"
+                    class="w-8 h-8 rounded-full border border-gray-300"
+                />
+                <span class="font-medium text-gray-700 ml-2">{{
+                    $page.props.auth.user.name
+                }}</span>
 
-  // Dropdown state
-  const isDropdownOpen = ref(false);
+                <!-- Dropdown Trigger -->
+                <button @click="toggleDropdown" class="text-gray-600 ml-2">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                        />
+                    </svg>
+                </button>
 
-  // Function to toggle dropdown
-  const toggleDropdown = () => {
-    isDropdownOpen.value = !isDropdownOpen.value;
-  };
-  </script>
+                <!-- Dropdown Menu -->
+                <div
+                    v-if="isDropdownOpen"
+                    class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 top-full"
+                >
+                    <div
+                        class="px-4 py-2 bg-purple-700 text-white rounded-t-md"
+                    >
+                        <p class="font-semibold">
+                            {{ $page.props.auth.user.name }}
+                        </p>
+                        <p class="text-sm">{{ $page.props.auth.user.email }}</p>
+                    </div>
+                    <p class="px-4 py-2 text-sm">
+                        {{ $page.props.auth.user.degree }}
+                        <span
+                            class="ml-2 px-2 py-1 bg-green-500 text-white text-xs rounded-full"
+                            >{{ $page.props.auth.user.status }}</span
+                        >
+                    </p>
+                    <p class="px-4 py-2 text-sm text-gray-600">
+                        {{ $page.props.auth.user.student_id }}
+                    </p>
+                    <a
+                        @click="manageAccount"
+                        :href="`/profile/${$page.props.auth.user.id}`"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >MANAGE MY ACCOUNT</a
+                    >
+                    <a
+                        @click="signOut"
+                        href="#"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >Sign Out</a
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
 
-  <style scoped>
-  /* Add any custom styles here */
-  </style>
+<script>
+import { usePage } from "@inertiajs/vue3";
+
+export default {
+    data() {
+        return {
+            currentTime: "",
+            currentDate: "",
+            isDropdownOpen: false,
+        };
+    },
+    mounted() {
+        this.updateDateTime();
+        setInterval(this.updateDateTime, 1000);
+    },
+    methods: {
+        updateDateTime() {
+            const now = new Date();
+            this.currentTime = now.toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: true,
+            });
+            this.currentDate = now.toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+            });
+        },
+        toggleDropdown() {
+            this.isDropdownOpen = !this.isDropdownOpen;
+        },
+        manageAccount() {
+            console.log("Navigate to profile page");
+            this.isDropdownOpen = false;
+        },
+        signOut() {
+            console.log("Sign out user");
+            // Implement your sign out logic here
+            this.isDropdownOpen = false;
+        },
+    },
+};
+</script>

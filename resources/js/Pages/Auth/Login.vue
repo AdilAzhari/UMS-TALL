@@ -27,9 +27,9 @@ const togglePassword = () => {
 const submit = () => {
     form.post(route('login'), {
         onFinish: () => form.reset('password'),
-        // onSuccess: () => {
-        //     // window.location.href = route('student.portal');
-        // },
+        onSuccess: () => {
+            // window.location.href = route('student.portal');
+        },
     });
 };
 </script>

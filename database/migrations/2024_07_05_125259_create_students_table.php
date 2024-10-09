@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('enrollment_date')->nullable();
-            $table->string('student_camp_id')->unique()->nullable();
+            $table->decimal('CGPA', 3, 2)->default(0.00);
+            $table->string('student_id')->nullable()->unique();
+            $table->Integer('total_credits')->default(0);
             $table->enum('status',['Graduated', 'Enrolled', 'Suspended', 'Expelled'])->default('Enrolled');
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();

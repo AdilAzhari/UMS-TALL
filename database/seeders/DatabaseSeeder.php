@@ -12,10 +12,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'test',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'test',
+        //     'email' => 'test@example.com',
+        // ]);
         $this->call([
             // UserSeeder::class,
             // departmentSeeder::class,
@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             // ProctorSeeder::class,
             // ClassSeeder::class,
             // enrollmentSeeder::class,
-            // ExamSeeder::class,
+            // ExamSeedser::class,
             // AttendanceSeeder::class,
             // AssignmentSeeder::class,
             // QuizzeSeeder::class,
@@ -38,15 +38,23 @@ class DatabaseSeeder extends Seeder
             // TechnicalTeamSeeder::class,
             // announcementSeeder::class,
             // QuizzeQuestionSeeder::class,
-            // QuizzeQuestionOptionSeeder::class,
-            // QuizzeAnswerSeeder::class,
-            // QuizzeSubmissionSeeder::class,
-            // MaterialSeeder::class,
-            // ExamQuestionSeeder::class,
-            // ExamAnswerSeeder::class,
-            // ExamQuestionOptionSeeder::class,
+            QuizzeQuestionOptionSeeder::class,
+            QuizzeAnswerSeeder::class,
+            QuizzeSubmissionSeeder::class,
+            MaterialSeeder::class,
+            ExamQuestionSeeder::class,
+            ExamAnswerSeeder::class,
+            ExamQuestionOptionSeeder::class,
             // ExamSubmissionSeeder::class,
-            // AnnouncementCommentSeeder::class,
+            AnnouncementCommentSeeder::class,
+            AcademicProgressSeeder::class,
+            RegistrationSeeder::class,
+            StudentCourseSeeder::class,
+            CourseTeacherseeder::class,
         ]);
+        // \App\Models\Student::factory(50)->create(); // Create 50 students
+        // \App\Models\Course::factory(20)->create();  // Create 20 courses
+
+
     }
 }

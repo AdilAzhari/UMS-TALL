@@ -28,6 +28,7 @@ class CourseFactory extends Factory
             'is_paid' => $this->faker->boolean(),
             'cost' => $this->faker->randomFloat(2, 0, 1000),
             'program_id' => \App\Models\Program::inRandomOrder()->first()->id,
+            'category' => $this->faker->randomElement(['major_required','major_elective','general_education','general']),
         ];
     }
 }

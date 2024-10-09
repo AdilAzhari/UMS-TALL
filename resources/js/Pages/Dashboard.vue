@@ -1,24 +1,23 @@
 <template>
-    <div class="flex h-screen bg-gray-100">
-        <Sidebar
-            :is-sidebar-open="isSidebarOpen"
-            @toggle-sidebar="toggleSidebar"
-        />
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
-                <router-view></router-view>
-            </main>
+    <AppLayout>
+        <template #header>
+            <h1 class="text-3xl font-bold text-gray-900">
+                Welcome, {{ $page.props.user.name }}
+            </h1>
+        </template>
+        <div>
+            <!-- Your dashboard content goes here -->
         </div>
-    </div>
+    </AppLayout>
 </template>
 
-<script setup>
-import { ref } from "vue";
-import Sidebar from "@/Views/Sidebar.vue";
+<script>
+import { defineComponent } from 'vue';
+import AppLayout from '@/Layouts/AppLayout.vue';
 
-const isSidebarOpen = ref(false);
-
-const toggleSidebar = () => {
-    isSidebarOpen.value = !isSidebarOpen.value;
-};
+export default defineComponent({
+    components: {
+        AppLayout,
+    },
+});
 </script>

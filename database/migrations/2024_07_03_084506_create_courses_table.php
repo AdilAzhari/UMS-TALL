@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('name');
             $table->text('description');
+            $table->integer('max_students')->default(30);
             $table->integer('credit')->default(3);
             $table->string('syllabus');
             $table->string('image');
@@ -24,6 +25,8 @@ return new class extends Migration
             $table->boolean('requier_proctor')->default(false);
             $table->boolean('is_paid')->default(false);
             $table->decimal('cost', 10, 2)->nullable();
+            $table->enum('category',['major_required','major_elective','general_education','general'])->default('general');
+            $table->foreignId('prerequisite_course_id')->nullable()->constrained('courses')->cascadeOnDelete();
             $table->timestamps();
         });
     }

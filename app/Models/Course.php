@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 class Course extends Model
 {
@@ -15,13 +16,17 @@ class Course extends Model
         'description',
         'syllabus',
         'image',
+        'max_students',
         'status',
         'requier_proctor',
+        'prerequisite_course_id',
         'cost',
         'is_paid',
+        'category',
         'teacher_id',
         'program_id',
         'proctor_id',
+        'department_id',
     ];
 
     public function program()
@@ -72,5 +77,17 @@ class Course extends Model
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+    public function users()
+    {
+        return $this->morphToMany(User::class, 'courseable');
+    }
+    public function ScopAvailableSeats(Builder $query)
+    {
+        return $query->where('max_students', '>', 'current_students');
+    }
+    public function prerequisites()
+    {
+        return $this->belongsToMany(Course::class, 'course_prerequisites', 'course_id', 'prerequisite_course_id');
     }
 }

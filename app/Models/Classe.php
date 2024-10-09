@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Query\Builder;
 
 class Classe extends Model
 {
@@ -55,5 +56,9 @@ class Classe extends Model
     public function exams()
     {
         return $this->hasMany(Exam::class);
+    }
+    public function ScopAvailableSeats(Builder $query)
+    {
+        return $query->where('max_students', '>', 'current_students');
     }
 }

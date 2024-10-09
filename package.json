@@ -20,7 +20,9 @@
     },
     "dependencies": {
         "@heroicons/vue": "^2.1.5",
+        "nprogress": "^0.2.0",
         "vue-loader": "^17.4.2",
-        "vue-router": "^4.4.5"
+        "vue-router": "^4.4.5",
+        "ziggy-js": "^2.3.0"
     }
 }

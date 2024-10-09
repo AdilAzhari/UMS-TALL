@@ -30,7 +30,7 @@ class StudentFactory extends Factory
             'term_id' => Term::inRandomOrder()->first()->id,
             'created_at' => $this->faker->dateTimeThisYear(),
             'user_id' => User::inRandomOrder()->first()->id,
-            'student_camp_id' => 'STY' . $this->faker->unique()->randomNumber(5),
+            'student_id' => 'STY' . $this->faker->unique()->randomNumber(5),
         ];
     }
 }

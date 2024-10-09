@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->enum('status', ['enrolled', 'pending', 'completed', 'dropped'])->default('pending');
             $table->date('enrollment_date');
+            $table->date('completion_date')->nullable();
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('class_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

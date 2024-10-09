@@ -23,47 +23,76 @@ class WeekResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\select::make('course_id')
-                    ->required()
-                    ->relationship('course', 'name'),
-                Forms\Components\select::make('assignment_id')
-                    ->relationship('assignments', 'title')
-                    ->default(null),
-                Forms\Components\select::make('quizz_id')
-                    ->default(null)
-                    ->relationship('quizzes', 'title'),
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->placeholder('type the description of the week')
-                    ->columnSpanFull(),
-                Forms\Components\DatePicker::make('start_date')
-                    ->required(),
-                Forms\Components\DatePicker::make('end_date')
-                    ->required(),
-                Forms\Components\TextInput::make('week_number')
-                    ->required()
-                    ->placeholder('type the week number from 1 to 10')
-                    ->numeric(),
-            ]);
+                Forms\Components\Group::make()
+                    ->schema([
+                        Forms\Components\Section::make('Week Information')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->required()
+                                    ->maxLength(255),
+                                Forms\Components\TextInput::make('week_number')
+                                    ->required()
+                                    ->numeric()
+                                    ->minValue(1)
+                                    ->maxValue(10)
+                                    ->placeholder('Enter week number (1-10)'),
+                                Forms\Components\DatePicker::make('start_date')
+                                    ->required(),
+                                Forms\Components\DatePicker::make('end_date')
+                                    ->required()
+                                    ->afterOrEqual('start_date'),
+                            ])
+                            ->columns(2),
+
+                        Forms\Components\Section::make('Week Description')
+                            ->schema([
+                                Forms\Components\RichEditor::make('description')
+                                    ->required()
+                                    ->placeholder('Enter the description of the week')
+                                    ->columnSpanFull(),
+                            ]),
+                    ])
+                    ->columnSpan(['lg' => 2]),
+
+                Forms\Components\Group::make()
+                    ->schema([
+                        Forms\Components\Section::make('Course Association')
+                            ->schema([
+                                Forms\Components\Select::make('course_id')
+                                    ->required()
+                                    ->relationship('course', 'name')
+                                    ->searchable(),
+                            ]),
+
+                        Forms\Components\Section::make('Related Content')
+                            ->schema([
+                                Forms\Components\Select::make('assignment_id')
+                                    ->relationship('assignments', 'title')
+                                    ->searchable()
+                                    ->placeholder('Select an assignment (optional)'),
+                                Forms\Components\Select::make('quizz_id')
+                                    ->relationship('quizzes', 'title')
+                                    ->searchable()
+                                    ->placeholder('Select a quiz (optional)'),
+                            ]),
+                    ])
+                    ->columnSpan(['lg' => 1]),
+            ])
+            ->columns(3);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('course.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('assignment.title')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('quizze.title')
+                Tables\Columns\TextColumn::make('week_number')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('title')
+                    ->searchable()
+                    ->limit(30),
+                Tables\Columns\TextColumn::make('course.name')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('start_date')
                     ->date()
@@ -71,24 +100,20 @@ class WeekResource extends Resource
                 Tables\Columns\TextColumn::make('end_date')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('week_number')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('assignment.title')
+                    ->placeholder('No assignment')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('quizze.title')
+                    ->placeholder('No quiz')
+                    ->searchable(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('course')
+                    ->relationship('course', 'name'),
+                Tables\Filters\Filter::make('has_assignment')
+                    ->query(fn (Builder $query): Builder => $query->whereNotNull('assignment_id')),
+                Tables\Filters\Filter::make('has_quiz')
+                    ->query(fn (Builder $query): Builder => $query->whereNotNull('quizz_id')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

@@ -55,7 +55,6 @@
   </template>
 
   <script setup>
-  import StudentPortalView from '@/Views/StudentPortal.vue';
   import { computed } from 'vue';
 
   // Props received from the server

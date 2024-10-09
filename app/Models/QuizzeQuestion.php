@@ -11,6 +11,8 @@ class QuizzeQuestion extends Model
     protected $fillable = [
         'quizze_id',
         'question',
+        'created_by',
+        'updated_by',
     ];
     public function quizze()
     {

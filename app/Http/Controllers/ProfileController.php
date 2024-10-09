@@ -15,7 +15,8 @@ class ProfileController extends Controller
 {
     public function show(Request $request): Response
     {
-        return Inertia::render('Profile',['user' => $request->user()]);
+        dd('ProfileController@show');
+        // return Inertia::render('Profile',['user' => $request->user()]);
     }
     /**
      * Display the user's profile form.

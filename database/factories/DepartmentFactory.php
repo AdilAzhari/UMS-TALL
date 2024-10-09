@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\department>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Department>
  */
 class DepartmentFactory extends Factory
 {
@@ -16,10 +16,28 @@ class DepartmentFactory extends Factory
      */
     public function definition(): array
     {
+        $departments = [
+            ['name' => 'Computer Science', 'code' => 'CS'],
+            ['name' => 'Software Engineering', 'code' => 'SE'],
+            ['name' => 'Information Technology', 'code' => 'IT'],
+            ['name' => 'Data Science', 'code' => 'DS'],
+            ['name' => 'Cybersecurity', 'code' => 'CYB'],
+            ['name' => 'Artificial Intelligence', 'code' => 'AI'],
+            ['name' => 'Computer Engineering', 'code' => 'CE'],
+            ['name' => 'Information Systems', 'code' => 'IS'],
+            ['name' => 'Network Engineering', 'code' => 'NE'],
+            ['name' => 'Robotics', 'code' => 'ROB'],
+        ];
+
+        // Randomly select a department from the list to seed data
+        $department = $this->faker->unique()->randomElement($departments);
+
         return [
-            'name' => $this->faker->word(),
-            'code' => $this->faker->word(),
-            'description' => $this->faker->sentence(),
+            'name' => $department['name'],
+            'code' => $department['code'],
+            'description' => $this->faker->sentence(10),
+            // 'image' => $this->faker->imageUrl(640, 480, 'departments', true),
+            // 'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];
     }
 }

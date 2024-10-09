@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 const routes = [
     {
-        name: "Home",
+        name: "home",
         path: "/",
-        component: () => import("@/Pages/Dashboard.vue"),
+        component: () => import("@/Layouts/AppLayout.vue"),
         meta: {
             title: "Dashboard",
             icon: "home",

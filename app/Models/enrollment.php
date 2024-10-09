@@ -10,10 +10,16 @@ class enrollment extends Model
     use HasFactory;
     protected $fillable = [
         'student_id',
-        'class_id',
+        'course_id',
         'status',
         'enrollment_date',
+        'completion_date'
     ];
+    protected $casts = [
+        'enrollment_date' => 'datetime',
+        'completion_date' => 'datetime',
+    ];
+    public $timestamps = false;
     public function student()
     {
         return $this->belongsTo(Student::class);

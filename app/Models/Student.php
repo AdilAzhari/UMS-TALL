@@ -13,7 +13,7 @@ class Student extends Model
         'user_id',
         'program_id',
         'student_id',
-        'student_camp_id',
+        'CGPA',
         'department_id',
         'term_id',
         'status',
@@ -39,7 +39,7 @@ class Student extends Model
     }
     public function currentTerm()
     {
-        return $this->belongsTo(Term::class, 'current_Term_id');
+        return $this->belongsTo(Term::class, 'Term_id');
     }
 
     public function enrollments()
@@ -53,8 +53,11 @@ class Student extends Model
     }
     public function courses()
     {
-        return $this->belongsToMany(Course::class);
+        return $this->belongsToMany(Course::class, 'course_student')
+                    ->withPivot('enrolled_date') // Optional: If you want to access the enrollment date
+                    ->withTimestamps();
     }
+
     public function gradingScales()
     {
         return $this->hasMany(GradingScale::class);
