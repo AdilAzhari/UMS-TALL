@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->foreignId('created_by')->constrained('teachers')->cascadeOnDelete();
             $table->foreignId('updated_by')->constrained('teachers')->cascadeOnDelete();
+            $table->foreignId('week_id')->constrained()->cascadeOnDelete();
             $table->enum('type', ['video', 'pdf', 'audio', 'image'])->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('size')->nullable();

@@ -37,4 +37,5 @@ class Term extends Model
     {
         return $this->hasMany(Registration::class);
     }
+
 }

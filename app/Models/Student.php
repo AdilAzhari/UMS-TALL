@@ -41,7 +41,6 @@ class Student extends Model
     {
         return $this->belongsTo(Term::class, 'Term_id');
     }
-
     public function enrollments()
     {
         return $this->hasMany(Enrollment::class);
@@ -65,5 +64,23 @@ class Student extends Model
     public function terms()
     {
         return $this->belongsToMany(Term::class);
+    }
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
+    }
+    public function academicProgress()
+    {
+        return $this->hasMany(AcademicProgress::class);
+    }
+    public function academicProgressByTerm($termId)
+    {
+        return $this->academicProgress()->where('term_id', $termId)->first();
+    }
+    public function course()
+    {
+        return $this->belongsToMany(Course::class, 'course_student')
+                    ->withPivot('enrolled_date')
+                    ->withTimestamps();
     }
 }

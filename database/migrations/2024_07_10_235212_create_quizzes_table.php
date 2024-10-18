@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
             $table->foreignId('class_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('week_id')->constrained()->cascadeOnDelete();
             $table->string('code');
             $table->string('description');
             $table->enum('type', ['graded', 'ungraded']);

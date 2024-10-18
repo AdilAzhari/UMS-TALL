@@ -1,165 +1,151 @@
 <template>
     <AppLayout>
-        <div class="p-6 bg-gray-100">
-            <h1 class="text-2xl font-bold mb-6">My Courses</h1>
+        <div class="p-6 bg-white">
+            <h1 class="text-3xl font-bold mb-6 text-purple-800">
+                BACHELOR'S DEGREE IN COMPUTER SCIENCE
+            </h1>
 
-            <!-- New inner navigation -->
-            <div class="bg-purple-100 rounded-lg mb-6">
-                <nav class="flex">
-                    <a
-                        v-for="tab in tabs"
-                        :key="tab"
-                        :class="[
-                            'px-4 py-2 text-sm font-medium',
-                            activeTab === tab
-                                ? 'text-purple-700 border-b-2 border-purple-700'
-                                : 'text-purple-500 hover:text-purple-700',
-                        ]"
-                        @click="activeTab = tab"
-                        href="#"
-                    >
-                        {{ tab }}
-                    </a>
-                </nav>
-            </div>
+            <div class="flex space-x-6">
+                <!-- Left column -->
+                <div class="w-2/3">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <h2 class="text-xl font-semibold mb-4">
+                            SIGN UP FOR CLASSES
+                        </h2>
+                        <p class="mb-4">
+                            {{ user.name }}, Registration is officially open!
+                            You'll have until October 23rd, 2024 to sign up for
+                            classes.
+                        </p>
+                        <button
+                            class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition duration-300"
+                        >
+                            REGISTER
+                        </button>
+                    </div>
 
-            <!-- Content based on active tab -->
-            <div v-if="activeTab === 'Current Courses'">
-                <!-- Current Courses Content -->
-                <div class="mt-6">
-                    <h2 class="text-xl font-semibold">
-                        Current Courses -
-                        {{
-                            new Date().toLocaleString("default", {
-                                month: "long",
-                                year: "numeric",
-                            })
-                        }}
-                    </h2>
-                    <!-- Courses table -->
-                    <table class="w-full mt-4 bg-white rounded-lg shadow-md">
-                        <thead>
-                            <tr
-                                class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"
-                            >
-                                <th class="py-3 px-6 text-left">Course</th>
-                                <th class="py-3 px-6 text-left">Instructor</th>
-                                <th class="py-3 px-6 text-left">Department</th>
-                                <th class="py-3 px-6 text-left">
-                                    Available Seats
-                                </th>
-                                <th class="py-3 px-6 text-left">Program</th>
-                                <th class="py-3 px-6 text-center">Category</th>
-                                <th class="py-3 px-6 text-center">Credits</th>
-                                <th class="py-3 px-6 text-center">Proctor</th>
-                            </tr>
-                        </thead>
-
-                        <tbody class="text-gray-600 text-sm font-light">
-                            <tr
-                                v-for="course in currentCourses"
-                                :key="course.id"
-                                class="border-b border-gray-200 hover:bg-gray-100"
-                            >
-                                <td
-                                    class="py-3 px-6 text-left whitespace-nowrap"
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-xl font-semibold mb-4">
+                            YOUR COURSES - SEPTEMBER 2024
+                        </h2>
+                        <p class="mb-4">Your courses, at a glance.</p>
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-left">
+                                    <th class="pb-2">Course Name</th>
+                                    <th class="pb-2">Status</th>
+                                    <th class="pb-2">Proctor</th>
+                                    <th class="pb-2">Paid</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="course in currentCourses"
+                                    :key="course.id"
+                                    class="border-t"
                                 >
-                                    <div class="flex items-center">
-                                        <span class="font-medium">{{
-                                            course.course_name
-                                        }}</span>
-                                    </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    {{ course.instructor }}
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    {{ course.department }}
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    {{ course.availableSeats }}
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    {{ course.program }}
-                                </td>
-                                <td class="py-3 px-6 text-center">
-                                    {{ course.category }}
-                                </td>
-                                <td class="py-3 px-6 text-center">
-                                    {{ course.credits }}
-                                </td>
-                                <td class="py-3 px-6 text-center">
-                                    <span
-                                        :class="{
-                                            'bg-green-200 text-green-600':
-                                                course.proctor === 'Required',
-                                            'bg-red-200 text-red-600':
-                                                course.proctor ===
-                                                'Not Required',
-                                        }"
-                                        class="py-1 px-3 rounded-full text-xs"
-                                    >
-                                        {{ course.proctor }}
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    <td class="py-2">
+                                        {{ course.course_name }}
+                                    </td>
+                                    <td class="py-2">
+                                        <span
+                                            class="inline-block w-3 h-3 rounded-full bg-green-500 mr-2"
+                                        ></span>
+                                        Registered
+                                    </td>
+                                    <td class="py-2">{{ course.proctor }}</td>
+                                    <td class="py-2">Future Payment</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
 
-            <div v-else-if="activeTab === 'Past Courses'">
-                <!-- Past Courses Content -->
-                <div class="mt-6">
-                    <h2 class="text-xl font-semibold">Past Courses</h2>
-                    <!-- Courses table -->
-                    <table class="w-full mt-4 bg-white rounded-lg shadow-md">
-                        <thead>
-                            <tr
-                                class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"
-                            >
-                                <th class="py-3 px-6 text-left">Course</th>
-                                <th class="py-3 px-6 text-left">Instructor</th>
-                                <th class="py-3 px-6 text-left">Department</th>
-                                <th class="py-3 px-6 text-left">Program</th>
-                                <th class="py-3 px-6 text-center">Category</th>
-                                <th class="py-3 px-6 text-center">Credits</th>
-                            </tr>
-                        </thead>
-
-                        <tbody class="text-gray-600 text-sm font-light">
-                            <tr
-                                v-for="course in pastCourses"
-                                :key="course.id"
-                                class="border-b border-gray-200 hover:bg-gray-100"
-                            >
-                                <td
-                                    class="py-3 px-6 text-left whitespace-nowrap"
+                <!-- Right column -->
+                <div class="w-1/3">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                        <h2 class="text-xl font-semibold mb-4">
+                            ACADEMIC PROGRESS
+                        </h2>
+                        <p class="mb-2">Keep up the great work!</p>
+                        <div class="mb-4">
+                            <p class="font-semibold">Term Progress (weeks)</p>
+                            <div class="bg-purple-200 rounded-full">
+                                <div
+                                    class="bg-purple-600 text-xs font-medium text-purple-100 text-center p-0.5 leading-none rounded-full"
+                                    :style="{
+                                        width: `${
+                                            (academicProgress.currentWeek /
+                                                academicProgress.totalWeeks) *
+                                            100
+                                        }%`,
+                                    }"
                                 >
-                                    <div class="flex items-center">
-                                        <span class="font-medium">{{
-                                            course.course_name
-                                        }}</span>
-                                    </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    {{ course.instructor }}
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    {{ course.department }}
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    {{ course.program }}
-                                </td>
-                                <td class="py-3 px-6 text-center">
-                                    {{ course.category }}
-                                </td>
-                                <td class="py-3 px-6 text-center">
-                                    {{ course.credits }}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    {{ academicProgress.currentWeek }} /
+                                    {{ academicProgress.totalWeeks }} weeks
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between">
+                            <div>
+                                <p class="text-3xl font-bold">
+                                    {{ academicProgress.gpa }}
+                                </p>
+                                <p class="text-sm">Cumulative GPA</p>
+                                <p class="text-xs text-gray-500">
+                                    Standing SAP
+                                </p>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold">
+                                    {{ academicProgress.creditsAccrued }}
+                                    <span class="text-sm font-normal"
+                                        >/
+                                        {{
+                                            academicProgress.totalCredits
+                                        }}</span
+                                    >
+                                </p>
+                                <p class="text-sm">Credits Accrued</p>
+                                <p class="text-xs text-gray-500">
+                                    September 2024
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-xl font-semibold mb-4">CHECKLIST</h2>
+                        <p class="mb-4">A to-do list for you.</p>
+                        <div class="flex space-x-2 mb-4">
+                            <button
+                                class="bg-gray-200 px-4 py-1 rounded-full text-sm font-medium"
+                            >
+                                CURRENT
+                            </button>
+                            <button
+                                class="text-gray-600 px-4 py-1 rounded-full text-sm font-medium"
+                            >
+                                COMPLETED
+                            </button>
+                        </div>
+                        <ul>
+                            <li class="flex items-center mb-2">
+                                <span
+                                    class="inline-block w-6 h-6 rounded-full bg-red-500 mr-2 flex items-center justify-center text-white"
+                                    >!</span
+                                >
+                                Run Degree Audit
+                            </li>
+                            <li class="flex items-center">
+                                <span
+                                    class="inline-block w-6 h-6 rounded-full bg-yellow-500 mr-2 flex items-center justify-center text-white"
+                                    >!</span
+                                >
+                                Register Now
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -179,11 +165,7 @@ export default defineComponent({
             type: Array,
             required: true,
         },
-        pastCourses: {
-            type: Array,
-            required: true,
-        },
-        registrationStatus: {
+        user: {
             type: Object,
             required: true,
         },
@@ -191,19 +173,6 @@ export default defineComponent({
             type: Object,
             required: true,
         },
-    },
-    data() {
-        return {
-            activeTab: "Current Courses",
-            tabs: [
-                "Current Courses",
-                "Past Courses",
-                "Manage Courses",
-                "Registration",
-                "Manage Proctors",
-                "How To",
-            ],
-        };
     },
 });
 </script>

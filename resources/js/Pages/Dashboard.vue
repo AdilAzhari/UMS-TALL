@@ -5,15 +5,13 @@
                 Welcome, {{ $page.props.user.name }}
             </h1>
         </template>
-        <div>
-            <!-- Your dashboard content goes here -->
-        </div>
+        <div></div>
     </AppLayout>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-import AppLayout from '@/Layouts/AppLayout.vue';
+import { defineComponent } from "vue";
+import AppLayout from "@/Layouts/AppLayout.vue";
 
 export default defineComponent({
     components: {

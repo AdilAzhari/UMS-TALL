@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Student;
 use App\Models\Course;
+use App\Models\enrollment;
 use App\Models\Proctor;
 use App\Models\Term;
 
@@ -25,9 +26,10 @@ class RegistrationFactory extends Factory
             'course_id' => Course::inRandomOrder()->first()->id,
             'proctor_id' => Proctor::inRandomOrder()->first()->id,
             'term_id' => Term::inRandomOrder()->first()->id,
+            'enrollment_id' => enrollment::inRandomOrder()->first()->id,
             'status' => $this->faker->randomElement(['registered', 'in_progress', 'completed', 'withdrawn']),
             'start_date' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
-            'end_date' => $this->faker->dateTimeBetween('+1 month', '+6 months'),
+            'end_date' => $this->faker->dateTimeBetween('+1 month', '+3 months'),
             'proctor_status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
             'payment_status' => $this->faker->boolean(),
         ];

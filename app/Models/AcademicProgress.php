@@ -13,26 +13,9 @@ class AcademicProgress extends Model
         'gpa',
         'program_id',
         'term_id',
-        'total_credits_earned',
+        'enrollment_id',
         'academic_standing',
-        'major_courses_total',
-        'major_courses_completed',
-        'general_courses_total',
-        'general_courses_completed',
-        'elective_courses_total',
-        'elective_courses_completed',
     ];
-    protected function casts(): array
-    {
-        return [
-            'major_courses_total' => 'integer',
-            'major_courses_completed' => 'integer',
-            'general_courses_total' => 'integer',
-            'general_courses_completed' => 'integer',
-            'elective_courses_total' => 'integer',
-            'elective_courses_completed' => 'integer',
-        ];
-    }
     public function student()
     {
         return $this->belongsTo(Student::class);

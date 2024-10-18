@@ -179,8 +179,8 @@ class User extends Authenticatable implements FilamentUser , HasAvatar
     {
         return $this->hasMany(AnnouncementComment::class);
     }
-    public function courses()
+    public function getCurrentCourses()
     {
-        return $this->morphedByMany(Course::class, 'courseable');
+        return $this->courses;
     }
 }

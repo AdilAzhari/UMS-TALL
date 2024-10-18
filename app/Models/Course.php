@@ -28,12 +28,10 @@ class Course extends Model
         'proctor_id',
         'department_id',
     ];
-
     public function program()
     {
         return $this->belongsTo(Program::class);
     }
-
     public function classes()
     {
         return $this->hasMany(Classe::class);
@@ -80,7 +78,7 @@ class Course extends Model
     }
     public function users()
     {
-        return $this->morphToMany(User::class, 'courseable');
+        return $this->belongsToMany(User::class);
     }
     public function ScopAvailableSeats(Builder $query)
     {

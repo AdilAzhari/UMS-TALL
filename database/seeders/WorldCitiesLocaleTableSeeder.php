@@ -1,10 +1,12 @@
 <?php
 
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class WorldCitiesLocaleTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
@@ -67673,8 +67675,6 @@ class WorldCitiesLocaleTableSeeder extends Seeder
                 'locale' => 'en',
                 'name' => 'York',
             ),
-        ));
-        
-        
+        ));   
     }
 }

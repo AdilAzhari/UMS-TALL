@@ -20,6 +20,7 @@ class Registration extends Model
         'end_date',
         'proctor_status',
         'payment_status',
+        'enrollment_id',
     ];
     protected Hidden $status;
     protected $casts = [
@@ -30,6 +31,10 @@ class Registration extends Model
     public function student()
     {
         return $this->belongsTo(Student::class);
+    }
+    public function enrollment(): BelongsTo
+    {
+        return $this->belongsTo(Enrollment::class);
     }
     public function course(): BelongsTo
     {

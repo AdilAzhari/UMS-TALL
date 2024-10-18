@@ -24,14 +24,12 @@ class enrollment extends Model
     {
         return $this->belongsTo(Student::class);
     }
-
-    public function class()
-    {
-        return $this->belongsTo(Classe::class);
-    }
-
     public function attendances()
     {
         return $this->hasMany(Attendance::class);
+    }
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
     }
 }
