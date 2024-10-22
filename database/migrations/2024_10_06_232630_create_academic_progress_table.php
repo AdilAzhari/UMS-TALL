@@ -16,12 +16,14 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained();
             $table->foreignId('program_id')->nullable()->constrained();
             $table->foreignId('enrollment_id')->nullable()->constrained();
-            $table->decimal('gpa', 3, 2)->nullable();
+            $table->decimal('gpa', 4.00, 2)->nullable();
             $table->Integer('total_credits')->default(0);
             $table->Integer('total_courses')->default(0);
             $table->Integer('total_courses_completed')->default(0);
             $table->Integer('total_courses_failed')->default(0);
             $table->Integer('total_courses_withdrawn')->default(0);
+            $table->Integer('total_courses_passed')->default(0);
+            $table->Integer('total_courses_failed_withdrawn')->default(0);
             $table->enum('academic_standing', ['good', 'warning', 'probation', 'suspension'])->default('good');
             $table->timestamps();
         });

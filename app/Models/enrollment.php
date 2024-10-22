@@ -28,8 +28,16 @@ class enrollment extends Model
     {
         return $this->hasMany(Attendance::class);
     }
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
     public function courses()
     {
         return $this->hasMany(Course::class);
+    }
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class);
     }
 }

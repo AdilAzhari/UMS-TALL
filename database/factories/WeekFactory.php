@@ -19,7 +19,7 @@ class WeekFactory extends Factory
     {
         return [
             'course_id' => \App\Models\Course::inRandomOrder()->first()->id,
-            'week_number' => $this->faker->randomNumber(),
+            'week_number' => $this->faker->numberBetween(1, 9),
             'title' => $this->faker->word(),
             'description' => $this->faker->sentence(),
             'assignment_id' => \App\Models\Assignment::inRandomOrder()->first()->id,

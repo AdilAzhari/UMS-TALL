@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('max_courses')->default(5);
             $table->date('start_date');
             $table->date('end_date');
+            $table->decimal('gpa')->default(0.00);
             $table->timestamps();
         });
     }

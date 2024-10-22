@@ -25,6 +25,7 @@ class TermFactory extends Factory
             'end_date' => $this->faker->dateTimeThisYear(),
             'is_current' => $this->faker->boolean(),
             'current_term_id' => 1,
+            'gpa' => $this->faker->randomFloat(2,0.00,4.00),
         ];
     }
 }

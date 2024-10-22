@@ -8,30 +8,75 @@
             <div class="flex space-x-6">
                 <!-- Left column -->
                 <div class="w-2/3">
-                    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <!-- Get Ready Section -->
+                    <div class="bg-purple-100 rounded-lg shadow-md p-6 mb-6">
                         <h2 class="text-xl font-semibold mb-4">
-                            SIGN UP FOR CLASSES
+                            GET READY FOR THE NEW TERM!
                         </h2>
                         <p class="mb-4">
-                            {{ user.name }}, Registration is officially open!
-                            You'll have until October 23rd, 2024 to sign up for
-                            classes.
+                            {{ $page.props.auth.user.name }}, time to plan your
+                            next term! Registration is officially open until
+                            <strong>October 23rd, 2024</strong>.
                         </p>
                         <button
                             class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition duration-300"
                         >
-                            REGISTER
+                            REGISTER NOW
                         </button>
                     </div>
 
-                    <div class="bg-white rounded-lg shadow-md p-6">
+                    <!-- Courses Tab Navigation -->
+                    <div class="mb-6">
+                        <div
+                            class="flex justify-between border-b border-gray-300 pb-2 mb-4"
+                        >
+                            <div>
+                                <button
+                                    :class="{
+                                        'text-purple-800 font-semibold':
+                                            currentTab === 'current',
+                                        'text-gray-500':
+                                            currentTab !== 'current',
+                                    }"
+                                    class="mr-4"
+                                    @click="currentTab = 'current'"
+                                >
+                                    CURRENT
+                                </button>
+                                <button
+                                    :class="{
+                                        'text-purple-800 font-semibold':
+                                            currentTab === 'past',
+                                        'text-gray-500': currentTab !== 'past',
+                                    }"
+                                    @click="currentTab = 'past'"
+                                >
+                                    PAST
+                                </button>
+                            </div>
+                            <a href="#" class="text-purple-800 font-semibold"
+                                >here</a
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Courses List (Conditional on Tab) -->
+                    <div
+                        v-if="currentTab === 'current'"
+                        class="bg-white rounded-lg shadow-md p-6"
+                    >
                         <h2 class="text-xl font-semibold mb-4">
-                            YOUR COURSES - SEPTEMBER 2024
+                            COURSES - SEPTEMBER 2024
                         </h2>
-                        <p class="mb-4">Your courses, at a glance.</p>
-                        <table class="w-full">
+                        <p class="text-sm text-gray-600 mb-4">
+                            Manage all of your courses from this page. From here
+                            you can see your course status, proctor information,
+                            or cancel courses.
+                        </p>
+                        <table class="w-full table-auto">
                             <thead>
-                                <tr class="text-left">
+                                <tr class="text-left border-b">
+                                    <th class="pb-2">Sequence</th>
                                     <th class="pb-2">Course Name</th>
                                     <th class="pb-2">Status</th>
                                     <th class="pb-2">Proctor</th>
@@ -45,6 +90,14 @@
                                     class="border-t"
                                 >
                                     <td class="py-2">
+                                        <span
+                                            class="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs"
+                                            v-if="course.isRetake"
+                                        >
+                                            Retake
+                                        </span>
+                                    </td>
+                                    <td class="py-2">
                                         {{ course.course_name }}
                                     </td>
                                     <td class="py-2">
@@ -53,62 +106,64 @@
                                         ></span>
                                         Registered
                                     </td>
-                                    <td class="py-2">{{ course.proctor }}</td>
+                                    <td class="py-2">
+                                        {{ course.proctorStatus }}
+                                    </td>
                                     <td class="py-2">Future Payment</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+
+                    <div
+                        v-if="currentTab === 'past'"
+                        class="bg-white rounded-lg shadow-md p-6"
+                    >
+                        <h2 class="text-xl font-semibold mb-4">PAST COURSES</h2>
+                        <!-- Add past courses table here if needed -->
+                    </div>
                 </div>
 
                 <!-- Right column -->
                 <div class="w-1/3">
+                    <!-- Academic Progress Section -->
                     <div class="bg-white rounded-lg shadow-md p-6 mb-6">
                         <h2 class="text-xl font-semibold mb-4">
                             ACADEMIC PROGRESS
                         </h2>
-                        <p class="mb-2">Keep up the great work!</p>
-                        <div class="mb-4">
-                            <p class="font-semibold">Term Progress (weeks)</p>
-                            <div class="bg-purple-200 rounded-full">
-                                <div
-                                    class="bg-purple-600 text-xs font-medium text-purple-100 text-center p-0.5 leading-none rounded-full"
-                                    :style="{
-                                        width: `${
-                                            (academicProgress.currentWeek /
-                                                academicProgress.totalWeeks) *
-                                            100
-                                        }%`,
-                                    }"
-                                >
-                                    {{ academicProgress.currentWeek }} /
-                                    {{ academicProgress.totalWeeks }} weeks
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex justify-between">
-                            <div>
-                                <p class="text-3xl font-bold">
-                                    {{ academicProgress.gpa }}
+                        <p class="mb-2">
+                            You can take up to 4 courses this term. Check our
+                            course load policy.
+                        </p>
+
+                        <!-- Academic Progress Grid -->
+                        <div class="flex space-x-4">
+                            <div class="w-1/3 text-center">
+                                <p class="text-lg font-bold text-purple-800">
+                                    Major Required
                                 </p>
-                                <p class="text-sm">Cumulative GPA</p>
-                                <p class="text-xs text-gray-500">
-                                    Standing SAP
+                                <p class="text-sm">
+                                    {{ studentProgram.majorCompleted }}
+                                    /
+                                    {{ academicProgress.totalMajors }}
                                 </p>
                             </div>
-                            <div>
-                                <p class="text-3xl font-bold">
-                                    {{ academicProgress.creditsAccrued }}
-                                    <span class="text-sm font-normal"
-                                        >/
-                                        {{
-                                            academicProgress.totalCredits
-                                        }}</span
-                                    >
+                            <div class="w-1/3 text-center">
+                                <p class="text-lg font-bold text-purple-800">
+                                    General Education
                                 </p>
-                                <p class="text-sm">Credits Accrued</p>
-                                <p class="text-xs text-gray-500">
-                                    September 2024
+                                <p class="text-sm">
+                                    {{ academicProgress.genEdCompleted }} /
+                                    {{ academicProgress.totalGenEd }}
+                                </p>
+                            </div>
+                            <div class="w-1/3 text-center">
+                                <p class="text-lg font-bold text-purple-800">
+                                    Electives
+                                </p>
+                                <p class="text-sm">
+                                    {{ academicProgress.electivesCompleted }} /
+                                    {{ academicProgress.totalElectives }}
                                 </p>
                             </div>
                         </div>
@@ -116,34 +171,10 @@
 
                     <div class="bg-white rounded-lg shadow-md p-6">
                         <h2 class="text-xl font-semibold mb-4">CHECKLIST</h2>
-                        <p class="mb-4">A to-do list for you.</p>
-                        <div class="flex space-x-2 mb-4">
-                            <button
-                                class="bg-gray-200 px-4 py-1 rounded-full text-sm font-medium"
-                            >
-                                CURRENT
-                            </button>
-                            <button
-                                class="text-gray-600 px-4 py-1 rounded-full text-sm font-medium"
-                            >
-                                COMPLETED
-                            </button>
-                        </div>
-                        <ul>
-                            <li class="flex items-center mb-2">
-                                <span
-                                    class="inline-block w-6 h-6 rounded-full bg-red-500 mr-2 flex items-center justify-center text-white"
-                                    >!</span
-                                >
-                                Run Degree Audit
-                            </li>
-                            <li class="flex items-center">
-                                <span
-                                    class="inline-block w-6 h-6 rounded-full bg-yellow-500 mr-2 flex items-center justify-center text-white"
-                                    >!</span
-                                >
-                                Register Now
-                            </li>
+                        <p class="mb-4">Stay on track this term:</p>
+                        <ul class="list-disc pl-6">
+                            <li class="mb-2">Run Degree Audit</li>
+                            <li>Register for classes</li>
                         </ul>
                     </div>
                 </div>
@@ -153,32 +184,51 @@
 </template>
 
 <script>
-import AppLayout from "@/Layouts/AppLayout.vue";
-import { defineComponent } from "vue";
-
-export default defineComponent({
-    components: {
-        AppLayout,
-    },
+export default {
     props: {
-        currentCourses: {
-            type: Array,
-            required: true,
-        },
-        user: {
+        studentProgram: {
             type: Object,
-            required: true,
-        },
-        academicProgress: {
-            type: Object,
-            required: true,
+            require: true,
         },
     },
-});
+    data() {
+        return {
+            currentTab: "current", // Controls the tab view
+            currentCourses: [
+                {
+                    id: 1,
+                    course_name: "Software Engineering 2",
+                    isRetake: true,
+                    proctorStatus: "Not Proctored",
+                },
+                {
+                    id: 2,
+                    course_name: "Operating Systems 2",
+                    isRetake: false,
+                    proctorStatus: "Proctor approved",
+                },
+                {
+                    id: 3,
+                    course_name: "Comparative Programming Languages",
+                    isRetake: true,
+                    proctorStatus: "Proctor approved",
+                },
+                {
+                    id: 4,
+                    course_name: "Systems & Application Security",
+                    isRetake: false,
+                    proctorStatus: "Not Proctored",
+                },
+            ],
+            academicProgress: {
+                majorCompleted: 8,
+                totalMajors: 12,
+                genEdCompleted: 6,
+                totalGenEd: 8,
+                electivesCompleted: 2,
+                totalElectives: 4,
+            },
+        };
+    },
+};
 </script>
-
-<style scoped>
-.table {
-    border-collapse: collapse;
-}
-</style>

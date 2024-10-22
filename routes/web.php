@@ -27,35 +27,12 @@ Route::get('/dashboard', [DashboardController::class,'index'])->middleware(['aut
 
 Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('user.profile');
 
-// Route::get('/online-campus', function () {
-//     return Inertia::render('Contact');
-// })->name('online-campus');
-// Route::get('links', function () {
-//     return Inertia::render('Contact');
-// })->name('links');
-// Route::get('admissions', function () {
-//     return Inertia::render('Contact');
-// })->name('admissions');
-// Route::get( 'forms', function () {
-//     return Inertia::render('Contact');
-// })->name('forms');
-// Route::get('achievements', function () {
-//     return Inertia::render('Contact');
-// })->name('achievements');
-// Route::get('share', function () {
-//     return Inertia::render('Contact');
-// })->name('share');
-// Route::get('courses', function () {
-//     return Inertia::render('Contact');
-// })->name('courses');
-// Route::get('payments', function () {
-//     return Inertia::render('Contact');
-// })->name('payments');
-
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
-    Route::get('/courses', [CourseController::class, 'index'])->name('courses');
+    Route::controller(CourseController::class)->group(function () {
+        Route::get('/courses', 'index')->name('courses');
+    });
+
     Route::get('/share', [StoryController::class, 'index'])->name('share');
     Route::get('/achievements', [AchievementsController::class, 'index'])->name('achievements');
     Route::get('/forms', [FormController::class, 'index'])->name('forms');
@@ -66,6 +43,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Courses
+    Route::controller(CourseController::class)->group(function () {
+        Route::get('/courses/registration', 'registration')->name('courses.registration');
+        Route::post('/courses/registration', 'register')->name('courses.register');
+    });
 });
 
 require __DIR__.'/auth.php';
