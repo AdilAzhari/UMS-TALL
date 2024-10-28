@@ -10,11 +10,16 @@ class AcademicProgress extends Model
     use HasFactory;
     protected $fillable = [
         'student_id',
-        'gpa',
         'program_id',
         'term_id',
-        'enrollment_id',
+        'gpa',
+        'cgpa',
         'academic_standing',
+        'total_credits',
+        'total_courses',
+        'total_courses_completed',
+        'total_courses_failed',
+        'total_courses_withdrawn',
     ];
     public function student()
     {

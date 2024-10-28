@@ -8,4 +8,7 @@ class CourseService
     {
         return $user->courses;
     }
+    public function availableCourses() {
+        return Course::where('is_active', true)->get();
+    }
 }

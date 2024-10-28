@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('terms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('current_term_id')->nullable()->constrained('terms')->cascadeOnDelete();
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->integer('max_courses')->default(5);
             $table->date('start_date');
             $table->date('end_date');
-            $table->decimal('gpa')->default(0.00);
+            $table->date('registration_start_date')->nullable();
+            $table->date('registration_end_date')->nullable();
             $table->timestamps();
         });
     }

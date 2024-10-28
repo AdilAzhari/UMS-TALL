@@ -1,79 +1,11 @@
-<template>
-    <AppLayout>
-        <div class="course-registration bg-white shadow-md rounded-lg p-6">
-            <h2 class="text-2xl font-bold text-purple-700 mb-4">
-                Course Registration
-            </h2>
-            <p class="text-gray-600 mb-4">
-                Your CGPA is
-                <span class="font-semibold">{{ studentCGPA || "N/A" }}</span
-                >. Based on this, you can register for courses under the
-                following categories:
-            </p>
-
-            <div class="flex flex-wrap gap-4">
-                <button
-                    v-for="category in courseCategories"
-                    :key="category.id"
-                    class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-purple-200"
-                    :class="{
-                        'bg-purple-700 text-white':
-                            selectedCategory === category,
-                    }"
-                    @click="selectCategory(category)"
-                >
-                    {{ category.name }}
-                </button>
-            </div>
-
-            <div v-if="selectedCategory" class="mt-6">
-                <h3 class="text-xl font-semibold text-gray-800">
-                    Available {{ selectedCategory.name }} Courses
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    <div
-                        v-for="course in filteredCourses"
-                        :key="course.id"
-                        class="p-4 border rounded-lg bg-gray-50 hover:shadow-md"
-                    >
-                        <h4 class="font-semibold text-gray-700">
-                            {{ course.course_name }}
-                        </h4>
-                        <p class="text-sm text-gray-600">
-                            Credits: {{ course.credits }}
-                        </p>
-                        <p class="text-sm text-gray-500">
-                            Prerequisites: {{ course.prerequisites || "None" }}
-                        </p>
-                        <button
-                            class="mt-3 bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600"
-                            @click="registerForCourse(course.id)"
-                        >
-                            Register
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </AppLayout>
-</template>
-
 <script>
+import { defineComponent } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
-
-export default {
+export default defineComponent({
     components: {
         AppLayout,
     },
     props: {
-        studentCGPA: {
-            type: Number,
-            required: true,
-        },
-        courseCategories: {
-            type: Array,
-            required: true,
-        },
         availableCourses: {
             type: Array,
             required: true,
@@ -81,34 +13,116 @@ export default {
     },
     data() {
         return {
-            selectedCategory: null,
+            searchQuery: "",
+            selectedTerm: "all",
+            selectedType: "all",
         };
     },
     computed: {
         filteredCourses() {
-            return this.availableCourses.filter(
-                (course) =>
-                    course.category === this.selectedCategory.name &&
-                    course.min_cgpa <= this.studentCGPA
-            );
+            let courses = this.availableCourses;
+
+            if (this.searchQuery) {
+                courses = courses.filter(
+                    (course) =>
+                        course.name
+                            .toLowerCase()
+                            .includes(this.searchQuery.toLowerCase()) ||
+                        course.code
+                            .toLowerCase()
+                            .includes(this.searchQuery.toLowerCase())
+                );
+            }
+
+            if (this.selectedTerm !== "all") {
+                courses = courses.filter(
+                    (course) => course.term === this.selectedTerm
+                );
+            }
+
+            if (this.selectedType !== "all") {
+                courses = courses.filter(
+                    (course) => course.type === this.selectedType
+                );
+            }
+
+            return courses;
         },
     },
     methods: {
-        selectCategory(category) {
-            this.selectedCategory = category;
-        },
-        registerForCourse(courseId) {
-            // Handle the registration logic here
-            console.log(`Registering for course with ID: ${courseId}`);
-            // You can make an API call to your backend to handle the registration
+        selectCourse(course) {
+            this.$emit("select-course", course);
         },
     },
-};
+});
 </script>
 
-<style scoped>
-.course-registration {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-</style>
+<template>
+    <AppLayout>
+        <div>
+            <!-- Filters -->
+            <div class="mb-6 flex space-x-4">
+                <input
+                    type="text"
+                    v-model="searchQuery"
+                    placeholder="Search courses..."
+                    class="flex-1 px-4 py-2 border rounded-md"
+                />
+                <select
+                    v-model="selectedTerm"
+                    class="px-4 py-2 border rounded-md"
+                >
+                    <option value="all">All Terms</option>
+                    <!-- Add your term options -->
+                </select>
+                <select
+                    v-model="selectedType"
+                    class="px-4 py-2 border rounded-md"
+                >
+                    <option value="all">All Types</option>
+                    <!-- Add your course type options -->
+                </select>
+            </div>
+
+            <!-- Course List -->
+            <div class="space-y-4">
+                <div
+                    v-for="course in filteredCourses"
+                    :key="course.id"
+                    class="border rounded-lg p-4 hover:bg-gray-50"
+                >
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-semibold text-lg">
+                                {{ course.code }} - {{ course.name }}
+                            </h3>
+                            <p class="text-sm text-gray-600 mt-1">
+                                {{ course.credits }} Credits
+                                <span
+                                    v-if="course.requier_proctor"
+                                    class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
+                                >
+                                    Proctor Required
+                                </span>
+                            </p>
+                            <div class="mt-2 text-sm">
+                                <p
+                                    v-if="course.prerequisite"
+                                    class="text-gray-600"
+                                >
+                                    Prerequisite: {{ course.prerequisite }}
+                                </p>
+                            </div>
+                        </div>
+                        <button
+                            @click="selectCourse(course)"
+                            class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"
+                        >
+                            Select Course
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </AppLayout>
+</template>

@@ -22,6 +22,7 @@ class AnnouncementFactory extends Factory
             'week_id' => \App\Models\Week::inRandomOrder()->first()->id,
             'message' => $this->faker->sentence(),
             'status' => $this->faker->randomElement(['active', 'inactive']),
+            'title' => $this->faker->word(),
         ];
     }
 }

@@ -13,7 +13,8 @@ class enrollment extends Model
         'course_id',
         'status',
         'enrollment_date',
-        'completion_date'
+        'completion_date',
+        'course_requirement_id',
     ];
     protected $casts = [
         'enrollment_date' => 'datetime',
@@ -39,5 +40,9 @@ class enrollment extends Model
     public function registrations()
     {
         return $this->hasMany(Registration::class);
+    }
+    public function courseRequirement()
+    {
+        return $this->belongsTo(CourseRequirement::class);
     }
 }

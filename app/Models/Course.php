@@ -19,14 +19,16 @@ class Course extends Model
         'max_students',
         'status',
         'requier_proctor',
+        'paid',
         'prerequisite_course_id',
+        'course_category_id',
         'cost',
-        'is_paid',
-        'category',
         'teacher_id',
         'program_id',
         'proctor_id',
         'department_id',
+        'sequence',
+        'term_id',
     ];
     public function program()
     {
@@ -87,5 +89,67 @@ class Course extends Model
     public function prerequisites()
     {
         return $this->belongsToMany(Course::class, 'course_prerequisites', 'course_id', 'prerequisite_course_id');
+    }
+    public function courseRequirements()
+    {
+        return $this->hasMany(CourseRequirement::class);
+    }
+    public function studentCourses()
+    {
+        return $this->hasMany(StudentCourse::class);
+    }
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
+    }
+    public function scopePaid($query)
+    {
+        return $query->where('is_paid', true);
+    }
+    public function scopeFree($query)
+    {
+        return $query->where('is_paid', false);
+    }
+    public function scopeNotStarted($query)
+    {
+        return $query->whereDoesntHave('studentCourses', function ($query) {
+            $query->where('status', 'not_started');
+        });
+    }
+    public function category()
+    {
+        return $this->belongsTo(CourseCategory::class, 'course_category_id');
+    }
+    public function scopeFutureCourses($query)
+    {
+        return $query->where('status', 'future_payment');
+    }
+    public function scopeCurrentCourses($query)
+    {
+        return $query->where('status', 'registered');
+    }
+    public function scopePastCourses($query)
+    {
+        return $query->where('status', 'completed');
+    }
+    public function scopeInProgress($query)
+    {
+        return $query->where('status', 'in_progress');
+    }
+    public function scopeRegistered($query)
+    {
+        return $query->where('status', 'registered');
+    }
+    public function scopeCompleted($query)
+    {
+        return $query->where('status', 'completed');
+    }
+    public function scopeFuturePayment($query)
+    {
+        return $query->where('status', 'future_payment');
+    }
+    public function scopeCourseRequirements($query)
+    {
+        return $query->whereHas('courseRequirements');
     }
 }

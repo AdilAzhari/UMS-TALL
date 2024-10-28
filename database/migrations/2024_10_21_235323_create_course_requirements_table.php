@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('course_requirements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
-            $table->enum('course_category', ['major_required', 'major_elective', 'general_education', 'general']);
+            $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();
+            $table->foreignId('course_category_id')->constrained('course_categories')->cascadeOnDelete();
             $table->integer('required_courses');
             $table->timestamps();
         });

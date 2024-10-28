@@ -204,79 +204,7 @@
                 </div>
 
                 <!-- Detailed Courses Section -->
-                <div class="px-6 lg:px-12 py-8">
-                    <div class="bg-white shadow-lg rounded-lg p-8">
-                        <div class="flex justify-center space-x-4 mb-6">
-                            <button
-                                v-for="view in ['current', 'future', 'past']"
-                                :key="view"
-                                class="px-4 py-2 rounded-full transition-all focus:outline-none"
-                                :class="{
-                                    'bg-purple-700 text-white':
-                                        activeView === view,
-                                    'bg-gray-200 text-gray-700':
-                                        activeView !== view,
-                                }"
-                                @click="activeView = view"
-                            >
-                                {{
-                                    view.charAt(0).toUpperCase() + view.slice(1)
-                                }}
-                            </button>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table
-                                class="min-w-full bg-white rounded-lg shadow-md"
-                            >
-                                <thead class="bg-gray-200">
-                                    <tr>
-                                        <th
-                                            class="py-3 px-4 text-left font-semibold text-gray-700"
-                                        >
-                                            Course Name
-                                        </th>
-                                        <th
-                                            class="py-3 px-4 text-left font-semibold text-gray-700"
-                                        >
-                                            Status
-                                        </th>
-                                        <th
-                                            class="py-3 px-4 text-left font-semibold text-gray-700"
-                                        >
-                                            Proctor
-                                        </th>
-                                        <th
-                                            class="py-3 px-4 text-left font-semibold text-gray-700"
-                                        >
-                                            Paid
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr
-                                        v-for="course in filteredCourses"
-                                        :key="course.id"
-                                        class="border-t hover:bg-gray-50"
-                                    >
-                                        <td class="py-3 px-4">
-                                            {{ course.course_code }} -
-                                            {{ course.course_name }}
-                                        </td>
-                                        <td class="py-3 px-4">
-                                            {{ course.status }}
-                                        </td>
-                                        <td class="py-3 px-4">
-                                            {{ course.proctor || "N/A" }}
-                                        </td>
-                                        <td class="py-3 px-4">
-                                            {{ course.payment_status }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <Courses :studentProgram="studentProgram" />
             </div>
         </div>
     </AppLayout>
@@ -286,11 +214,12 @@
 import { defineComponent } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link } from "@inertiajs/vue3";
-
+import Courses from "@/Components/Courses.vue";
 export default defineComponent({
     components: {
         AppLayout,
         Link,
+        Courses,
     },
     props: {
         studentProgram: {
@@ -298,6 +227,7 @@ export default defineComponent({
             required: true,
         },
     },
+
     data() {
         return {
             activeView: "current",

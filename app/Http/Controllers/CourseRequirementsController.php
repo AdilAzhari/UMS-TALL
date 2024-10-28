@@ -13,7 +13,10 @@ class CourseRequirementsController extends Controller
      */
     public function index()
     {
-        //
+        $courseRequirements = CourseRequirements::all();
+        return inertia('CourseRequirements/Index', [
+            'courseRequirements' => $courseRequirements,
+        ]);
     }
 
     /**

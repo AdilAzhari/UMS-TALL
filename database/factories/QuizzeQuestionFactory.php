@@ -17,10 +17,10 @@ class QuizzeQuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            'quiz_id' => \App\Models\Quizze::inRandomOrder()->first()->id,
+            'quizze_id' => \App\Models\Quizze::inRandomOrder()->first()->id,
             'question' => $this->faker->sentence(),
-            'created_by' => \App\Models\User::inRandomOrder()->first()->id,
-            'updated_by' => \App\Models\User::inRandomOrder()->first()->id,
+            'created_by' => \App\Models\Teacher::inRandomOrder()->first()->id,
+            'updated_by' => \App\Models\Teacher::inRandomOrder()->first()->id,
         ];
     }
 }

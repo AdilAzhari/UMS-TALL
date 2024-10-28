@@ -30,7 +30,10 @@ Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('user.pr
 Route::middleware('auth')->group(function () {
     Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
     Route::controller(CourseController::class)->group(function () {
+        // Route::get('/courses', 'registrationSuccess')->name('courses.registration.success');
         Route::get('/courses', 'index')->name('courses');
+        Route::get('/courses/registration', 'registration')->name('courses.registration');
+        // Route::get('/courses/register', 'register')->name('courses.register');
     });
 
     Route::get('/share', [StoryController::class, 'index'])->name('share');
@@ -44,11 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Courses
-    Route::controller(CourseController::class)->group(function () {
-        Route::get('/courses/registration', 'registration')->name('courses.registration');
-        Route::post('/courses/registration', 'register')->name('courses.register');
-    });
 });
 
 require __DIR__.'/auth.php';

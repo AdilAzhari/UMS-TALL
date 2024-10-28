@@ -15,18 +15,20 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('max_students')->default(30);
             $table->integer('credit')->default(3);
-            $table->string('syllabus');
-            $table->string('image');
+            $table->string('syllabus')->nullable();
+            $table->string('image')->nullable();
             $table->boolean('status')->default(false);
             $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();
-            $table->boolean('requier_proctor')->default(false);
-            $table->boolean('is_paid')->default(false);
-            $table->decimal('cost', 10, 2)->nullable();
-            $table->enum('category',['major_required','major_elective','general_education','general'])->default('general');
             $table->foreignId('prerequisite_course_id')->nullable()->constrained('courses')->cascadeOnDelete();
+            $table->foreignId('course_category_id')->constrained()->cascadeOnDelete();
+            $table->boolean('requier_proctor')->default(false);
+            $table->enum('paid', ['paid', 'unpaid', 'future_payment'])->default('unpaid');
+            $table->decimal('cost', 10, 2)->nullable();
+            $table->integer('sequence')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

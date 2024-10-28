@@ -13,6 +13,6 @@ class WeekSeeder extends Seeder
      */
     public function run(): void
     {
-        Week::factory()->count(10)->create();
+        Week::factory()->count(9)->create();
     }
 }

@@ -52,4 +52,20 @@ class Registration extends Model
     {
         return $query->where('status', 'in_progress');
     }
+    public function scopePastCourses($query)
+    {
+        return $query->where('status', 'completed');
+    }
+    public function scopeFutureCourses($query)
+    {
+        return $query->where('status', 'registered');
+    }
+    public function scopeCurrentCourses($query)
+    {
+        return $query->where('status', 'in_progress');
+    }
+    public function scopeAvailableCourses($query)
+    {
+        return $query->where('status', 'registered');
+    }
 }

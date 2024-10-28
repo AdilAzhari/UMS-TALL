@@ -16,16 +16,16 @@ class TermFactory extends Factory
      */
     public function definition(): array
     {
-        $name = $this->faker->word();
+        $name = ['Fall 2024', 'Spring 2025', 'Summer 2025', 'Winter 2025'];
 
         return [
-            'name' => $name,
-            'slug' => str($name),
-            'start_date' => $this->faker->dateTimeThisYear(),
-            'end_date' => $this->faker->dateTimeThisYear(),
-            'is_current' => $this->faker->boolean(),
-            'current_term_id' => 1,
-            'gpa' => $this->faker->randomFloat(2,0.00,4.00),
+            'name' => $name[array_rand($name)],
+            'slug' => str($name[array_rand($name)]),
+            'start_date' => now()->addMonths(1),
+            'end_date' => now()->addMonths(3),
+            'max_courses' => 5,
+            'registration_start_date' => now()->addMonths(1),
+            'registration_end_date' => now()->addMonths(2),
         ];
     }
 }

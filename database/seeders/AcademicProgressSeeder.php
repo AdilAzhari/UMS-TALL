@@ -13,6 +13,6 @@ class AcademicProgressSeeder extends Seeder
      */
     public function run(): void
     {
-        AcademicProgress::factory()->create();
+        AcademicProgress::factory(40)->create();
     }
 }

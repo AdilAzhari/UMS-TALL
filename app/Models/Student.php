@@ -83,4 +83,8 @@ class Student extends Model
                     ->withPivot('enrolled_date')
                     ->withTimestamps();
     }
+    public function courseCategories()
+    {
+        return $this->courses->pluck('category')->unique('name')->values();
+    }
 }

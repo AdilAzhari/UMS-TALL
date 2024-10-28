@@ -26,6 +26,7 @@ class WeekFactory extends Factory
             'start_date' => $this->faker->dateTimeThisYear(),
             'end_date' => $this->faker->dateTimeThisYear(),
             'quizz_id' => Quizze::inRandomOrder()->first()->id,
+            'term_id' => \App\Models\Term::inRandomOrder()->first()->id,
         ];
     }
 }

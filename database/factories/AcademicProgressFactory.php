@@ -26,7 +26,13 @@ class AcademicProgressFactory extends Factory
             'gpa' => $this->faker->randomFloat(2, 0, 4),
             'program_id' => Program::inRandomOrder()->first()->id,
             'academic_standing' => $this->faker->randomElement(['good', 'warning', 'probation', 'suspension']),
-            'enrollment_id' => enrollment::inRandomOrder()->first()->id,
+            'term_id' => Term::inRandomOrder()->first()->id,
+            'cgpa' => $this->faker->randomFloat(2, 0, 4),
+            'total_credits' => $this->faker->numberBetween(0, 100),
+            'total_courses' => $this->faker->numberBetween(0, 100),
+            'total_courses_completed' => $this->faker->numberBetween(0, 100),
+            'total_courses_failed' => $this->faker->numberBetween(0, 100),
+            'total_courses_withdrawn' => $this->faker->numberBetween(0, 100),
         ];
     }
 }

@@ -31,6 +31,9 @@ class StudentFactory extends Factory
             'created_at' => $this->faker->dateTimeThisYear(),
             'user_id' => User::inRandomOrder()->first()->id,
             'student_id' => 'STY' . $this->faker->unique()->randomNumber(5),
+            'address' => $this->faker->address(),
+            'phone_number' => $this->faker->phoneNumber(),
+            'date_of_birth' => $this->faker->date(),
         ];
     }
 }

@@ -30,6 +30,7 @@ class MaterialFactory extends Factory
             'url' => $this->faker->url(),
             'filename' => $this->faker->word(),
             'disk' => $this->faker->word(),
+            'week_id' => \App\Models\Week::inRandomOrder()->first()->id,
         ];
     }
 }

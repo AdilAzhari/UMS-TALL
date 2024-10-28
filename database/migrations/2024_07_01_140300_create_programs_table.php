@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('duration_years');
             $table->foreignId('department_id')->constrained('departments')->cascadeOnDelete();
             $table->string('program_name')->nullable();
-            $table->enum('program_status', ['Graduated', 'Enrolled', 'Suspended', 'Expelled']);
-            $table->enum('program_type', ['Diploma', 'BACHELOR\'S DEGREE', 'MASTERS DEGREE', 'DOCTORATE DEGREE']);
+            $table->foreignId('program_type_id')->constrained('program_types')->cascadeOnDelete();
+            $table->foreignId('program_status_id')->constrained('program_statuses')->cascadeOnDelete();
             $table->timestamps();
         });
     }

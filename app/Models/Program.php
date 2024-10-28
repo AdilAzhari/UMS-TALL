@@ -13,10 +13,14 @@ class Program extends Model
         'program_code',
         'program_name',
         'description',
-        'program_status',
         'duration_years',
         'department_id',
-        'program_type',
+        'program_type_id',
+        'program_status_id',
+        'total_credits',
+        'total_courses',
+        'created_by',
+        'updated_by',
     ];
     public function department()
     {
@@ -31,4 +35,21 @@ class Program extends Model
     {
         return $this->hasMany(Student::class);
     }
+    public function programType()
+    {
+        return $this->belongsTo(ProgramType::class);
+    }
+    public function programStatus()
+    {
+        return $this->belongsTo(ProgramStatuse::class);
+    }
+    public function createdBy()
+    {
+        return $this->belongsTo(Teacher::class, 'created_by');
+    }
+    public function updatedBy()
+    {
+        return $this->belongsTo(Teacher::class, 'updated_by');
+    }
+
 }
