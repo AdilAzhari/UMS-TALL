@@ -32,8 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(CourseController::class)->group(function () {
         // Route::get('/courses', 'registrationSuccess')->name('courses.registration.success');
         Route::get('/courses', 'index')->name('courses');
-        Route::get('/courses/registration', 'registration')->name('courses.registration');
-        // Route::get('/courses/register', 'register')->name('courses.register');
+        Route::post('/courses/register', 'register')->name('courses.register');
     });
 
     Route::get('/share', [StoryController::class, 'index'])->name('share');

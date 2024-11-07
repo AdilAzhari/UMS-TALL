@@ -7,20 +7,6 @@
                     <h1 class="text-4xl font-bold text-purple-900">
                         MY COURSES
                     </h1>
-                    <div class="flex items-center space-x-4">
-                        <div class="text-right">
-                            <div class="text-sm text-gray-500">
-                                UoPeople Time
-                            </div>
-                            <div>{{ currentTime }}</div>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-sm text-gray-500">
-                                UoPeople Date
-                            </div>
-                            <div>{{ currentDate }}</div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Navigation Tabs -->
@@ -173,13 +159,90 @@
 
                     <!-- Registration Tab -->
                     <div
-                        v-else-if="currentTab === 'registration'"
+                        v-if="currentTab === 'registration'"
                         class="bg-white rounded-lg shadow-md"
                     >
                         <div class="p-6">
+                            <div class="flex justify-between items-center mb-6">
+                                <h1 class="text-4xl font-bold text-purple-900">
+                                    PLAN YOUR NEXT TERM - NOVEMBER 2024
+                                </h1>
+                                <div class="relative w-32 h-32">
+                                    <div
+                                        class="w-32 h-32 rounded-full border-8 border-emerald-400 flex items-center justify-center"
+                                    >
+                                        <div class="text-center">
+                                            <div class="text-3xl font-bold">
+                                                {{ selectedCourses.length }}/4
+                                            </div>
+                                            <div class="text-sm">
+                                                Courses Registered
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <h2 class="text-2xl font-bold text-purple-900 mb-6">
                                 Course Registration
                             </h2>
+                            <!-- Search Bar -->
+                            <div class="mb-6">
+                                <div class="relative">
+                                    <input
+                                        type="text"
+                                        v-model="searchQuery"
+                                        placeholder="Search courses by name or code..."
+                                        class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                                    />
+                                    <span
+                                        class="absolute right-3 top-2.5 text-gray-400"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-5 w-5"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                            />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- Alert Message -->
+                            <div v-if="showAlert" class="mb-6">
+                                <div
+                                    class="bg-yellow-50 border-l-4 border-yellow-400 p-4"
+                                >
+                                    <div class="flex">
+                                        <div class="flex-shrink-0">
+                                            <svg
+                                                class="h-5 w-5 text-yellow-400"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                                    clip-rule="evenodd"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm text-yellow-700">
+                                                {{ alertMessage }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <!-- Available Courses -->
                                 <div class="space-y-4">
@@ -264,9 +327,13 @@
                                 </button>
                                 <button
                                     class="px-6 py-2 bg-pink-500 text-white rounded-full hover:bg-pink-600"
+                                    :disabled="isSubmitting"
                                     @click="submitRegistration"
                                 >
-                                    Complete Registration
+                                    <span v-if="isSubmitting"
+                                        >Processing...</span
+                                    >
+                                    <span v-else>Complete Registration</span>
                                 </button>
                             </div>
                         </div>
@@ -303,7 +370,7 @@
 import { defineComponent } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Courses from "@/Components/Courses.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 
 export default defineComponent({
     components: {
@@ -316,10 +383,22 @@ export default defineComponent({
             type: Object,
             required: true,
         },
+        availableCourses: {
+            type: Object,
+            required: true,
+        },
+        errors: {
+            type: Object,
+            default: () => ({}),
+        },
     },
     data() {
         return {
             currentTab: "manage",
+            searchQuery: "",
+            showAlert: false,
+            alertMessage: "",
+            alertTimeout: null,
             tabs: [
                 { label: "Manage Courses", value: "manage" },
                 { label: "Registration", value: "registration" },
@@ -330,42 +409,49 @@ export default defineComponent({
                 { text: "Run Degree Audit", completed: false },
                 { text: "Register for classes", completed: false },
             ],
-            availableCourses: [
-                { id: 1, code: "CS1101", name: "Programming Fundamentals" },
-                { id: 2, code: "MATH1201", name: "College Algebra" },
-                { id: 3, code: "ENG1102", name: "English Composition" },
-            ],
             selectedCourses: [],
         };
     },
     computed: {
-        currentTime() {
-            const now = new Date();
-            return now.toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: true,
-            });
-        },
-        currentDate() {
-            const now = new Date();
-            return now.toLocaleDateString("en-US", {
-                weekday: "long",
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-            });
+        filteredCourses() {
+            const query = this.searchQuery.toLowerCase();
+            return this.availableCourses.filter(
+                (course) =>
+                    course.name.toLowerCase().includes(query) ||
+                    course.code.toLowerCase().includes(query)
+            );
         },
     },
     methods: {
         addCourse(course) {
-            if (this.selectedCourses.length < 4) {
-                this.selectedCourses.push(course);
-                this.availableCourses = this.availableCourses.filter(
-                    (c) => c.id !== course.id
+            // Check if course is already selected
+            if (this.selectedCourses.some((c) => c.id === course.id)) {
+                this.showAlertMessage(
+                    `${course.code} has already been added to your selection.`
                 );
+                return;
             }
+
+            // Check maximum courses limit
+            if (this.selectedCourses.length >= 4) {
+                this.showAlertMessage("You can only select up to 4 courses.");
+                return;
+            }
+
+            this.selectedCourses.push(course);
+        },
+        showAlertMessage(message) {
+            if (this.alertTimeout) {
+                clearTimeout(this.alertTimeout);
+            }
+
+            this.alertMessage = message;
+            this.showAlert = true;
+
+            this.alertTimeout = setTimeout(() => {
+                this.showAlert = false;
+                this.alertMessage = "";
+            }, 3000);
         },
         removeCourse(course) {
             this.selectedCourses = this.selectedCourses.filter(
@@ -375,15 +461,53 @@ export default defineComponent({
         },
         resetSelection() {
             // Reset course selection logic
+            this.availableCourses.push(...this.selectedCourses);
             this.selectedCourses = [];
         },
-        submitRegistration() {
-            // Registration submission logic
-            console.log(
-                "Submitting registration for courses:",
-                this.selectedCourses
+        async submitRegistration() {
+            if (this.selectedCourses.length === 0) {
+                this.showAlertMessage("Please select at least one course.");
+                return;
+            }
+
+            this.isSubmitting = true;
+
+            // Extract course IDs from selected courses
+            const courseIds = this.selectedCourses.map((course) => course.id);
+
+            // Send request to your controller
+            router.post(
+                "/courses/register",
+                {
+                    courses: courseIds,
+                },
+                {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        // Show success message and reset form
+                        this.showAlertMessage(
+                            "Courses registered successfully!"
+                        );
+                        this.resetSelection();
+                        this.isSubmitting = false;
+                    },
+                    onError: (errors) => {
+                        // Show error message
+                        this.showAlertMessage(
+                            errors.courses ||
+                                "Failed to register courses. Please try again."
+                        );
+                        this.isSubmitting = false;
+                    },
+                }
             );
         },
+    },
+    beforeUnmount() {
+        // Clear any remaining timeout when component is destroyed
+        if (this.alertTimeout) {
+            clearTimeout(this.alertTimeout);
+        }
     },
 });
 </script>
@@ -395,5 +519,9 @@ export default defineComponent({
 
 input[type="checkbox"] {
     @apply w-4 h-4 cursor-pointer;
+}
+
+button:disabled {
+    @apply opacity-50 cursor-not-allowed;
 }
 </style>

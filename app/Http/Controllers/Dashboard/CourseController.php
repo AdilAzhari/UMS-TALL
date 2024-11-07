@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CourseRegiserRequest;
 use App\Models\Course;
 use App\Models\CourseRequirement;
 use App\Models\Registration;
-use App\Models\Teacher;
+use Illuminate\Support\Facades\Notification;
 use App\Models\Term;
 use App\Models\User;
-use App\Services\CourseService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
@@ -18,12 +17,9 @@ class CourseController extends Controller
     // Todo: Add course categories
     // Todo: Add course registration logic
     // Todo: Add course registration validation
-    // Todo: Add course registration view
-    // Todo: show available courses
     // Todo: show registered courses
     // Todo: show course registration status
     // Todo: show course registration closing date
-    // Todo: show course registration form
     // Todo: show course registration success message
     // Todo: show course registration error message
     // Todo: show course registration form validation error message
@@ -36,13 +32,98 @@ class CourseController extends Controller
     // Todo: if not, show the reason why it was rejected (and send email to student) and it will not be added to the course list.
     // Todo: sending email to teacher after registration
     // Todo: show time left for course registration to close
-    public function registration(){
-        $user = Auth::user();
-        // $courseCategories = CourseCategory::all();
-        return inertia('Courses/CourseRegistration', [
-            'user' => $user,
-            // 'courseCategories' => $courseCategories,
-        ]);
+
+    public function register(CourseRegiserRequest $request)
+    {
+        try {
+
+            // Get the authenticated student ID
+            $student = auth()->user()->student->id;
+            // Check maximum course limit
+            $validated = $request->validated();
+            if (count($validated['courses']) > 4) {
+                return back()->withErrors([
+                    'courses' => 'You cannot register for more than 4 courses.'
+                ]);
+            }
+            // Get current active term
+            $currentTerm = Term::where('start_date', '<=', now())
+                ->where('end_date', '>=', now())
+                ->first();
+
+            if (!$currentTerm) {
+                return back()->withErrors([
+                    'courses' => 'No active term found for registration.'
+                ]);
+            }
+            // Register each course
+            foreach ($validated['courses'] as $courseId) {
+                $course = Course::find($courseId);
+                if (!$course) {
+                    return back()->withErrors([
+                        'courses' => 'Invalid course selected.'
+                    ]);
+                }
+                // Check if the student has already registered for the course
+                $existingRegistration = Registration::where('student_id', $student)
+                    ->where('course_id', $courseId)
+                    ->where('term_id', $currentTerm->id)
+                    ->first();
+
+                if ($existingRegistration) {
+                    return back()->withErrors([
+                        'courses' => 'You have already registered for ' . $course->name . '.'
+                    ]);
+                }
+
+                // Check if the student has already passed the course
+                $passedCourse = Registration::where('student_id', $student)
+                    ->where('course_id', $courseId)
+                    ->where('status', 'passed')
+                    ->first();
+
+                if ($passedCourse) {
+                    return back()->withErrors([
+                        'courses' => 'You have already passed ' . $course->name . '.'
+                    ]);
+                }
+                // Check if the student has already failed the course
+                $failedCourse = Registration::where('student_id', $student)
+                    ->where('course_id', $courseId)
+                    ->where('status', 'failed')
+                    ->first();
+
+                if ($failedCourse) {
+                    return back()->withErrors([
+                        'courses' => 'You have already failed ' . $course->name . '.'
+                    ]);
+                }
+                // Register the course
+               $registration = Registration::create([
+                    'student_id' => $student,
+                    'course_id' => $courseId,
+                    'proctor_id' => 1,
+                    'term_id' => $currentTerm->id,
+                    'status' => 'registered',
+                    'proctor_status' => 'pending',
+                    'registered_at' => now(),
+                    'payment_status' => false,
+                ]);
+                dd($registration);
+                // Send email to student
+
+                // Notification::send();
+                // Send email to teacher
+                // Send email to proctor (if any)
+
+            }
+            return redirect()->back()->with('success', 'Courses registered successfully!');
+
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'courses' => 'An error occurred while registering courses. Please try again.'
+            ]);
+        }
     }
 
     public function index(){
@@ -138,6 +219,7 @@ class CourseController extends Controller
                 'isOpen' => true,
                 'closingDate' => '2024-10-23',
             ],
+            'availableCourses' => $availableCourses,
             'studentProgram' => $studentData,
         ]);
     }

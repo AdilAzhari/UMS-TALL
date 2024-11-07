@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         // User::factory()->create([
         //     'name' => 'admin',
         //     'email' => 'admin@example.com',
+        //     'password' => '12345678',
         // ]);
         $this->call([
             // UserSeeder::class,
@@ -52,9 +53,9 @@ class DatabaseSeeder extends Seeder
             // AnnouncementCommentSeeder::class,
             // AcademicProgressSeeder::class,
             // RegistrationSeeder::class,
-            StudentCourseSeeder::class,
+            // StudentCourseSeeder::class,
             // CourseTeacherseeder::class,
-            // CourseRequirementsSeeder::class,
+            CourseRequirementsSeeder::class,
         ]);
         // \App\Models\Student::factory(50)->create(); // Create 50 students
         // \App\Models\Course::factory(20)->create();  // Create 20 courses

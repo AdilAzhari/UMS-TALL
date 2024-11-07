@@ -16,11 +16,9 @@ class Registration extends Model
         'proctor_id',
         'term_id',
         'status',
-        'start_date',
-        'end_date',
         'proctor_status',
         'payment_status',
-        'enrollment_id',
+        // 'registered_at',
     ];
     protected Hidden $status;
     protected $casts = [
