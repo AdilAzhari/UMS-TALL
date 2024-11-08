@@ -10,32 +10,21 @@ use App\Models\Registration;
 use Illuminate\Support\Facades\Notification;
 use App\Models\Term;
 use App\Models\User;
+use App\Notifications\CourseRegistrationNotification;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
     // Todo: Add course categories
-    // Todo: Add course registration logic
-    // Todo: Add course registration validation
-    // Todo: show registered courses
-    // Todo: show course registration status
     // Todo: show course registration closing date
-    // Todo: show course registration success message
-    // Todo: show course registration error message
-    // Todo: show course registration form validation error message
     // Todo: for the courses that require prerequisites, show the prerequisites
     // Todo: for courses requiring proctor after, show form for proctor details
     // Todo: show course registration closing date
-    // Todo: after registration, show registered courses and status
-    // Todo: sending email to student after registration
-    // Todo: sending email to proctor after registration (if any) and if they have accepted the course will be added to the course list.
-    // Todo: if not, show the reason why it was rejected (and send email to student) and it will not be added to the course list.
-    // Todo: sending email to teacher after registration
     // Todo: show time left for course registration to close
 
     public function register(CourseRegiserRequest $request)
     {
-        try {
+        // try {
 
             // Get the authenticated student ID
             $student = auth()->user()->student->id;
@@ -65,16 +54,16 @@ class CourseController extends Controller
                     ]);
                 }
                 // Check if the student has already registered for the course
-                $existingRegistration = Registration::where('student_id', $student)
-                    ->where('course_id', $courseId)
-                    ->where('term_id', $currentTerm->id)
-                    ->first();
+                // $existingRegistration = Registration::where('student_id', $student)
+                //     ->where('course_id', $courseId)
+                //     ->where('term_id', $currentTerm->id)
+                //     ->first();
 
-                if ($existingRegistration) {
-                    return back()->withErrors([
-                        'courses' => 'You have already registered for ' . $course->name . '.'
-                    ]);
-                }
+                // if ($existingRegistration) {
+                //     return back()->withErrors([
+                //         'courses' => 'You have already registered for ' . $course->name . '.'
+                //     ]);
+                // }
 
                 // Check if the student has already passed the course
                 $passedCourse = Registration::where('student_id', $student)
@@ -109,21 +98,23 @@ class CourseController extends Controller
                     'registered_at' => now(),
                     'payment_status' => false,
                 ]);
-                dd($registration);
-                // Send email to student
 
-                // Notification::send();
-                // Send email to teacher
-                // Send email to proctor (if any)
+                // Get course and proctor requirement details
+                $course = Course::find($courseId);
+                $requiresProctor = $course->requier_proctor;
 
+                // Send notification to student
+
+                $studentUser = auth()->user();
+                Notification::send($studentUser, new CourseRegistrationNotification($course,$registration->proctor_status, $requiresProctor));
             }
             return redirect()->back()->with('success', 'Courses registered successfully!');
 
-        } catch (\Exception $e) {
-            return back()->withErrors([
-                'courses' => 'An error occurred while registering courses. Please try again.'
-            ]);
-        }
+        // } catch (\Exception $e) {
+        //     return back()->withErrors([
+        //         'courses' => 'An error occurred while registering courses. Please try again.'
+        //     ]);
+        // }
     }
 
     public function index(){

@@ -18,13 +18,14 @@ class Registration extends Model
         'status',
         'proctor_status',
         'payment_status',
-        // 'registered_at',
+        'registered_at',
+        'completion_date',
     ];
     protected Hidden $status;
     protected $casts = [
         'start_date' => 'date',
         'end_date' => 'date',
-        'payment_status' => 'boolean',
+        'registered_at' => 'date',
     ];
     public function student()
     {

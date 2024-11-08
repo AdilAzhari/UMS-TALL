@@ -20,8 +20,8 @@ return new class extends Migration
             $table->enum('status',['registered','in_progress','completed','withdrawn'])->default('in_progress')->index();
             $table->enum('proctor_status',['pending','approved','rejected'])->default('pending')->index();
             $table->timestamp('registered_at')->nullable()->default(now());
-            $table->boolean('payment_status')->default(false)->index();
-            $table->enum('payment_status',['f']);
+            $table->date('completion_date')->nullable();
+            $table->enum('payment_status', ['unpaid', 'pending', 'paid', 'future'])->default('unpaid')->index();
             $table->timestamps();
         });
     }

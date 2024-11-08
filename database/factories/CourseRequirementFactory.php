@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Program;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CourseRequirements>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CourseRequirement
  */
 class CourseRequirementFactory extends Factory
 {
