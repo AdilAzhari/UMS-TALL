@@ -1,40 +1,32 @@
-@component('mail::message')
-    # Welcome to {{ config('app.name') }}!
+<x-mail::message>
+    # Course Registration Confirmation
 
-    Thank you for registering for your new course. We're excited to have you on board!
+    Dear {{ $user }},
 
-    {{-- Course Information Card --}}
-    @component('mail::panel')
-        ## Course Registration Details
-        **{{ $courseName }}**
-        Status: {{ ucfirst($status) }}
+    Thank you for registering for {{ $courseName }}**. We're excited to have you join us!
 
-        @if ($requiresProctor)
-            🔔 **Action Required:** This course needs a proctor
-            {{-- @component('mail::button', ['url' => route('proctor.assign', ['course' => $courseId])])
-                Assign Proctor Now
-            @endcomponent --}}
-        @else
-            ✅ No proctor required for this course
-        @endif
-    @endcomponent
+    {{-- <x-mail::panel> --}}
+    <strong>Course Details</strong>
+    • Course Name: {{ $courseName }}
+    • Proctor Status: {{ ucfirst($status) }}
+    • Proctor Required: {{ $requiresProctor ? 'Yes' : 'No' }}
 
-    {{-- Next Steps Section --}}
-    @component('mail::panel')
-        ## Next Steps
-        1. Review your course materials
-        2. Mark important dates in your calendar
-        @if ($requiresProctor)
-            3. Assign a proctor as soon as possible
-        @endif
-    @endcomponent
+    @if ($requiresProctor)
+        <strong>Important:</strong> Please assign a proctor for this course as soon as possible.
+    @endif
+    {{-- </x-mail::panel> --}}
 
-    @component('mail::subcopy')
-        Need help? Our support team is ready to assist you:
-        - Email: support@{{ config('app.url') }}
-        {{-- - Visit our [Help Center]({{ route('help-center') }}) --}}
-    @endcomponent
+    @if ($requiresProctor)
+        {{-- <x-mail::button :url="route('proctor.assign', ['course' => $courseId])">
+        Assign Proctor
+    </x-mail::button> --}}
+    @endif
 
-    Best regards,
+    <x-mail::subcopy>
+        If you have any questions, our support team is here to help at:
+        support@{{ config('app.url') }}
+    </x-mail::subcopy>
+
+    Thanks,<br>
     {{ config('app.name') }} Team
-@endcomponent
+</x-mail::message>

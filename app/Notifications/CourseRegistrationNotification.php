@@ -52,6 +52,7 @@ class CourseRegistrationNotification extends Notification
                     'status' => $this->proctor_status,
                     'requiresProctor' => $this->requiresProctor,
                     'statusMessage' => $statusMessage,
+                    'user' => $notifiable->name,
                 ]);
     }
 
