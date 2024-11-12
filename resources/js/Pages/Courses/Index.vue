@@ -3,10 +3,27 @@
         <div class="min-h-screen bg-purple-50">
             <div class="max-w-7xl mx-auto p-6">
                 <!-- Header Section -->
-                <div class="flex justify-between items-center mb-6">
-                    <h1 class="text-4xl font-bold text-purple-900">
-                        MY COURSES
-                    </h1>
+                <div class="relative mb-8 bg-gradient-to-r from-purple-900 to-pink-600 rounded-2xl p-8 shadow-lg overflow-hidden">
+                    <div class="absolute inset-0 bg-grid-white/[0.1] opacity-20"></div>
+                    <div class="relative flex justify-between items-center">
+                        <div>
+                            <h1 class="text-5xl font-extrabold text-white tracking-tight">
+                                My Courses
+                            </h1>
+                            <p class="mt-2 text-purple-100 text-lg">
+                                Manage your academic journey
+                            </p>
+                        </div>
+                        <div class="hidden md:block">
+                            <div class="p-3 bg-white/10 rounded-xl backdrop-blur-sm border border-white/20">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-purple-400 rounded-full filter blur-3xl opacity-50"></div>
+                    <div class="absolute bottom-0 left-0 -mb-4 -ml-4 w-24 h-24 bg-pink-400 rounded-full filter blur-3xl opacity-50"></div>
                 </div>
 
                 <!-- Navigation Tabs -->
@@ -340,14 +357,12 @@
                     </div>
 
                     <!-- Manage Proctors Tab -->
-                    <div
-                        v-else-if="currentTab === 'proctors'"
-                        class="bg-white rounded-lg shadow-md p-6"
-                    >
-                        <h2 class="text-2xl font-bold text-purple-900 mb-6">
-                            Manage Proctors
-                        </h2>
-                        <!-- Add proctor management content here -->
+                    <div v-if="currentTab === 'proctors'">
+                        <ProctorManagement
+                            :proctorCourses="
+                                studentProgram.courses.futureProctoredCourses
+                            "
+                        />
                     </div>
 
                     <!-- How To Tab -->
@@ -371,12 +386,14 @@ import { defineComponent } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Courses from "@/Components/Courses.vue";
 import { Link, router } from "@inertiajs/vue3";
+import ProctorManagement from "@/Components/ProctorManagement.vue";
 
 export default defineComponent({
     components: {
         AppLayout,
         Courses,
         Link,
+        ProctorManagement,
     },
     props: {
         studentProgram: {
