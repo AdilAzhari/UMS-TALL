@@ -17,6 +17,7 @@ class Registration extends Model
         'term_id',
         'status',
         'proctor_status',
+        'proctored',
         'payment_status',
         'registered_at',
         'completion_date',
@@ -66,5 +67,8 @@ class Registration extends Model
     public function scopeAvailableCourses($query)
     {
         return $query->where('status', 'registered');
+    }
+    public function scopeProctored($query){
+        $query->where('proctored',true);
     }
 }

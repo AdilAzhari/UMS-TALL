@@ -3,9 +3,11 @@
 namespace App\Services;
 
 use App\Models\Course;
+use App\Models\Proctor;
 use App\Models\Registration;
 use App\Models\Term;
 use App\Models\User;
+use App\Notifications\AssignProctorNotification;
 use App\Notifications\CourseRegistrationNotification;
 use Illuminate\Support\Facades\Notification;
 
@@ -118,7 +120,7 @@ class CourseRegistrationService
         $futureCourses = Registration::where('student_id', $user->student->id)->futureCourses()->get();
         $currentCourses = Registration::where('student_id', $user->student->id)->currentCourses()->get();
         $ProctoredCourses = Registration::where('student_id', $user->student->id)->proctored()->get();
-                // dd($this->mapCourses($ProctoredCourses));
+
         return [
             'courses' => [
                 'past' => $this->mapCourses($pastCourses),
@@ -164,5 +166,26 @@ class CourseRegistrationService
             'examDate' => $course->course->exam->exam_date ?? 'This course exam data has not been set yet',
             'description' => $course->course->description,
         ]) ?? [];
+    }
+    public function assignProctor($data)
+    {
+        $studentId = auth()->user()->student->id;
+        $validated = $data;
+        $course = registration::find($validated['course_id']);
+        $course = $course->course;
+
+        $proctor = Proctor::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone_number' => $validated['phone_number'],
+            'address' => $validated['address'],
+            'city' => $validated['city'],
+            'state' => $validated['state'],
+            'country' => $validated['country'],
+            'student_id' => $studentId,
+        ]);
+        Notification::send($proctor, new AssignProctorNotification($course, $proctor));
+
+        return ['status' => 'success'];
     }
 }

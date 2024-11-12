@@ -1,32 +1,31 @@
 <x-mail::message>
-    # Course Registration Confirmation
-
     Dear {{ $user }},
 
-    Thank you for registering for {{ $courseName }}**. We're excited to have you join us!
+    We are writing to inform you that there has been a change in your proctor status for the course
+    {{ $courseName }}. Below are the updated details:
 
-    {{-- <x-mail::panel> --}}
-    <strong>Course Details</strong>
+    ## Course Details
     • Course Name: {{ $courseName }}
     • Proctor Status: {{ ucfirst($status) }}
     • Proctor Required: {{ $requiresProctor ? 'Yes' : 'No' }}
 
-    @if ($requiresProctor)
-        <strong>Important:</strong> Please assign a proctor for this course as soon as possible.
-    @endif
-    {{-- </x-mail::panel> --}}
-
-    @if ($requiresProctor)
-        {{-- <x-mail::button :url="route('proctor.assign', ['course' => $courseId])">
-        Assign Proctor
-    </x-mail::button> --}}
+    @if ($requiresProctor && $status == 'pending')
+        <strong>Important:</strong> Please assign a proctor for this course at your earliest convenience.
+    @elseif ($status == 'approved')
+        Your assigned proctor has been approved. No further action is needed at this time.
+    @elseif ($status == 'rejected')
+        Unfortunately, your assigned proctor was not approved. Please assign a different proctor by logging into your
+        student portal.
     @endif
 
-    <x-mail::subcopy>
-        If you have any questions, our support team is here to help at:
-        support@{{ config('app.url') }}
-    </x-mail::subcopy>
+    To review these changes and manage your proctor status, please log in to your
+    {{-- [student portal](https://studentportal.uopeople.edu). --}}
 
-    Thanks,<br>
-    {{ config('app.name') }} Team
+    If you have any questions, you may contact Student Services at
+    {{-- [student.services@uopeople.edu](mailto:student.services@uopeople.edu). --}}
+
+    Best Regards,
+    Student Services
+    Nova Horizon University
+
 </x-mail::message>

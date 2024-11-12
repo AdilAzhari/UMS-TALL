@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,7 +25,7 @@ class ProctorFactory extends Factory
             'city' => $this->faker->city(),
             'state' => $this->faker->state(),
             'country' => $this->faker->country(),
-            'user_id' => \App\Models\User::factory(),
+            'student_id' => Student::inRandomOrder()->first()->id,
         ];
     }
 }

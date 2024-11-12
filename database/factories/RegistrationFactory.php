@@ -28,7 +28,8 @@ class RegistrationFactory extends Factory
             'term_id' => Term::inRandomOrder()->first()->id,
             'status' => $this->faker->randomElement(['registered', 'in_progress', 'completed', 'withdrawn']),
             'proctor_status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
-            'payment_status' => $this->faker->boolean(),
+            'proctored' => $this->faker->boolean(),
+            'payment_status' => $this->faker->randomElement(['unpaid', 'pending', 'paid', 'future']),
         ];
     }
 }

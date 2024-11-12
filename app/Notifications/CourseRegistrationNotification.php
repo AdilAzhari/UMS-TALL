@@ -42,7 +42,7 @@ class CourseRegistrationNotification extends Notification
             ? "This course requires a proctor. Please assign a proctor at your earliest convenience."
             : "No proctor is required for this course.";
         return (new MailMessage)
-                ->subject("Registration Confirmed for {$courseName}")
+                ->subject("Registration Status Update for {{ $courseName }}")
                 ->greeting("Hello, {$notifiable->name}!")
                 ->line("Thank you for registering for **{$courseName}**.")
                 ->line("Here are your registration details:")
