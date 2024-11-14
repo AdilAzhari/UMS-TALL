@@ -33,6 +33,11 @@ Route::middleware('auth')->group(function () {
         // Route::get('/courses', 'registrationSuccess')->name('courses.registration.success');
         Route::get('/courses', 'index')->name('courses');
         Route::post('/courses/register', 'register')->name('courses.register');
+        Route::get('/courses/manage', 'manage')->name('courses.manage');
+        Route::get('/courses/registration', 'registration')->name('courses.registration');
+        Route::get('/courses/proctors', 'proctors')->name('courses.proctors');
+        Route::get('/courses/howto', 'howTo')->name('courses.howto');
+
         // web.php
         Route::get('/assign/proctorForm/{id}','showAssignProctorForm')->name('show.assign.proctorForm');
         Route::post('/assign/proctorForm/{courseID}', 'storeAssignProctorForm')->name('assign.proctorForm');
@@ -42,8 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::inertia('/assign/proctorForm','ProctorDetailsForm');
     Route::get('/share', [StoryController::class, 'index'])->name('share');
     Route::get('/achievements', [AchievementsController::class, 'index'])->name('achievements');
-    Route::get('/forms', [FormController::class, 'index'])->name('forms');
-    Route::get('/admissions', [AdmissionsController::class, 'index'])->name('admissions');
     Route::get('/links', [LinksController::class, 'index'])->name('links');
     Route::get('/online-campus', action: [CampusController::class, 'index'])->name('online-campus');
 
