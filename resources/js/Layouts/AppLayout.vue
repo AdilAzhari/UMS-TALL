@@ -5,6 +5,7 @@
         <Sidebar
             :isSidebarOpen="isSidebarOpen"
             @toggleSidebar="toggleSidebar"
+            :useful-links="usefulLinks"
         />
 
         <!-- Main Content -->

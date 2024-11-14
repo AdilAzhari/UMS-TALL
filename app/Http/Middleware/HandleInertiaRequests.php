@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
@@ -42,6 +43,11 @@ class HandleInertiaRequests extends Middleware
                 return
                 Auth::user();
             },
+            'usefulLinks' => Link::get()
+                ->map(fn($link) => [
+                    'name' => $link->title,
+                    'url' => $link->url,
+                ]),
         ];
     }
 }
