@@ -37,6 +37,7 @@ class ProgramFactory extends Factory
             'program_status_id' => ProgramStatuse::inRandomOrder()->first()->id,
             'program_type_id' => ProgramType::inRandomOrder()->first()->id,
             'department_id' => Department::inRandomOrder()->first()->id,
+            'total_credits' => $this->faker->numberBetween(0, 120),
         ];
     }
 }

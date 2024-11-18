@@ -42,11 +42,6 @@ class Student extends Model
     {
         return $this->belongsTo(Term::class, 'Term_id');
     }
-    public function enrollments()
-    {
-        return $this->hasMany(Enrollment::class);
-    }
-
     public function assignmentSubmissions()
     {
         return $this->hasMany(AssignmentSubmission::class);
@@ -62,10 +57,10 @@ class Student extends Model
     {
         return $this->hasMany(GradingScale::class);
     }
-    public function terms()
-    {
-        return $this->belongsToMany(Term::class);
-    }
+    // public function terms()
+    // {
+    //     return $this->belongsToMany(Term::class);
+    // }
     public function registrations()
     {
         return $this->hasMany(Registration::class);
@@ -88,4 +83,17 @@ class Student extends Model
     {
         return $this->courses->pluck('category')->unique('name')->values();
     }
+    public function academicAchievements() {
+        return $this->hasMany(AcademicAchievement::class);
+    }
+
+    public function courseGrades() {
+        return $this->hasMany(CourseGrades::class);
+    }
+    public function terms()
+    {
+        return $this->hasManyThrough(Term::class, Enrollment::class, 'student_id', 'id', 'id', 'term_id')
+                    ->with('courses');
+    }
+
 }

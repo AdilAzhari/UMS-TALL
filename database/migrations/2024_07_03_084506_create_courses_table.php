@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('max_students')->default(30);
-            $table->integer('credit')->default(3);
+            $table->integer('credit_hours')->default(3);
             $table->string('syllabus')->nullable();
             $table->string('image')->nullable();
             $table->boolean('status')->default(false);

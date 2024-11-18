@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('term_student', function (Blueprint $table) {
             $table->id();
-            $table->decimal('amount');
-            $table->Date('paymentDate');
-            $table->enum('status',['Pending', 'Completed', 'Failed', 'Refund']);
-            $table->enum('method ',['Strip','Paypal','Creadit Card']);
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('course_id ')->constrained()->cascadeOnDelete();
+            $table->foreignId('term_id')->constrained()->cascadeOnDelete();
+            $table->enum('status',['Active', 'Graduated', 'Withdrawn'])->default('Active');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('term_student');
     }
 };

@@ -24,8 +24,6 @@ class Registration extends Model
     ];
     protected Hidden $status;
     protected $casts = [
-        'start_date' => 'date',
-        'end_date' => 'date',
         'registered_at' => 'date',
     ];
     public function student()

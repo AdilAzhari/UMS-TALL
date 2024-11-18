@@ -16,11 +16,11 @@ class TermFactory extends Factory
      */
     public function definition(): array
     {
-        $name = ['Fall 2024', 'Spring 2025', 'Summer 2025', 'Winter 2025'];
+        $name = $this->faker->monthName() . ' ' . $this->faker->year();
 
         return [
-            'name' => $name[array_rand($name)],
-            'slug' => str($name[array_rand($name)]),
+            'name' => $name,
+            'slug' => str($name)->slug(),
             'start_date' => now()->addMonths(1),
             'end_date' => now()->addMonths(3),
             'max_courses' => 5,

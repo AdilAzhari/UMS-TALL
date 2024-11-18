@@ -1,0 +1,125 @@
+[33mcommit 585f140ba7b751e7782d4a1aa82c0b4672037aa1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Tue Nov 12 21:49:41 2024 +0800
+
+    add: implement proctor management features and update course registration notifications
+
+[33mcommit 9cd523b0bf00f5d2fc6844d77d857951a3e892a5[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Sun Nov 10 22:04:15 2024 +0800
+
+    Refactor course controller: Extract logic into service
+
+[33mcommit b1f1d2524ebbc4423c37e7c39e0d1bfb67d86279[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Sat Nov 9 07:22:59 2024 +0800
+
+    add: implement email notification templates for course registration
+
+[33mcommit 52f76907681a4ec3c6674e1d9139d8c9aeb1d223[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Fri Nov 8 19:38:06 2024 +0800
+
+    add: sending emails to student after registering for courses
+
+[33mcommit 7a0ff96532d69f5e14944c3d7e6984986812455a[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Thu Nov 7 17:42:20 2024 +0800
+
+    add: adding registration and its vailidation
+
+[33mcommit 86aec12c6ad41d089b7780fa491dbf1d82a1c047[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Mon Oct 28 18:06:20 2024 +0800
+
+    add: adding the registration for courses
+
+[33mcommit ef7a27f06496689446ddf04baef84c6080286e02[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Tue Oct 22 22:42:06 2024 +0800
+
+    Edit: editing the dashboard and include all the required data
+
+[33mcommit e830dba2064468d231a371d46062aaf0f91c6f22[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Fri Oct 18 21:34:23 2024 +0800
+
+    add and egit: adding academic progress + rigstration and editing the dashboard
+
+[33mcommit 93fdc990f271ee826ff3c0c5df06b468696d7b5b[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Thu Oct 10 06:24:48 2024 +0800
+
+    add
+
+[33mcommit 7aef31ec09a87a5337b5fe8080bed24eb3376ec3[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Thu Oct 3 13:57:53 2024 +0800
+
+    add: adding portal dashboard and sidebar
+
+[33mcommit 34f8781561d488573ce368f3ea96a47c550f2eba[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Wed Sep 25 13:53:34 2024 +0800
+
+    add: adding relation managment for tables thats needed to be
+
+[33mcommit f166fbb88afdc6e16c8ca29130dc4c1a0dba113b[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Tue Sep 24 18:46:06 2024 +0800
+
+    edit: reOrdering tables and fixing the relations issues
+
+[33mcommit 592bed01a24e09a856c38ec9fec6f817de67130a[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Fri Sep 20 21:45:38 2024 +0800
+
+    edit: reOrdering tables and fixing the relations issues
+
+[33mcommit bd3e4ddd8d2707ef05167edfa2493b64846870b7[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Thu Sep 19 14:06:32 2024 +0800
+
+    fix: fixing the tables relationsips and add relation manegers for some resource
+
+[33mcommit 48bc14f9d1e330d5c59282b2ad9aa1a1087d78d3[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Sat Sep 14 19:54:31 2024 +0800
+
+    adding: add models resourses into the dashboard
+
+[33mcommit fab6c141e8e498f7a8c8105edd65ae05a59f98a2[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Fri Sep 13 21:13:20 2024 +0800
+
+    adding more talbes and redesign the DB prob
+
+[33mcommit 07116a1da3ac773d8f7b836f674729b5ab2a30c6[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Wed Sep 11 21:01:55 2024 +0800
+
+    install: installing the needed packages and DB Tables
+
+[33mcommit e626e04663f421090033315bae2f5d82fbc533ca[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Wed Aug 14 21:19:50 2024 +0800
+
+    adding first 2 migration files for user details and courses
+
+[33mcommit ade4dd9b646e7617cc9fa6b99ca4332118509938[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Mon Aug 12 21:42:17 2024 +0800
+
+    initial commit
+
+[33mcommit a71d9dd800cd639a124129490f0d8cfa3df0572e[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Mon Aug 12 21:38:22 2024 +0800
+
+    Install Breeze
+
+[33mcommit b56ccd116100cd644bff060a00bcecdd1c5f28a1[m
+Author: Adil omer <36453919+adelazhary@users.noreply.github.com>
+Date:   Mon Aug 12 21:36:48 2024 +0800
+
+    Set up a fresh Laravel app

@@ -12,7 +12,6 @@
                     class="relative bg-purple-800 text-white py-10 px-6 lg:px-12 flex flex-col lg:flex-row items-center justify-between space-y-6 lg:space-y-0"
                 >
                     <div>
-                        <!-- youre persuing -->
                         <p class="text-xl lg:text-2xl">
                             You're pursuing a
                             <span class="font-semibold">
@@ -58,7 +57,7 @@
                             >!
                         </p>
                         <Link
-                            :href="route('courses.registration')"
+                            :href="route('courses.register')"
                             class="bg-purple-600 text-white px-8 py-2 rounded-full shadow-lg hover:bg-purple-700 transition duration-300 focus:outline-none"
                         >
                             Register Now
@@ -66,145 +65,131 @@
                     </div>
 
                     <!-- Academic Progress Section -->
-                    <div
-                        class="bg-white shadow-lg rounded-lg p-8 transform transition-transform hover:-translate-y-2 hover:shadow-xl"
-                    >
-                        <h2 class="text-2xl font-semibold text-purple-800 mb-4">
-                            Academic Progress
-                        </h2>
-                        <p class="text-gray-600 mb-4">
-                            <span
-                                v-if="
-                                    studentProgram.academicProgress === 'good'
-                                "
-                                >🎉 Excellent progress!</span
-                            >
-                            <span
-                                v-else-if="
-                                    studentProgram.academicProgress ===
-                                    'warning'
-                                "
-                                >⚠️ Needs Improvement.</span
-                            >
-                            <span
-                                v-else-if="
-                                    studentProgram.academicProgress ===
-                                    'probation'
-                                "
-                                >❗ On Probation, please consult your
-                                advisor.</span
-                            >
-                        </p>
-                        <div class="relative pt-1">
-                            <div class="flex mb-2 items-center justify-between">
-                                <div>
-                                    <span
-                                        class="text-sm font-medium inline-block text-gray-600"
-                                        >Term Progress</span
-                                    >
-                                </div>
-                                <div class="text-right">
-                                    <span
-                                        class="text-sm font-medium inline-block text-purple-600"
-                                        >{{
-                                            studentProgram.currentWeekNumber ||
-                                            0
-                                        }}
-                                        / 9 weeks</span
-                                    >
-                                </div>
-                            </div>
-                            <div
-                                class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200"
-                            >
-                                <div
-                                    :style="{
-                                        width: `${
-                                            ((studentProgram.currentWeekNumber ||
-                                                0) /
-                                                9) *
-                                            100
-                                        }%`,
-                                    }"
-                                    class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-600"
-                                ></div>
-                            </div>
-                        </div>
-                        <div class="flex justify-between">
-                            <div class="text-center">
-                                <h3
-                                    class="text-3xl font-semibold text-gray-800"
-                                >
-                                    {{ studentProgram.gpa || "N/A" }}
-                                </h3>
-                                <p class="text-sm text-gray-500">
-                                    Cumulative GPA
-                                </p>
-                            </div>
-                            <div class="text-center">
-                                <h3
-                                    class="text-3xl font-semibold text-gray-800"
-                                >
-                                    {{ studentProgram.totalCredit || 0 }}
-                                </h3>
-                                <p class="text-sm text-gray-500">
-                                    Credits Accrued
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Course Categories Section -->
-                    <div
-                        class="bg-white shadow-lg rounded-lg p-8 transform transition-transform hover:-translate-y-2 hover:shadow-xl"
-                    >
-                        <h2 class="text-2xl font-semibold text-purple-800 mb-4">
-                            Course Categories
-                        </h2>
-                        <div class="grid grid-cols-2 gap-4 text-center">
-                            <div class="bg-purple-50 p-4 rounded-lg">
-                                <p class="text-lg font-bold">
-                                    {{ studentProgram.majorElectiveCount || 0 }}
-                                </p>
-                                <p class="text-sm text-gray-600">
-                                    Major Electives
-                                </p>
-                            </div>
-                            <div class="bg-purple-50 p-4 rounded-lg">
-                                <p class="text-lg font-bold">
-                                    {{ studentProgram.generalCount || 0 }}
-                                </p>
-                                <p class="text-sm text-gray-600">
-                                    General Courses
-                                </p>
-                            </div>
-                            <div class="bg-purple-50 p-4 rounded-lg">
-                                <p class="text-lg font-bold">
-                                    {{
-                                        (studentProgram.general_education || [])
-                                            .length
-                                    }}
-                                </p>
-                                <p class="text-sm text-gray-600">
-                                    General Education
-                                </p>
-                            </div>
-                            <div class="bg-purple-50 p-4 rounded-lg">
-                                <p class="text-lg font-bold">
-                                    {{
-                                        studentProgram.major_required.count || 0
-                                    }}
-                                </p>
-                                <p class="text-sm text-gray-600">
-                                    Major Required
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    <AcademicProgress :studentProgram="studentProgram" />
                 </div>
 
-                <!-- Detailed Courses Section -->
-                <Courses :studentProgram="studentProgram" />
+                <!-- Courses List Section with Tabs -->
+                <div class="px-6 lg:px-12 py-10">
+                    <h2 class="text-2xl font-semibold text-purple-800 mb-6">
+                        Your Courses - November 2024
+                    </h2>
+
+                    <!-- Tabs for Switching Course Categories -->
+                    <div class="flex space-x-4 mb-6">
+                        <button
+                            :class="{
+                                'bg-purple-600 text-white':
+                                    activeView === 'future',
+                                'bg-gray-200 text-gray-700':
+                                    activeView !== 'future',
+                            }"
+                            class="py-2 px-4 rounded-lg focus:outline-none"
+                            @click="activeView = 'future'"
+                        >
+                            Future Courses
+                        </button>
+                        <button
+                            :class="{
+                                'bg-purple-600 text-white':
+                                    activeView === 'past',
+                                'bg-gray-200 text-gray-700':
+                                    activeView !== 'past',
+                            }"
+                            class="py-2 px-4 rounded-lg focus:outline-none"
+                            @click="activeView = 'past'"
+                        >
+                            Past Courses
+                        </button>
+                    </div>
+
+                    <!-- Courses Table -->
+                    <div
+                        class="bg-gray-50 shadow-lg rounded-lg overflow-hidden"
+                    >
+                        <table class="min-w-full bg-white">
+                            <thead>
+                                <tr>
+                                    <th
+                                        class="py-3 px-6 bg-purple-800 text-white text-left text-sm font-semibold"
+                                    >
+                                        Course Name
+                                    </th>
+                                    <th
+                                        class="py-3 px-6 bg-purple-800 text-white text-left text-sm font-semibold"
+                                    >
+                                        Status
+                                    </th>
+                                    <th
+                                        class="py-3 px-6 bg-purple-800 text-white text-left text-sm font-semibold"
+                                    >
+                                        Proctor
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="course in filteredCourses"
+                                    :key="course.id"
+                                    class="border-b border-gray-200"
+                                >
+                                    <td class="py-4 px-6">
+                                        {{ course.name }} ({{ course.code }})
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span
+                                            v-if="
+                                                course.status === 'Registered'
+                                            "
+                                            class="text-green-500"
+                                            >Registered</span
+                                        >
+                                        <span
+                                            v-else-if="
+                                                course.status ===
+                                                'Request denied'
+                                            "
+                                            class="text-gray-500"
+                                            >Request denied</span
+                                        >
+                                        <span
+                                            v-else-if="
+                                                course.status === 'Canceled'
+                                            "
+                                            class="text-gray-500"
+                                            >Canceled</span
+                                        >
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <span
+                                            v-if="
+                                                course.proctor ===
+                                                false
+                                            "
+                                            class="text-gray-500"
+                                            >Not Required</span
+                                        >
+                                        <span
+                                            v-else-if="
+                                                course.proctor ===
+                                                true
+                                            "
+                                            class="text-purple-500 cursor-pointer"
+                                            >Assign a proctor</span
+                                        >
+                                        <span
+                                            v-else-if="
+                                                course.proctor ===
+                                                'Proctor approved'
+                                            "
+                                            class="text-green-500"
+                                            >Proctor approved</span
+                                        >
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </AppLayout>
@@ -214,12 +199,11 @@
 import { defineComponent } from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link } from "@inertiajs/vue3";
-import Courses from "@/Components/Courses.vue";
+
 export default defineComponent({
     components: {
         AppLayout,
         Link,
-        Courses,
     },
     props: {
         studentProgram: {
@@ -227,20 +211,21 @@ export default defineComponent({
             required: true,
         },
     },
+    mounted() {
+        console.log(this.studentProgram);
+    },
 
     data() {
         return {
-            activeView: "current",
+            activeView: "future",
         };
     },
     computed: {
         filteredCourses() {
-            if (this.activeView === "current") {
-                return this.studentProgram.currentCourses || [];
-            } else if (this.activeView === "future") {
-                return this.studentProgram.futureCourses || [];
+            if (this.activeView === "future") {
+                return this.studentProgram.courses.futureCourses || [];
             } else if (this.activeView === "past") {
-                return this.studentProgram.pastCourses || [];
+                return this.studentProgram.courses.pastCourses || [];
             }
             return [];
         },

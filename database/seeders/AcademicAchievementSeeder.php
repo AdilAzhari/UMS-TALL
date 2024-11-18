@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\AcademicProgress;
+use App\Models\AcademicAchievement;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class AcademicProgressSeeder extends Seeder
+class AcademicAchievementSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        AcademicProgress::factory()->count(40)->create();
+        AcademicAchievement::factory(100)->create();
     }
 }

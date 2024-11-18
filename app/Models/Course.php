@@ -12,7 +12,7 @@ class Course extends Model
     protected $fillable = [
         'name',
         'code',
-        'credit',
+        'credit_hours',
         'description',
         'syllabus',
         'image',
@@ -154,5 +154,12 @@ class Course extends Model
     public function scopeCourseRequirements($query)
     {
         return $query->whereHas('courseRequirements');
+    }
+    public function term()
+    {
+        return $this->belongsTo(Term::class);
+    }
+    public function CourseGrade(){
+        return $this->belongsTo(CourseGrades::class);
     }
 }

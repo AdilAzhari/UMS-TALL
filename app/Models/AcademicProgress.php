@@ -14,6 +14,7 @@ class AcademicProgress extends Model
         'term_id',
         'gpa',
         'cgpa',
+        'progress_percentage',
         'academic_standing',
         'total_credits',
         'total_courses',

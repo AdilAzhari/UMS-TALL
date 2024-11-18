@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('program_name')->nullable();
             $table->foreignId('program_type_id')->constrained('program_types')->cascadeOnDelete();
             $table->foreignId('program_status_id')->constrained('program_statuses')->cascadeOnDelete();
+            $table->integer('total_credits');
             $table->timestamps();
         });
     }

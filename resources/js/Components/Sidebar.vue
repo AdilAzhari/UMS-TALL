@@ -44,6 +44,46 @@
                     {{ item.name }}
                 </span>
             </Link>
+            <div v-if="isSidebarOpen" class="flex flex-col">
+                <div
+                    class="flex items-center py-3 px-4 rounded-lg hover:bg-purple-700 transition duration-200 cursor-pointer"
+                    @click="showUsefulLinks = !showUsefulLinks"
+                >
+                    <LinkIcon class="w-6 h-6 text-yellow-400" />
+                    <span class="ml-3 text-base font-semibold"
+                        >Useful Links</span
+                    >
+                    <svg
+                        :class="[
+                            'w-5 h-5 ml-auto transition-transform',
+                            { 'rotate-180': showUsefulLinks },
+                        ]"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                        />
+                    </svg>
+                </div>
+                <div v-if="showUsefulLinks" class="space-y-2 pl-12">
+                    <a
+                        v-for="link in $page.props.usefulLinks"
+                        :key="link.name"
+                        :href="link.url"
+                        class="flex items-center py-2 hover:bg-purple-700 transition duration-200"
+                        target="_blank"
+                    >
+                        <component :is="link.icon" class="w-5 h-5 text-yellow-400" />
+                        <span class="ml-3 text-base font-semibold">{{
+                            link.name
+                        }}</span>
+                    </a>
+                </div>
+            </div>
         </nav>
 
         <div v-if="isSidebarOpen" class="mt-auto p-4">
@@ -81,6 +121,15 @@ import {
 export default {
     components: {
         Link,
+        LinkIcon,
+        HomeIcon,
+        CreditCardIcon,
+        AcademicCapIcon,
+        MegaphoneIcon,
+        TrophyIcon,
+        DocumentTextIcon,
+        UserGroupIcon,
+        ComputerDesktopIcon,
     },
     props: {
         isSidebarOpen: {
@@ -99,12 +148,19 @@ export default {
             { name: "Payments", icon: CreditCardIcon, route: "payments" },
             { name: "My Courses", icon: AcademicCapIcon, route: "courses" },
             { name: "Share Your Story!", icon: MegaphoneIcon, route: "share" },
-            { name: "Academic Achievements", icon: TrophyIcon, route: "achievements" },
-            { name: "Self Service Forms", icon: DocumentTextIcon, route: "forms" },
-            { name: "Admissions", icon: UserGroupIcon, route: "admissions" },
-            { name: "Useful Links", icon: LinkIcon, route: "links" },
-            { name: "Online Campus", icon: ComputerDesktopIcon, route: "online-campus" },
+            {
+                name: "Academic Achievements",
+                icon: TrophyIcon,
+                route: "achievements",
+            },
+            {
+                name: "Online Campus",
+                icon: ComputerDesktopIcon,
+                route: "online-campus",
+            },
         ]);
+
+        const showUsefulLinks = ref(false);
 
         const error = ref(null);
         const form = useForm({});
@@ -125,6 +181,7 @@ export default {
         return {
             toggleSidebar,
             menuItems,
+            showUsefulLinks,
             handleLinkClick,
             error,
         };

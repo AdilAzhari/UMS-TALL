@@ -13,6 +13,6 @@ class TermSeeder extends Seeder
      */
     public function run(): void
     {
-        Term::factory(5)->create();
+        Term::factory(50)->create();
     }
 }

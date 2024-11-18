@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained();
             $table->foreignId('program_id')->nullable()->constrained();
-            $table->foreignId('term_id')->nullable()->constrained('terms');
             $table->decimal('gpa', 4, 2)->nullable();
             $table->decimal('cgpa', 4, 2)->nullable();
             $table->integer('total_credits')->default(0);
@@ -23,7 +22,9 @@ return new class extends Migration
             $table->integer('total_courses_completed')->default(0);
             $table->integer('total_courses_failed')->default(0);
             $table->integer('total_courses_withdrawn')->default(0);
+            $table->decimal('progress_percentage', 5, 2)->default(0.00);
             $table->enum('academic_standing', ['good', 'warning', 'probation', 'suspension'])->nullable();
+            $table->enum('status', ['On Track', 'Probation', 'At Risk'])->default('On Track');
             $table->timestamps();
         });
     }

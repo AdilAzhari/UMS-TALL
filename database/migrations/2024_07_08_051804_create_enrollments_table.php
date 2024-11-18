@@ -18,6 +18,9 @@ return new class extends Migration
             $table->date('completion_date')->nullable();
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('term_id')->constrained()->cascadeOnDelete();
+            $table->string('grade')->default(null);
+            $table->Decimal('grade_points')->default(0.00);
             $table->timestamps();
         });
     }

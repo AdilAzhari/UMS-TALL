@@ -12,9 +12,10 @@ class Term extends Model
         'name',
         'start_date',
         'end_date',
-        'is_current',
-        'current_term_id',
-        'slug'
+        'slug',
+        'max_courses',
+        'registration_start_date',
+        'registration_end_date',
     ];
     protected $casts = [
         'start_date' => 'datetime',
@@ -36,6 +37,17 @@ class Term extends Model
     public function registrations()
     {
         return $this->hasMany(Registration::class);
+    }
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
+    public function students()
+    {
+        return $this->belongsToMany(Student::class);
+    }
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
     }
 
 }

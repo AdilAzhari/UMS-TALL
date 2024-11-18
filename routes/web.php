@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::inertia('/assign/proctorForm','ProctorDetailsForm');
     Route::get('/share', [StoryController::class, 'index'])->name('share');
     Route::get('/achievements', [AchievementsController::class, 'index'])->name('achievements');
-    Route::get('/links', [LinksController::class, 'index'])->name('links');
+    // Route::get('/links', [LinksController::class, 'index'])->name('links');
     Route::get('/online-campus', action: [CampusController::class, 'index'])->name('online-campus');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

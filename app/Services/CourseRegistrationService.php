@@ -172,7 +172,6 @@ class CourseRegistrationService
         $studentId = auth()->user()->student->id;
         $validated = $data;
         $course = registration::find($validated['course_id']);
-        $course = $course->course;
 
         $proctor = Proctor::create([
             'name' => $validated['name'],
@@ -184,7 +183,8 @@ class CourseRegistrationService
             'country' => $validated['country'],
             'student_id' => $studentId,
         ]);
-        Notification::send($proctor, new AssignProctorNotification($course, $proctor));
+
+        Notification::send($proctor, new AssignProctorNotification($course->course, $proctor));
 
         return ['status' => 'success'];
     }

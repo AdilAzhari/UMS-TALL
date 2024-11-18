@@ -11,10 +11,12 @@ class enrollment extends Model
     protected $fillable = [
         'student_id',
         'course_id',
+        'term_id',
         'status',
         'enrollment_date',
         'completion_date',
-        'course_requirement_id',
+        'grade_points',
+        'grade'
     ];
     protected $casts = [
         'enrollment_date' => 'datetime',
@@ -44,5 +46,11 @@ class enrollment extends Model
     public function courseRequirement()
     {
         return $this->belongsTo(CourseRequirement::class);
+    }
+    public function scopePastCourses($query){
+        return $query->where('completion_date', '<' , now());
+    }
+    public function term(){
+        return $this->belongsTo(term::class);
     }
 }
