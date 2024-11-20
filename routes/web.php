@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\PaymentController;
 use App\Http\Controllers\Dashboard\StoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,9 +29,7 @@ Route::get('/dashboard', [DashboardController::class,'index'])->middleware(['aut
 Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('user.profile');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
     Route::controller(CourseController::class)->group(function () {
-        // Route::get('/courses', 'registrationSuccess')->name('courses.registration.success');
         Route::get('/courses', 'index')->name('courses');
         Route::post('/courses/register', 'register')->name('courses.register');
         Route::get('/courses/manage', 'manage')->name('courses.manage');
@@ -54,6 +53,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::resource('payments', PaymentController::class)->only(['index', 'create', 'store']);
+
+    Route::controller(StripeController::class)->group(function () {
+        Route::get('/payments/pay', 'pay')->name('payments.pay');
+        Route::get('/payments/make', 'create')->name('payments.make');
+        Route::get('/payments/success/{paymentId}','paymentSuccess')->name('payments.success');
+        Route::get('/payments/cancel/{paymentId}', 'paymentCancel')->name('payments.cancel');
+    });
 });
 
 require __DIR__.'/auth.php';

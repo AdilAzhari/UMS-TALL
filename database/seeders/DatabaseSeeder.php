@@ -56,8 +56,9 @@ class DatabaseSeeder extends Seeder
             // CourseTeacherseeder::class,
             // CourseRequirementsSeeder::class,
             // linkSeeder::class,
-            CourseGradesSeeder::class,
+            // CourseGradesSeeder::class,
             // AcademicAchievementSeeder::class,
+            PaymentSeeder::class,
 
         ]);
     }

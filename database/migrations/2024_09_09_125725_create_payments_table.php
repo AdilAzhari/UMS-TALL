@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->decimal('amount');
-            $table->Date('paymentDate');
-            $table->enum('status',['Pending', 'Completed', 'Failed', 'Refund']);
-            $table->enum('method ',['Strip','Paypal','Creadit Card']);
+            $table->date('payment_date');
+            $table->enum('status',['Pending', 'Completed', 'Failed', 'Refunded','Cancelled']);
+            $table->enum('method',['Strip','Paypal','Creadit Card']);
+            $table->enum('transaction_type',['Exam/Course Processing Fee','Transferring Credit Fee','application Fee']);
+            $table->string('failure_reason')->nullable();
+            $table->string('payment_intent')->nullable();
+            $table->string('refund_id')->nullable();
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('course_id ')->constrained()->cascadeOnDelete();
+            $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
