@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\PaymentFailedNotification;
+use App\Notifications\PaymentSuccessNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -52,18 +53,21 @@ class StripeController extends Controller
     }
 
     public function paymentSuccess($paymentId){
-        $payment = Payment::findOrFail($paymentId);
+        $payment = Payment::findOrFail($paymentId)->load('student.user');
         $payment->status = 'Completed';
         $payment->payment_date = now();
         $payment->save();
+
+        if ($payment->student && $payment->student->user) {
+            Notification::send($payment->student->user, new PaymentSuccessNotification($payment));
+        }
 
         return redirect()->route('payments.index')->with('success', 'Payment successful');
     }
 
     public function paymentCancel($paymentId){
         $payment = Payment::findOrFail($paymentId);
-        // $payment->status = 'Cancelled';
-        $payment->status = 'Failed';
+        $payment->status = 'Cancelled';
         $payment->save();
 
         Notification::send($payment->student->user, new PaymentFailedNotification($payment));

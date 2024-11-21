@@ -79,7 +79,8 @@
                     </div>
                     <div class="mb-6">
                         <p class="text-sm text-gray-600">
-                            <strong>Course Code:</strong>
+                            <strong>Course:</strong>
+                            {{ payment.course.name}}
                             {{ payment.course.code }}
                         </p>
                         <p class="text-sm text-gray-600">
@@ -95,7 +96,7 @@
                     <div>
                         <button
                             v-if="
-                                ['Failed', 'Refunded'].includes(payment.status)
+                                ['Failed', 'Refunded','Cancelled'].includes(payment.status)
                             "
                             @click="redirectToPayment(payment.id)"
                             class="w-full py-3 mb-2 text-white bg-red-600 rounded-full font-medium hover:bg-red-700 transition"
@@ -103,7 +104,14 @@
                             Retry Payment
                         </button>
                         <button
-                            v-else-if="activeTab === 'upcoming'"
+                            v-if="activeTab === 'history' && payment.status === 'Pending'"
+                            @click="redirectToPayment(payment.id)"
+                            class="w-full py-3 text-white bg-indigo-600 rounded-full font-medium hover:bg-indigo-700 transition"
+                        >
+                            Complete Payment
+                        </button>
+                        <button
+                            v-else-if="activeTab === 'upcoming' && payment.status === 'Pending'"
                             @click="redirectToPayment(payment.id)"
                             class="w-full py-3 text-white bg-indigo-600 rounded-full font-medium hover:bg-indigo-700 transition"
                         >

@@ -38,6 +38,5 @@ class Payment extends Model
                             ->orWhere('code', 'like', "%{$search}%");
                     });
         });
-
     }
 }
