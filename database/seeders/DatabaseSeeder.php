@@ -17,6 +17,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'admin@example.com',
         //     'password' => '12345678',
         // ]);
+        // user::factory()->create([
+        //     'name' => 'teacher',
+        //     'email' => 'teacher@example.com',
+        //     'password' => '12345678',
+        // ]);
         $this->call([
             // UserSeeder::class,
             // departmentSeeder::class,
@@ -58,7 +63,10 @@ class DatabaseSeeder extends Seeder
             // linkSeeder::class,
             // CourseGradesSeeder::class,
             // AcademicAchievementSeeder::class,
-            PaymentSeeder::class,
+            // PaymentSeeder::class,
+            // StorySeeder::class,
+            // StoryTagSeeder::class,
+            StoryCommentSeeder::class
 
         ]);
     }

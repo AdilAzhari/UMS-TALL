@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\PaymentController;
 use App\Http\Controllers\Dashboard\StoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StoryCommentController;
 use App\Http\Controllers\StripeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -44,16 +45,19 @@ Route::middleware('auth')->group(function () {
 
     });
     Route::inertia('/assign/proctorForm','ProctorDetailsForm');
-    Route::get('/share', [StoryController::class, 'index'])->name('share');
+
     Route::get('/achievements', [AchievementsController::class, 'index'])->name('achievements');
     // Route::get('/links', [LinksController::class, 'index'])->name('links');
-    Route::get('/online-campus', action: [CampusController::class, 'index'])->name('online-campus');
+    Route::get('/online-campus', [CampusController::class, 'index'])->name('online-campus');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('payments', PaymentController::class)->only(['index', 'create', 'store']);
+    Route::controller(PaymentController::class)->group(function () {
+        Route::get('/payments', 'index')->name('payments');
+    });
 
     Route::controller(StripeController::class)->group(function () {
         Route::get('/payments/pay', 'pay')->name('payments.pay');
@@ -61,6 +65,20 @@ Route::middleware('auth')->group(function () {
         Route::get('/payments/success/{paymentId}','paymentSuccess')->name('payments.success');
         Route::get('/payments/cancel/{paymentId}', 'paymentCancel')->name('payments.cancel');
     });
+
+
+    Route::controller(StoryController::class)->prefix('stories')->group(function () {
+        Route::get('/{story}', 'show')->name('stories.show');
+        Route::get('/{story}/edit', 'edit')->name('stories.edit');
+        Route::get('/', 'index')->name('stories.index');
+        Route::get('/{slug}', 'show')->name('stories.show');
+        Route::post('/{slug}/comments', 'storeComment')->name('stories.comments.store');
+
+    });
+
+    Route::post('/comments', [StoryCommentController::class, 'store'])->name('comments.store');
+    Route::get('/story/{storyId}/comments', [storyCommentController::class, 'index']);
+    Route::get('/api/stories/{storyId}/comments', [storyCommentController::class, 'show']);
 });
 
 require __DIR__.'/auth.php';
