@@ -2,86 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StoryComment;
 use App\Http\Requests\StoreStoryCommentRequest;
 use App\Http\Requests\UpdateStoryCommentRequest;
-use Inertia\Inertia;
+use App\Models\Story;
+use App\Models\StoryComment;
+use Illuminate\Http\RedirectResponse;
 
 class StoryCommentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreStoryCommentRequest $request)
+    public function storeComment(StoreStoryCommentRequest $request): RedirectResponse
     {
-        $data = $request->validate([
-            'content' => 'required|string',
-            'story_id' => 'required|exists:stories,id',
-            'parent_id' => 'nullable|exists:comments,id',
-        ]);
+        $story = Story::findOrFail($request->story_id);
 
-        $comment = storyComment::create([
-            'content' => $data['content'],
-            'story_id' => $data['story_id'],
-            'parent_id' => $data['parent_id'], // Distinguishes replies from top-level comments
-            'student_id' => auth()->id(),
-        ]);
+        $story->comments()->create($request->all() + [
+                'student_id' => $story->student_id,
+                'published_at' => now(),
+            ]);
 
-        return redirect()->back()->with('success', 'Comment created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(StoryComment $storyComment)
-    {
-        $comments = storyComment::where('story_id', $storyId)
-            ->whereNull('parent_id') // Only top-level comments
-            ->with(['replies.student.user']) // Include replies for each comment
-            ->get();
-
-        return Inertia::render('Stories/Show', [
-            'comments' => $comments,
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(StoryComment $storyComment)
-    {
-        //
+        return redirect()->back()->with('message', 'Comment created successfully.');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStoryCommentRequest $request, StoryComment $storyComment)
+    public function updateComment(UpdateStoryCommentRequest $request, $storyId, $commentId)
     {
-        //
+        $comment = StoryComment::findOrFail($commentId);
+        $request->merge([
+            'published_at' => now(),
+        ]);
+        $comment->update($request->all());
+        return redirect()->back()->with('message', 'Comment updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StoryComment $storyComment)
+    public function destroyComment($storyId, $commentId)
     {
-        //
+        $storyComment = StoryComment::where('id', $commentId)->where('story_id', $storyId)->firstOrFail();
+        $storyComment->delete();
+
+        return redirect()->back()->with('message', 'Comment deleted successfully.');
     }
 }
