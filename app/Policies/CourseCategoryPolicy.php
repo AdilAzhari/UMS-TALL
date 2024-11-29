@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\CourseCategory;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class CourseCategoryPolicy
 {
@@ -13,7 +12,7 @@ class CourseCategoryPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +20,7 @@ class CourseCategoryPolicy
      */
     public function view(User $user, CourseCategory $courseCategory): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +28,7 @@ class CourseCategoryPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +36,7 @@ class CourseCategoryPolicy
      */
     public function update(User $user, CourseCategory $courseCategory): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +44,7 @@ class CourseCategoryPolicy
      */
     public function delete(User $user, CourseCategory $courseCategory): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +52,7 @@ class CourseCategoryPolicy
      */
     public function restore(User $user, CourseCategory $courseCategory): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +60,6 @@ class CourseCategoryPolicy
      */
     public function forceDelete(User $user, CourseCategory $courseCategory): bool
     {
-        //
+        return true;
     }
 }
