@@ -9,21 +9,16 @@ use Inertia\Inertia;
 
 class AchievementsController extends Controller
 {
-    // todo: add index method
-    // todo: show Total Statistics
-    // todo: show Achievements
-    // todo: show all past terms with their courses and grades
-    // todo: Credits Taken Credits Passed Credits Failed Credits department
     public function index()
     {
         $user = auth()->user();
 
         $studentData = enrollment::where('student_id', $user->student->id)
-            ->with(['course','course.CourseGrade', 'student', 'term'])
+            ->with(['course', 'course.CourseGrade', 'student', 'term'])
             ->PastCourses()
             ->get();
-        $CourseGrade = CourseGrades::where('student_id',$user->student->id)->get();
-            return $CourseGrade;
+        $CourseGrade = CourseGrades::where('student_id', $user->student->id)->get();
+//            return $CourseGrade;
         $terms = $studentData->groupBy('term_id')->map(function ($termData) {
             $termGPA = $this->calculateTermGPA($termData);
             $creditsPassed = $this->calculatePassedCredits($termData);
@@ -80,30 +75,6 @@ class AchievementsController extends Controller
         return $totalCredits > 0 ? ($totalPoints / $totalCredits) : 0;
     }
 
-    protected function calculateCGPA($terms)
-    {
-        $totalPoints = 0;
-        $totalCredits = 0;
-
-        foreach ($terms as $term) {
-            $termCredits = $term['totalCredit'];
-            $termGPA = floatval($term['gpa']);
-
-            $totalPoints += ($termCredits * $termGPA);
-            $totalCredits += $termCredits;
-        }
-
-        return $totalCredits > 0 ? ($totalPoints / $totalCredits) : 0;
-    }
-
-    protected function calculatePassedCredits($termData)
-    {
-        return $termData->sum(function ($registration) {
-            $grade = $this->getGradePoint($registration->grade);
-            return $grade >= 1.0 ? ($registration->course->credit ?? 0) : 0;
-        });
-    }
-
     protected function getGradePoint($grade)
     {
         return match ($grade) {
@@ -119,5 +90,29 @@ class AchievementsController extends Controller
             'D' => 1.0,
             default => 0.0,
         };
+    }
+
+    protected function calculatePassedCredits($termData)
+    {
+        return $termData->sum(function ($registration) {
+            $grade = $this->getGradePoint($registration->grade);
+            return $grade >= 1.0 ? ($registration->course->credit ?? 0) : 0;
+        });
+    }
+
+    protected function calculateCGPA($terms)
+    {
+        $totalPoints = 0;
+        $totalCredits = 0;
+
+        foreach ($terms as $term) {
+            $termCredits = $term['totalCredit'];
+            $termGPA = floatval($term['gpa']);
+
+            $totalPoints += ($termCredits * $termGPA);
+            $totalCredits += $termCredits;
+        }
+
+        return $totalCredits > 0 ? ($totalPoints / $totalCredits) : 0;
     }
 }
