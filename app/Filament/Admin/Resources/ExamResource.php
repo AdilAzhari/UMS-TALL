@@ -6,15 +6,13 @@ use App\Filament\Admin\Resources\ExamResource\Pages;
 use App\Filament\Admin\Resources\ExamResource\RelationManagers;
 use App\Models\Exam;
 use App\Models\Teacher;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 
 class ExamResource extends Resource
@@ -22,6 +20,7 @@ class ExamResource extends Resource
     protected static ?string $model = Exam::class;
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
     protected static ?string $navigationGroup = 'Assessment & Grading';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -56,7 +55,7 @@ class ExamResource extends Resource
                     ->placeholder('Choce the duration of the exam')
                     ->options([
                         'one Houre' => '1/hr',
-                        'one and half'=> '1.5/hr',
+                        'one and half' => '1.5/hr',
                         'two Houre' => '2/hr'
 
                     ]),
@@ -78,7 +77,7 @@ class ExamResource extends Resource
                             ->limit(50)
                             ->pluck('name', 'id');
                     })
-                    ->getOptionLabelUsing(fn ($value): ?string => User::find($value)?->name)
+                    ->getOptionLabelUsing(fn($value): ?string => User::find($value)?->name)
                     ->afterStateUpdated(function ($state, callable $set) {
                         $teacherId = Teacher::where('user_id', $state)->value('id');
                         $set('teacher_id', $teacherId);
@@ -98,6 +97,7 @@ class ExamResource extends Resource
                     ->relationship('updatedBy', 'name')
                     ->default(Auth::id())->disabled(),
             ]);
+        return $form;
     }
 
     public static function table(Table $table): Table

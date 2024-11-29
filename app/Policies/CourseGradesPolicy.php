@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\CourseGrades;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class CourseGradesPolicy
 {
@@ -13,7 +12,7 @@ class CourseGradesPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +20,7 @@ class CourseGradesPolicy
      */
     public function view(User $user, CourseGrades $courseGrades): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +28,7 @@ class CourseGradesPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +36,7 @@ class CourseGradesPolicy
      */
     public function update(User $user, CourseGrades $courseGrades): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +44,7 @@ class CourseGradesPolicy
      */
     public function delete(User $user, CourseGrades $courseGrades): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +52,7 @@ class CourseGradesPolicy
      */
     public function restore(User $user, CourseGrades $courseGrades): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +60,6 @@ class CourseGradesPolicy
      */
     public function forceDelete(User $user, CourseGrades $courseGrades): bool
     {
-        //
+        return true;
     }
 }

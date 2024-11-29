@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\CourseRequirements;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class CourseRequirementsPolicy
 {
@@ -13,7 +12,7 @@ class CourseRequirementsPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +20,7 @@ class CourseRequirementsPolicy
      */
     public function view(User $user, CourseRequirements $courseRequirements): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +28,7 @@ class CourseRequirementsPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +36,7 @@ class CourseRequirementsPolicy
      */
     public function update(User $user, CourseRequirements $courseRequirements): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +44,7 @@ class CourseRequirementsPolicy
      */
     public function delete(User $user, CourseRequirements $courseRequirements): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +52,7 @@ class CourseRequirementsPolicy
      */
     public function restore(User $user, CourseRequirements $courseRequirements): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +60,6 @@ class CourseRequirementsPolicy
      */
     public function forceDelete(User $user, CourseRequirements $courseRequirements): bool
     {
-        //
+        return true;
     }
 }

@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\program_statuse;
-use Illuminate\Auth\Access\Response;
+use App\Models\User;
 
 class ProgramStatusePolicy
 {
@@ -13,7 +12,7 @@ class ProgramStatusePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +20,7 @@ class ProgramStatusePolicy
      */
     public function view(User $user, program_statuse $programStatuse): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +28,7 @@ class ProgramStatusePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +36,7 @@ class ProgramStatusePolicy
      */
     public function update(User $user, program_statuse $programStatuse): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +44,7 @@ class ProgramStatusePolicy
      */
     public function delete(User $user, program_statuse $programStatuse): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +52,7 @@ class ProgramStatusePolicy
      */
     public function restore(User $user, program_statuse $programStatuse): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +60,6 @@ class ProgramStatusePolicy
      */
     public function forceDelete(User $user, program_statuse $programStatuse): bool
     {
-        //
+        return true;
     }
 }

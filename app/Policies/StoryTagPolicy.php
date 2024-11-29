@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\StoryTag;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class StoryTagPolicy
 {
@@ -13,7 +12,7 @@ class StoryTagPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +20,7 @@ class StoryTagPolicy
      */
     public function view(User $user, StoryTag $storyTag): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +28,7 @@ class StoryTagPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +36,7 @@ class StoryTagPolicy
      */
     public function update(User $user, StoryTag $storyTag): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +44,7 @@ class StoryTagPolicy
      */
     public function delete(User $user, StoryTag $storyTag): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +52,7 @@ class StoryTagPolicy
      */
     public function restore(User $user, StoryTag $storyTag): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +60,6 @@ class StoryTagPolicy
      */
     public function forceDelete(User $user, StoryTag $storyTag): bool
     {
-        //
+        return true;
     }
 }

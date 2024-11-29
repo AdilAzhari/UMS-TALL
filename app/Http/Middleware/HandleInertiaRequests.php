@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
@@ -37,17 +36,13 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'flash' => [
-                'message' => fn () => $request->session()->get('message'),
+                'message' => fn() => $request->session()->get('message'),
             ],
             'user' => function () {
                 return
-                Auth::user();
+                    Auth::user();
             },
-            'usefulLinks' => Link::get()
-                ->map(fn($link) => [
-                    'name' => $link->title,
-                    'url' => $link->url,
-                ]),
+            
         ];
     }
 }
