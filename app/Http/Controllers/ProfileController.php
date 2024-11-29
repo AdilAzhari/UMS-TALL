@@ -10,14 +10,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use JetBrains\PhpStorm\NoReturn;
 
 class ProfileController extends Controller
 {
-    public function show(Request $request): Response
+    #[NoReturn] public function show(Request $request): Response
     {
-        dd('ProfileController@show');
-        // return Inertia::render('Profile',['user' => $request->user()]);
+//        dd('ProfileController@show');
+        return Inertia::render('Profile', ['user' => $request->user()]);
     }
+
     /**
      * Display the user's profile form.
      */
