@@ -57,10 +57,10 @@ class Student extends Model
     {
         return $this->hasMany(GradingScale::class);
     }
-    // public function terms()
-    // {
-    //     return $this->belongsToMany(Term::class);
-    // }
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
     public function registrations()
     {
         return $this->hasMany(Registration::class);
