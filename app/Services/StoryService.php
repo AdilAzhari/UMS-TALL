@@ -4,19 +4,14 @@ namespace App\Services;
 
 use App\Models\Story;
 use HTMLPurifier;
+use HTMLPurifier_Config;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
 use LaravelIdea\Helper\App\Models\_IH_Story_C;
 
 class StoryService
 {
-    public function __construct(
-        private Storage      $storage,
-        private HTMLPurifier $purifier
-    )
-    {
-    }
-
     public function getAllStories($paginate = 10): \Illuminate\Contracts\Pagination\LengthAwarePaginator|LengthAwarePaginator|array|_IH_Story_C
     {
         return Story::with('student', 'student.user')
@@ -25,7 +20,7 @@ class StoryService
             ->paginate($paginate);
     }
 
-    public function getRecommendedStories($limit = 3)
+    public function getRecommendedStories($limit = 3): array|_IH_Story_C
     {
         return Story::with('student', 'student.user')
             ->published()
@@ -53,20 +48,19 @@ class StoryService
 
     protected function sanitizeContent($content): string
     {
-        $config = $this->purifier->getConfig();
+        $config = HTMLPurifier_Config::createDefault();
         $config->set('HTML.Allowed', 'p,b,i,u,a[href],ul,ol,li');
-        return $this->purifier->purify($content);
+        $purifier = new HTMLPurifier($config);
+        return $purifier->purify($content);
     }
 
-    private function handleImageUpload(?UploadedFile $imageFile, ?string $existingImagePath = null): ?string
+    private function handleImageUpload(?UploadedFile $imageFile): ?string
     {
-        if ($existingImagePath) {
-            Storage::disk('public')->delete($existingImagePath);
+        if (null) {
+            Storage::disk('public')->delete(null);
         }
 
-        return $imageFile
-            ? $imageFile->store('stories', 'public')
-            : $existingImagePath;
+        return $imageFile?->store('stories', 'public');
     }
 
     public function updateStory($storyId, $data)
