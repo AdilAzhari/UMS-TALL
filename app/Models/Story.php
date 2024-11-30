@@ -16,14 +16,26 @@ class Story extends Model
     /** @use HasFactory<StoryFactory> */
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'content', 'published', 'published_at', 'student_id', 'parent_id',
+    protected $fillable = ['title', 'image', 'slug', 'content', 'published', 'published_at', 'student_id', 'parent_id',
         'status'];
 
-    protected $casts = [
-        'published' => 'boolean',
-        'status' => 'boolean',
-        'parent_id' => 'integer',
-    ];
+    protected static function booted(): void
+    {
+        static::deleting(function ($story) {
+            $story->comments()->delete();
+            $story->replies()->delete();
+        });
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(StoryComment::class);
+    }
+
+    public function replies(): HasMany
+    {
+        return $this->hasMany(StoryComment::class)->whereNotNull('parent_id');
+    }
 
     public function student(): BelongsTo
     {
@@ -35,11 +47,6 @@ class Story extends Model
         return $this->belongsToMany(StoryTag::class);
     }
 
-    public function comments(): HasMany
-    {
-        return $this->hasMany(StoryComment::class);
-    }
-
     public function getRouteKeyName(): string
     {
         return 'slug';
@@ -47,12 +54,7 @@ class Story extends Model
 
     public function scopePublished($query)
     {
-        return $query->where('published', true);
-    }
-
-    public function replies(): HasMany
-    {
-        return $this->hasMany(StoryComment::class)->whereNotNull('parent_id');
+        return $query->where('published', 'published');
     }
 
     public function parent(): BelongsTo
@@ -63,7 +65,8 @@ class Story extends Model
     protected function publishedAt(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Carbon::parse($value)->diffForHumans()
+            get: fn($value) => Carbon::parse($value)->diffForHumans(),
+            set: fn($value) => Carbon::parse($value)
         );
     }
 }

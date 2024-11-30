@@ -15,8 +15,7 @@
                         by <span class="font-medium">{{ story.student.user.name }}</span> •
                         {{ story.published_at }}
                     </p>
-                    <p class="text-gray-700 text-sm leading-relaxed">
-                        {{ story.content }}
+                    <p class="text-gray-700 text-sm leading-relaxed " v-html="story.content">
                     </p>
                 </section>
 

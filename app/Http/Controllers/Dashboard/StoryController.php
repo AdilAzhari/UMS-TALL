@@ -3,19 +3,23 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Story;
-use App\Models\StoryComment;
+use App\Http\Requests\StoreStoryRequest;
 use App\Models\StoryTag;
-use Illuminate\Http\Request;
+use App\Services\StoryService;
 use Inertia\Inertia;
 
 class StoryController extends Controller
 {
+    private StoryService $storyService;
+
+    public function __construct(StoryService $storyService)
+    {
+        $this->storyService = $storyService;
+    }
+
     public function index()
     {
-        $stories = Story::with('student', 'student.user')
-            ->orderBy('published_at', 'desc')
-            ->paginate(10);
+        $stories = $this->storyService->getAllStories();
 
         return Inertia::render('Stories/Index', [
             'stories' => $stories,
@@ -23,33 +27,11 @@ class StoryController extends Controller
         ]);
     }
 
-    public function storeComment(Request $request, $id)
-    {
-        dd($id, $request->all());
-        $story = Story::where('id', $id)->firstOrFail();
-
-        $request->validate([
-            'content' => 'required|string|max:1000',
-        ]);
-
-        dd($request);
-        StoryComment::create([
-            'story_id' => $story->id,
-            'student_id' => auth()->id(),
-            'content' => $request->content,
-            'approved' => false, // Requires admin approval
-        ]);
-
-        return back()->with('success', 'Your comment has been submitted and is awaiting approval.');
-    }
-
     public function show($storyId)
     {
-        $story = Story::with('student', 'student.user')->findOrFail($storyId);
-
+        $story = $this->storyService->findStoryById($storyId);
         $comments = $story->comments()->with('student', 'student.user', 'replies.student', 'replies.student.user')->get();
-
-        $recommendedStories = Story::with('student', 'student.user')->inRandomOrder()->limit(3)->get();
+        $recommendedStories = $this->storyService->getRecommendedStories();
 
         return Inertia::render('Stories/Show', [
             'story' => $story,
@@ -58,11 +40,36 @@ class StoryController extends Controller
         ]);
     }
 
-    public function edit($storyId)
+    public function update(StoreStoryRequest $request, $storyId)
     {
-        $story = Story::findOrFail($storyId);
-        return Inertia::render('Stories/Edit', [
-            'story' => $story,
-        ]);
+        $story = $this->storyService->updateStory($storyId, $request->validated());
+
+        return redirect()->route('stories.index')->with('message', 'Story updated successfully!');
+    }
+
+    public function store(StoreStoryRequest $request)
+    {
+        $story = $this->storyService->createStory($request->validated());
+
+        return redirect()->route('stories.index')->with('message', 'Story created successfully!');
+    }
+
+    public function create($storyId = null)
+    {
+        if ($storyId) {
+            $story = $this->storyService->findStoryById($storyId);
+            return Inertia::render('Stories/Update', [
+                'story' => $story,
+            ]);
+        }
+
+        return Inertia::render('Stories/Create');
+    }
+
+    public function destroy($storyId)
+    {
+        $this->storyService->deleteStory($storyId);
+
+        return redirect()->route('stories.index')->with('message', 'Story deleted successfully!');
     }
 }

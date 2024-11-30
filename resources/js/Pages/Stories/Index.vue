@@ -18,6 +18,21 @@
             </div>
         </header>
 
+        <!-- Notification Message -->
+        <div
+            v-if="flashMessage"
+            class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 mx-auto max-w-4xl"
+            role="alert"
+        >
+            <span class="block sm:inline">{{ flashMessage }}</span>
+            <button
+                class="text-green-700 font-bold ml-4"
+                @click="clearNotification"
+            >
+                &times;
+            </button>
+        </div>
+
         <!-- Main Content Section -->
         <main class="py-4 px-6">
             <div class="container mx-auto">
@@ -45,41 +60,61 @@
                 </div>
 
                 <!-- Stories List -->
-                <div
-                    v-if="filteredStories.length"
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                >
+                <div>
                     <div
-                        v-for="story in filteredStories"
-                        :key="story.id"
-                        class="story-card bg-white border rounded-lg shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow"
+                        v-if="filteredStories.length"
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                     >
-                        <h2
-                            class="text-lg font-semibold text-gray-800 truncate"
+                        <div
+                            v-for="story in filteredStories"
+                            :key="story.id"
+                            class="story-card bg-white border rounded-lg shadow-md p-6 flex flex-col hover:shadow-lg transition-shadow"
                         >
-                            {{ story.title }}
-                        </h2>
-                        <p class="text-sm text-gray-600 mt-2 line-clamp-3">
-                            {{ story.content }}
-                        </p>
-                        <div class="mt-auto">
-                            <div class="text-xs text-gray-500 mt-4">
-                                <span>by {{ story.student.user.name }}</span> •
-                                <span>{{ story.published_at }}</span>
+                            <h2 class="text-lg font-semibold text-gray-800 truncate">
+                                {{ story.title }}
+                            </h2>
+                            <p
+                                class="text-sm text-gray-600 mt-2 line-clamp-3"
+                                v-html="story.content"
+                            ></p>
+                            <div class="mt-auto">
+                                <div class="text-xs text-gray-500 mt-4">
+                                    <span>by {{ story.student.user.name }}</span> •
+                                    <span>{{ story.published_at }}</span>
+                                </div>
+                                <button
+                                    class="text-purple-600 hover:text-purple-800 mt-2 text-sm font-medium"
+                                    @click="viewStory(story.id)"
+                                >
+                                    Read More
+                                </button>
+
+                                <!-- Conditionally render Edit and Delete buttons -->
+                                <div
+                                    v-if="story.student.user.id === $page.props.auth.user.id"
+                                    class="flex space-x-4 mt-4"
+                                >
+                                    <button
+                                        class="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                                        @click="editStory(story.id)"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        class="text-red-600 hover:text-red-800 text-sm font-medium"
+                                        @click="deleteStory(story.id)"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
-                            <button
-                                class="text-purple-600 hover:text-purple-800 mt-2 text-sm font-medium"
-                                @click="viewStory(story.id)"
-                            >
-                                Read More
-                            </button>
                         </div>
                     </div>
-                </div>
 
-                <!-- No Stories Found -->
-                <div v-else class="text-center text-gray-600 mt-12">
-                    <p>No stories found. Be the first to share yours!</p>
+                    <!-- No Stories Found -->
+                    <div v-else class="text-center text-gray-600 mt-12">
+                        <p>No stories found. Be the first to share yours!</p>
+                    </div>
                 </div>
 
                 <!-- Pagination -->
@@ -101,6 +136,7 @@ export default {
     props: {
         stories: Object, // Stories data with pagination from the backend
         tags: Array, // Tags data from the backend
+        flash: Object, // Flash data from the backend
     },
     data() {
         return {
@@ -109,6 +145,9 @@ export default {
         };
     },
     computed: {
+        flashMessage() {
+            return this.flash.message; // Access the flash message from props
+        },
         filteredStories() {
             let result = this.stories.data; // Stories on the current page
 
@@ -133,10 +172,25 @@ export default {
     },
     methods: {
         navigateToCreateStory() {
-            this.$inertia.visit("/stories/create"); // Redirect to create story page
+            this.$inertia.visit("stories/create");
         },
         viewStory(id) {
-            this.$inertia.visit(`/stories/${id}`); // Redirect to the individual story page
+            this.$inertia.visit(`/stories/${id}`);
+        },
+        editStory(id) {
+            this.$inertia.visit(`/stories/${id}/edit`);
+        },
+        deleteStory(id) {
+            if (confirm("Are you sure you want to delete this story?")) {
+                this.$inertia.delete(`/stories/${id}`, {
+                    onSuccess: () => {
+                        // Redirects or session logic will handle flash messages
+                    },
+                });
+            }
+        },
+        clearNotification() {
+            this.flash.message = ""; // Clear the flash message
         },
     },
 };

@@ -64,14 +64,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/payments/cancel/{paymentId}', 'paymentCancel')->name('payments.cancel');
     });
 
-
-    Route::controller(StoryController::class)->prefix('stories')->name('stories.')->group(function () {
-        Route::get('/', 'index')->name('index'); // Index route comes first
-        Route::get('/{story}/edit', 'edit')->name('edit');
-        Route::get('/{slug}', 'show')->name('show'); // Show route for slug-based stories
-        Route::post('/{id}/comments', 'storeComment')->name('comments.store');
-    });
-
+    Route::controller(StoryController::class)
+        ->prefix('stories')
+        ->name('stories.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::get('/{story}/edit', 'create')->name('edit');
+            Route::get('/{slug}', 'show')->name('show');
+            Route::post('/', 'store')->name('store');
+            Route::put('/{id}', 'update')->name('update');
+            Route::delete('/{id}', 'destroy')->name('destroy');
+        });
 
     Route::controller(StoryCommentController::class)->prefix('storyComment')->name('storyComment')->group(function () {
         Route::post('/{storyId}/comments', 'storeComment')->name('.store');
