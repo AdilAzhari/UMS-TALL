@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Program extends Model
 {
@@ -22,32 +24,38 @@ class Program extends Model
         'created_by',
         'updated_by',
     ];
-    public function department()
+
+    public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
     }
 
-    public function courses()
+    public function courses(): HasMany
     {
         return $this->hasMany(Course::class);
     }
-    public function students()
+
+    public function students(): HasMany
     {
         return $this->hasMany(Student::class);
     }
-    public function programType()
+
+    public function programType(): BelongsTo
     {
         return $this->belongsTo(ProgramType::class);
     }
-    public function programStatus()
+
+    public function programStatus(): BelongsTo
     {
         return $this->belongsTo(ProgramStatuse::class);
     }
-    public function createdBy()
+
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(Teacher::class, 'created_by');
     }
-    public function updatedBy()
+
+    public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(Teacher::class, 'updated_by');
     }
