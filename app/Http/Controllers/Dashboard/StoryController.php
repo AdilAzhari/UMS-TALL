@@ -43,7 +43,6 @@ class StoryController extends Controller
     public function update(StoreStoryRequest $request, $storyId)
     {
         $story = $this->storyService->updateStory($storyId, $request->validated());
-
         return redirect()->route('stories.index')->with('message', 'Story updated successfully!');
     }
 
