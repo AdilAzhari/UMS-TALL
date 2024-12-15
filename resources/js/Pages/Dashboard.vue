@@ -1,4 +1,9 @@
 <template>
+    <Head>
+        <title>
+            dashboard
+        </title>
+    </Head>
     <AppLayout>
         <div
             class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen py-12 px-4 lg:px-10"
@@ -52,8 +57,8 @@
                             {{ $page.props.auth.user.name }}, registration is
                             now open until
                             <span class="font-semibold text-purple-600">{{
-                                studentProgram.registration_deadline
-                            }}</span
+                                    studentProgram.registration_deadline
+                                }}</span
                             >!
                         </p>
                         <Link
@@ -65,7 +70,7 @@
                     </div>
 
                     <!-- Academic Progress Section -->
-                    <AcademicProgress :studentProgram="studentProgram" />
+                    <AcademicProgress :studentProgram="studentProgram"/>
                 </div>
 
                 <!-- Courses List Section with Tabs -->
@@ -108,84 +113,84 @@
                     >
                         <table class="min-w-full bg-white">
                             <thead>
-                                <tr>
-                                    <th
-                                        class="py-3 px-6 bg-purple-800 text-white text-left text-sm font-semibold"
-                                    >
-                                        Course Name
-                                    </th>
-                                    <th
-                                        class="py-3 px-6 bg-purple-800 text-white text-left text-sm font-semibold"
-                                    >
-                                        Status
-                                    </th>
-                                    <th
-                                        class="py-3 px-6 bg-purple-800 text-white text-left text-sm font-semibold"
-                                    >
-                                        Proctor
-                                    </th>
-                                </tr>
+                            <tr>
+                                <th
+                                    class="py-3 px-6 bg-purple-800 text-white text-left text-sm font-semibold"
+                                >
+                                    Course Name
+                                </th>
+                                <th
+                                    class="py-3 px-6 bg-purple-800 text-white text-left text-sm font-semibold"
+                                >
+                                    Status
+                                </th>
+                                <th
+                                    class="py-3 px-6 bg-purple-800 text-white text-left text-sm font-semibold"
+                                >
+                                    Proctor
+                                </th>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    v-for="course in filteredCourses"
-                                    :key="course.id"
-                                    class="border-b border-gray-200"
-                                >
-                                    <td class="py-4 px-6">
-                                        {{ course.name }} ({{ course.code }})
-                                    </td>
-                                    <td class="py-4 px-6">
+                            <tr
+                                v-for="course in filteredCourses"
+                                :key="course.id"
+                                class="border-b border-gray-200"
+                            >
+                                <td class="py-4 px-6">
+                                    {{ course.name }} ({{ course.code }})
+                                </td>
+                                <td class="py-4 px-6">
                                         <span
                                             v-if="
                                                 course.status === 'Registered'
                                             "
                                             class="text-green-500"
-                                            >Registered</span
+                                        >Registered</span
                                         >
-                                        <span
-                                            v-else-if="
+                                    <span
+                                        v-else-if="
                                                 course.status ===
                                                 'Request denied'
                                             "
-                                            class="text-gray-500"
-                                            >Request denied</span
-                                        >
-                                        <span
-                                            v-else-if="
+                                        class="text-gray-500"
+                                    >Request denied</span
+                                    >
+                                    <span
+                                        v-else-if="
                                                 course.status === 'Canceled'
                                             "
-                                            class="text-gray-500"
-                                            >Canceled</span
-                                        >
-                                    </td>
-                                    <td class="py-4 px-6">
+                                        class="text-gray-500"
+                                    >Canceled</span
+                                    >
+                                </td>
+                                <td class="py-4 px-6">
                                         <span
                                             v-if="
                                                 course.proctor ===
                                                 false
                                             "
                                             class="text-gray-500"
-                                            >Not Required</span
+                                        >Not Required</span
                                         >
-                                        <span
-                                            v-else-if="
+                                    <span
+                                        v-else-if="
                                                 course.proctor ===
                                                 true
                                             "
-                                            class="text-purple-500 cursor-pointer"
-                                            >Assign a proctor</span
-                                        >
-                                        <span
-                                            v-else-if="
+                                        class="text-purple-500 cursor-pointer"
+                                    >Assign a proctor</span
+                                    >
+                                    <span
+                                        v-else-if="
                                                 course.proctor ===
                                                 'Proctor approved'
                                             "
-                                            class="text-green-500"
-                                            >Proctor approved</span
-                                        >
-                                    </td>
-                                </tr>
+                                        class="text-green-500"
+                                    >Proctor approved</span
+                                    >
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -196,9 +201,9 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { Link } from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
 
 export default defineComponent({
     components: {
