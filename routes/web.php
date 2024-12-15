@@ -46,17 +46,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/achievements', [AchievementsController::class, 'index'])->name('achievements');
     // Route::get('/links', [LinksController::class, 'index'])->name('links');
-    Route::controller(CampusController::class)->prefix('campus/')->name('campus.')->group(function () {
-        Route::get('/', 'index')->name('campus');
-        Route::get('/course/{id}', 'course')->name('courses');
-    });
     Route::get('/online-campus', [CampusController::class, 'index'])->name('online-campus');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-//    Route::resource('payments', PaymentController::class)->only(['index', 'create', 'store']);
+    Route::resource('payments', PaymentController::class)->only(['index', 'create', 'store']);
     Route::controller(PaymentController::class)->group(function () {
         Route::get('/payments', 'index')->name('payments');
     });
@@ -75,7 +71,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::get('/{story}/edit', 'create')->name('edit');
-            Route::get('/{id}', 'show')->name('show');
+            Route::get('/{slug}', 'show')->name('show');
             Route::post('/', 'store')->name('store');
             Route::put('/{id}', 'update')->name('update');
             Route::delete('/{id}', 'destroy')->name('destroy');
