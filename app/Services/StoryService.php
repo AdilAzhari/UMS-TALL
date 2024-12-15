@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Story;
 use HTMLPurifier;
 use HTMLPurifier_Config;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
@@ -20,28 +21,20 @@ class StoryService
             ->paginate($paginate);
     }
 
-    public function getRecommendedStories($limit = 3): array|_IH_Story_C
-    {
-        return Story::with('student', 'student.user')
-            ->published()
-            ->inRandomOrder()
-            ->limit($limit)
-            ->get();
-    }
-
     public function createStory($data)
     {
         $validatedData = validator($data, [
+            'title' => 'required|string|max:255',
             'content' => 'required|string',
             'status' => 'in:draft,published',
-            'image' => 'nullable|image|max:2048'
+            'image' => 'nullable|max:2048'
         ])->validate();
 
         $validatedData['content'] = $this->sanitizeContent($validatedData['content']);
         $validatedData['image'] = $this->handleImageUpload($validatedData['image'] ?? null);
 
         return Story::create($validatedData + [
-                'student_id' => auth()->user()->student->id,
+                'student_id' => auth()->user()->student->id ?? rand(1, 10),
                 'published_at' => $validatedData['status'] !== 'draft' ? now() : null,
             ]);
     }
@@ -96,5 +89,13 @@ class StoryService
         $story = $this->findStoryById($storyId);
         $story->delete();
         return $story;
+    }
+
+    public function getRecommendedStories(): array|_IH_Story_C|Collection
+    {
+        return Story::with('student', 'student.user', 'comments', 'replies')->published()
+            ->take(3)
+            ->get()
+            ->sortByDesc('published_at');
     }
 }
