@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use JsonException;
 use Tests\TestCase;
 
 class ProfileTest extends TestCase
@@ -22,9 +21,6 @@ class ProfileTest extends TestCase
         $response->assertOk();
     }
 
-    /**
-     * @throws JsonException
-     */
     public function test_profile_information_can_be_updated(): void
     {
         $user = User::factory()->create();
@@ -47,9 +43,6 @@ class ProfileTest extends TestCase
         $this->assertNull($user->email_verified_at);
     }
 
-    /**
-     * @throws JsonException
-     */
     public function test_email_verification_status_is_unchanged_when_the_email_address_is_unchanged(): void
     {
         $user = User::factory()->create();
