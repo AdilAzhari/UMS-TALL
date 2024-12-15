@@ -2,10 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Story;
+use App\Models\StoryComment;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\StoryComment>
+ * @extends Factory<StoryComment>
  */
 class StoryCommentFactory extends Factory
 {
@@ -18,10 +21,10 @@ class StoryCommentFactory extends Factory
     {
         return [
             'content' => $this->faker->paragraphs(3, true),
-            'story_id' => \App\Models\Story::factory(),
-            'student_id' => \App\Models\Student::factory(),
+            'story_id' => Story::factory() ?? null,
+            'student_id' => Student::factory() ?? null,
             'status' => $this->faker->randomElement(['draft', 'published']),
-            'parent_id' => null,
+            'parent_id' => null ?? null,
             'published_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
