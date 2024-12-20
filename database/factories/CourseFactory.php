@@ -31,9 +31,18 @@ class CourseFactory extends Factory
             'require_proctor' => $this->faker->boolean(),
             'paid' => $this->faker->randomElement(['paid', 'unpaid', 'future_payment']),
             'cost' => $this->faker->randomFloat(2, 0, 150),
+<<<<<<< HEAD
             'program_id' => Program::inRandomOrder()->first()->id ?? Program::factory()->create()->id,
             'course_category_id' => CourseCategory::inRandomOrder()->first()->id ?? CourseCategory::factory()->create()->id,
             'prerequisite_course_id' => Course::inRandomOrder()->first()->id ?? Course::factory()->create()->id,
+=======
+            'program_id' => Program::inRandomOrder()->first()?->id
+                ?? Program::factory()->create()->id,
+            'course_category_id' => CourseCategory::inRandomOrder()->first()?->id
+                ?? CourseCategory::factory()->create()->id,
+            'prerequisite_course_id' => Course::inRandomOrder()->first()?->id ?? null,
+
+>>>>>>> 8111ea0117bfc51759aa6847977e1354bb2a8eb9
         ];
     }
 }

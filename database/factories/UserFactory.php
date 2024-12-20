@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
@@ -41,7 +42,11 @@ class UserFactory extends Factory
             'date_of_birth' => fake()->date(),
             'nationality' => fake()->country(),
             'country_of_residence' => fake()->country(),
+<<<<<<< HEAD
             'marital_status' => fake()->randomElement(['Single', 'Married', 'Divorced', 'Widowed']),
+=======
+//            'marital_status' => fake()->randomElement(['Single', 'Married', 'Divorced', 'Widowed']),
+>>>>>>> 8111ea0117bfc51759aa6847977e1354bb2a8eb9
             'gender' => fake()->randomElement(['male', 'female']),
         ];
     }
@@ -51,7 +56,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
