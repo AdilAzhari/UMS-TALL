@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+<<<<<<< HEAD
 use App\Exceptions\CustomHandler;
 use App\Models\User;
 use Illuminate\Contracts\Debug\ExceptionHandler;
@@ -15,6 +16,11 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Telescope\TelescopeServiceProvider;
 use PgSql\Connection;
 use Schema;
+=======
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Vite;
+use Illuminate\Support\ServiceProvider;
+>>>>>>> 8111ea0117bfc51759aa6847977e1354bb2a8eb9
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,9 +40,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+<<<<<<< HEAD
         Schema::defaultStringLength(191);
         $this->configureModels();
         $this->configureCommands();
+=======
+        $this->configureModels();
+>>>>>>> 8111ea0117bfc51759aa6847977e1354bb2a8eb9
         Vite::prefetch(concurrency: 3);
         // Optimize Eloquent
         Model::preventLazyLoading(! $this->app->isProduction());
@@ -86,5 +96,11 @@ class AppServiceProvider extends ServiceProvider
         DB::prohibitDestructiveCommands(
             $this->app->isProduction()
         );
+    }
+
+    public function configureModels(): void
+    {
+        Model::shouldBeStrict();
+        Model::unguard();
     }
 }
