@@ -3,7 +3,6 @@
 use App\Http\Controllers\Dashboard\AchievementsController;
 use App\Http\Controllers\Dashboard\CampusController;
 use App\Http\Controllers\Dashboard\CourseController;
-use App\Http\Controllers\Dashboard\LinksController;
 use App\Http\Controllers\Dashboard\PaymentController;
 use App\Http\Controllers\Dashboard\StoryController;
 use App\Http\Controllers\DashboardController;
@@ -45,7 +44,6 @@ Route::middleware('auth')->group(function () {
     Route::inertia('/assign/proctorForm', 'ProctorDetailsForm');
 
     Route::get('/achievements', [AchievementsController::class, 'index'])->name('achievements');
-    // Route::get('/links', [LinksController::class, 'index'])->name('links');
     Route::get('/online-campus', [CampusController::class, 'index'])->name('online-campus');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -84,6 +82,8 @@ Route::middleware('auth')->group(function () {
     });
     Route::get('/story/{storyId}/comments', [storyCommentController::class, 'index']);
     Route::get('/api/stories/{storyId}/comments', [storyCommentController::class, 'show']);
+
+    require __DIR__.'/CampusCourse.php';
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

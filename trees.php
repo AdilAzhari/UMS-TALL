@@ -3,7 +3,9 @@
 class Node
 {
     public int $data;
+
     public ?Node $left;  // Explicitly specify that left can be Node or null
+
     public ?Node $right; // Explicitly specify that right can be Node or null
 
     public function __construct(int $value)
@@ -18,6 +20,7 @@ class Node
         if ($value <= $this->data) {
             if ($this->left === null) {
                 $this->left = new Node($value);
+
                 return $this->left;
             } else {
                 return $this->left->insert($value);
@@ -25,6 +28,7 @@ class Node
         } else {
             if ($this->right === null) {
                 $this->right = new Node($value);
+
                 return $this->right;
             } else {
                 return $this->right->insert($value);
