@@ -10,44 +10,45 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TeacherResource extends Resource
 {
     protected static ?string $model = Teacher::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
     protected static ?string $navigationGroup = 'User Management';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Section::make('Teacher Professional Information')
-                ->description('Enter professional and employment details')
-                ->schema([
-                    Forms\Components\TextInput::make('qualification')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('experience')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\TextInput::make('specialization')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\select::make('department_id')
-                        ->relationship('department', 'name')
-                        ->required(),
-                    Forms\Components\TextInput::make('designation')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\DatePicker::make('hire_date')
-                        ->required(),
-                    Forms\Components\select::make('user_id')
-                        ->relationship('user', 'name')
-                        ->label('Teacher Name')
-                        ->disabled()
-                        ->required(),
-                ])->columns(2),
+                    ->description('Enter professional and employment details')
+                    ->schema([
+                        Forms\Components\TextInput::make('qualification')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('experience')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('specialization')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\select::make('department_id')
+                            ->relationship('department', 'name')
+                            ->required(),
+                        Forms\Components\TextInput::make('designation')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\DatePicker::make('hire_date')
+                            ->required(),
+                        Forms\Components\select::make('user_id')
+                            ->relationship('user', 'name')
+                            ->label('Teacher Name')
+                            ->disabled()
+                            ->required(),
+                    ])->columns(2),
             ]);
     }
 

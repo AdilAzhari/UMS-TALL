@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Week;
-use Illuminate\Auth\Access\Response;
 
 class WeekPolicy
 {

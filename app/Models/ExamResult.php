@@ -16,6 +16,7 @@ class ExamResult extends Model
         'status',
         'notes',
     ];
+
     public function exam()
     {
         return $this->belongsTo(Exam::class);

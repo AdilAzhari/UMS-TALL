@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\program_statuses;
 use App\Http\Requests\Storeprogram_statusesRequest;
 use App\Http\Requests\Updateprogram_statusesRequest;
+use App\Models\program_statuses;
 
 class ProgramStatusesController extends Controller
 {

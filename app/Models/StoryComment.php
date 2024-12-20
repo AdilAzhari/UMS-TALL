@@ -41,8 +41,8 @@ class StoryComment extends Model
     protected function publishedAt(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Carbon::parse($value)->diffForHumans(),
-            set: fn($value) => Carbon::parse($value),
+            get: fn ($value) => Carbon::parse($value)->diffForHumans(),
+            set: fn ($value) => Carbon::parse($value),
         );
     }
 }

@@ -7,10 +7,11 @@ use App\Http\Requests\assignProctorFormRequest;
 use App\Http\Requests\CourseRegiserRequest;
 use App\Models\Proctor;
 use App\Models\Registration;
-use Inertia\Inertia;
 use App\Services\CourseRegistrationService;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+
 class CourseController extends Controller
 {
     protected $courseRegistrationService;
@@ -47,11 +48,14 @@ class CourseController extends Controller
             'studentProgram' => $studentData,
         ]);
     }
-    public function showAssignProctorForm($courseID){
+
+    public function showAssignProctorForm($courseID)
+    {
         return Inertia::render('ProctorDetailsForm', [
             'courseID' => $courseID,
         ]);
     }
+
     public function storeAssignProctorForm(assignProctorFormRequest $request, $courseID)
     {
         $data = $request->validated();
@@ -62,24 +66,28 @@ class CourseController extends Controller
 
         return redirect()->back()->with('success', 'Proctor assigned successfully!');
     }
+
     public function response(Request $request)
     {
         $proctor = Proctor::find($request->proctor);
-        if (!$proctor) {
+        if (! $proctor) {
             return redirect()->route('courses')->with('error', 'Invalid proctor ID.');
         }
         if ($request->response === 'accept') {
             $proctor->registrations()->update(['proctor_status' => 'approved']);
+
             return redirect()->route('courses')->with('success', 'Proctor assignment accepted.');
         }
 
         if ($request->response === 'decline') {
             $proctor->registrations()->update(['proctor_status' => 'rejected']);
+
             return redirect()->route('courses')->with('success', 'Proctor assignment declined.');
         }
 
         return redirect()->route('courses')->with('error', 'Invalid response.');
     }
+
     public function manage()
     {
         $studentData = $this->courseRegistrationService->getStudentData(Auth::user());
@@ -96,6 +104,7 @@ class CourseController extends Controller
             'studentProgram' => $studentData,
         ]);
     }
+
     public function registration()
     {
         $studentData = $this->courseRegistrationService->getStudentData(Auth::user());
@@ -112,6 +121,7 @@ class CourseController extends Controller
             'studentProgram' => $studentData,
         ]);
     }
+
     public function proctors()
     {
         $studentData = $this->courseRegistrationService->getStudentData(Auth::user());
@@ -128,6 +138,7 @@ class CourseController extends Controller
             'studentProgram' => $studentData,
         ]);
     }
+
     public function howTo()
     {
         $studentData = $this->courseRegistrationService->getStudentData(Auth::user());

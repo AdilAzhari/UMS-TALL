@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
-use Illuminate\Support\Facades\Notification;
 use App\Notifications\PaymentFailedNotification;
 use App\Notifications\PaymentSuccessNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class StripeController extends Controller
 {
@@ -20,16 +20,16 @@ class StripeController extends Controller
         );
     }
 
+    public function pay(request $request)
+    {
 
-    public function pay(request $request){
-
-        if (!$request->has('id') || !is_numeric($request->id)) {
+        if (! $request->has('id') || ! is_numeric($request->id)) {
             return redirect()->back()->with('error', 'Invalid payment ID');
         }
 
         $studentPayment = Payment::findOrFail($request->id);
 
-        if($studentPayment->status == 'paid'){
+        if ($studentPayment->status == 'paid') {
             return redirect()->back()->with('error', 'Payment already made');
         }
 
@@ -49,10 +49,12 @@ class StripeController extends Controller
             'success_url' => route('payments.success', ['paymentId' => $studentPayment->id]),
             'cancel_url' => route('payments.cancel', ['paymentId' => $studentPayment->id]),
         ]);
+
         return redirect($session->url);
     }
 
-    public function paymentSuccess($paymentId){
+    public function paymentSuccess($paymentId)
+    {
         $payment = Payment::findOrFail($paymentId)->load('student.user');
         $payment->status = 'Completed';
         $payment->payment_date = now();
@@ -65,7 +67,8 @@ class StripeController extends Controller
         return redirect()->route('payments.index')->with('success', 'Payment successful');
     }
 
-    public function paymentCancel($paymentId){
+    public function paymentCancel($paymentId)
+    {
         $payment = Payment::findOrFail($paymentId);
         $payment->status = 'Cancelled';
         $payment->save();
@@ -75,7 +78,8 @@ class StripeController extends Controller
         return redirect()->route('payments.index')->with('error', 'Payment cancelled');
     }
 
-    public function refund($paymentId) {
+    public function refund($paymentId)
+    {
         $payment = Payment::findOrFail($paymentId);
 
         // Only refund if the payment is already marked as paid
@@ -98,8 +102,7 @@ class StripeController extends Controller
 
             return redirect()->route('payments.index')->with('success', 'Payment refunded successfully.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Refund failed: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Refund failed: '.$e->getMessage());
         }
     }
-
 }

@@ -18,7 +18,7 @@ class AchievementsController extends Controller
             ->PastCourses()
             ->get();
         $CourseGrade = CourseGrades::where('student_id', $user->student->id)->get();
-//            return $CourseGrade;
+        //            return $CourseGrade;
         $terms = $studentData->groupBy('term_id')->map(function ($termData) {
             $termGPA = $this->calculateTermGPA($termData);
             $creditsPassed = $this->calculatePassedCredits($termData);
@@ -96,6 +96,7 @@ class AchievementsController extends Controller
     {
         return $termData->sum(function ($registration) {
             $grade = $this->getGradePoint($registration->grade);
+
             return $grade >= 1.0 ? ($registration->course->credit ?? 0) : 0;
         });
     }

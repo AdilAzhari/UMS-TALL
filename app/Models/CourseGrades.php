@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CourseGrades extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'student_id',
         'term_id',
@@ -15,15 +16,19 @@ class CourseGrades extends Model
         'grade',
         'credits',
     ];
-    public function student() {
+
+    public function student()
+    {
         return $this->belongsTo(Student::class);
     }
 
-    public function course() {
+    public function course()
+    {
         return $this->belongsTo(Course::class);
     }
 
-    public function term() {
+    public function term()
+    {
         return $this->belongsTo(Term::class);
     }
 }

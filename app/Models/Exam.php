@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Exam extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'exam_date',
         'exam_description',
@@ -20,32 +21,39 @@ class Exam extends Model
         'class_id',
         'teacher_id',
         'course_id',
-        'exam_code'
+        'exam_code',
     ];
+
     public function class()
     {
-        return $this->belongsTo(Classe::class);
+        return $this->belongsTo(Classes::class);
     }
+
     public function teacher()
     {
         return $this->belongsTo(Teacher::class);
     }
+
     public function results()
     {
         return $this->hasMany(ExamResult::class);
     }
+
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
     public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
     public function course()
     {
         return $this->belongsTo(Course::class);
     }
+
     public function Terms()
     {
         return $this->belongsTo(Term::class);
@@ -55,10 +63,12 @@ class Exam extends Model
     {
         return $this->hasMany(Enrollment::class);
     }
+
     public function attendances()
     {
         return $this->hasMany(Attendance::class);
     }
+
     public function questions()
     {
         return $this->hasMany(QuizzeQuestion::class);

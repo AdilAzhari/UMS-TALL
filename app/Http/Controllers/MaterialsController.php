@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\materials;
 use App\Http\Requests\StorematerialsRequest;
 use App\Http\Requests\UpdatematerialsRequest;
+use App\Models\materials;
 
 class MaterialsController extends Controller
 {

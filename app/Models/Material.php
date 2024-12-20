@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Material extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'course_id',
         'type',
@@ -28,14 +29,17 @@ class Material extends Model
         'created_by',
         'updated_by',
     ];
+
     public function course()
     {
         return $this->belongsTo(Course::class);
     }
+
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
     public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');

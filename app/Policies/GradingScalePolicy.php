@@ -2,10 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Grading_scale;
 use App\Models\GradingScale;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class GradingScalePolicy
 {

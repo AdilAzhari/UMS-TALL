@@ -22,6 +22,7 @@ class Program extends Model
         'created_by',
         'updated_by',
     ];
+
     public function department()
     {
         return $this->belongsTo(Department::class);
@@ -31,25 +32,29 @@ class Program extends Model
     {
         return $this->hasMany(Course::class);
     }
+
     public function students()
     {
         return $this->hasMany(Student::class);
     }
+
     public function programType()
     {
         return $this->belongsTo(ProgramType::class);
     }
+
     public function programStatus()
     {
         return $this->belongsTo(ProgramStatuse::class);
     }
+
     public function createdBy()
     {
         return $this->belongsTo(Teacher::class, 'created_by');
     }
+
     public function updatedBy()
     {
         return $this->belongsTo(Teacher::class, 'updated_by');
     }
-
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CourseRequirements;
 use App\Http\Requests\StoreCourseRequirementsRequest;
 use App\Http\Requests\UpdateCourseRequirementsRequest;
+use App\Models\CourseRequirements;
 
 class CourseRequirementsController extends Controller
 {
@@ -14,6 +14,7 @@ class CourseRequirementsController extends Controller
     public function index()
     {
         $courseRequirements = CourseRequirements::all();
+
         return inertia('CourseRequirements/Index', [
             'courseRequirements' => $courseRequirements,
         ]);

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CourseCategory;
 use App\Http\Requests\StoreCourseCategoryRequest;
 use App\Http\Requests\UpdateCourseCategoryRequest;
+use App\Models\CourseCategory;
 
 class CourseCategoryController extends Controller
 {

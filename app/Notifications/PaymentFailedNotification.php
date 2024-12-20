@@ -3,14 +3,15 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class PaymentFailedNotification extends Notification
 {
     use Queueable;
+
     protected $payment;
+
     /**
      * Create a new notification instance.
      */
@@ -40,7 +41,7 @@ class PaymentFailedNotification extends Notification
             ->greeting("Hello, {$notifiable->name}!")
             ->line('We are sorry to inform you that your payment has failed.')
             ->line('Please try again or contact support for further assistance.')
-            ->action('Retry Payment', url('/payments/pay?id=' . $this->payment->id))
+            ->action('Retry Payment', url('/payments/pay?id='.$this->payment->id))
             ->line('Thank you for using our application!');
     }
 

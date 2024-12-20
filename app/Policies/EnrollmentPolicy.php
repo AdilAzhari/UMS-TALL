@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\enrollment;
-use Illuminate\Auth\Access\Response;
+use App\Models\User;
 
 class EnrollmentPolicy
 {

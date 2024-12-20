@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Week;
 use App\Http\Requests\StoreWeekRequest;
 use App\Http\Requests\UpdateWeekRequest;
+use App\Models\Week;
 
 class WeekController extends Controller
 {

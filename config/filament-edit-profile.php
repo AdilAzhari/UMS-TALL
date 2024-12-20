@@ -13,6 +13,6 @@ return [
             'phone_number' => 'Phone Number',
             'Preferred_name' => 'Preferred Name',
             'secondary_email_address' => 'Secondary Email Address',
-        ]
-    ]
+        ],
+    ],
 ];

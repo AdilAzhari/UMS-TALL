@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class QuizzeSubmission extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'quizze_id',
         'student_id',
@@ -46,7 +47,7 @@ class QuizzeSubmission extends Model
 
     public function class()
     {
-        return $this->belongsTo(Classe::class);
+        return $this->belongsTo(Classes::class);
     }
 
     public function teacher()

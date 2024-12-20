@@ -4,18 +4,23 @@ namespace App\Notifications;
 
 use App\Models\Course;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class CourseRegistrationNotification extends Notification
 {
     use Queueable;
-    protected $course,$proctor_status, $requiresProctor;
+
+    protected $course;
+
+    protected $proctor_status;
+
+    protected $requiresProctor;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct(Course $Course,$Proctor_status, $RequiresProctor)
+    public function __construct(Course $Course, $Proctor_status, $RequiresProctor)
     {
         $this->course = $Course;
         $this->proctor_status = $Proctor_status;
@@ -39,21 +44,22 @@ class CourseRegistrationNotification extends Notification
     {
         $courseName = $this->course->name;
         $statusMessage = $this->requiresProctor
-            ? "This course requires a proctor. Please assign a proctor at your earliest convenience."
-            : "No proctor is required for this course.";
+            ? 'This course requires a proctor. Please assign a proctor at your earliest convenience.'
+            : 'No proctor is required for this course.';
+
         return (new MailMessage)
-                ->subject("Registration Status Update for {{ $courseName }}")
-                ->greeting("Hello, {$notifiable->name}!")
-                ->line("Thank you for registering for **{$courseName}**.")
-                ->line("Here are your registration details:")
-                ->action('Notification Action', url('/'))
-                ->markdown('emails.course_registration', [
-                    'courseName' => $courseName,
-                    'status' => $this->proctor_status,
-                    'requiresProctor' => $this->requiresProctor,
-                    'statusMessage' => $statusMessage,
-                    'user' => $notifiable->name,
-                ]);
+            ->subject("Registration Status Update for {{ $courseName }}")
+            ->greeting("Hello, {$notifiable->name}!")
+            ->line("Thank you for registering for **{$courseName}**.")
+            ->line('Here are your registration details:')
+            ->action('Notification Action', url('/'))
+            ->markdown('emails.course_registration', [
+                'courseName' => $courseName,
+                'status' => $this->proctor_status,
+                'requiresProctor' => $this->requiresProctor,
+                'statusMessage' => $statusMessage,
+                'user' => $notifiable->name,
+            ]);
     }
 
     /**
@@ -64,7 +70,7 @@ class CourseRegistrationNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            ''
+            '',
         ];
     }
 }

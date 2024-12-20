@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->enum('status', ['present', 'absent']);
-            $table->enum('reason',['sick', 'vacation', 'other'])->nullable();
+            $table->enum('reason', ['sick', 'vacation', 'other'])->nullable();
             $table->text('notes')->nullable();
             $table->foreignId('enrollment_id')->constrained('enrollments')->cascadeOnDelete();
             $table->foreignId('class_id')->constrained('classes')->cascadeOnDelete();

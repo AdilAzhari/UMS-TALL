@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class GradingScale extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'grade',
         'min_score',
@@ -16,10 +17,12 @@ class GradingScale extends Model
         'course_id',
         'gpa_point',
     ];
+
     public function student()
     {
         return $this->belongsTo(Student::class);
     }
+
     public function course()
     {
         return $this->belongsTo(Course::class);

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\TechnicalTeam;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class TechnicalTeamSeeder extends Seeder

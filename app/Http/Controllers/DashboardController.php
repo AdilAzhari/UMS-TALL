@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Registration;
 use App\Models\Term;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -22,7 +21,7 @@ class DashboardController extends Controller
                 'student.enrollments',
                 'student.courses',
                 'student.registrations',
-                'student.department:id,name,code'
+                'student.department:id,name,code',
             ])
             ->first();
 
@@ -47,7 +46,7 @@ class DashboardController extends Controller
                 'student.enrollments',
                 'student.courses',
                 'student.registrations',
-                'student.department:id,name,code'
+                'student.department:id,name,code',
             ])
             ->first();
 
@@ -72,12 +71,13 @@ class DashboardController extends Controller
                 'code' => $programName->student->department->code,
             ] : null,
             'totalCredit' => collect($programName->student->courses ?? [])->sum('credit'),
-            'gpa' => $programName->student->academicProgress->map(fn($progress) => $progress->gpa)->first() ?? null,
+            'gpa' => $programName->student->academicProgress->map(fn ($progress) => $progress->gpa)->first() ?? null,
         ];
     }
+
     protected function mapCourses($courses)
     {
-        return $courses->map(fn($course) => [
+        return $courses->map(fn ($course) => [
             'id' => $course->id,
             'name' => $course->course->name,
             'status' => $course->registration,
@@ -93,7 +93,7 @@ class DashboardController extends Controller
 
     private function getStudentDepartment($student)
     {
-        if (!$student->department) {
+        if (! $student->department) {
             return null;
         }
 
@@ -105,8 +105,8 @@ class DashboardController extends Controller
 
     private function mapEnrollments($enrollments, $status)
     {
-        return $enrollments->filter(fn($enrollment) => $enrollment->status === $status)
-            ->map(fn($enrollment) => [
+        return $enrollments->filter(fn ($enrollment) => $enrollment->status === $status)
+            ->map(fn ($enrollment) => [
                 'id' => $enrollment->id,
                 'course_name' => optional($enrollment->course)->name,
                 'course_code' => optional($enrollment->course)->code,

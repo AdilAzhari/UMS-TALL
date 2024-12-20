@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProgramType;
 use App\Http\Requests\StoreProgramTypeRequest;
 use App\Http\Requests\UpdateProgramTypeRequest;
+use App\Models\ProgramType;
 
 class ProgramTypeController extends Controller
 {

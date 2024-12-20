@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Schema\ForeignIdColumnDefinition;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -23,18 +22,18 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->string('Preferred_name')->nullable();
             $table->string('secondary_email_address')->nullable();
-            $table->enum('gender',['male','female'])->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('nationality')->nullable();
             $table->string('address')->nullable();
-            $table->enum('marital_status',['single','married','divorced','widowed'])->nullable();
+            $table->enum('marital_status', ['single', 'married', 'divorced', 'widowed'])->nullable();
             $table->string('city_of_residence')->nullable();
             $table->string('country_of_residence')->nullable();
             $table->string(column: 'state')->nullable();
             $table->string('zip_code')->nullable();
             $table->string('avatar')->nullable();
-            $table->enum('status',['active','inactive'])->default('active');
-            $table->enum('role', ['student', 'teacher', 'admin','technical_team'])->default('student');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('role', ['student', 'teacher', 'admin', 'technical_team'])->default('student');
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('updated_by')->nullable()->constrained('users')->cascadeOnDelete();
             $table->rememberToken();

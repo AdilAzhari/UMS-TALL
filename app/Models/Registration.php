@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Registration extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'student_id',
         'course_id',
@@ -22,51 +23,65 @@ class Registration extends Model
         'registered_at',
         'completion_date',
     ];
+
     protected Hidden $status;
+
     protected $casts = [
         'registered_at' => 'date',
     ];
+
     public function student()
     {
         return $this->belongsTo(Student::class);
     }
+
     public function enrollment(): BelongsTo
     {
         return $this->belongsTo(Enrollment::class);
     }
+
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
+
     public function proctor(): BelongsTo
     {
         return $this->belongsTo(Proctor::class);
     }
+
     public function term(): BelongsTo
     {
         return $this->belongsTo(Term::class);
     }
+
     public function scopeInProgress($query)
     {
         return $query->where('status', 'in_progress');
     }
+
     public function scopePastCourses($query)
     {
         return $query->where('status', 'completed');
     }
+
     public function scopeFutureCourses($query)
     {
         return $query->where('status', 'registered');
     }
+
     public function scopeCurrentCourses($query)
     {
         return $query->where('status', 'in_progress');
     }
+
     public function scopeAvailableCourses($query)
     {
         return $query->where('status', 'registered');
     }
-    public function scopeProctored($query){
-        $query->where('proctored',true);
+
+    public function scopeProctored($query)
+    {
+        $query->where('proctored', true);
     }
 }

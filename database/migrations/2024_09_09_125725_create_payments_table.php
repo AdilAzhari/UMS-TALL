@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->decimal('amount');
             $table->date('payment_date');
-            $table->enum('status',['Pending', 'Completed', 'Failed', 'Refunded','Cancelled']);
-            $table->enum('method',['Strip','Paypal','Creadit Card']);
-            $table->enum('transaction_type',['Exam/Course Processing Fee','Transferring Credit Fee','application Fee']);
+            $table->enum('status', ['Pending', 'Completed', 'Failed', 'Refunded', 'Cancelled']);
+            $table->enum('method', ['Strip', 'Paypal', 'Creadit Card']);
+            $table->enum('transaction_type', ['Exam/Course Processing Fee', 'Transferring Credit Fee', 'application Fee']);
             $table->string('failure_reason')->nullable();
             $table->string('payment_intent')->nullable();
             $table->string('refund_id')->nullable();

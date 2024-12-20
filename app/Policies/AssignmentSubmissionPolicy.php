@@ -2,10 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Assignment_submission;
 use App\Models\AssignmentSubmission;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class AssignmentSubmissionPolicy
 {

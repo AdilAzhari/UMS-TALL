@@ -17,7 +17,7 @@ class PaymentController extends Controller
         $historicalPayments = Payment::with('course')
             ->where('payment_date', '<=', now())
             ->where('student_id', auth()->user()->student->id)
-            ->when($request->search, fn($query, $search) => $query->search($search))
+            ->when($request->search, fn ($query, $search) => $query->search($search))
             ->orderBy('payment_date', 'desc')
             ->paginate(10)
             ->withQueryString(); // Preserve filters in pagination links
@@ -25,7 +25,7 @@ class PaymentController extends Controller
         $upcomingPayments = Payment::with('course')
             ->where('status', 'pending')
             ->where('student_id', auth()->user()->student->id)
-            ->when($request->search, fn($query, $search) => $query->search($search))
+            ->when($request->search, fn ($query, $search) => $query->search($search))
             ->orderBy('payment_date', 'asc')
             ->paginate(10);
 

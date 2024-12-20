@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProgramRequirement;
 use App\Http\Requests\StoreProgramRequirementRequest;
 use App\Http\Requests\UpdateProgramRequirementRequest;
+use App\Models\ProgramRequirement;
 
 class ProgramRequirementController extends Controller
 {

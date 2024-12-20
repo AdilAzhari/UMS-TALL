@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\ExamQuestionOption;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class ExamQuestionOptionPolicy
 {
@@ -37,7 +36,6 @@ class ExamQuestionOptionPolicy
         return true;
 
     }
-
 
     /**
      * Determine whether the user can update the model.

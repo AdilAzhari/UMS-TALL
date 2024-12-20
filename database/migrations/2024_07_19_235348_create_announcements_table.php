@@ -19,6 +19,9 @@ return new class extends Migration
             $table->text('message');
             $table->string('title');
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('type', ['announcement', 'assignment', 'quiz'])->default('announcement');
+            $table->enum('audience', ['global', 'week', 'course'])->default('global');
+            $table->foreignId('created_by')->constrained('teachers')->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

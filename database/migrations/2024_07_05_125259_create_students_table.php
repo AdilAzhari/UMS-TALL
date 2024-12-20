@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('enrollment_date')->nullable();
             $table->decimal('CGPA', 3, 2)->default(0.00);
             $table->string('student_id')->nullable()->unique();
-            $table->enum('status',['Graduated', 'Enrolled', 'Suspended', 'Expelled'])->default('Enrolled');
+            $table->enum('status', ['Graduated', 'Enrolled', 'Suspended', 'Expelled'])->default('Enrolled');
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();
             $table->foreignId('department_id')->constrained('departments')->cascadeOnDelete();

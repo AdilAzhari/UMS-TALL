@@ -34,16 +34,18 @@ class StoryService
         $validatedData = validator($data, [
             'content' => 'required|string',
             'status' => 'in:draft,published',
-            'image' => 'nullable|image|max:2048'
+            'image' => 'nullable|image|max:2048',
         ])->validate();
 
         $validatedData['content'] = $this->sanitizeContent($validatedData['content']);
         $validatedData['image'] = $this->handleImageUpload($validatedData['image'] ?? null);
 
+        //        todo: send an email to subscribed student to be notified tho email or notification message
         return Story::create($validatedData + [
-                'student_id' => auth()->user()->student->id,
-                'published_at' => $validatedData['status'] !== 'draft' ? now() : null,
-            ]);
+            'student_id' => auth()->user()->student->id,
+            'published_at' => $validatedData['status'] !== 'draft' ? now() : null,
+        ]);
+
     }
 
     protected function sanitizeContent($content): string
@@ -51,6 +53,7 @@ class StoryService
         $config = HTMLPurifier_Config::createDefault();
         $config->set('HTML.Allowed', 'p,b,i,u,a[href],ul,ol,li');
         $purifier = new HTMLPurifier($config);
+
         return $purifier->purify($content);
     }
 
@@ -80,8 +83,8 @@ class StoryService
         }
 
         $story->update($data + [
-                'published_at' => $data['status'] !== 'draft' ? now() : null,
-            ]);
+            'published_at' => $data['status'] !== 'draft' ? now() : null,
+        ]);
 
         return $story;
     }
@@ -95,6 +98,7 @@ class StoryService
     {
         $story = $this->findStoryById($storyId);
         $story->delete();
+
         return $story;
     }
 }

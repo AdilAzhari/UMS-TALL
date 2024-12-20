@@ -14,9 +14,10 @@ use JetBrains\PhpStorm\NoReturn;
 
 class ProfileController extends Controller
 {
-    #[NoReturn] public function show(Request $request): Response
+    #[NoReturn]
+    public function show(Request $request): Response
     {
-//        dd('ProfileController@show');
+        //        dd('ProfileController@show');
         return Inertia::render('Profile', ['user' => $request->user()]);
     }
 

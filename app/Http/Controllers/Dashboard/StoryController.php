@@ -58,6 +58,7 @@ class StoryController extends Controller
     {
         if ($storyId) {
             $story = $this->storyService->findStoryById($storyId);
+
             return Inertia::render('Stories/Update', [
                 'story' => $story,
             ]);

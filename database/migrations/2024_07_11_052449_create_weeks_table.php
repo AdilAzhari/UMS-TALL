@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->foreignId('assignment_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('quizz_id')->nullable()->constrained('quizzes')->cascadeOnDelete();
+            $table->foreignId('self_quiz')->nullable()->constrained('quizzes')->cascadeOnDelete();
+            $table->text('announcement')->nullable();
             $table->foreignId('term_id')->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->text('description');
             $table->date('start_date');
             $table->date('end_date');
-            $table->integer('week_number')->range(1, 9);
+            $table->integer('week_number')->default(0)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

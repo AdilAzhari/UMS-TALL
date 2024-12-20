@@ -8,13 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class AcademicAchievement extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'gpa','credits_earned','honors_awards','student_id','term_id',
+        'gpa', 'credits_earned', 'honors_awards', 'student_id', 'term_id',
     ];
-    public function student() {
+
+    public function student()
+    {
         return $this->belongsTo(Student::class);
     }
-    public function term() {
+
+    public function term()
+    {
         return $this->belongsTo(Term::class);
     }
 }

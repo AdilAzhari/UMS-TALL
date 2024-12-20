@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StoryTag;
 use App\Http\Requests\StoreStoryTagRequest;
 use App\Http\Requests\UpdateStoryTagRequest;
+use App\Models\StoryTag;
 
 class StoryTagController extends Controller
 {

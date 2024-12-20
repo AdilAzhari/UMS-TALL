@@ -1,13 +1,15 @@
 <?php
+
 namespace App\Notifications;
 
-use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\URL;
 
 class AssignProctorNotification extends Notification
 {
     protected $course;
+
     protected $proctor;
 
     public function __construct($course, $proctor)
@@ -26,18 +28,18 @@ class AssignProctorNotification extends Notification
         // Generate signed URLs for acceptance and decline
         $acceptUrl = URL::signedRoute('proctor.response', [
             'proctor' => $this->proctor->id,
-            'response' => 'approved'
+            'response' => 'approved',
         ]);
 
         $declineUrl = URL::signedRoute('proctor.response', [
             'proctor' => $this->proctor->id,
-            'response' => 'rejected'
+            'response' => 'rejected',
         ]);
 
         return (new MailMessage)
-            ->subject('Proctor Assignment for ' . $this->course->name)
-            ->greeting('Hello ' . $this->proctor->name . ',')
-            ->line('You have been assigned as a proctor for the course: ' . $this->course->name . '.')
+            ->subject('Proctor Assignment for '.$this->course->name)
+            ->greeting('Hello '.$this->proctor->name.',')
+            ->line('You have been assigned as a proctor for the course: '.$this->course->name.'.')
             ->line('If you agree to take on this role, please click the link below to accept:')
             ->action('Accept Assignment', $acceptUrl)
             ->line('If you wish to decline, please click the link below:')

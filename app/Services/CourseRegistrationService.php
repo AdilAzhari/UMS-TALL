@@ -10,10 +10,11 @@ use App\Models\User;
 use App\Notifications\AssignProctorNotification;
 use App\Notifications\CourseRegistrationNotification;
 use Illuminate\Support\Facades\Notification;
+use LaravelIdea\Helper\App\Models\_IH_Course_C;
 
 class CourseRegistrationService
 {
-    public function registerCourses($request)
+    public function registerCourses($request): array
     {
         $studentId = auth()->user()->student->id;
         $validated = $request->validated();
@@ -23,13 +24,13 @@ class CourseRegistrationService
         }
 
         $currentTerm = $this->getCurrentTerm();
-        if (!$currentTerm) {
+        if (! $currentTerm) {
             return ['status' => 'error', 'message' => 'No active term found for registration.'];
         }
 
         foreach ($validated['courses'] as $courseId) {
             $course = Course::find($courseId);
-            if (!$course) {
+            if (! $course) {
                 return ['status' => 'error', 'message' => 'Invalid course selected.'];
             }
 
@@ -55,35 +56,35 @@ class CourseRegistrationService
         return ['status' => 'success'];
     }
 
-    protected function getCurrentTerm()
+    protected function getCurrentTerm(): Term
     {
         return Term::where('start_date', '<=', now())
-                    ->where('end_date', '>=', now())
-                    ->first();
+            ->where('end_date', '>=', now())
+            ->first();
     }
 
     protected function checkRegistrationEligibility($studentId, $courseId, $currentTerm)
     {
         $existingRegistration = Registration::where('student_id', $studentId)
-                                            ->where('course_id', $courseId)
-                                            ->where('term_id', $currentTerm->id)
-                                            ->first();
+            ->where('course_id', $courseId)
+            ->where('term_id', $currentTerm->id)
+            ->first();
         if ($existingRegistration) {
             return 'You have already registered for this course.';
         }
 
         $passedCourse = Registration::where('student_id', $studentId)
-                                    ->where('course_id', $courseId)
-                                    ->where('status', 'passed')
-                                    ->first();
+            ->where('course_id', $courseId)
+            ->where('status', 'passed')
+            ->first();
         if ($passedCourse) {
             return 'You have already passed this course.';
         }
 
         $failedCourse = Registration::where('student_id', $studentId)
-                                    ->where('course_id', $courseId)
-                                    ->where('status', 'failed')
-                                    ->first();
+            ->where('course_id', $courseId)
+            ->where('status', 'failed')
+            ->first();
         if ($failedCourse) {
             return 'You have already failed this course.';
         }
@@ -99,7 +100,7 @@ class CourseRegistrationService
         }
     }
 
-    public function getStudentData($user)
+    public function getStudentData($user): array
     {
         $programName = User::where('id', $user->id)
             ->with([
@@ -108,7 +109,7 @@ class CourseRegistrationService
                 'student.enrollments',
                 'student.courses',
                 'student.registrations',
-                'student.department:id,name,code'
+                'student.department:id,name,code',
             ])
             ->first();
 
@@ -136,25 +137,13 @@ class CourseRegistrationService
                 'code' => $programName->student->department->code,
             ] : null,
             'totalCredit' => collect($programName->student->courses ?? [])->sum('credit'),
-            'gpa' => $programName->student->academicProgress->map(fn($progress) => $progress->gpa)->first() ?? null,
+            'gpa' => $programName->student->academicProgress->map(fn ($progress) => $progress->gpa)->first() ?? null,
         ];
     }
 
-    public function getAvailableCourses($user)
+    protected function mapCourses($courses): array
     {
-        $pastCourses = Registration::where('student_id', $user->student->id)->PastCourses()->pluck('course_id');
-        $currentCourses = Registration::where('student_id', $user->student->id)->currentCourses()->pluck('course_id');
-        $futureCourses = Registration::where('student_id', $user->student->id)->futureCourses()->pluck('course_id');
-
-        return Course::whereNotIn('id', $pastCourses)
-                     ->whereNotIn('id', $currentCourses)
-                     ->whereNotIn('id', $futureCourses)
-                     ->get();
-    }
-
-    protected function mapCourses($courses)
-    {
-        return $courses->map(fn($course) => [
+        return $courses->map(fn ($course) => [
             'id' => $course->id,
             'name' => $course->course->name,
             'status' => $course->status,
@@ -167,7 +156,20 @@ class CourseRegistrationService
             'description' => $course->course->description,
         ]) ?? [];
     }
-    public function assignProctor($data)
+
+    public function getAvailableCourses($user): array|_IH_Course_C
+    {
+        $pastCourses = Registration::where('student_id', $user->student->id)->PastCourses()->pluck('course_id');
+        $currentCourses = Registration::where('student_id', $user->student->id)->currentCourses()->pluck('course_id');
+        $futureCourses = Registration::where('student_id', $user->student->id)->futureCourses()->pluck('course_id');
+
+        return Course::whereNotIn('id', $pastCourses)
+            ->whereNotIn('id', $currentCourses)
+            ->whereNotIn('id', $futureCourses)
+            ->get();
+    }
+
+    public function assignProctor($data): array
     {
         $studentId = auth()->user()->student->id;
         $validated = $data;

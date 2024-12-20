@@ -4,7 +4,6 @@ use Illuminate\Database\Seeder;
 
 class WorldDivisionsLocaleTableSeeder extends Seeder
 {
-
     /**
      * Auto generated seed file
      *
@@ -12,293 +11,263 @@ class WorldDivisionsLocaleTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
         \DB::table('world_divisions_locale')->truncate();
-        
-        \DB::table('world_divisions_locale')->insert(array (
-            0 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+
+        \DB::table('world_divisions_locale')->insert([
+            0 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 1,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 1,
                 'locale' => 'zh-cn',
                 'name' => '庆尚北道',
-            ),
-            1 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            1 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 2,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 2,
                 'locale' => 'zh-cn',
                 'name' => '庆尚南道',
-            ),
-            2 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            2 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 3,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 3,
                 'locale' => 'zh-cn',
                 'name' => '大邱',
-            ),
-            3 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            3 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 4,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 4,
                 'locale' => 'zh-cn',
                 'name' => '江原道',
-            ),
-            4 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            4 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 5,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 5,
                 'locale' => 'zh-cn',
                 'name' => '京畿道',
-            ),
-            5 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            5 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 6,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 6,
                 'locale' => 'zh-cn',
                 'name' => '全罗北道',
-            ),
-            6 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            6 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 7,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 7,
                 'locale' => 'zh-cn',
                 'name' => '全罗南道',
-            ),
-            7 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            7 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 8,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 8,
                 'locale' => 'zh-cn',
                 'name' => '忠清北道',
-            ),
-            8 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            8 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 9,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 9,
                 'locale' => 'zh-cn',
                 'name' => '忠清南道',
-            ),
-            9 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            9 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 10,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 10,
                 'locale' => 'zh-cn',
                 'name' => '柔佛',
-            ),
-            10 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            10 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 11,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 11,
                 'locale' => 'zh-cn',
                 'name' => '吉打',
-            ),
-            11 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            11 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 12,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 12,
                 'locale' => 'zh-cn',
                 'name' => '吉兰丹',
-            ),
-            12 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            12 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 13,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 13,
                 'locale' => 'zh-cn',
                 'name' => '吉隆坡',
-            ),
-            13 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            13 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 14,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 14,
                 'locale' => 'zh-cn',
                 'name' => '纳闽',
-            ),
-            14 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            14 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 15,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 15,
                 'locale' => 'zh-cn',
                 'name' => '马六甲',
-            ),
-            15 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            15 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 16,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 16,
                 'locale' => 'zh-cn',
                 'name' => '森美兰',
-            ),
-            16 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            16 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 17,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 17,
                 'locale' => 'zh-cn',
                 'name' => '彭亨',
-            ),
-            17 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            17 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 18,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 18,
                 'locale' => 'zh-cn',
                 'name' => '霹雳',
-            ),
-            18 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            18 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 19,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 19,
                 'locale' => 'zh-cn',
                 'name' => '玻璃市',
-            ),
-            19 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            19 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 20,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 20,
                 'locale' => 'zh-cn',
                 'name' => '槟榔屿',
-            ),
-            20 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            20 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 21,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 21,
                 'locale' => 'zh-cn',
                 'name' => '沙巴',
-            ),
-            21 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            21 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 22,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 22,
                 'locale' => 'zh-cn',
                 'name' => '沙捞越',
-            ),
-            22 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            22 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 23,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 23,
                 'locale' => 'zh-cn',
                 'name' => '雪兰莪',
-            ),
-            23 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            23 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 24,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 24,
                 'locale' => 'zh-cn',
                 'name' => '丁加奴',
-            ),
-            24 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            24 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 25,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 25,
                 'locale' => 'zh-cn',
                 'name' => '安徽',
-            ),
-            25 => 
-            array (
+            ],
+            25 => [
                 'abbr' => '京',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 26,
                 'full_name' => '北京市',
                 'id' => 26,
                 'locale' => 'zh-cn',
                 'name' => '北京',
-            ),
-            26 => 
-            array (
+            ],
+            26 => [
                 'abbr' => '渝',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 27,
                 'full_name' => '重庆市',
                 'id' => 27,
                 'locale' => 'zh-cn',
                 'name' => '重庆',
-            ),
-            27 => 
-            array (
+            ],
+            27 => [
                 'abbr' => '闽',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 28,
                 'full_name' => '福建省',
                 'id' => 28,
                 'locale' => 'zh-cn',
                 'name' => '福建',
-            ),
-            28 => 
-            array (
+            ],
+            28 => [
                 'abbr' => '甘',
                 'alias' => '陇',
                 'division_id' => 29,
@@ -306,29 +275,26 @@ class WorldDivisionsLocaleTableSeeder extends Seeder
                 'id' => 29,
                 'locale' => 'zh-cn',
                 'name' => '甘肃',
-            ),
-            29 => 
-            array (
+            ],
+            29 => [
                 'abbr' => '粤',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 30,
                 'full_name' => '广东省',
                 'id' => 30,
                 'locale' => 'zh-cn',
                 'name' => '广东',
-            ),
-            30 => 
-            array (
+            ],
+            30 => [
                 'abbr' => '桂',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 31,
                 'full_name' => '广西壮族自治区',
                 'id' => 31,
                 'locale' => 'zh-cn',
                 'name' => '广西',
-            ),
-            31 => 
-            array (
+            ],
+            31 => [
                 'abbr' => '贵',
                 'alias' => '黔',
                 'division_id' => 32,
@@ -336,139 +302,125 @@ class WorldDivisionsLocaleTableSeeder extends Seeder
                 'id' => 32,
                 'locale' => 'zh-cn',
                 'name' => '贵州',
-            ),
-            32 => 
-            array (
+            ],
+            32 => [
                 'abbr' => '琼',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 33,
                 'full_name' => '河南省',
                 'id' => 33,
                 'locale' => 'zh-cn',
                 'name' => '海南',
-            ),
-            33 => 
-            array (
+            ],
+            33 => [
                 'abbr' => '冀',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 34,
                 'full_name' => '河北省',
                 'id' => 34,
                 'locale' => 'zh-cn',
                 'name' => '河北',
-            ),
-            34 => 
-            array (
+            ],
+            34 => [
                 'abbr' => '黑',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 35,
                 'full_name' => '黑龙江省',
                 'id' => 35,
                 'locale' => 'zh-cn',
                 'name' => '黑龙江',
-            ),
-            35 => 
-            array (
+            ],
+            35 => [
                 'abbr' => '豫',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 36,
                 'full_name' => '河南省',
                 'id' => 36,
                 'locale' => 'zh-cn',
                 'name' => '河南',
-            ),
-            36 => 
-            array (
+            ],
+            36 => [
                 'abbr' => '鄂',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 37,
                 'full_name' => '湖北省',
                 'id' => 37,
                 'locale' => 'zh-cn',
                 'name' => '湖北',
-            ),
-            37 => 
-            array (
+            ],
+            37 => [
                 'abbr' => '湘',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 38,
                 'full_name' => '湖南省',
                 'id' => 38,
                 'locale' => 'zh-cn',
                 'name' => '湖南',
-            ),
-            38 => 
-            array (
+            ],
+            38 => [
                 'abbr' => '蒙',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 39,
                 'full_name' => '内蒙古自治区',
                 'id' => 39,
                 'locale' => 'zh-cn',
                 'name' => '内蒙古',
-            ),
-            39 => 
-            array (
+            ],
+            39 => [
                 'abbr' => '苏',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 40,
                 'full_name' => '江苏省',
                 'id' => 40,
                 'locale' => 'zh-cn',
                 'name' => '江苏',
-            ),
-            40 => 
-            array (
+            ],
+            40 => [
                 'abbr' => '赣',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 41,
                 'full_name' => '江西省',
                 'id' => 41,
                 'locale' => 'zh-cn',
                 'name' => '江西',
-            ),
-            41 => 
-            array (
+            ],
+            41 => [
                 'abbr' => '吉',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 42,
                 'full_name' => '吉林省',
                 'id' => 42,
                 'locale' => 'zh-cn',
                 'name' => '吉林',
-            ),
-            42 => 
-            array (
+            ],
+            42 => [
                 'abbr' => '辽',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 43,
                 'full_name' => '辽宁省',
                 'id' => 43,
                 'locale' => 'zh-cn',
                 'name' => '辽宁',
-            ),
-            43 => 
-            array (
+            ],
+            43 => [
                 'abbr' => '宁',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 44,
                 'full_name' => '宁夏回族自治区',
                 'id' => 44,
                 'locale' => 'zh-cn',
                 'name' => '宁夏',
-            ),
-            44 => 
-            array (
+            ],
+            44 => [
                 'abbr' => '青',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 45,
                 'full_name' => '青海省',
                 'id' => 45,
                 'locale' => 'zh-cn',
                 'name' => '青海',
-            ),
-            45 => 
-            array (
+            ],
+            45 => [
                 'abbr' => '陕',
                 'alias' => '秦',
                 'division_id' => 46,
@@ -476,89 +428,80 @@ class WorldDivisionsLocaleTableSeeder extends Seeder
                 'id' => 46,
                 'locale' => 'zh-cn',
                 'name' => '陕西',
-            ),
-            46 => 
-            array (
+            ],
+            46 => [
                 'abbr' => '鲁',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 47,
                 'full_name' => '山东省',
                 'id' => 47,
                 'locale' => 'zh-cn',
                 'name' => '山东',
-            ),
-            47 => 
-            array (
+            ],
+            47 => [
                 'abbr' => '沪',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 48,
                 'full_name' => '上海市',
                 'id' => 48,
                 'locale' => 'zh-cn',
                 'name' => '上海',
-            ),
-            48 => 
-            array (
+            ],
+            48 => [
                 'abbr' => '晋',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 49,
                 'full_name' => '山西省',
                 'id' => 49,
                 'locale' => 'zh-cn',
                 'name' => '山西',
-            ),
-            49 => 
-            array (
+            ],
+            49 => [
                 'abbr' => '川',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 50,
                 'full_name' => '四川省',
                 'id' => 50,
                 'locale' => 'zh-cn',
                 'name' => '四川',
-            ),
-            50 => 
-            array (
+            ],
+            50 => [
                 'abbr' => '台',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 51,
                 'full_name' => '台湾省',
                 'id' => 51,
                 'locale' => 'zh-cn',
                 'name' => '台湾',
-            ),
-            51 => 
-            array (
+            ],
+            51 => [
                 'abbr' => '津',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 52,
                 'full_name' => '天津市',
                 'id' => 52,
                 'locale' => 'zh-cn',
                 'name' => '天津',
-            ),
-            52 => 
-            array (
+            ],
+            52 => [
                 'abbr' => '藏',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 53,
                 'full_name' => '西藏自治区',
                 'id' => 53,
                 'locale' => 'zh-cn',
                 'name' => '西藏',
-            ),
-            53 => 
-            array (
+            ],
+            53 => [
                 'abbr' => '新',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 54,
                 'full_name' => '新疆维吾尔自治区',
                 'id' => 54,
                 'locale' => 'zh-cn',
                 'name' => '新疆',
-            ),
-            54 => 
-            array (
+            ],
+            54 => [
                 'abbr' => '云',
                 'alias' => '滇',
                 'division_id' => 55,
@@ -566,1879 +509,1691 @@ class WorldDivisionsLocaleTableSeeder extends Seeder
                 'id' => 55,
                 'locale' => 'zh-cn',
                 'name' => '云南',
-            ),
-            55 => 
-            array (
+            ],
+            55 => [
                 'abbr' => '浙',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 56,
                 'full_name' => '浙江省',
                 'id' => 56,
                 'locale' => 'zh-cn',
                 'name' => '浙江',
-            ),
-            56 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            56 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 57,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 57,
                 'locale' => 'zh-cn',
                 'name' => '英格兰',
-            ),
-            57 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            57 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 58,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 58,
                 'locale' => 'zh-cn',
                 'name' => '北爱尔兰',
-            ),
-            58 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            58 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 59,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 59,
                 'locale' => 'zh-cn',
                 'name' => '苏格兰',
-            ),
-            59 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            59 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 60,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 60,
                 'locale' => 'zh-cn',
                 'name' => '威尔士',
-            ),
-            60 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            60 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 61,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 61,
                 'locale' => 'zh-cn',
                 'name' => '阿拉巴马',
-            ),
-            61 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            61 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 62,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 62,
                 'locale' => 'zh-cn',
                 'name' => '阿拉斯加',
-            ),
-            62 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            62 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 63,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 63,
                 'locale' => 'zh-cn',
                 'name' => '亚利桑那',
-            ),
-            63 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            63 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 64,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 64,
                 'locale' => 'zh-cn',
                 'name' => '阿肯色',
-            ),
-            64 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            64 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 65,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 65,
                 'locale' => 'zh-cn',
                 'name' => '加利福尼亚',
-            ),
-            65 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            65 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 66,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 66,
                 'locale' => 'zh-cn',
                 'name' => '科罗拉多',
-            ),
-            66 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            66 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 67,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 67,
                 'locale' => 'zh-cn',
                 'name' => '康涅狄格',
-            ),
-            67 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            67 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 68,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 68,
                 'locale' => 'zh-cn',
                 'name' => '特拉华',
-            ),
-            68 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            68 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 69,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 69,
                 'locale' => 'zh-cn',
                 'name' => '哥伦比亚特区',
-            ),
-            69 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            69 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 70,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 70,
                 'locale' => 'zh-cn',
                 'name' => '佛罗里达',
-            ),
-            70 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            70 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 71,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 71,
                 'locale' => 'zh-cn',
                 'name' => '佐治亚',
-            ),
-            71 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            71 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 72,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 72,
                 'locale' => 'zh-cn',
                 'name' => '夏威夷',
-            ),
-            72 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            72 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 73,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 73,
                 'locale' => 'zh-cn',
                 'name' => '爱达荷',
-            ),
-            73 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            73 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 74,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 74,
                 'locale' => 'zh-cn',
                 'name' => '伊利诺斯',
-            ),
-            74 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            74 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 75,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 75,
                 'locale' => 'zh-cn',
                 'name' => '印第安那',
-            ),
-            75 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            75 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 76,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 76,
                 'locale' => 'zh-cn',
                 'name' => '爱荷华',
-            ),
-            76 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            76 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 77,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 77,
                 'locale' => 'zh-cn',
                 'name' => '堪萨斯',
-            ),
-            77 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            77 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 78,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 78,
                 'locale' => 'zh-cn',
                 'name' => '肯塔基',
-            ),
-            78 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            78 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 79,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 79,
                 'locale' => 'zh-cn',
                 'name' => '路易斯安那',
-            ),
-            79 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            79 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 80,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 80,
                 'locale' => 'zh-cn',
                 'name' => '缅因',
-            ),
-            80 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            80 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 81,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 81,
                 'locale' => 'zh-cn',
                 'name' => '马里兰',
-            ),
-            81 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            81 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 82,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 82,
                 'locale' => 'zh-cn',
                 'name' => '马萨诸塞',
-            ),
-            82 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            82 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 83,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 83,
                 'locale' => 'zh-cn',
                 'name' => '密歇根',
-            ),
-            83 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            83 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 84,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 84,
                 'locale' => 'zh-cn',
                 'name' => '明尼苏达',
-            ),
-            84 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            84 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 85,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 85,
                 'locale' => 'zh-cn',
                 'name' => '密西西比',
-            ),
-            85 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            85 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 86,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 86,
                 'locale' => 'zh-cn',
                 'name' => '密苏里',
-            ),
-            86 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            86 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 87,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 87,
                 'locale' => 'zh-cn',
                 'name' => '蒙大拿',
-            ),
-            87 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            87 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 88,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 88,
                 'locale' => 'zh-cn',
                 'name' => '内布拉斯加',
-            ),
-            88 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            88 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 89,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 89,
                 'locale' => 'zh-cn',
                 'name' => '内华达',
-            ),
-            89 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            89 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 90,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 90,
                 'locale' => 'zh-cn',
                 'name' => '新罕布什尔',
-            ),
-            90 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            90 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 91,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 91,
                 'locale' => 'zh-cn',
                 'name' => '新泽西',
-            ),
-            91 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            91 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 92,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 92,
                 'locale' => 'zh-cn',
                 'name' => '新墨西哥',
-            ),
-            92 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            92 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 93,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 93,
                 'locale' => 'zh-cn',
                 'name' => '纽约',
-            ),
-            93 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            93 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 94,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 94,
                 'locale' => 'zh-cn',
                 'name' => '北卡罗来纳',
-            ),
-            94 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            94 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 95,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 95,
                 'locale' => 'zh-cn',
                 'name' => '北达科他',
-            ),
-            95 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            95 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 96,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 96,
                 'locale' => 'zh-cn',
                 'name' => '俄亥俄',
-            ),
-            96 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            96 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 97,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 97,
                 'locale' => 'zh-cn',
                 'name' => '俄克拉荷马',
-            ),
-            97 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            97 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 98,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 98,
                 'locale' => 'zh-cn',
                 'name' => '俄勒冈',
-            ),
-            98 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            98 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 99,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 99,
                 'locale' => 'zh-cn',
                 'name' => '宾夕法尼亚',
-            ),
-            99 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            99 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 100,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 100,
                 'locale' => 'zh-cn',
                 'name' => '罗德岛',
-            ),
-            100 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            100 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 101,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 101,
                 'locale' => 'zh-cn',
                 'name' => '南卡罗来纳',
-            ),
-            101 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            101 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 102,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 102,
                 'locale' => 'zh-cn',
                 'name' => '南达科他',
-            ),
-            102 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            102 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 103,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 103,
                 'locale' => 'zh-cn',
                 'name' => '田纳西',
-            ),
-            103 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            103 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 104,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 104,
                 'locale' => 'zh-cn',
                 'name' => '德克萨斯',
-            ),
-            104 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            104 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 105,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 105,
                 'locale' => 'zh-cn',
                 'name' => '犹他',
-            ),
-            105 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            105 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 106,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 106,
                 'locale' => 'zh-cn',
                 'name' => '佛蒙特',
-            ),
-            106 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            106 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 107,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 107,
                 'locale' => 'zh-cn',
                 'name' => '维吉尼亚',
-            ),
-            107 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            107 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 108,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 108,
                 'locale' => 'zh-cn',
                 'name' => '华盛顿',
-            ),
-            108 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            108 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 109,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 109,
                 'locale' => 'zh-cn',
                 'name' => '西佛吉尼亚',
-            ),
-            109 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            109 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 110,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 110,
                 'locale' => 'zh-cn',
                 'name' => '威斯康星',
-            ),
-            110 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            110 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 111,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 111,
                 'locale' => 'zh-cn',
                 'name' => '怀俄明',
-            ),
-            111 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            111 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 112,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 112,
                 'locale' => 'zh-cn',
                 'name' => '堪培拉',
-            ),
-            112 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            112 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 113,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 113,
                 'locale' => 'zh-cn',
                 'name' => '新南威尔士',
-            ),
-            113 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            113 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 114,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 114,
                 'locale' => 'zh-cn',
                 'name' => '北部地区',
-            ),
-            114 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            114 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 115,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 115,
                 'locale' => 'zh-cn',
                 'name' => '昆士兰',
-            ),
-            115 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            115 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 116,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 116,
                 'locale' => 'zh-cn',
                 'name' => '南澳大利亚',
-            ),
-            116 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            116 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 117,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 117,
                 'locale' => 'zh-cn',
                 'name' => '塔斯马尼亚',
-            ),
-            117 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            117 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 118,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 118,
                 'locale' => 'zh-cn',
                 'name' => '维多利亚',
-            ),
-            118 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            118 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 119,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 119,
                 'locale' => 'zh-cn',
                 'name' => '西澳大利亚',
-            ),
-            119 => 
-            array (
+            ],
+            119 => [
                 'abbr' => '港',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 121,
                 'full_name' => '香港特别行政区',
                 'id' => 120,
                 'locale' => 'zh-cn',
                 'name' => '香港',
-            ),
-            120 => 
-            array (
+            ],
+            120 => [
                 'abbr' => '澳',
-                'alias' => NULL,
+                'alias' => null,
                 'division_id' => 122,
                 'full_name' => '澳门特别行政区',
                 'id' => 121,
                 'locale' => 'zh-cn',
                 'name' => '澳门',
-            ),
-            121 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            121 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 1,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 122,
                 'locale' => 'en',
                 'name' => 'Chungcheongbuk-do',
-            ),
-            122 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            122 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 2,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 123,
                 'locale' => 'en',
                 'name' => 'Chungcheongnam-do',
-            ),
-            123 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            123 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 3,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 124,
                 'locale' => 'en',
                 'name' => 'Daegu',
-            ),
-            124 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            124 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 4,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 125,
                 'locale' => 'en',
                 'name' => 'Gangwon-do',
-            ),
-            125 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            125 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 5,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 126,
                 'locale' => 'en',
                 'name' => 'Gyeonggi-do',
-            ),
-            126 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            126 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 6,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 127,
                 'locale' => 'en',
                 'name' => 'Gyeongsangbuk-do',
-            ),
-            127 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            127 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 7,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 128,
                 'locale' => 'en',
                 'name' => 'Gyeongsangnam-do',
-            ),
-            128 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            128 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 8,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 129,
                 'locale' => 'en',
                 'name' => 'Jeollabuk-do',
-            ),
-            129 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            129 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 9,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 130,
                 'locale' => 'en',
                 'name' => 'Jeollanam-do',
-            ),
-            130 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            130 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 10,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 131,
                 'locale' => 'en',
                 'name' => 'Johor',
-            ),
-            131 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            131 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 11,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 132,
                 'locale' => 'en',
                 'name' => 'Kedah',
-            ),
-            132 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            132 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 12,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 133,
                 'locale' => 'en',
                 'name' => 'Kelantan',
-            ),
-            133 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            133 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 13,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 134,
                 'locale' => 'en',
                 'name' => 'Kuala Lumpur',
-            ),
-            134 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            134 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 14,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 135,
                 'locale' => 'en',
                 'name' => 'Labuan',
-            ),
-            135 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            135 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 15,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 136,
                 'locale' => 'en',
                 'name' => 'Malacca',
-            ),
-            136 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            136 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 16,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 137,
                 'locale' => 'en',
                 'name' => 'Negeri Sembilan',
-            ),
-            137 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            137 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 17,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 138,
                 'locale' => 'en',
                 'name' => 'Pahang',
-            ),
-            138 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            138 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 18,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 139,
                 'locale' => 'en',
                 'name' => 'Perak',
-            ),
-            139 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            139 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 19,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 140,
                 'locale' => 'en',
                 'name' => 'Perlis',
-            ),
-            140 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            140 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 20,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 141,
                 'locale' => 'en',
                 'name' => 'Pulau Pinang',
-            ),
-            141 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            141 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 21,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 142,
                 'locale' => 'en',
                 'name' => 'Sabah',
-            ),
-            142 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            142 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 22,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 143,
                 'locale' => 'en',
                 'name' => 'Sarawak',
-            ),
-            143 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            143 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 23,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 144,
                 'locale' => 'en',
                 'name' => 'Selangor',
-            ),
-            144 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            144 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 24,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 145,
                 'locale' => 'en',
                 'name' => 'Terengganu',
-            ),
-            145 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            145 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 25,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 146,
                 'locale' => 'en',
                 'name' => 'Anhui',
-            ),
-            146 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            146 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 26,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 147,
                 'locale' => 'en',
                 'name' => 'Beijing',
-            ),
-            147 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            147 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 27,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 148,
                 'locale' => 'en',
                 'name' => 'Chongqing',
-            ),
-            148 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            148 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 28,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 149,
                 'locale' => 'en',
                 'name' => 'Fujian',
-            ),
-            149 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            149 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 29,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 150,
                 'locale' => 'en',
                 'name' => 'Gansu',
-            ),
-            150 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            150 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 30,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 151,
                 'locale' => 'en',
                 'name' => 'Guangdong',
-            ),
-            151 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            151 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 31,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 152,
                 'locale' => 'en',
                 'name' => 'Guangxi',
-            ),
-            152 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            152 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 32,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 153,
                 'locale' => 'en',
                 'name' => 'Guizhou',
-            ),
-            153 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            153 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 33,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 154,
                 'locale' => 'en',
                 'name' => 'Hainan',
-            ),
-            154 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            154 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 34,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 155,
                 'locale' => 'en',
                 'name' => 'Hebei',
-            ),
-            155 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            155 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 35,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 156,
                 'locale' => 'en',
                 'name' => 'Heilongjiang',
-            ),
-            156 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            156 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 36,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 157,
                 'locale' => 'en',
                 'name' => 'Henan',
-            ),
-            157 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            157 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 37,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 158,
                 'locale' => 'en',
                 'name' => 'Hubei',
-            ),
-            158 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            158 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 38,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 159,
                 'locale' => 'en',
                 'name' => 'Hunan',
-            ),
-            159 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            159 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 39,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 160,
                 'locale' => 'en',
                 'name' => 'Inner Mongolia',
-            ),
-            160 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            160 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 40,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 161,
                 'locale' => 'en',
                 'name' => 'Jiangsu',
-            ),
-            161 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            161 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 41,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 162,
                 'locale' => 'en',
                 'name' => 'Jiangxi',
-            ),
-            162 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            162 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 42,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 163,
                 'locale' => 'en',
                 'name' => 'Jilin',
-            ),
-            163 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            163 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 43,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 164,
                 'locale' => 'en',
                 'name' => 'Liaoning',
-            ),
-            164 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            164 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 44,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 165,
                 'locale' => 'en',
                 'name' => 'Ningxia',
-            ),
-            165 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            165 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 45,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 166,
                 'locale' => 'en',
                 'name' => 'Qinghai',
-            ),
-            166 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            166 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 46,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 167,
                 'locale' => 'en',
                 'name' => 'Shaanxi',
-            ),
-            167 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            167 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 47,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 168,
                 'locale' => 'en',
                 'name' => 'Shandong',
-            ),
-            168 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            168 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 48,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 169,
                 'locale' => 'en',
                 'name' => 'Shanghai',
-            ),
-            169 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            169 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 49,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 170,
                 'locale' => 'en',
                 'name' => 'Shanxi',
-            ),
-            170 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            170 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 50,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 171,
                 'locale' => 'en',
                 'name' => 'Sichuan',
-            ),
-            171 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            171 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 51,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 172,
                 'locale' => 'en',
                 'name' => 'Taiwan',
-            ),
-            172 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            172 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 52,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 173,
                 'locale' => 'en',
                 'name' => 'Tianjin',
-            ),
-            173 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            173 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 53,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 174,
                 'locale' => 'en',
                 'name' => 'Tibet',
-            ),
-            174 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            174 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 54,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 175,
                 'locale' => 'en',
                 'name' => 'Xinjiang',
-            ),
-            175 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            175 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 55,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 176,
                 'locale' => 'en',
                 'name' => 'Yunnan',
-            ),
-            176 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            176 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 56,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 177,
                 'locale' => 'en',
                 'name' => 'Zhejiang',
-            ),
-            177 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            177 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 57,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 178,
                 'locale' => 'en',
                 'name' => 'England',
-            ),
-            178 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            178 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 58,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 179,
                 'locale' => 'en',
                 'name' => 'Northern Ireland',
-            ),
-            179 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            179 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 59,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 180,
                 'locale' => 'en',
                 'name' => 'Scotland',
-            ),
-            180 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            180 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 60,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 181,
                 'locale' => 'en',
                 'name' => 'Wales',
-            ),
-            181 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            181 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 61,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 182,
                 'locale' => 'en',
                 'name' => 'Alabama',
-            ),
-            182 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            182 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 62,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 183,
                 'locale' => 'en',
                 'name' => 'Alaska',
-            ),
-            183 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            183 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 63,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 184,
                 'locale' => 'en',
                 'name' => 'Arizona',
-            ),
-            184 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            184 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 64,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 185,
                 'locale' => 'en',
                 'name' => 'Arkansas',
-            ),
-            185 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            185 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 65,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 186,
                 'locale' => 'en',
                 'name' => 'California',
-            ),
-            186 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            186 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 66,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 187,
                 'locale' => 'en',
                 'name' => 'Colorado',
-            ),
-            187 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            187 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 67,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 188,
                 'locale' => 'en',
                 'name' => 'Connecticut',
-            ),
-            188 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            188 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 68,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 189,
                 'locale' => 'en',
                 'name' => 'Delaware',
-            ),
-            189 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            189 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 69,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 190,
                 'locale' => 'en',
                 'name' => 'District of Columbia',
-            ),
-            190 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            190 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 70,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 191,
                 'locale' => 'en',
                 'name' => 'Florida',
-            ),
-            191 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            191 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 71,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 192,
                 'locale' => 'en',
                 'name' => 'Georgia',
-            ),
-            192 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            192 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 72,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 193,
                 'locale' => 'en',
                 'name' => 'Hawaii',
-            ),
-            193 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            193 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 73,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 194,
                 'locale' => 'en',
                 'name' => 'Idaho',
-            ),
-            194 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            194 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 74,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 195,
                 'locale' => 'en',
                 'name' => 'Illinois',
-            ),
-            195 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            195 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 75,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 196,
                 'locale' => 'en',
                 'name' => 'Indiana',
-            ),
-            196 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            196 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 76,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 197,
                 'locale' => 'en',
                 'name' => 'Iowa',
-            ),
-            197 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            197 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 77,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 198,
                 'locale' => 'en',
                 'name' => 'Kansas',
-            ),
-            198 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            198 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 78,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 199,
                 'locale' => 'en',
                 'name' => 'Kentucky',
-            ),
-            199 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            199 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 79,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 200,
                 'locale' => 'en',
                 'name' => 'Louisiana',
-            ),
-            200 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            200 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 80,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 201,
                 'locale' => 'en',
                 'name' => 'Maine',
-            ),
-            201 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            201 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 81,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 202,
                 'locale' => 'en',
                 'name' => 'Maryland',
-            ),
-            202 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            202 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 82,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 203,
                 'locale' => 'en',
                 'name' => 'Massachusetts',
-            ),
-            203 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            203 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 83,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 204,
                 'locale' => 'en',
                 'name' => 'Michigan',
-            ),
-            204 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            204 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 84,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 205,
                 'locale' => 'en',
                 'name' => 'Minnesota',
-            ),
-            205 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            205 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 85,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 206,
                 'locale' => 'en',
                 'name' => 'Mississippi',
-            ),
-            206 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            206 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 86,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 207,
                 'locale' => 'en',
                 'name' => 'Missouri',
-            ),
-            207 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            207 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 87,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 208,
                 'locale' => 'en',
                 'name' => 'Montana',
-            ),
-            208 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            208 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 88,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 209,
                 'locale' => 'en',
                 'name' => 'Nebraska',
-            ),
-            209 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            209 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 89,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 210,
                 'locale' => 'en',
                 'name' => 'Nevada',
-            ),
-            210 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            210 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 90,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 211,
                 'locale' => 'en',
                 'name' => 'New Hampshire',
-            ),
-            211 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            211 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 91,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 212,
                 'locale' => 'en',
                 'name' => 'New Jersey',
-            ),
-            212 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            212 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 92,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 213,
                 'locale' => 'en',
                 'name' => 'New Mexico',
-            ),
-            213 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            213 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 93,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 214,
                 'locale' => 'en',
                 'name' => 'New York',
-            ),
-            214 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            214 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 94,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 215,
                 'locale' => 'en',
                 'name' => 'North Carolina',
-            ),
-            215 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            215 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 95,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 216,
                 'locale' => 'en',
                 'name' => 'North Dakota',
-            ),
-            216 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            216 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 96,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 217,
                 'locale' => 'en',
                 'name' => 'Ohio',
-            ),
-            217 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            217 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 97,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 218,
                 'locale' => 'en',
                 'name' => 'Oklahoma',
-            ),
-            218 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            218 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 98,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 219,
                 'locale' => 'en',
                 'name' => 'Oregon',
-            ),
-            219 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            219 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 99,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 220,
                 'locale' => 'en',
                 'name' => 'Pennsylvania',
-            ),
-            220 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            220 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 100,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 221,
                 'locale' => 'en',
                 'name' => 'Rhode Island',
-            ),
-            221 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            221 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 101,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 222,
                 'locale' => 'en',
                 'name' => 'South Carolina',
-            ),
-            222 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            222 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 102,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 223,
                 'locale' => 'en',
                 'name' => 'South Dakota',
-            ),
-            223 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            223 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 103,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 224,
                 'locale' => 'en',
                 'name' => 'Tennessee',
-            ),
-            224 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            224 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 104,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 225,
                 'locale' => 'en',
                 'name' => 'Texas',
-            ),
-            225 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            225 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 105,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 226,
                 'locale' => 'en',
                 'name' => 'Utah',
-            ),
-            226 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            226 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 106,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 227,
                 'locale' => 'en',
                 'name' => 'Vermont',
-            ),
-            227 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            227 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 107,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 228,
                 'locale' => 'en',
                 'name' => 'Virginia',
-            ),
-            228 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            228 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 108,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 229,
                 'locale' => 'en',
                 'name' => 'Washington',
-            ),
-            229 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            229 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 109,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 230,
                 'locale' => 'en',
                 'name' => 'West Virginia',
-            ),
-            230 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            230 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 110,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 231,
                 'locale' => 'en',
                 'name' => 'Wisconsin',
-            ),
-            231 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            231 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 111,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 232,
                 'locale' => 'en',
                 'name' => 'Wyoming',
-            ),
-            232 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            232 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 112,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 233,
                 'locale' => 'en',
                 'name' => 'Canberra',
-            ),
-            233 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            233 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 113,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 234,
                 'locale' => 'en',
                 'name' => 'New South Wales',
-            ),
-            234 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            234 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 114,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 235,
                 'locale' => 'en',
                 'name' => 'Northern Territory',
-            ),
-            235 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            235 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 115,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 236,
                 'locale' => 'en',
                 'name' => 'Queensland',
-            ),
-            236 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            236 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 116,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 237,
                 'locale' => 'en',
                 'name' => 'South Australia',
-            ),
-            237 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            237 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 117,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 238,
                 'locale' => 'en',
                 'name' => 'Tasmania',
-            ),
-            238 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            238 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 118,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 239,
                 'locale' => 'en',
                 'name' => 'Victoria',
-            ),
-            239 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            239 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 119,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 240,
                 'locale' => 'en',
                 'name' => 'Western Australia',
-            ),
-            240 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            240 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 121,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 241,
                 'locale' => 'en',
                 'name' => 'Hongkong',
-            ),
-            241 => 
-            array (
-                'abbr' => NULL,
-                'alias' => NULL,
+            ],
+            241 => [
+                'abbr' => null,
+                'alias' => null,
                 'division_id' => 122,
-                'full_name' => NULL,
+                'full_name' => null,
                 'id' => 242,
                 'locale' => 'en',
                 'name' => 'Macau',
-            ),
-        ));
-        
-        
+            ],
+        ]);
+
     }
 }

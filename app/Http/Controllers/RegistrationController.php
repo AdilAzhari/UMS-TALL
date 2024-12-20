@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Registration;
 use App\Http\Requests\StoreRegistrationRequest;
 use App\Http\Requests\UpdateRegistrationRequest;
+use App\Models\Registration;
 
 class RegistrationController extends Controller
 {
