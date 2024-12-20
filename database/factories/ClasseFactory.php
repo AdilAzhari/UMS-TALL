@@ -2,10 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\Classes;
+use App\Models\Course;
+use App\Models\Teacher;
+use App\Models\Term;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Classes>
+ * @extends Factory<Classes>
  */
 class ClasseFactory extends Factory
 {
@@ -23,9 +27,9 @@ class ClasseFactory extends Factory
             'year' => $this->faker->numberBetween(1, 4),
             'max_students' => $this->faker->numberBetween(10, 30),
             'current_students' => $this->faker->numberBetween(10, 30),
-            'course_id' => \App\Models\Course::inRandomOrder()->first()->id,
-            'teacher_id' => \App\Models\Teacher::inRandomOrder()->first()->id,
-            'term_id' => \App\Models\Term::inRandomOrder()->first()->id,
+            'course_id' => Course::inRandomOrder()->first()->id ?? Course::factory()->create()->id,
+            'teacher_id' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
+            'term_id' => Term::inRandomOrder()->first()->id ?? Term::factory()->create()->id,
         ];
     }
 }

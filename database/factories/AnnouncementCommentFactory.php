@@ -4,10 +4,11 @@ namespace Database\Factories;
 
 use App\Models\Announcement;
 use App\Models\AnnouncementComment;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AnnouncementComment>
+ * @extends Factory<AnnouncementComment>
  */
 class AnnouncementCommentFactory extends Factory
 {
@@ -19,11 +20,11 @@ class AnnouncementCommentFactory extends Factory
     public function definition(): array
     {
         return [
-            'announcement_id' => \App\Models\Announcement::inRandomOrder()->first()->id,
-            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
+            'announcement_id' => Announcement::inRandomOrder()->first()->id ?? Announcement::factory()->create()->id,
+            'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
             'comment' => $this->faker->sentence(),
             'parent_id' => null,
-            'commented_by' => \App\Models\User::inRandomOrder()->first()->id,
+            'commented_by' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
         ];
     }
 }

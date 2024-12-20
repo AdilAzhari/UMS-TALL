@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\AcademicAchievement;
 use App\Models\Student;
 use App\Models\Term;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AcademicAchievement>
+ * @extends Factory<AcademicAchievement>
  */
 class AcademicAchievementFactory extends Factory
 {
@@ -19,8 +20,8 @@ class AcademicAchievementFactory extends Factory
     public function definition(): array
     {
         return [
-            'student_id' => Student::inRandomOrder()->first()->id,
-            'term_id' => Term::inRandomOrder()->first()->id,
+            'student_id' => Student::inRandomOrder()->first()->id ?? Student::factory()->create()->id,
+            'term_id' => Term::inRandomOrder()->first()->id ?? Term::factory()->create()->id,
             'gpa' => $this->faker->randomFloat(2, 0, 4),
             'credits_earned' => $this->faker->numberBetween(1, 20),
             'honors_awards' => $this->faker->sentence(),

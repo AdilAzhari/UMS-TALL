@@ -16,7 +16,7 @@ class TermFactory extends Factory
      */
     public function definition(): array
     {
-        $name = $this->faker->monthName() . ' ' . $this->faker->year();
+        $name = $this->faker->monthName().' '.$this->faker->year();
 
         return [
             'name' => $name,

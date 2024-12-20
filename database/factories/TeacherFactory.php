@@ -3,10 +3,13 @@
 namespace Database\Factories;
 
 use App\Models\department;
+use App\Models\program;
+use App\Models\Teachers;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Teachers>
+ * @extends Factory<Teachers>
  */
 class TeacherFactory extends Factory
 {
@@ -18,7 +21,7 @@ class TeacherFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
             'qualification' => $this->faker->word(),
             'experience' => $this->faker->word(),
             'specialization' => $this->faker->word(),
@@ -26,8 +29,8 @@ class TeacherFactory extends Factory
             'hire_date' => $this->faker->dateTimeThisYear(),
             'phone_number' => $this->faker->phoneNumber(),
             'status' => $this->faker->randomElement(['active', 'inactive']),
-            'program_id' => \App\Models\program::inRandomOrder()->first()->id,
-            'department_id' => department::inRandomOrder()->first()->id,
+            'program_id' => program::inRandomOrder()->first()->id ?? program::factory()->create()->id,
+            'department_id' => department::inRandomOrder()->first()->id ?? department::factory()->create()->id,
         ];
     }
 }

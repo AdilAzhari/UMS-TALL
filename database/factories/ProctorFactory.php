@@ -2,11 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Proctor;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Proctor>
+ * @extends Factory<Proctor>
  */
 class ProctorFactory extends Factory
 {
@@ -25,7 +26,7 @@ class ProctorFactory extends Factory
             'city' => $this->faker->city(),
             'state' => $this->faker->state(),
             'country' => $this->faker->country(),
-            'student_id' => Student::inRandomOrder()->first()->id,
+            'student_id' => Student::inRandomOrder()->first()->id ?? Student::factory()->create()->id,
         ];
     }
 }

@@ -17,6 +17,7 @@ class CourseCategoryFactory extends Factory
     public function definition(): array
     {
         $name = ['Major Required', 'Elective', 'General Education', 'Major Elective'];
+
         return [
             'name' => $this->faker->unique()->randomElement($name),
         ];

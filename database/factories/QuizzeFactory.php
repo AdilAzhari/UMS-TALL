@@ -2,10 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\Classes;
+use App\Models\Course;
+use App\Models\Quizze;
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Quizze>
+ * @extends Factory<Quizze>
  */
 class QuizzeFactory extends Factory
 {
@@ -17,9 +21,9 @@ class QuizzeFactory extends Factory
     public function definition(): array
     {
         return [
-            'course_id' => \App\Models\Course::inRandomOrder()->first()->id,
-            'class_id' => \App\Models\Classe::inRandomOrder()->first()->id,
-            'teacher_id' => \App\Models\Teacher::inRandomOrder()->first()->id,
+            'course_id' => Course::inRandomOrder()->first()->id,
+            'class_id' => Classes::inRandomOrder()->first()->id,
+            'teacher_id' => Teacher::inRandomOrder()->first()->id,
             'code' => $this->faker->word(),
             'description' => $this->faker->sentence(),
             'type' => $this->faker->randomElement(['graded', 'ungraded']),

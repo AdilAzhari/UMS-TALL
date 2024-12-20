@@ -42,7 +42,7 @@ class UserFactory extends Factory
             'nationality' => fake()->country(),
             'country_of_residence' => fake()->country(),
             'marital_status' => fake()->randomElement(['Single', 'Married', 'Divorced', 'Widowed']),
-            'gender' => fake()->randomElement(['male','female']),
+            'gender' => fake()->randomElement(['male', 'female']),
         ];
     }
 

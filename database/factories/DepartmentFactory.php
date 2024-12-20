@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Department;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Department>
+ * @extends Factory<Department>
  */
 class DepartmentFactory extends Factory
 {
@@ -36,8 +37,6 @@ class DepartmentFactory extends Factory
             'name' => $department['name'],
             'code' => $department['code'],
             'description' => $this->faker->sentence(10),
-            // 'image' => $this->faker->imageUrl(640, 480, 'departments', true),
-            // 'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];
     }
 }

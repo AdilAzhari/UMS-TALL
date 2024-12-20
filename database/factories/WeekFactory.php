@@ -2,11 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Models\Assignment;
+use App\Models\Course;
 use App\Models\Quizze;
+use App\Models\Term;
+use App\Models\Week;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Week>
+ * @extends Factory<Week>
  */
 class WeekFactory extends Factory
 {
@@ -18,15 +22,15 @@ class WeekFactory extends Factory
     public function definition(): array
     {
         return [
-            'course_id' => \App\Models\Course::inRandomOrder()->first()->id,
+            'course_id' => Course::inRandomOrder()->first()->id ?? Course::factory()->create()->id,
             'week_number' => $this->faker->numberBetween(1, 9),
             'title' => $this->faker->word(),
             'description' => $this->faker->sentence(),
-            'assignment_id' => \App\Models\Assignment::inRandomOrder()->first()->id,
+            'assignment_id' => Assignment::inRandomOrder()->first()->id ?? Assignment::factory()->create()->id,
             'start_date' => $this->faker->dateTimeThisYear(),
             'end_date' => $this->faker->dateTimeThisYear(),
-            'quizz_id' => Quizze::inRandomOrder()->first()->id,
-            'term_id' => \App\Models\Term::inRandomOrder()->first()->id,
+            'quiz_id' => Quizze::inRandomOrder()->first()->id ?? Quizze::factory()->create()->id,
+            'term_id' => Term::inRandomOrder()->first()->id ?? Term::factory()->create()->id,
         ];
     }
 }

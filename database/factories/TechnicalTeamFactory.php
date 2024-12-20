@@ -2,10 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\TechnicalTeam;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TechnicalTeam>
+ * @extends Factory<TechnicalTeam>
  */
 class TechnicalTeamFactory extends Factory
 {
@@ -17,7 +19,7 @@ class TechnicalTeamFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
             'role' => $this->faker->randomElement(['support', 'system_admin']),
             'status' => $this->faker->randomElement(['active', 'inactive']),
         ];

@@ -3,10 +3,13 @@
 namespace Database\Factories;
 
 use App\Models\Course;
+use App\Models\Material;
+use App\Models\Teacher;
+use App\Models\Week;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\materials>
+ * @extends Factory<Material>
  */
 class MaterialFactory extends Factory
 {
@@ -18,9 +21,9 @@ class MaterialFactory extends Factory
     public function definition(): array
     {
         return [
-            'course_id' => Course::inRandomOrder()->first()->id,
-            'created_by' => \App\Models\teacher::inRandomOrder()->first()->id,
-            'updated_by' => \App\Models\teacher::inRandomOrder()->first()->id,
+            'course_id' => Course::inRandomOrder()->first()->id ?? course::factory()->create()->id,
+            'created_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
+            'updated_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
             'type' => $this->faker->randomElement(['video', 'pdf', 'audio', 'image']),
             'thumbnail' => $this->faker->word(),
             'title' => $this->faker->word(),
@@ -30,7 +33,7 @@ class MaterialFactory extends Factory
             'url' => $this->faker->url(),
             'filename' => $this->faker->word(),
             'disk' => $this->faker->word(),
-            'week_id' => \App\Models\Week::inRandomOrder()->first()->id,
+            'week_id' => Week::inRandomOrder()->first()->id ?? Week::factory()->create()->id,
         ];
     }
 }

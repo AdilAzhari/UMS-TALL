@@ -2,10 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Models\Classes;
+use App\Models\Course;
+use App\Models\Exams;
+use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Exams>
+ * @extends Factory<Exams>
  */
 class ExamFactory extends Factory
 {
@@ -17,17 +22,17 @@ class ExamFactory extends Factory
     public function definition(): array
     {
         return [
-            'course_id' => \App\Models\Course::inRandomOrder()->first()->id,
-            'class_id' => \App\Models\Classe::inRandomOrder()->first()->id,
-            'teacher_id' => \App\Models\Teacher::inRandomOrder()->first()->id,
+            'course_id' => Course::inRandomOrder()->first()->id ?? Course::factory()->create()->id,
+            'class_id' => Classes::inRandomOrder()->first()->id ?? Classes::factory()->create()->id,
+            'teacher_id' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
             'created_at' => $this->faker->dateTimeThisYear(),
             'exam_date' => $this->faker->dateTimeThisYear(),
             'exam_description' => $this->faker->sentence(),
             'exam_duration' => $this->faker->randomNumber(),
             'exam_rules' => $this->faker->sentence(),
-            'created_by' => \App\Models\User::inRandomOrder()->first()->id,
-            'updated_by' => \App\Models\User::inRandomOrder()->first()->id,
+            'created_by' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
+            'updated_by' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
             'exam_passing_score' => $this->faker->randomNumber(),
-            'exam_code' => $this->faker->word(),];
+            'exam_code' => $this->faker->word(), ];
     }
 }

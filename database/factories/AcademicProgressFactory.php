@@ -2,15 +2,13 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Student;
-use App\Models\Course;
-use App\Models\enrollment;
+use App\Models\AcademicProgress;
 use App\Models\Program;
-use App\Models\Term;
+use App\Models\Student;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AcademicProgress>
+ * @extends Factory<AcademicProgress>
  */
 class AcademicProgressFactory extends Factory
 {
@@ -21,10 +19,10 @@ class AcademicProgressFactory extends Factory
      */
     public function definition(): array
     {
-        return[
-            'student_id' => Student::inRandomOrder()->first()->id,
+        return [
+            'student_id' => Student::inRandomOrder()->first()->id ?? Student::factory()->create()->id,
             'gpa' => $this->faker->randomFloat(2, 0, 4),
-            'program_id' => Program::inRandomOrder()->first()->id,
+            'program_id' => Program::inRandomOrder()->first()->id ?? Program::factory()->create()->id,
             'academic_standing' => $this->faker->randomElement(['good', 'warning', 'probation', 'suspension']),
             'cgpa' => $this->faker->randomFloat(2, 0, 4),
             'total_credits' => $this->faker->numberBetween(0, 100),

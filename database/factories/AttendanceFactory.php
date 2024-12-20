@@ -2,10 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Models\Attendance;
+use App\Models\Classes;
+use App\Models\Enrollment;
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Attendance>
+ * @extends Factory<Attendance>
  */
 class AttendanceFactory extends Factory
 {
@@ -21,10 +26,10 @@ class AttendanceFactory extends Factory
             'status' => $this->faker->randomElement(['present', 'absent']),
             'reason' => $this->faker->randomElement(['sick', 'vacation', 'other']),
             'notes' => $this->faker->text(),
-            'student_id' => \App\Models\Student::inRandomOrder()->first()->id,
-            'enrollment_id' => \App\Models\Enrollment::inRandomOrder()->first()->id,
-            'class_id' => \App\Models\Classe::inRandomOrder()->first()->id,
-            'teacher_id' => \App\Models\Teacher::inRandomOrder()->first()->id,
+            'student_id' => Student::inRandomOrder()->first()->id ?? Student::factory()->create()->id,
+            'enrollment_id' => Enrollment::inRandomOrder()->first()->id ?? Enrollment::factory()->create()->id,
+            'class_id' => Classes::inRandomOrder()->first()->id ?? Classes::factory()->create()->id,
+            'teacher_id' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
         ];
     }
 }

@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\program_statuse;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\program_statuse>
+ * @extends Factory<program_statuse>
  */
 class ProgramStatuseFactory extends Factory
 {
@@ -24,7 +25,6 @@ class ProgramStatuseFactory extends Factory
                 'Dropped',
                 'Withdrawn',
                 'Completed',
-                'Not Started',
             ]),
         ];
     }
