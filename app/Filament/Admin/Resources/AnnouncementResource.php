@@ -3,20 +3,19 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\AnnouncementResource\Pages;
-use App\Filament\Admin\Resources\AnnouncementResource\RelationManagers;
 use App\Models\Announcement;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AnnouncementResource extends Resource
 {
     protected static ?string $model = Announcement::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center';
+
     protected static ?string $navigationGroup = 'Announcement Management';
 
     public static function form(Form $form): Form
@@ -40,8 +39,8 @@ class AnnouncementResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\Radio::make('status')
                     ->options([
-                      'actvie' => 'Active',
-                      'inactive' => 'Inactive',
+                        'actvie' => 'Active',
+                        'inactive' => 'Inactive',
                     ])
                     ->required(),
             ]);

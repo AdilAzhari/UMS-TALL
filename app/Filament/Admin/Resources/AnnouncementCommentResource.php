@@ -10,15 +10,15 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AnnouncementCommentResource extends Resource
 {
     protected static ?string $model = AnnouncementComment::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center';
+
     protected static ?string $navigationGroup = 'Announcement Management';
+
     public static function form(Form $form): Form
     {
         return $form

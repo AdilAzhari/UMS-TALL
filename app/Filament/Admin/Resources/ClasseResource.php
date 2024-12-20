@@ -3,21 +3,21 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\ClasseResource\Pages;
-use App\Filament\Admin\Resources\ClasseResource\RelationManagers;
-use App\Models\Classe;
+use App\Models\Classes;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ClasseResource extends Resource
 {
-    protected static ?string $model = Classe::class;
+    protected static ?string $model = Classes::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+
     protected static ?string $navigationGroup = 'Academic Structure';
+
     public static function form(Form $form): Form
     {
         return $form

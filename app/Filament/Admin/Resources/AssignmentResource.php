@@ -3,7 +3,6 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\AssignmentResource\Pages;
-use App\Filament\Admin\Resources\AssignmentResource\RelationManagers;
 use App\Models\Assignment;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -16,8 +15,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class AssignmentResource extends Resource
 {
     protected static ?string $model = Assignment::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+
     protected static ?string $navigationGroup = 'Assignments & Submissions';
+
     public static function form(Form $form): Form
     {
         return $form

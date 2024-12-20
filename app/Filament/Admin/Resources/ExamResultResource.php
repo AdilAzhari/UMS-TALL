@@ -2,10 +2,6 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\AnnouncementResource\RelationManagers\CourseRelationManager;
-use App\Filament\Admin\Resources\AssignmentResource\RelationManagers\ClassRelationManager;
-use App\Filament\Admin\Resources\AttendancesResource\RelationManagers\TermRelationManager;
-use App\Filament\Admin\Resources\ClasseResource\RelationManagers\TeacherRelationManager;
 use App\Filament\Admin\Resources\ExamResultResource\Pages;
 use App\Filament\Admin\Resources\ExamResultResource\RelationManagers;
 use App\Models\ExamResult;
@@ -14,14 +10,15 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ExamResultResource extends Resource
 {
     protected static ?string $model = ExamResult::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+
     protected static ?string $navigationGroup = 'Assessment & Grading';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -32,7 +29,7 @@ class ExamResultResource extends Resource
                     ->relationship('exam', 'id'),
                 Forms\Components\select::make('student_id')
                     ->required()
-                    ->relationship('student', 'user_id',function($query){
+                    ->relationship('student', 'user_id', function ($query) {
                         return $query->whereColumn('user_id', 'id');
                     }),
                 Forms\Components\TextInput::make('score')

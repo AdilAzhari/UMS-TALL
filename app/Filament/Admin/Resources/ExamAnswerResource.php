@@ -3,21 +3,21 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\ExamAnswerResource\Pages;
-use App\Filament\Admin\Resources\ExamAnswerResource\RelationManagers;
 use App\Models\ExamAnswer;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ExamAnswerResource extends Resource
 {
     protected static ?string $model = ExamAnswer::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+
     protected static ?string $navigationGroup = 'Assessment & Grading';
+
     public static function form(Form $form): Form
     {
         return $form

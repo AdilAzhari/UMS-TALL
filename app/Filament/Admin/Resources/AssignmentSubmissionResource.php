@@ -3,21 +3,21 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\AssignmentSubmissionResource\Pages;
-use App\Filament\Admin\Resources\AssignmentSubmissionResource\RelationManagers;
 use App\Models\AssignmentSubmission;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AssignmentSubmissionResource extends Resource
 {
     protected static ?string $model = AssignmentSubmission::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+
     protected static ?string $navigationGroup = 'Assignments & Submissions';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -33,10 +33,10 @@ class AssignmentSubmissionResource extends Resource
                     ->default(null),
                 Forms\Components\Radio::make('status')
                     ->options([
-                      'submitted' => 'Submitted',
-                      'graded' => 'Graded',
-                      'late' => 'Late',
-                      'pending' => 'Pending',
+                        'submitted' => 'Submitted',
+                        'graded' => 'Graded',
+                        'late' => 'Late',
+                        'pending' => 'Pending',
                     ])
                     ->required(),
                 Forms\Components\Textarea::make('remarks')

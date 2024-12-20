@@ -3,32 +3,31 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\EnrollmentResource\Pages;
-use App\Filament\Admin\Resources\EnrollmentResource\RelationManagers;
 use App\Models\Enrollment;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class EnrollmentResource extends Resource
 {
     protected static ?string $model = Enrollment::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
     protected static ?string $navigationGroup = 'Enrollments & Student Progress';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Radio::make('status')
                     ->options([
-                        'enrolled'  => 'Enrolled',
-                        'pending'   => 'Pending',
+                        'enrolled' => 'Enrolled',
+                        'pending' => 'Pending',
                         'completed' => 'Completed',
-                        'dropped'   => 'Dropped'
+                        'dropped' => 'Dropped',
                     ])
                     ->required(),
                 Forms\Components\DatePicker::make('enrollment_date')

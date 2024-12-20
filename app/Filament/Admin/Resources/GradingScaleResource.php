@@ -3,21 +3,21 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\GradingScaleResource\Pages;
-use App\Filament\Admin\Resources\GradingScaleResource\RelationManagers;
 use App\Models\GradingScale;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GradingScaleResource extends Resource
 {
     protected static ?string $model = GradingScale::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+
     protected static ?string $navigationGroup = 'Assessment & Grading';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -36,7 +36,7 @@ class GradingScaleResource extends Resource
                     ->numeric(),
                 Forms\Components\select::make('student_id')
                     ->required()
-                    ->relationship('student', 'user_id',function ($query) {
+                    ->relationship('student', 'user_id', function ($query) {
                         return $query->where('user_id', 'id');
                     }),
                 Forms\Components\select::make('course_id')

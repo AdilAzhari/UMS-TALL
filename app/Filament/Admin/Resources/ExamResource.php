@@ -14,11 +14,12 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
 
-
 class ExamResource extends Resource
 {
     protected static ?string $model = Exam::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+
     protected static ?string $navigationGroup = 'Assessment & Grading';
 
     public static function form(Form $form): Form
@@ -56,7 +57,7 @@ class ExamResource extends Resource
                     ->options([
                         'one Houre' => '1/hr',
                         'one and half' => '1.5/hr',
-                        'two Houre' => '2/hr'
+                        'two Houre' => '2/hr',
 
                     ]),
                 Forms\Components\select::make('class_id')
@@ -77,7 +78,7 @@ class ExamResource extends Resource
                             ->limit(50)
                             ->pluck('name', 'id');
                     })
-                    ->getOptionLabelUsing(fn($value): ?string => User::find($value)?->name)
+                    ->getOptionLabelUsing(fn ($value): ?string => User::find($value)?->name)
                     ->afterStateUpdated(function ($state, callable $set) {
                         $teacherId = Teacher::where('user_id', $state)->value('id');
                         $set('teacher_id', $teacherId);
@@ -97,6 +98,7 @@ class ExamResource extends Resource
                     ->relationship('updatedBy', 'name')
                     ->default(Auth::id())->disabled(),
             ]);
+
         return $form;
     }
 

@@ -3,15 +3,12 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\MaterialResource\Pages;
-use App\Filament\Admin\Resources\MaterialResource\RelationManagers;
 use App\Models\Material;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
 
 class MaterialResource extends Resource
@@ -19,99 +16,101 @@ class MaterialResource extends Resource
     protected static ?string $model = Material::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+
     protected static ?string $navigationGroup = 'Learning Resources';
+
     public static function form(Form $form): Form
     {
         return $form
-        ->schema([
-            // Section: Basic Information
-            Forms\Components\Section::make('Basic Information')
-                ->schema([
-                    Forms\Components\TextInput::make('title')
-                        ->label('Course Title')
-                        ->required()
-                        ->maxLength(255),
-                    Forms\Components\RichEditor::make('description')
-                        ->label('Course Description')
-                        ->required()
-                        ->columnSpanFull(),
-                    Forms\Components\Select::make('course_id')
-                        ->label('Course Name')
-                        ->required()
-                        ->relationship('course', 'name'),
-                    Forms\Components\radio::make('type')
-                        ->inline()
-                        ->label('Course Type')
-                        ->options([
-                            'video' => 'Video',
-                            'audio' => 'Audio',
-                            'pdf' => 'PDF',
-                            'doc' => 'DOC',
-                            'ppt' => 'PPT',
-                            'zip' => 'ZIP',
-                            'none' => 'none',
-                        ])
-                        ->default('none'),
-                ]),
-            // Section: Media/Files
-            Forms\Components\Section::make('Media/Files')
-                ->schema([
-                    Forms\Components\TextInput::make('thumbnail')
-                        ->label('Thumbnail')
-                        ->maxLength(255)
-                        ->default(null),
-                    Forms\Components\TextInput::make('size')
-                        ->label('Size')
-                        ->placeholder('Size in bytes')
-                        ->numeric()
-                        ->default(0),
-                    Forms\Components\TextInput::make('path')
-                        ->label('Path')
-                        ->maxLength(255)
-                        ->default(null),
-                    Forms\Components\TextInput::make('url')
-                        ->label('Url')
-                        ->maxLength(255)
-                        ->default(null),
-                    Forms\Components\TextInput::make('filename')
-                        ->label('Filename')
-                        ->maxLength(255)
-                        ->default(null),
-                    Forms\Components\TextInput::make('original_filename')
-                        ->label('Original Filename')
-                        ->maxLength(255)
-                        ->default(null),
-                    Forms\Components\TextInput::make('disk')
-                        ->label('Storage Disk')
-                        ->maxLength(255)
-                        ->default(null),
-                ]),
+            ->schema([
+                // Section: Basic Information
+                Forms\Components\Section::make('Basic Information')
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label('Course Title')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\RichEditor::make('description')
+                            ->label('Course Description')
+                            ->required()
+                            ->columnSpanFull(),
+                        Forms\Components\Select::make('course_id')
+                            ->label('Course Name')
+                            ->required()
+                            ->relationship('course', 'name'),
+                        Forms\Components\radio::make('type')
+                            ->inline()
+                            ->label('Course Type')
+                            ->options([
+                                'video' => 'Video',
+                                'audio' => 'Audio',
+                                'pdf' => 'PDF',
+                                'doc' => 'DOC',
+                                'ppt' => 'PPT',
+                                'zip' => 'ZIP',
+                                'none' => 'none',
+                            ])
+                            ->default('none'),
+                    ]),
+                // Section: Media/Files
+                Forms\Components\Section::make('Media/Files')
+                    ->schema([
+                        Forms\Components\TextInput::make('thumbnail')
+                            ->label('Thumbnail')
+                            ->maxLength(255)
+                            ->default(null),
+                        Forms\Components\TextInput::make('size')
+                            ->label('Size')
+                            ->placeholder('Size in bytes')
+                            ->numeric()
+                            ->default(0),
+                        Forms\Components\TextInput::make('path')
+                            ->label('Path')
+                            ->maxLength(255)
+                            ->default(null),
+                        Forms\Components\TextInput::make('url')
+                            ->label('Url')
+                            ->maxLength(255)
+                            ->default(null),
+                        Forms\Components\TextInput::make('filename')
+                            ->label('Filename')
+                            ->maxLength(255)
+                            ->default(null),
+                        Forms\Components\TextInput::make('original_filename')
+                            ->label('Original Filename')
+                            ->maxLength(255)
+                            ->default(null),
+                        Forms\Components\TextInput::make('disk')
+                            ->label('Storage Disk')
+                            ->maxLength(255)
+                            ->default(null),
+                    ]),
 
-            // Section: Audit Information
-            Forms\Components\Section::make('Audit Information')
-                ->schema([
-                    Forms\Components\Select::make('created_by')
-                        ->label('Created By')
-                        ->required()
-                        ->relationship('createdBy', 'name')
-                        ->default(function () {
-                            if (Auth::check() && Auth::user()->created_by === null) {
-                                return Auth::id();
-                            }
-                        })->disabled(),
+                // Section: Audit Information
+                Forms\Components\Section::make('Audit Information')
+                    ->schema([
+                        Forms\Components\Select::make('created_by')
+                            ->label('Created By')
+                            ->required()
+                            ->relationship('createdBy', 'name')
+                            ->default(function () {
+                                if (Auth::check() && Auth::user()->created_by === null) {
+                                    return Auth::id();
+                                }
+                            })->disabled(),
                         Forms\Components\Select::make('updated_by')
-                        ->label('Updated By')
-                        ->relationship('updatedBy', 'name')
-                        ->default(function () {
-                            return Auth::user()->id;
-                        })
-                        ->disabled()
-                        ->dehydrated(true) // This ensures the field is included when the form is submitted
-                        ->default(function () {
-                            return Auth::user()->id;
-                        }),
+                            ->label('Updated By')
+                            ->relationship('updatedBy', 'name')
+                            ->default(function () {
+                                return Auth::user()->id;
+                            })
+                            ->disabled()
+                            ->dehydrated(true) // This ensures the field is included when the form is submitted
+                            ->default(function () {
+                                return Auth::user()->id;
+                            }),
                     ])->columns(2),
-        ]);
+            ]);
 
     }
 
@@ -187,6 +186,7 @@ class MaterialResource extends Resource
             'edit' => Pages\EditMaterial::route('/{record}/edit'),
         ];
     }
+
     public static function beforeSave($record)
     {
         $record->updated_by = Auth::id(); // Set the current user's ID as the updated_by value

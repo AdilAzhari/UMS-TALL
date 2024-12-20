@@ -3,28 +3,28 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\QuizzeQuestionOptionResource\Pages;
-use App\Filament\Admin\Resources\QuizzeQuestionOptionResource\RelationManagers;
-use App\Models\QuizzeQuestionOption;
+use App\Models\QuizQuestionOption;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class QuizzeQuestionOptionResource extends Resource
 {
-    protected static ?string $model = QuizzeQuestionOption::class;
+    protected static ?string $model = QuizQuestionOption::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+
     protected static ?string $navigationGroup = 'Assessment & Grading';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\select::make('quizz_question_id')
                     ->required()
-                    ->relationship('quizzeQuestion', 'question'),
+                    ->relationship('quizQuestion', 'question'),
                 Forms\Components\TextInput::make('option')
                     ->required()
                     ->maxLength(255),
