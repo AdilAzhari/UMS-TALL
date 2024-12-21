@@ -15,12 +15,12 @@ class StoryCommentController extends Controller
      */
     public function storeComment(StoreStoryCommentRequest $request): RedirectResponse
     {
-        $story = Story::findOrFail($request->story_id);
+        $story = (new Story)->findOrFail($request->story_id);
 
         $story->comments()->create($request->all() + [
-            'student_id' => $story->student_id,
-            'published_at' => now(),
-        ]);
+                'student_id' => $story->student_id,
+                'published_at' => now(),
+            ]);
 
         return redirect()->back()->with('message', 'Comment created successfully.');
     }
@@ -28,9 +28,9 @@ class StoryCommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateComment(UpdateStoryCommentRequest $request, $storyId, $commentId)
+    public function updateComment(UpdateStoryCommentRequest $request, $commentId): RedirectResponse
     {
-        $comment = StoryComment::findOrFail($commentId);
+        $comment = (new StoryComment)->findOrFail($commentId);
         $request->merge([
             'published_at' => now(),
         ]);
@@ -42,9 +42,9 @@ class StoryCommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroyComment($storyId, $commentId)
+    public function destroyComment($storyId, $commentId): RedirectResponse
     {
-        $storyComment = StoryComment::where('id', $commentId)->where('story_id', $storyId)->firstOrFail();
+        $storyComment = (new StoryComment)->where('id', $commentId)->where('story_id', $storyId)->firstOrFail();
         $storyComment->delete();
 
         return redirect()->back()->with('message', 'Comment deleted successfully.');

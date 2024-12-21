@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Announcement extends Model
 {
@@ -43,8 +42,4 @@ class Announcement extends Model
         return $this->belongsTo(Week::class);
     }
 
-    public function announcementComment(): HasMany
-    {
-        return $this->hasMany(AnnouncementComment::class);
-    }
 }

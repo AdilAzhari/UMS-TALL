@@ -4,12 +4,12 @@ namespace Database\Factories;
 
 use App\Models\Classes;
 use App\Models\Course;
-use App\Models\Quizze;
+use App\Models\Quiz;
 use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Quizze>
+ * @extends Factory<Quiz>
  */
 class QuizzeFactory extends Factory
 {

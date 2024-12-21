@@ -11,22 +11,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-<<<<<<< HEAD
         //        User::factory()->create([
         //            'name' => 'admin',
         //            'email' => 'admin@example.com',
         //            'password' => '12345678',
         //        ]);
-        // user::factory()->create([
-        //     'name' => 'teacher',
-        //     'email' => 'teacher@example.com',
-        //     'password' => '12345678',
-        // ]);
+        //        User::factory()->create([
+        //            'name' => 'teacher',
+        //            'email' => 'teacher@example.com',
+        //            'password' => '12345678',
+        //        ]);
         $this->call([
             //            UserSeeder::class,
             //            departmentSeeder::class,
             //            ProgramTypeSeeder::class,
-            //            ProgramStatuseSeeder::class,
+            //            ProgramStatusSeeder::class,
             //            programSeeder::class,
             //            TermSeeder::class,
             //            CourseCategorySeeder::class,
@@ -38,67 +37,11 @@ class DatabaseSeeder extends Seeder
             //            enrollmentSeeder::class,
             //            AttendanceSeeder::class,
             //            AssignmentSeeder::class,
-            //            QuizzeSeeder::class,
+            //            QuizSeeder::class,
             //            WeekSeeder::class,
             //            GradingScaleSeeder::class,
             //            AssignmentSubmissionSeeder::class,
             //            ExamSeeder::class,
-            //            ExamResultSeeder::class,
-            //            TechnicalTeamSeeder::class,
-            //            announcementSeeder::class,
-            //            QuizzeQuestionSeeder::class,
-            //            QuizzeQuestionOptionSeeder::class,
-            //            QuizzeAnswerSeeder::class,
-            //            QuizzeSubmissionSeeder::class,
-            //            MaterialSeeder::class,
-            //            ExamQuestionSeeder::class,
-            //            ExamAnswerSeeder::class,
-            //            ExamQuestionOptionSeeder::class,
-            //            AnnouncementCommentSeeder::class,
-            //            AcademicProgressSeeder::class,
-            //            RegistrationSeeder::class,
-            //            StudentCourseSeeder::class,
-            //            CourseTeacherseeder::class,
-            //            CourseRequirementsSeeder::class,
-            //            linkSeeder::class,
-            //            CourseGradesSeeder::class,
-            //            AcademicAchievementSeeder::class,
-            //            PaymentSeeder::class,
-            //            StorySeeder::class,
-            //            StoryTagSeeder::class,
-            //            StoryCommentSeeder::class
-=======
-//        User::factory()->create([
-//            'name' => 'admin',
-//            'email' => 'admin@example.com',
-//            'password' => '12345678',
-//        ]);
-//        User::factory()->create([
-//            'name' => 'teacher',
-//            'email' => 'teacher@example.com',
-//            'password' => '12345678',
-//        ]);
-        $this->call([
-//            UserSeeder::class,
-//            departmentSeeder::class,
-//            ProgramTypeSeeder::class,
-//            ProgramStatuseSeeder::class,
-//            programSeeder::class,
-//            TermSeeder::class,
-//            CourseCategorySeeder::class,
-//            CourseSeeder::class,
-//            TeacherSeeder::class,
-//            StudentSeeder::class,
-//            ProctorSeeder::class,
-//            ClassSeeder::class,
-//            enrollmentSeeder::class,
-//            AttendanceSeeder::class,
-//            AssignmentSeeder::class,
-//            QuizzeSeeder::class,
-//            WeekSeeder::class,
-//            GradingScaleSeeder::class,
-//            AssignmentSubmissionSeeder::class,
-//            ExamSeeder::class,
             ExamResultSeeder::class,
             TechnicalTeamSeeder::class,
             announcementSeeder::class,
@@ -122,8 +65,7 @@ class DatabaseSeeder extends Seeder
             PaymentSeeder::class,
             StorySeeder::class,
             StoryTagSeeder::class,
-            StoryCommentSeeder::class
->>>>>>> 8111ea0117bfc51759aa6847977e1354bb2a8eb9
+            StoryCommentSeeder::class,
         ]);
     }
 }

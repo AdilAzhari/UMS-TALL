@@ -2,10 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Quiz;
+use App\Models\QuizzeQuestion;
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\QuizzeQuestion>
+ * @extends Factory<QuizzeQuestion>
  */
 class QuizzeQuestionFactory extends Factory
 {
@@ -17,10 +20,10 @@ class QuizzeQuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            'quizze_id' => \App\Models\Quizze::inRandomOrder()->first()->id,
+            'quizze_id' => Quiz::inRandomOrder()->first()->id,
             'question' => $this->faker->sentence(),
-            'created_by' => \App\Models\Teacher::inRandomOrder()->first()->id,
-            'updated_by' => \App\Models\Teacher::inRandomOrder()->first()->id,
+            'created_by' => Teacher::inRandomOrder()->first()->id,
+            'updated_by' => Teacher::inRandomOrder()->first()->id,
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AssignmentSubmission extends Model
 {
@@ -20,18 +21,13 @@ class AssignmentSubmission extends Model
         'feedback',
     ];
 
-    public function assignment()
+    public function assignment(): BelongsTo
     {
         return $this->belongsTo(Assignment::class);
     }
 
-    public function student()
+    public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
-    }
-
-    public function gradedBy()
-    {
-        return $this->belongsTo(Teacher::class, 'graded_by');
     }
 }

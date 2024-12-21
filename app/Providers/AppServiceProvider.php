@@ -2,11 +2,9 @@
 
 namespace App\Providers;
 
-<<<<<<< HEAD
-use App\Exceptions\CustomHandler;
 use App\Models\User;
-use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Queue;
@@ -14,13 +12,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Telescope\TelescopeServiceProvider;
-use PgSql\Connection;
-use Schema;
-=======
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Vite;
-use Illuminate\Support\ServiceProvider;
->>>>>>> 8111ea0117bfc51759aa6847977e1354bb2a8eb9
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -40,37 +31,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-<<<<<<< HEAD
-        Schema::defaultStringLength(191);
         $this->configureModels();
         $this->configureCommands();
-=======
-        $this->configureModels();
->>>>>>> 8111ea0117bfc51759aa6847977e1354bb2a8eb9
         Vite::prefetch(concurrency: 3);
         // Optimize Eloquent
         Model::preventLazyLoading(! $this->app->isProduction());
-
-        if (DB::connection() instanceof Connection) {
-            DB::connection()->listen(function ($query) {
-                // Log slow queries or complex queries
-                if ($query->time > 100) {
-                    Log::warning('Slow Query Detected', [
-                        'sql' => $query->sql,
-                        'bindings' => $query->bindings,
-                        'time' => $query->time,
-                    ]);
-                }
-            });
-        }
-
-        if ($this->app->isProduction()) {
-            $this->app->bind(
-                ExceptionHandler::class,
-                CustomHandler::class
-            );
-        }
-        Validator::extend('phone_number', function ($attribute, $value, $parameters, $validator) {
+        Validator::extend('phone_number', function ($value) {
             return preg_match('/^[0-9]{10}$/', $value);
         });
 
@@ -96,11 +62,5 @@ class AppServiceProvider extends ServiceProvider
         DB::prohibitDestructiveCommands(
             $this->app->isProduction()
         );
-    }
-
-    public function configureModels(): void
-    {
-        Model::shouldBeStrict();
-        Model::unguard();
     }
 }

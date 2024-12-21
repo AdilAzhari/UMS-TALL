@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class ProgramStatuse extends Model
+class ProgramStatus extends Model
 {
     use HasFactory;
 
@@ -15,12 +16,12 @@ class ProgramStatuse extends Model
         'status',
     ];
 
-    public function student()
+    public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
     }
 
-    public function program()
+    public function program(): BelongsTo
     {
         return $this->belongsTo(Program::class);
     }

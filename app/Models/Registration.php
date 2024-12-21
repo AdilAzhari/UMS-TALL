@@ -30,7 +30,7 @@ class Registration extends Model
         'registered_at' => 'date',
     ];
 
-    public function student()
+    public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
     }
@@ -80,7 +80,7 @@ class Registration extends Model
         return $query->where('status', 'registered');
     }
 
-    public function scopeProctored($query)
+    public function scopeProctored($query): void
     {
         $query->where('proctored', true);
     }

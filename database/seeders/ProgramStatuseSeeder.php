@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\ProgramStatuse;
+use App\Models\ProgramStatus;
 use Illuminate\Database\Seeder;
 
 class ProgramStatuseSeeder extends Seeder
@@ -12,6 +12,6 @@ class ProgramStatuseSeeder extends Seeder
      */
     public function run(): void
     {
-        ProgramStatuse::factory()->count(7)->create();
+        ProgramStatus::factory()->count(7)->create();
     }
 }

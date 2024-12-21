@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ExamQuestion extends Model
@@ -18,22 +20,22 @@ class ExamQuestion extends Model
         'updated_by',
     ];
 
-    public function exam()
+    public function exam(): BelongsTo
     {
         return $this->belongsTo(Exam::class);
     }
 
-    public function options()
+    public function options(): HasMany
     {
         return $this->hasMany(ExamQuestionOption::class);
     }
 
-    public function createdBy()
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function updatedBy()
+    public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
     }

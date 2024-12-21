@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Quizze;
+use App\Models\Quiz;
 use App\Models\User;
 
 class QuizzePolicy
@@ -20,7 +20,7 @@ class QuizzePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Quizze $quizze): bool
+    public function view(User $user, Quiz $quizze): bool
     {
         //
 
@@ -40,7 +40,7 @@ class QuizzePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Quizze $quizze): bool
+    public function update(User $user, Quiz $quizze): bool
     {
         //
 
@@ -50,7 +50,7 @@ class QuizzePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Quizze $quizze): bool
+    public function delete(User $user, Quiz $quizze): bool
     {
         //
 
@@ -60,7 +60,7 @@ class QuizzePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Quizze $quizze): bool
+    public function restore(User $user, Quiz $quizze): bool
     {
         //
 
@@ -70,7 +70,7 @@ class QuizzePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Quizze $quizze): bool
+    public function forceDelete(User $user, Quiz $quizze): bool
     {
         //
 

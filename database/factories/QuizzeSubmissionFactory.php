@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Quizze;
+use App\Models\Quiz;
 use App\Models\QuizzeSubmission;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -21,7 +21,7 @@ class QuizzeSubmissionFactory extends Factory
     public function definition(): array
     {
         return [
-            'quiz_id' => Quizze::inRandomOrder()->first()->id ?? Quizze::factory()->create()->id,
+            'quiz_id' => Quiz::inRandomOrder()->first()->id ?? Quiz::factory()->create()->id,
             'student_id' => Student::inRandomOrder()->first()->id ?? Student::factory()->create()->id,
             'score' => $this->faker->numberBetween(0, 100), // Assuming score is out of 100
             'status' => $this->faker->randomElement(['pending', 'submitted', 'graded']),

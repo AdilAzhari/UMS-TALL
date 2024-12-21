@@ -4,24 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class department extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'code'];
+    protected $fillable = ['name', 'description', 'code', 'id'];
 
-    public function programs()
+    public function programs(): HasMany
     {
         return $this->hasMany(Program::class);
     }
 
-    public function teachers()
+    public function teachers(): HasMany
     {
         return $this->hasMany(Teacher::class);
     }
 
-    public function students()
+    public function students(): HasMany
     {
         return $this->hasMany(Student::class);
     }

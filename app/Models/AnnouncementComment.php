@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AnnouncementComment extends Model
 {
@@ -17,28 +18,19 @@ class AnnouncementComment extends Model
         'commented_by',
     ];
 
-    public function announcement()
+    public function announcement(): BelongsTo
     {
         return $this->belongsTo(Announcement::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function parent()
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(AnnouncementComment::class, 'parent_id');
     }
 
-    public function replies()
-    {
-        return $this->hasMany(AnnouncementComment::class, 'parent_id');
-    }
-
-    public function commentedBy()
-    {
-        return $this->belongsTo(User::class, 'commented_by');
-    }
 }

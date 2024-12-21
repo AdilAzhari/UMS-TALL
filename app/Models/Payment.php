@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payment extends Model
 {
@@ -19,27 +20,27 @@ class Payment extends Model
         'transaction_type',
     ];
 
-    public function student()
+    public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
     }
 
-    public function course()
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    public function scopeSearch($query, $search)
+    public function scopeSearch($query, $search): void
     {
         $query->where(function ($query) use ($search) {
-            $query->Where('method', 'like', "%{$search}%")
-                ->orWhere('amount', 'like', "%{$search}%")
-                ->orWhere('status', 'like', "%{$search}%")
-                ->orWhere('payment_date', 'like', "%{$search}%")
-                ->orWhere('transaction_type', 'like', "%{$search}%")
+            $query->Where('method', 'like', "%$search%")
+                ->orWhere('amount', 'like', "%$search%")
+                ->orWhere('status', 'like', "%$search%")
+                ->orWhere('payment_date', 'like', "%$search%")
+                ->orWhere('transaction_type', 'like', "%$search%")
                 ->orWhereHas('course', function ($query) use ($search) {
-                    $query->where('name', 'like', "%{$search}%")
-                        ->orWhere('code', 'like', "%{$search}%");
+                    $query->where('name', 'like', "%$search%")
+                        ->orWhere('code', 'like', "%$search%");
                 });
         });
     }

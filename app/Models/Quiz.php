@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Quizze extends Model
+class Quiz extends Model
 {
     use HasFactory;
 
@@ -30,52 +33,52 @@ class Quizze extends Model
         'end_date' => 'datetime',
     ];
 
-    public function course()
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    public function teacher()
+    public function teacher(): BelongsTo
     {
         return $this->belongsTo(Teacher::class);
     }
 
-    public function class()
+    public function class(): BelongsTo
     {
         return $this->belongsTo(Classes::class);
     }
 
-    public function submissions()
+    public function submissions(): HasMany
     {
         return $this->hasMany(QuizzeSubmission::class);
     }
 
-    public function createdBy()
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function updatedBy()
+    public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    public function QuizzeQuestion()
+    public function QuizQuestion(): HasMany
     {
         return $this->hasMany(QuizzeQuestion::class);
     }
 
-    public function students()
+    public function students(): BelongsToMany
     {
         return $this->belongsToMany(Student::class);
     }
 
-    public function QuizzeSubmission()
+    public function QuizSubmission(): HasMany
     {
         return $this->hasMany(QuizzeSubmission::class);
     }
 
-    public function QuizzeAnswer()
+    public function QuizAnswer(): HasMany
     {
         return $this->hasMany(QuizzeAnswer::class);
     }

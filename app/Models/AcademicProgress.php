@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class AcademicProgress extends Model
 {
@@ -24,38 +25,19 @@ class AcademicProgress extends Model
         'total_courses_withdrawn',
     ];
 
-    public function student()
+    public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
     }
 
-    public function program()
+    public function program(): BelongsTo
     {
         return $this->belongsTo(Program::class);
     }
 
-    public function term()
+    public function term(): BelongsTo
     {
         return $this->belongsTo(Term::class);
     }
 
-    public function scopeGoodStanding($query)
-    {
-        return $query->where('academic_standing', 'good');
-    }
-
-    public function scopeWarning($query)
-    {
-        return $query->where('academic_standing', 'warning');
-    }
-
-    public function scopeProbation($query)
-    {
-        return $query->where('academic_standing', 'probation');
-    }
-
-    public function scopeSuspension($query)
-    {
-        return $query->where('academic_standing', 'suspension');
-    }
 }

@@ -55,7 +55,7 @@ test('test student can create story', function () {
 })->skip();
 test('test student can update story', function () {
     $this->actingAs($this->user)
-        ->put('/stories/' . $this->story->id, [
+        ->put('/stories/'.$this->story->id, [
             'title' => 'Test story',
             'content' => 'Test content',
             'status' => 'draft',
@@ -68,7 +68,7 @@ test('test student can update story', function () {
 });
 test('test student can delete his story', function () {
     $this->actingAs($this->user)
-        ->delete('/stories/' . $this->story->id)
+        ->delete('/stories/'.$this->story->id)
         ->assertRedirect('/stories')
         ->assertSessionHasNoErrors()
         ->assertSessionHas('message');
@@ -76,7 +76,7 @@ test('test student can delete his story', function () {
 test('test student can write a comment on story', function () {
 
     $this->actingAs($this->user)
-        ->post('/storyComment/' . $this->story->id . '/comments', [
+        ->post('/storyComment/'.$this->story->id.'/comments', [
             'content' => 'Test comment',
             'status' => 'draft',
             'parent_id' => null,
@@ -91,7 +91,7 @@ test('test student can view all stories', function () {
     $res = $this->actingAs($this->user)->get('/stories');
 
     $res->assertStatus(200);
-    $res->assertInertia(fn($page) => $page->component('Stories/Index')
+    $res->assertInertia(fn ($page) => $page->component('Stories/Index')
         ->has('stories')
         ->has('tags')
     );
@@ -102,8 +102,8 @@ test('test student can view a story with its comments', function () {
         'story_id' => $this->story->id,
     ]);
     $this->story->comments()->save($comment);
-    $this->actingAs($this->user)->get('/stories/' . $this->story->id)
-        ->assertStatus(200)->assertInertia(fn($page) => $page->component('Stories/Show'));
+    $this->actingAs($this->user)->get('/stories/'.$this->story->id)
+        ->assertStatus(200)->assertInertia(fn ($page) => $page->component('Stories/Show'));
     $this->assertDatabaseHas('story_comments', [
         'story_id' => $this->story->id,
         'parent_id' => null,
@@ -125,7 +125,7 @@ test('test student cannot create story with invalid data', function () {
 test('test student cannot delete another student\'s story', function () {
     $anotherStory = Story::factory()->create();
     $this->actingAs($this->user)
-        ->delete('/stories/' . $anotherStory->id)
+        ->delete('/stories/'.$anotherStory->id)
         ->assertstatus(302)
         ->assertSessionHas('message')
         ->assertRedirect('/stories');
@@ -133,7 +133,7 @@ test('test student cannot delete another student\'s story', function () {
 test('test student cannot view draft stories', function () {
     $draftStory = Story::factory()->create(['status' => 'draft']);
     $this->actingAs($this->user)
-        ->get('/stories/' . $draftStory->id)
+        ->get('/stories/'.$draftStory->id)
         ->assertstatus(302)
         ->assertSessionHas('message')
         ->assertRedirect('/stories');

@@ -23,6 +23,6 @@ class QuizzeAnswer extends Model
 
     public function quiz()
     {
-        return $this->belongsTo(Quizze::class);
+        return $this->belongsTo(Quiz::class);
     }
 }

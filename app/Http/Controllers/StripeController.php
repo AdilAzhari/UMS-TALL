@@ -9,11 +9,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
-<<<<<<< HEAD
-=======
 use Stripe\Exception\ApiErrorException;
 use Stripe\StripeClient;
->>>>>>> 8111ea0117bfc51759aa6847977e1354bb2a8eb9
 
 class StripeController extends Controller
 {
@@ -26,19 +23,12 @@ class StripeController extends Controller
         );
     }
 
-    public function pay(request $request)
-    {
-
-<<<<<<< HEAD
-        if (! $request->has('id') || ! is_numeric($request->id)) {
-=======
     /**
      * @throws ApiErrorException
      */
     public function pay(request $request)
     {
-        if (!$request->has('id') || !is_numeric($request->id)) {
->>>>>>> 8111ea0117bfc51759aa6847977e1354bb2a8eb9
+        if (! $request->has('id') || ! is_numeric($request->id)) {
             return redirect()->back()->with('error', 'Invalid payment ID');
         }
 
@@ -116,13 +106,8 @@ class StripeController extends Controller
             Mail::to($$payment->student->email)->send(new PaymentStatusChanged($payment));
 
             return redirect()->route('payments.index')->with('success', 'Payment refunded successfully.');
-<<<<<<< HEAD
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Refund failed: '.$e->getMessage());
-=======
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Refund failed: ' . $e->getMessage());
->>>>>>> 8111ea0117bfc51759aa6847977e1354bb2a8eb9
+            return redirect()->back()->with('error', 'Refund failed: '.$e->getMessage());
         }
     }
 }

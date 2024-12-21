@@ -10,7 +10,6 @@ use App\Models\User;
 use App\Notifications\AssignProctorNotification;
 use App\Notifications\CourseRegistrationNotification;
 use Illuminate\Support\Facades\Notification;
-use LaravelIdea\Helper\App\Models\_IH_Course_C;
 
 class CourseRegistrationService
 {
@@ -24,13 +23,10 @@ class CourseRegistrationService
         }
 
         $currentTerm = $this->getCurrentTerm();
-        if (! $currentTerm) {
-            return ['status' => 'error', 'message' => 'No active term found for registration.'];
-        }
 
         foreach ($validated['courses'] as $courseId) {
-            $course = Course::find($courseId);
-            if (! $course) {
+            $course = (new Course)->find($courseId);
+            if (!$course) {
                 return ['status' => 'error', 'message' => 'Invalid course selected.'];
             }
 
@@ -39,7 +35,7 @@ class CourseRegistrationService
                 return ['status' => 'error', 'message' => $error];
             }
 
-            $registration = Registration::create([
+            $registration = (new Registration)->create([
                 'student_id' => $studentId,
                 'course_id' => $courseId,
                 'proctor_id' => 1,
@@ -58,14 +54,14 @@ class CourseRegistrationService
 
     protected function getCurrentTerm(): Term
     {
-        return Term::where('start_date', '<=', now())
+        return (new Term)->where('start_date', '<=', now())
             ->where('end_date', '>=', now())
             ->first();
     }
 
-    protected function checkRegistrationEligibility($studentId, $courseId, $currentTerm)
+    protected function checkRegistrationEligibility($studentId, $courseId, $currentTerm): ?string
     {
-        $existingRegistration = Registration::where('student_id', $studentId)
+        $existingRegistration = (new Registration)->where('student_id', $studentId)
             ->where('course_id', $courseId)
             ->where('term_id', $currentTerm->id)
             ->first();
@@ -73,7 +69,7 @@ class CourseRegistrationService
             return 'You have already registered for this course.';
         }
 
-        $passedCourse = Registration::where('student_id', $studentId)
+        $passedCourse = (new Registration)->where('student_id', $studentId)
             ->where('course_id', $courseId)
             ->where('status', 'passed')
             ->first();
@@ -81,7 +77,7 @@ class CourseRegistrationService
             return 'You have already passed this course.';
         }
 
-        $failedCourse = Registration::where('student_id', $studentId)
+        $failedCourse = (new Registration)->where('student_id', $studentId)
             ->where('course_id', $courseId)
             ->where('status', 'failed')
             ->first();
@@ -92,7 +88,7 @@ class CourseRegistrationService
         return null;
     }
 
-    protected function sendRegistrationNotification($registration, $course)
+    protected function sendRegistrationNotification($registration, $course): void
     {
         $requiresProctor = $course->requier_proctor;
         if ($registration->proctor_id) {
@@ -102,7 +98,7 @@ class CourseRegistrationService
 
     public function getStudentData($user): array
     {
-        $programName = User::where('id', $user->id)
+        $programName = (new User)->where('id', $user->id)
             ->with([
                 'student.program:id,program_name',
                 'student.academicProgress',
@@ -113,14 +109,14 @@ class CourseRegistrationService
             ])
             ->first();
 
-        $term = Term::where('end_date', '<', now())
+        $term = (new Term)->where('end_date', '<', now())
             ->orderBy('end_date', 'desc')
             ->first();
 
-        $pastCourses = Registration::where('student_id', $user->student->id)->PastCourses()->get();
-        $futureCourses = Registration::where('student_id', $user->student->id)->futureCourses()->get();
-        $currentCourses = Registration::where('student_id', $user->student->id)->currentCourses()->get();
-        $ProctoredCourses = Registration::where('student_id', $user->student->id)->proctored()->get();
+        $pastCourses = (new Registration)->where('student_id', $user->student->id)->PastCourses()->get();
+        $futureCourses = (new Registration)->where('student_id', $user->student->id)->futureCourses()->get();
+        $currentCourses = (new Registration)->where('student_id', $user->student->id)->currentCourses()->get();
+        $ProctoredCourses = (new Registration)->where('student_id', $user->student->id)->proctored()->get();
 
         return [
             'courses' => [
@@ -137,13 +133,13 @@ class CourseRegistrationService
                 'code' => $programName->student->department->code,
             ] : null,
             'totalCredit' => collect($programName->student->courses ?? [])->sum('credit'),
-            'gpa' => $programName->student->academicProgress->map(fn ($progress) => $progress->gpa)->first() ?? null,
+            'gpa' => $programName->student->academicProgress->map(fn($progress) => $progress->gpa)->first() ?? null,
         ];
     }
 
     protected function mapCourses($courses): array
     {
-        return $courses->map(fn ($course) => [
+        return $courses->map(fn($course) => [
             'id' => $course->id,
             'name' => $course->course->name,
             'status' => $course->status,
@@ -157,13 +153,13 @@ class CourseRegistrationService
         ]) ?? [];
     }
 
-    public function getAvailableCourses($user): array|_IH_Course_C
+    public function getAvailableCourses($user): Course
     {
-        $pastCourses = Registration::where('student_id', $user->student->id)->PastCourses()->pluck('course_id');
-        $currentCourses = Registration::where('student_id', $user->student->id)->currentCourses()->pluck('course_id');
-        $futureCourses = Registration::where('student_id', $user->student->id)->futureCourses()->pluck('course_id');
+        $pastCourses = (new Registration)->where('student_id', $user->student->id)->PastCourses()->pluck('course_id');
+        $currentCourses = (new Registration)->where('student_id', $user->student->id)->currentCourses()->pluck('course_id');
+        $futureCourses = (new Registration)->where('student_id', $user->student->id)->futureCourses()->pluck('course_id');
 
-        return Course::whereNotIn('id', $pastCourses)
+        return (new Course)->whereNotIn('id', $pastCourses)
             ->whereNotIn('id', $currentCourses)
             ->whereNotIn('id', $futureCourses)
             ->get();
@@ -173,9 +169,9 @@ class CourseRegistrationService
     {
         $studentId = auth()->user()->student->id;
         $validated = $data;
-        $course = registration::find($validated['course_id']);
+        $course = (new Registration)->find($validated['course_id']);
 
-        $proctor = Proctor::create([
+        $proctor = (new Proctor)->create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'phone_number' => $validated['phone_number'],

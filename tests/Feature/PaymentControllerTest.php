@@ -16,13 +16,13 @@ beforeEach(function () {
 test('displays historical and upcoming payments', function () {
     $student = Student::factory()->create();
     Payment::factory()->create([
-        'payment_date' => now()->subDay(4),
+        'payment_date' => now()->subDay(),
         'status' => 'Completed',
         'student_id' => $student->id,
     ]);
 
     Payment::factory()->create([
-        'payment_date' => now()->addDay(10),
+        'payment_date' => now()->addDay(),
         'status' => 'Pending',
         'student_id' => $student->id,
     ]);
@@ -35,7 +35,7 @@ test('displays historical and upcoming payments', function () {
 it('renders the payments index page', function () {
     $user = User::factory(1)->create();
     $course = Course::factory()->create();
-//    $this->actingAs($user);
+    //    $this->actingAs($user);
     $response = $this->get('/payments');
 
     Payment::factory()->count(3)->state([
@@ -43,7 +43,7 @@ it('renders the payments index page', function () {
         ->create(['course_id' => $course->id,
             'student_id' => student::factory(1)->create(['user_id' => $user->id])->id,
             'program_id' => Program::factory()->create()->id]);
-//    $upcomingPayments = Payment::factory()->count(2)->state(['status' => 'Pending'])->create();
+    //    $upcomingPayments = Payment::factory()->count(2)->state(['status' => 'Pending'])->create();
 
     $response->assertStatus(200);
 
@@ -91,8 +91,8 @@ it('it correctly separates past and upcoming payments', function () {
     ]);
 
     // Fetch payments grouped by past and upcoming
-    $pastPayments = Payment::where('payment_date', '<', now())->get();
-    $upcomingPayments = Payment::where('payment_date', '>=', now())->get();
+    $pastPayments = (new App\Models\Payment)->where('payment_date', '<', now())->get();
+    $upcomingPayments = (new App\Models\Payment)->where('payment_date', '>=', now())->get();
 
     // Assertions
     $this->assertCount(1, $pastPayments);
@@ -107,13 +107,11 @@ it('it correctly separates past and upcoming payments', function () {
 });
 
 it('Successful payment handling', function () {
-
 });
 
 it('test it show the payment handling page', function () {
 });
 it('Payment cancellation', function () {
-
 });
 it('Payment creation', function () {
     todo('make payment');
@@ -131,7 +129,7 @@ it('handles a failed payment gracefully', function () {
         'amount' => 100.50,
         'payment_method_id' => 'pm_card_visa',
     ]);
-//    dd($this);
+    //    dd($this);
     $response->assertRedirect();
     $response->assertSessionHasErrors(['error' => 'Your card was declined.']);
 })->only();

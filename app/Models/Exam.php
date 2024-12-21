@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Exam extends Model
@@ -24,52 +26,47 @@ class Exam extends Model
         'exam_code',
     ];
 
-    public function class()
+    public function class(): BelongsTo
     {
         return $this->belongsTo(Classes::class);
     }
 
-    public function teacher()
+    public function teacher(): BelongsTo
     {
         return $this->belongsTo(Teacher::class);
     }
 
-    public function results()
+    public function results(): HasMany
     {
         return $this->hasMany(ExamResult::class);
     }
 
-    public function createdBy()
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function updatedBy()
+    public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    public function course()
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    public function Terms()
+    public function Terms(): BelongsTo
     {
         return $this->belongsTo(Term::class);
     }
 
-    public function enrollments()
+    public function enrollments(): HasMany
     {
         return $this->hasMany(Enrollment::class);
     }
 
-    public function attendances()
-    {
-        return $this->hasMany(Attendance::class);
-    }
-
-    public function questions()
+    public function questions(): HasMany
     {
         return $this->hasMany(QuizzeQuestion::class);
     }

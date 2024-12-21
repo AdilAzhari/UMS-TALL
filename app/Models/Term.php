@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Term extends Model
 {
@@ -25,37 +28,37 @@ class Term extends Model
         'is_current' => 'boolean',
     ];
 
-    public function classes()
+    public function classes(): HasMany
     {
         return $this->hasMany(Classes::class);
     }
 
-    public function currentStudents()
+    public function currentStudents(): HasMany
     {
         return $this->hasMany(Student::class, 'current_term_id');
     }
 
-    public function currentTerm()
+    public function currentTerm(): BelongsTo
     {
         return $this->belongsTo(Term::class, 'term_id');
     }
 
-    public function registrations()
+    public function registrations(): HasMany
     {
         return $this->hasMany(Registration::class);
     }
 
-    public function course()
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    public function students()
+    public function students(): BelongsToMany
     {
         return $this->belongsToMany(Student::class);
     }
 
-    public function courses()
+    public function courses(): HasMany
     {
         return $this->hasMany(Course::class);
     }

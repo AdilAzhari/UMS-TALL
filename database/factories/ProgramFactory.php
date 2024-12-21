@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Department;
-use App\Models\ProgramStatuse;
+use App\Models\ProgramStatus;
 use App\Models\ProgramType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -34,18 +34,12 @@ class ProgramFactory extends Factory
             'program_code' => $program['code'],
             'description' => $program['description'],
             'duration_years' => $this->faker->randomElement([2, 3, 4, 5]),
-<<<<<<< HEAD
-            'program_status_id' => ProgramStatuse::inRandomOrder()->first()->id ?? ProgramStatuse::factory()->create()->id,
-            'program_type_id' => ProgramType::inRandomOrder()->first()->id ?? ProgramType::factory()->create()->id,
-            'department_id' => Department::inRandomOrder()->first()->id ?? Department::factory()->create()->id,
-=======
-            'program_status_id' => ProgramStatuse::inRandomOrder()->first()?->id
-                ?? ProgramStatuse::factory()->create()->id,
+            'program_status_id' => ProgramStatus::inRandomOrder()->first()?->id
+                ?? ProgramStatus::factory()->create()->id,
             'program_type_id' => ProgramType::inRandomOrder()->first()?->id
                 ?? ProgramType::factory()->create()->id,
             'department_id' => Department::inRandomOrder()->first()?->id
-                ?? Department::factory()->create()->id,
->>>>>>> 8111ea0117bfc51759aa6847977e1354bb2a8eb9
+                ?? Department::factory()->create()?->id,
             'total_credits' => $this->faker->numberBetween(0, 120),
         ];
     }

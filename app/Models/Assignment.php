@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Assignment extends Model
 {
@@ -23,37 +24,32 @@ class Assignment extends Model
         'deadline' => 'datetime',
     ];
 
-    public function class()
+    public function class(): BelongsTo
     {
         return $this->belongsTo(Classes::class);
     }
 
-    public function teacher()
+    public function teacher(): BelongsTo
     {
         return $this->belongsTo(Teacher::class);
     }
 
-    public function submissions()
-    {
-        return $this->hasMany(AssignmentSubmission::class);
-    }
-
-    public function createdBy()
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function updatedBy()
+    public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    public function course()
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    public function week()
+    public function week(): BelongsTo
     {
         return $this->belongsTo(Week::class);
     }

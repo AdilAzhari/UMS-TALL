@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class enrollment extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
     protected $fillable = [
         'student_id',
         'course_id',
@@ -19,50 +22,32 @@ class enrollment extends Model
         'grade_points',
         'grade',
     ];
-
     protected $casts = [
         'enrollment_date' => 'datetime',
         'completion_date' => 'datetime',
     ];
 
-    public $timestamps = false;
-
-    public function student()
+    public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
     }
 
-    public function attendances()
-    {
-        return $this->hasMany(Attendance::class);
-    }
-
-    public function course()
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    public function courses()
+    public function courses(): HasMany
     {
         return $this->hasMany(Course::class);
     }
 
-    public function registrations()
+    public function registrations(): HasMany
     {
         return $this->hasMany(Registration::class);
     }
 
-    public function courseRequirement()
-    {
-        return $this->belongsTo(CourseRequirement::class);
-    }
-
-    public function scopePastCourses($query)
-    {
-        return $query->where('completion_date', '<', now());
-    }
-
-    public function term()
+    public function term(): BelongsTo
     {
         return $this->belongsTo(term::class);
     }

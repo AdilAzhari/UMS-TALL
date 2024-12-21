@@ -8,6 +8,9 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
@@ -57,6 +60,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'password',
         'remember_token',
     ];
+    /**
+     * @var mixed|string|null
+     */
+    private mixed $avatar_url;
+    private mixed $is_admin;
 
     public function canAccessPanel(Panel $panel): bool
     {
@@ -68,124 +76,34 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         return $this->avatar_url ? Storage::url("$this->avatar_url") : null;
     }
 
-    public function student()
+    public function student(): HasOne
     {
         return $this->hasOne(Student::class);
     }
 
-    public function teacher()
+    public function teacher(): HasOne
     {
         return $this->hasOne(Teacher::class);
     }
 
-    public function notifications()
+    public function notifications(): HasMany
     {
         return $this->hasMany(Notification::class);
     }
 
-    public function createdAssignments()
-    {
-        return $this->hasMany(Assignment::class, 'created_by');
-    }
-
-    public function updatedAssignments()
-    {
-        return $this->hasMany(Assignment::class, 'updated_by');
-    }
-
-    public function createdExams()
-    {
-        return $this->hasMany(Exam::class, 'created_by');
-    }
-
-    public function updatedExams()
-    {
-        return $this->hasMany(Exam::class, 'updated_by');
-    }
-
-    public function createdCourses()
-    {
-        return $this->hasMany(Course::class, 'created_by');
-    }
-
-    public function TechnicalTeam()
+    public function TechnicalTeam(): HasOne
     {
         return $this->hasOne(TechnicalTeam::class);
     }
 
-    public function createdDepartments()
-    {
-        return $this->hasMany(Department::class, 'created_by');
-    }
-
-    public function updatedDepartments()
-    {
-        return $this->hasMany(Department::class, 'updated_by');
-    }
-
-    public function createdPrograms()
-    {
-        return $this->hasMany(Program::class, 'created_by');
-    }
-
-    public function updatedPrograms()
-    {
-        return $this->hasMany(Program::class, 'updated_by');
-    }
-
-    public function createdTerms()
-    {
-        return $this->hasMany(Term::class, 'created_by');
-    }
-
-    public function updatedTerms()
-    {
-        return $this->hasMany(Term::class, 'updated_by');
-    }
-
-    public function createdClasses()
-    {
-        return $this->hasMany(Classes::class, 'created_by');
-    }
-
-    public function updatedClasses()
-    {
-        return $this->hasMany(Classes::class, 'updated_by');
-    }
-
-    public function createdStudents()
-    {
-        return $this->hasMany(Student::class, 'created_by');
-    }
-
-    public function updatedStudents()
-    {
-        return $this->hasMany(Student::class, 'updated_by');
-    }
-
-    public function createdTeachers()
-    {
-        return $this->hasMany(Teacher::class, 'created_by');
-    }
-
-    public function createdBy()
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function updatedBy()
+    public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
-    }
-
-    public function announcementComments()
-    {
-        return $this->hasMany(AnnouncementComment::class);
-    }
-
-    public function getCurrentCourses()
-    {
-        return $this->courses;
     }
 
     /**

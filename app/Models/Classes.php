@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Classes extends Model
 {
@@ -26,43 +27,29 @@ class Classes extends Model
         'current_students' => 'integer',
     ];
 
-    public function course()
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    public function teacher()
+    public function teacher(): BelongsTo
     {
         return $this->belongsTo(Teacher::class);
     }
 
-    public function term()
+    public function term(): BelongsTo
     {
         return $this->belongsTo(Term::class);
     }
 
-    public function enrollments()
+    public function enrollments(): HasMany
     {
         return $this->hasMany(Enrollment::class);
     }
 
-    public function attendances()
-    {
-        return $this->hasMany(Attendance::class);
-    }
-
-    public function assignments()
+    public function assignments(): HasMany
     {
         return $this->hasMany(Assignment::class);
     }
 
-    public function exams()
-    {
-        return $this->hasMany(Exam::class);
-    }
-
-    public function ScopAvailableSeats(Builder $query)
-    {
-        return $query->where('max_students', '>', 'current_students');
-    }
 }

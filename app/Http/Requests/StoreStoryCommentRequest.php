@@ -7,6 +7,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreStoryCommentRequest extends FormRequest
 {
+    public mixed $story_id;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -18,7 +20,7 @@ class StoreStoryCommentRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {

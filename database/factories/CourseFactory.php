@@ -4,12 +4,11 @@ namespace Database\Factories;
 
 use App\Models\Course;
 use App\Models\CourseCategory;
-use App\Models\Courses;
 use App\Models\Program;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Courses>
+ * @extends Factory<Course>
  */
 class CourseFactory extends Factory
 {
@@ -24,25 +23,18 @@ class CourseFactory extends Factory
             'name' => $this->faker->sentence(3),
             'code' => strtoupper($this->faker->bothify('??###')),
             'credit_hours' => $this->faker->numberBetween(1, 4),
-            'description' => $this->faker->text(200),
+            'description' => $this->faker->text(400),
             'syllabus' => $this->faker->word(),
             'image' => $this->faker->url(),
             'status' => $this->faker->boolean(),
             'require_proctor' => $this->faker->boolean(),
             'paid' => $this->faker->randomElement(['paid', 'unpaid', 'future_payment']),
             'cost' => $this->faker->randomFloat(2, 0, 150),
-<<<<<<< HEAD
-            'program_id' => Program::inRandomOrder()->first()->id ?? Program::factory()->create()->id,
-            'course_category_id' => CourseCategory::inRandomOrder()->first()->id ?? CourseCategory::factory()->create()->id,
-            'prerequisite_course_id' => Course::inRandomOrder()->first()->id ?? Course::factory()->create()->id,
-=======
             'program_id' => Program::inRandomOrder()->first()?->id
                 ?? Program::factory()->create()->id,
             'course_category_id' => CourseCategory::inRandomOrder()->first()?->id
                 ?? CourseCategory::factory()->create()->id,
             'prerequisite_course_id' => Course::inRandomOrder()->first()?->id ?? null,
-
->>>>>>> 8111ea0117bfc51759aa6847977e1354bb2a8eb9
         ];
     }
 }

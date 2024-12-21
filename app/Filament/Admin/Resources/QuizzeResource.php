@@ -3,7 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\QuizzeResource\Pages;
-use App\Models\Quizze;
+use App\Models\Quiz;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,7 +12,7 @@ use Filament\Tables\Table;
 
 class QuizzeResource extends Resource
 {
-    protected static ?string $model = Quizze::class;
+    protected static ?string $model = Quiz::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
 
