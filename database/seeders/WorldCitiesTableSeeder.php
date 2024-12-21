@@ -9,12 +9,12 @@ class WorldCitiesTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
 
-        \DB::table('world_cities')->truncate();
+        DB::table('world_cities')->truncate();
 
-        \DB::table('world_cities')->insert([
+        DB::table('world_cities')->insert([
             0 => [
                 'code' => 'el',
                 'country_id' => 156,
@@ -4016,7 +4016,7 @@ class WorldCitiesTableSeeder extends Seeder
                 'name' => 'Sariwon',
             ],
         ]);
-        \DB::table('world_cities')->insert([
+        DB::table('world_cities')->insert([
             0 => [
                 'code' => 'ham',
                 'country_id' => 73,
@@ -8018,7 +8018,7 @@ class WorldCitiesTableSeeder extends Seeder
                 'name' => 'Kampong Thum',
             ],
         ]);
-        \DB::table('world_cities')->insert([
+        DB::table('world_cities')->insert([
             0 => [
                 'code' => 'km',
                 'country_id' => 91,
@@ -12020,7 +12020,7 @@ class WorldCitiesTableSeeder extends Seeder
                 'name' => 'Pretoria',
             ],
         ]);
-        \DB::table('world_cities')->insert([
+        DB::table('world_cities')->insert([
             0 => [
                 'code' => 'biy',
                 'country_id' => 36,
@@ -16022,7 +16022,7 @@ class WorldCitiesTableSeeder extends Seeder
                 'name' => 'Tongatapu',
             ],
         ]);
-        \DB::table('world_cities')->insert([
+        DB::table('world_cities')->insert([
             0 => [
                 'code' => 'v',
                 'country_id' => 169,
@@ -20024,7 +20024,7 @@ class WorldCitiesTableSeeder extends Seeder
                 'name' => 'Novara',
             ],
         ]);
-        \DB::table('world_cities')->insert([
+        DB::table('world_cities')->insert([
             0 => [
                 'code' => 'pmf',
                 'country_id' => 151,
@@ -24026,7 +24026,7 @@ class WorldCitiesTableSeeder extends Seeder
                 'name' => 'Qianxinan Buyi-Miao Autonomous Prefecture',
             ],
         ]);
-        \DB::table('world_cities')->insert([
+        DB::table('world_cities')->insert([
             0 => [
                 'code' => '24',
                 'country_id' => 101,
@@ -28028,7 +28028,7 @@ class WorldCitiesTableSeeder extends Seeder
                 'name' => 'Rock Springs',
             ],
         ]);
-        \DB::table('world_cities')->insert([
+        DB::table('world_cities')->insert([
             0 => [
                 'code' => 'cys',
                 'country_id' => 167,

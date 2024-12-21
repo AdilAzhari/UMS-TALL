@@ -12,7 +12,7 @@ class WorldCitiesLocaleTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
 
         DB::table('world_cities_locale')->truncate();
@@ -30126,7 +30126,7 @@ class WorldCitiesLocaleTableSeeder extends Seeder
                 'full_name' => null,
                 'id' => 3762,
                 'locale' => 'en',
-                'name' => 'Vlore',
+                'name' => 'Flore',
             ],
             262 => [
                 'alias' => null,
@@ -40356,7 +40356,7 @@ class WorldCitiesLocaleTableSeeder extends Seeder
                 'full_name' => null,
                 'id' => 5040,
                 'locale' => 'en',
-                'name' => 'Slatina',
+                'name' => 'Slating',
             ],
             40 => [
                 'alias' => null,
@@ -40364,7 +40364,7 @@ class WorldCitiesLocaleTableSeeder extends Seeder
                 'full_name' => null,
                 'id' => 5041,
                 'locale' => 'en',
-                'name' => 'Slobozia',
+                'name' => 'Slobodan',
             ],
             41 => [
                 'alias' => null,
