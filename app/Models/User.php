@@ -49,6 +49,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'created_by',
         'updated_by',
         'avatar_url',
+        'is_admin',
     ];
 
     /**
@@ -60,11 +61,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'password',
         'remember_token',
     ];
+
     /**
      * @var mixed|string|null
      */
-    private mixed $avatar_url;
-    private mixed $is_admin;
+    private mixed $is_admin = 0;
 
     public function canAccessPanel(Panel $panel): bool
     {

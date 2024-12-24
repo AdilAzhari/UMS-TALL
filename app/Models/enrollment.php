@@ -12,6 +12,7 @@ class enrollment extends Model
     use HasFactory;
 
     public $timestamps = false;
+
     protected $fillable = [
         'student_id',
         'course_id',
@@ -22,6 +23,7 @@ class enrollment extends Model
         'grade_points',
         'grade',
     ];
+
     protected $casts = [
         'enrollment_date' => 'datetime',
         'completion_date' => 'datetime',
