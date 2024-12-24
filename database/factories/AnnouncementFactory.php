@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Announcement;
+use App\Models\Classes;
 use App\Models\Course;
 use App\Models\Teacher;
 use App\Models\User;
@@ -22,15 +23,16 @@ class AnnouncementFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
-            'course_id' => Course::inRandomOrder()->first()->id ?? Course::factory()->create()->id,
-            'week_id' => Week::inRandomOrder()->first()->id ?? Week::factory()->create()->id,
+            'user_id' => User::query()->inRandomOrder()->first()->id ?? User::factory()->create()->id,
+            'course_id' => Course::query()->inRandomOrder()->first()->id ?? Course::factory()->create()->id,
+            'week_id' => Week::query()->inRandomOrder()->first()->id ?? Week::factory()->create()->id,
             'message' => $this->faker->sentence(),
             'status' => $this->faker->randomElement(['active', 'inactive']),
             'title' => $this->faker->word(),
             'audience' => $this->faker->randomElement(['global', 'week', 'course']),
             'type' => $this->faker->randomElement(['announcement', 'assignment', 'quiz']),
-            'created_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
+            'created_by' => Teacher::query()->inRandomOrder()->first()->id,
+            'class_id' => Classes::query()->inRandomOrder()->first()->id,
         ];
     }
 }

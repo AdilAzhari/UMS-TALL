@@ -20,6 +20,7 @@ class Announcement extends Model
         'audience',
         'title',
         'created_by',
+        'class_id',
     ];
 
     public function user(): BelongsTo
@@ -41,5 +42,4 @@ class Announcement extends Model
     {
         return $this->belongsTo(Week::class);
     }
-
 }

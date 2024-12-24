@@ -32,5 +32,4 @@ class AnnouncementComment extends Model
     {
         return $this->belongsTo(AnnouncementComment::class, 'parent_id');
     }
-
 }

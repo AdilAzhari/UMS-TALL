@@ -39,5 +39,4 @@ class AcademicProgress extends Model
     {
         return $this->belongsTo(Term::class);
     }
-
 }

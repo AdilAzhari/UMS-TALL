@@ -16,11 +16,13 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->foreignId('week_id')->constrained('weeks')->cascadeOnDelete();
+            $table->foreignId('class_id')->constrained('classes')->cascadeOnDelete();
             $table->text('message');
             $table->string('title');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->enum('type', ['announcement', 'assignment', 'quiz'])->default('announcement');
             $table->enum('audience', ['global', 'week', 'course'])->default('global');
+            $table->string('attachments')->nullable();
             $table->foreignId('created_by')->constrained('teachers')->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
