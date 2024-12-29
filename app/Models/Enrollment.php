@@ -23,7 +23,10 @@ class enrollment extends Model
         'grade_points',
         'grade',
     ];
-
+    protected $attributes = [
+        'grade_points' => 0.00,
+        'grade' => 0,
+    ];
     protected $casts = [
         'enrollment_date' => 'datetime',
         'completion_date' => 'datetime',

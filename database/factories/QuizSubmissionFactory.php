@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends Factory<QuizzeSubmission>
  */
-class QuizzeSubmissionFactory extends Factory
+class QuizSubmissionFactory extends Factory
 {
     /**
      * Define the model's default state.
