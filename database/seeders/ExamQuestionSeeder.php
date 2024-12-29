@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ExamQuestion;
 use Illuminate\Database\Seeder;
 
 class ExamQuestionSeeder extends Seeder
@@ -11,6 +12,6 @@ class ExamQuestionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        examquestion::factory(500)->create();
     }
 }

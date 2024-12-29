@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ExamAnswer;
 use Illuminate\Database\Seeder;
 
 class ExamAnswerSeeder extends Seeder
@@ -11,6 +12,6 @@ class ExamAnswerSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        examanswer::factory()->count(1000)->create();
     }
 }
