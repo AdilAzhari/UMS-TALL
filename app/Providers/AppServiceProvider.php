@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         Vite::prefetch(concurrency: 3);
         // Optimize Eloquent
         Model::preventLazyLoading(! $this->app->isProduction());
+
         Validator::extend('phone_number', function ($value) {
             return preg_match('/^[0-9]{10}$/', $value);
         });
