@@ -4,23 +4,23 @@
         <div class="flex items-center">
             <div class="flex items-center bg-gray-100 rounded-lg px-3 py-2 w-96">
                 <svg
-                    xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5 text-gray-400 mr-2"
                     fill="none"
-                    viewBox="0 0 24 24"
                     stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
                     <path
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                     />
                 </svg>
                 <input
-                    type="search"
-                    placeholder="Search for apps or actions"
                     class="bg-transparent w-full text-sm text-gray-700 focus:outline-none"
+                    placeholder="Search for apps or actions"
+                    type="search"
                 />
             </div>
         </div>
@@ -29,17 +29,17 @@
         <div class="flex items-center space-x-8">
             <div class="flex items-center">
                 <svg
-                    xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5 text-gray-400 mr-2"
                     fill="none"
-                    viewBox="0 0 24 24"
                     stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
                     <path
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                 </svg>
                 <div class="flex flex-col">
@@ -50,17 +50,17 @@
 
             <div class="flex items-center">
                 <svg
-                    xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5 text-gray-400 mr-2"
                     fill="none"
-                    viewBox="0 0 24 24"
                     stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                 >
                     <path
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                     />
                 </svg>
                 <div class="flex flex-col">
@@ -74,26 +74,26 @@
         <div class="relative flex items-center">
             <div class="flex items-center">
                 <img
-                    :src="$page.props.auth.user.image"
                     :alt="$page.props.auth.user.name"
+                    :src="$page.props.auth.user.image"
                     class="w-8 h-8 rounded-full border border-gray-300"
                 />
                 <span class="font-medium text-gray-700 ml-2">{{
-                    $page.props.auth.user.name
-                }}</span>
-                <button @click="toggleDropdown" class="ml-1">
+                        $page.props.auth.user.name
+                    }}</span>
+                <button class="ml-1" @click="toggleDropdown">
                     <svg
-                        xmlns="http://www.w3.org/2000/svg"
                         class="h-5 w-5 text-gray-400"
                         fill="none"
-                        viewBox="0 0 24 24"
                         stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
                     >
                         <path
+                            d="M19 9l-7 7-7-7"
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             stroke-width="2"
-                            d="M19 9l-7 7-7-7"
                         />
                     </svg>
                 </button>
@@ -118,16 +118,16 @@
                     {{ $page.props.auth.user.student_id }}
                 </p>
                 <a
-                    @click="manageAccount"
                     :href="`/profile/${$page.props.auth.user.id}`"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    @click="manageAccount"
                 >
                     MANAGE MY ACCOUNT
                 </a>
                 <a
-                    @click="signOut"
-                    href="#"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    href="#"
+                    @click="signOut"
                 >
                     Sign Out
                 </a>
@@ -137,8 +137,6 @@
 </template>
 
 <script>
-import { usePage } from "@inertiajs/vue3";
-
 export default {
     data() {
         return {

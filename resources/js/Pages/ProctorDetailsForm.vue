@@ -27,24 +27,24 @@
                         <div class="flex items-center space-x-2">
                             <div class="flex space-x-1">
                                 <div
-                                    class="w-2 h-2 rounded-full"
                                     :class="[
                                         currentStep >= 1
                                             ? 'bg-white'
                                             : 'bg-white/40',
                                     ]"
+                                    class="w-2 h-2 rounded-full"
                                 ></div>
                                 <div
-                                    class="w-2 h-2 rounded-full"
                                     :class="[
                                         currentStep >= 2
                                             ? 'bg-white'
                                             : 'bg-white/40',
                                     ]"
+                                    class="w-2 h-2 rounded-full"
                                 ></div>
                             </div>
                             <span class="text-white text-sm font-medium"
-                                >Step {{ currentStep }} of 2</span
+                            >Step {{ currentStep }} of 2</span
                             >
                         </div>
                     </div>
@@ -55,11 +55,11 @@
         <!-- Form Container with Animation -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div
-                class="bg-white rounded-xl shadow-xl overflow-hidden border border-purple-100 transition-all duration-500"
                 :class="{
                     'opacity-0 translate-y-4': isLoading,
                     'opacity-100 translate-y-0': !isLoading,
                 }"
+                class="bg-white rounded-xl shadow-xl overflow-hidden border border-purple-100 transition-all duration-500"
             >
                 <!-- Form Header -->
                 <div
@@ -75,7 +75,7 @@
 
                 <!-- Form Content -->
                 <div class="p-6">
-                    <form @submit.prevent="submitForm" class="space-y-8">
+                    <form class="space-y-8" @submit.prevent="submitForm">
                         <!-- Step 1: Personal Information -->
                         <div v-show="currentStep === 1" class="space-y-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -85,7 +85,7 @@
                                     >
                                         <span
                                             class="flex items-center justify-center w-6 h-6 rounded-full bg-purple-100 text-purple-600 text-sm mr-2"
-                                            >1</span
+                                        >1</span
                                         >
                                         Personal Information
                                     </h3>
@@ -93,30 +93,30 @@
                                     <!-- Name Input -->
                                     <div class="relative group">
                                         <label
-                                            for="name"
                                             class="block text-sm font-medium text-gray-700 mb-1"
+                                            for="name"
                                         >
                                             Full Name
                                             <span class="text-red-500">*</span>
                                         </label>
                                         <div class="relative">
                                             <input
-                                                v-model="form.name"
-                                                type="text"
                                                 id="name"
-                                                placeholder="Enter your full name"
+                                                v-model="form.name"
                                                 class="pl-10 w-full px-4 py-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                                                placeholder="Enter your full name"
                                                 required
+                                                type="text"
                                             />
                                             <span
                                                 class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                                             >
                                                 <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
                                                     class="h-5 w-5"
-                                                    viewBox="0 0 24 24"
                                                     fill="none"
                                                     stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                                 >
                                                     <path
                                                         d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
@@ -134,30 +134,30 @@
                                     <!-- Email Input -->
                                     <div class="relative group">
                                         <label
-                                            for="email"
                                             class="block text-sm font-medium text-gray-700 mb-1"
+                                            for="email"
                                         >
                                             Email Address
                                             <span class="text-red-500">*</span>
                                         </label>
                                         <div class="relative">
                                             <input
-                                                v-model="form.email"
-                                                type="email"
                                                 id="email"
-                                                placeholder="Enter your email address"
+                                                v-model="form.email"
                                                 class="pl-10 w-full px-4 py-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                                                placeholder="Enter your email address"
                                                 required
+                                                type="email"
                                             />
                                             <span
                                                 class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                                             >
                                                 <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
                                                     class="h-5 w-5"
-                                                    viewBox="0 0 24 24"
                                                     fill="none"
                                                     stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                                 >
                                                     <path
                                                         d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
@@ -173,30 +173,30 @@
                                     <!-- Phone Input -->
                                     <div class="relative group">
                                         <label
-                                            for="phone"
                                             class="block text-sm font-medium text-gray-700 mb-1"
+                                            for="phone"
                                         >
                                             Phone Number
                                             <span class="text-red-500">*</span>
                                         </label>
                                         <div class="relative">
                                             <input
-                                                v-model="form.phone_number"
-                                                type="tel"
                                                 id="phone"
-                                                placeholder="Enter your phone number"
+                                                v-model="form.phone_number"
                                                 class="pl-10 w-full px-4 py-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                                                placeholder="Enter your phone number"
                                                 required
+                                                type="tel"
                                             />
                                             <span
                                                 class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                                             >
                                                 <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
                                                     class="h-5 w-5"
-                                                    viewBox="0 0 24 24"
                                                     fill="none"
                                                     stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                                 >
                                                     <path
                                                         d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
@@ -214,8 +214,8 @@
                                     <div class="w-full max-w-sm p-8">
                                         <svg
                                             class="w-full h-auto text-purple-100"
-                                            viewBox="0 0 24 24"
                                             fill="currentColor"
+                                            viewBox="0 0 24 24"
                                         >
                                             <path
                                                 d="M12 14c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6zm0-10c2.21 0 4 1.79 4 4s-1.79 4-4 4-4-1.79-4-4 1.79-4 4-4zm0 12c-4.42 0-8 1.79-8 4v2h16v-2c0-2.21-3.58-4-8-4zm6 4H6v-.99c.2-.72 3.3-2.01 6-2.01s5.8 1.29 6 2v1z"
@@ -235,7 +235,7 @@
                                     >
                                         <span
                                             class="flex items-center justify-center w-6 h-6 rounded-full bg-purple-100 text-purple-600 text-sm mr-2"
-                                            >2</span
+                                        >2</span
                                         >
                                         Address Information
                                     </h3>
@@ -243,30 +243,30 @@
                                     <!-- Address Input -->
                                     <div class="relative group">
                                         <label
-                                            for="address"
                                             class="block text-sm font-medium text-gray-700 mb-1"
+                                            for="address"
                                         >
                                             Street Address
                                             <span class="text-red-500">*</span>
                                         </label>
                                         <div class="relative">
                                             <input
-                                                v-model="form.address"
-                                                type="text"
                                                 id="address"
-                                                placeholder="Enter your street address"
+                                                v-model="form.address"
                                                 class="pl-10 w-full px-4 py-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                                                placeholder="Enter your street address"
                                                 required
+                                                type="text"
                                             />
                                             <span
                                                 class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                                             >
                                                 <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
                                                     class="h-5 w-5"
-                                                    viewBox="0 0 24 24"
                                                     fill="none"
                                                     stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                                 >
                                                     <path
                                                         d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
@@ -284,30 +284,30 @@
                                     <!-- City Input -->
                                     <div class="relative group">
                                         <label
-                                            for="city"
                                             class="block text-sm font-medium text-gray-700 mb-1"
+                                            for="city"
                                         >
                                             City
                                             <span class="text-red-500">*</span>
                                         </label>
                                         <div class="relative">
                                             <input
-                                                v-model="form.city"
-                                                type="text"
                                                 id="city"
-                                                placeholder="Enter your city"
+                                                v-model="form.city"
                                                 class="pl-10 w-full px-4 py-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                                                placeholder="Enter your city"
                                                 required
+                                                type="text"
                                             />
                                             <span
                                                 class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                                             >
                                                 <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
                                                     class="h-5 w-5"
-                                                    viewBox="0 0 24 24"
                                                     fill="none"
                                                     stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                                 >
                                                     <path
                                                         d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
@@ -323,30 +323,30 @@
                                     <!-- State Input -->
                                     <div class="relative group">
                                         <label
-                                            for="state"
                                             class="block text-sm font-medium text-gray-700 mb-1"
+                                            for="state"
                                         >
                                             State/Province
                                             <span class="text-red-500">*</span>
                                         </label>
                                         <div class="relative">
                                             <input
-                                                v-model="form.state"
-                                                type="text"
                                                 id="state"
-                                                placeholder="Enter your state/province"
+                                                v-model="form.state"
                                                 class="pl-10 w-full px-4 py-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                                                placeholder="Enter your state/province"
                                                 required
+                                                type="text"
                                             />
                                             <span
                                                 class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                                             >
                                                 <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
                                                     class="h-5 w-5"
-                                                    viewBox="0 0 24 24"
                                                     fill="none"
                                                     stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                                 >
                                                     <path
                                                         d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
@@ -364,30 +364,30 @@
                                     <!-- Country Input -->
                                     <div class="relative group">
                                         <label
-                                            for="country"
                                             class="block text-sm font-medium text-gray-700 mb-1"
+                                            for="country"
                                         >
                                             Country
                                             <span class="text-red-500">*</span>
                                         </label>
                                         <div class="relative">
                                             <input
-                                                v-model="form.country"
-                                                type="text"
                                                 id="country"
-                                                placeholder="Enter your country"
+                                                v-model="form.country"
                                                 class="pl-10 w-full px-4 py-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
+                                                placeholder="Enter your country"
                                                 required
+                                                type="text"
                                             />
                                             <span
                                                 class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
                                             >
                                                 <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
                                                     class="h-5 w-5"
-                                                    viewBox="0 0 24 24"
                                                     fill="none"
                                                     stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                                 >
                                                     <circle
                                                         cx="12"
@@ -410,13 +410,13 @@
                                     <div class="w-full max-w-sm p-8">
                                         <svg
                                             class="w-full h-auto text-purple-100"
-                                            viewBox="0 0 24 24"
                                             fill="currentColor"
+                                            viewBox="0 0 24 24"
                                         >
                                             <path
                                                 d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"
                                             />
-                                            <circle cx="12" cy="9" r="2.5" />
+                                            <circle cx="12" cy="9" r="2.5"/>
                                         </svg>
                                     </div>
                                 </div>
@@ -428,10 +428,10 @@
                             class="flex justify-between pt-6 border-t border-gray-200"
                         >
                             <button
-                                type="button"
                                 v-if="currentStep === 2"
-                                @click="currentStep = 1"
                                 class="flex items-center px-6 py-3 text-sm font-medium text-purple-600 bg-purple-50 rounded-lg hover:bg-purple-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+                                type="button"
+                                @click="currentStep = 1"
                             >
                                 <svg
                                     class="w-5 h-5 mr-2"
@@ -440,19 +440,19 @@
                                     viewBox="0 0 24 24"
                                 >
                                     <path
+                                        d="M15 19l-7-7 7-7"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         stroke-width="2"
-                                        d="M15 19l-7-7 7-7"
                                     />
                                 </svg>
                                 Previous Step
                             </button>
                             <button
-                                type="button"
                                 v-if="currentStep === 1"
-                                @click="currentStep = 2"
                                 class="flex items-center px-6 py-3 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+                                type="button"
+                                @click="currentStep = 2"
                             >
                                 Next Step
                                 <svg
@@ -462,21 +462,21 @@
                                     viewBox="0 0 24 24"
                                 >
                                     <path
+                                        d="M9 5l7 7-7 7"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         stroke-width="2"
-                                        d="M9 5l7 7-7 7"
                                     />
                                 </svg>
                             </button>
                             <button
-                                type="submit"
                                 v-if="currentStep === 2"
                                 :disabled="isSubmitting"
                                 class="flex items-center px-6 py-3 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                type="submit"
                             >
                                 <span v-if="!isSubmitting"
-                                    >Submit Proctor Details</span
+                                >Submit Proctor Details</span
                                 >
                                 <span v-else class="flex items-center">
                                     <svg
@@ -494,8 +494,8 @@
                                         />
                                         <path
                                             class="opacity-75"
-                                            fill="currentColor"
                                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                            fill="currentColor"
                                         />
                                     </svg>
                                     Processing...
@@ -519,14 +519,14 @@
                         viewBox="0 0 24 24"
                     >
                         <path
+                            d="M5 13l4 4L19 7"
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             stroke-width="2"
-                            d="M5 13l4 4L19 7"
                         />
                     </svg>
                     <span class="font-medium"
-                        >Form submitted successfully!</span
+                    >Form submitted successfully!</span
                     >
                 </div>
             </div>
@@ -535,8 +535,8 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { useForm } from "@inertiajs/vue3";
+import {ref} from "vue";
+import {useForm} from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 
 export default {
@@ -603,15 +603,6 @@ export default {
 </script>
 
 <style scoped>
-.form-enter-active,
-.form-leave-active {
-    transition: opacity 0.5s ease;
-}
-
-.form-enter-from,
-.form-leave-to {
-    opacity: 0;
-}
 
 @keyframes slideIn {
     from {
@@ -624,7 +615,4 @@ export default {
     }
 }
 
-.slide-in {
-    animation: slideIn 0.5s ease-out;
-}
 </style>

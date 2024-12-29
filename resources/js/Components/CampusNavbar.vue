@@ -3,7 +3,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center space-x-4">
-                <img alt="Campus Logo" class="w-10 h-10" src="/logo.png"/>
+                <img alt="Campus Logo" class="w-10 h-10"/>
                 <h1 class="text-2xl font-extra bold text-indigo-700">Online Campus</h1>
             </div>
 

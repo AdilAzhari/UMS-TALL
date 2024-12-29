@@ -1,164 +1,1 @@
-<template>
-    <div class="course-page bg-gray-50 min-h-screen p-6">
-        <!-- Header Section -->
-        <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">
-                {{ course.name }} <span class="text-indigo-500">({{ course.code }})</span>
-            </h1>
-        </header>
-
-        <!-- Tabs Section -->
-        <section>
-            <!-- Tabs Header -->
-            <div class="flex justify-center mb-4 border-b border-gray-200">
-                <button
-                    v-for="(tab, index) in tabs"
-                    :key="index"
-                    :class="{
-            'text-indigo-600 border-b-2 border-indigo-500 font-semibold':
-              activeTab === index,
-          }"
-                    class="tab-button py-2 px-4 text-gray-600 hover:text-indigo-600 focus:outline-none transition-all duration-200"
-                    @click="activeTab = index"
-                >
-                    <i :class="[tab.iconClass, 'mr-2']"></i>
-                    {{ tab.title }}
-                </button>
-            </div>
-
-            <!-- Tabs Content -->
-            <div class="bg-white shadow rounded-md p-6">
-                <div v-if="activeTab === 0">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Announcements</h3>
-                    <p class="text-gray-600">
-                        Welcome to the course! Check here for the latest updates, schedules, and important reminders.
-                    </p>
-                </div>
-
-                <div v-if="activeTab === 1">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Forum Discussion</h3>
-                    <p class="text-gray-600">
-                        Engage with your peers! Post questions, share ideas, and contribute to the discussion.
-                    </p>
-                </div>
-
-                <div v-if="activeTab === 2">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Resources</h3>
-                    <ul class="list-disc list-inside text-gray-600">
-                        <li><a class="text-indigo-500 hover:underline" href="#">Course Syllabus (PDF)</a></li>
-                        <li><a class="text-indigo-500 hover:underline" href="#">Additional Reading Material</a></li>
-                        <li><a class="text-indigo-500 hover:underline" href="#">Helpful Links</a></li>
-                    </ul>
-                </div>
-
-                <div v-if="activeTab === 3">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">FAQs</h3>
-                    <p class="text-gray-600">
-                        Browse frequently asked questions to clarify any doubts related to the course.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Weekly Units Section -->
-        <section class="mt-8">
-            <div
-                v-for="(week, index) in weeks"
-                :key="week.id"
-                class="mb-4 bg-white shadow rounded-md overflow-hidden"
-            >
-                <!-- Week Header -->
-                <div
-                    class="flex justify-between items-center p-4 bg-indigo-500 text-white cursor-pointer hover:bg-indigo-600"
-                    @click="toggleWeek(index)"
-                >
-                    <div>
-                        <h2 class="text-lg font-semibold">Week {{ index + 1 }}: {{ week.title }}</h2>
-                        <p class="text-sm opacity-80">{{ week.startDate }} - {{ week.endDate }}</p>
-                    </div>
-                    <i
-                        :class="[
-              'fas',
-              week.isOpen ? 'fa-chevron-up' : 'fa-chevron-down',
-              'transition-transform duration-300',
-            ]"
-                    ></i>
-                </div>
-
-                <!-- Week Content -->
-                <div v-show="week.isOpen" class="p-4 bg-gray-50">
-                    <div
-                        v-for="content in week.contents"
-                        :key="content.id"
-                        class="flex items-start mb-3"
-                    >
-                        <i :class="[content.iconClass, 'text-indigo-500 text-xl mr-4']"></i>
-                        <div>
-                            <h4 class="font-semibold text-gray-700">{{ content.title }}</h4>
-                            <p v-if="content.todo" class="text-sm text-gray-600">
-                                <strong>To do:</strong> {{ content.todo }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-</template>
-
-<script>
-export default {
-    name: "CoursePageWithTabs",
-    data() {
-        return {
-            course: {
-                name: "Dynamic Programming",
-                code: "CS 4407-01",
-            },
-            tabs: [
-                {title: "Announcements", iconClass: "fas fa-bullhorn"},
-                {title: "Forum Discussion", iconClass: "fas fa-comments"},
-                {title: "Resources", iconClass: "fas fa-folder-open"},
-                {title: "FAQs", iconClass: "fas fa-question-circle"},
-            ],
-            activeTab: 0,
-            weeks: [
-                {
-                    id: 1,
-                    title: "Introduction to Dynamic Programming",
-                    startDate: "2024-01-08",
-                    endDate: "2024-01-14",
-                    isOpen: false,
-                    contents: [
-                        {id: 1, title: "Learning Guide", iconClass: "fas fa-book-open", todo: "Read notes."},
-                        {id: 2, title: "Forum Discussion", iconClass: "fas fa-comments", todo: "Post ideas."},
-                        {id: 3, title: "Assignment", iconClass: "fas fa-tasks", todo: "Submit homework."},
-                    ],
-                },
-                ...Array.from({length: 3}, (_, i) => ({
-                    id: i + 2,
-                    title: `Advanced Topic ${i + 1}`,
-                    startDate: `2024-01-${15 + i * 7}`,
-                    endDate: `2024-01-${21 + i * 7}`,
-                    isOpen: false,
-                    contents: [
-                        {id: 1, title: `Lecture ${i + 1}`, iconClass: "fas fa-chalkboard-teacher"},
-                        {id: 2, title: `Assignment ${i + 1}`, iconClass: "fas fa-tasks"},
-                    ],
-                })),
-            ],
-        };
-    },
-    methods: {
-        toggleWeek(index) {
-            this.weeks[index].isOpen = !this.weeks[index].isOpen;
-        },
-    },
-};
-</script>
-
-<style scoped>
-.tab-button {
-    @apply text-sm md:text-base;
-}
-</style>
+<template>    <Head>        <title>Course Page</title>    </Head>    <div class="course-page bg-gray-50 min-h-screen p-6">        <!-- Header Section -->        <header class="text-center mb-8">            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">                {{ course.name }} <span class="text-indigo-500">({{ course.code }})</span>            </h1>        </header>        <!-- Course Tabs -->        <div class="mb-8">            <div class="border-b border-gray-200">                <nav aria-label="Course sections" class="flex space-x-8">                    <a                        v-for="tab in tabs"                        :key="tab.id"                        :class="[                    'py-4 px-1 border-b-2 font-medium text-sm focus:outline-none',                    currentTab === tab.id                        ? 'border-indigo-500 text-indigo-600'                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'                ]"                        :href="tab.url"                    >                        {{ tab.name }}                    </a>                </nav>            </div>        </div>        <!-- Weekly Units Section -->        <section>            <h2 class="text-2xl font-bold text-gray-800 mb-4">Weekly Content</h2>            <div                v-for="(week, index) in weeks"                :key="week.id"                class="mb-4 bg-white shadow rounded-md overflow-hidden"            >                <!-- Week Header -->                <div                    class="flex justify-between items-center p-4 bg-indigo-500 text-white cursor-pointer hover:bg-indigo-600"                    @click="toggleWeek(index)"                >                    <div>                        <h2 class="text-lg font-semibold">Week {{ week.week_number }}: {{ week.title }}</h2>                    </div>                    <i                        :class="[ 'fas', week.isOpen ? 'fa-chevron-up' : 'fa-chevron-down', 'transition-transform duration-300' ]"                    ></i>                </div>                <!-- Week Content -->                <div v-show="week.isOpen" class="p-4 bg-gray-50">                    <!-- Content Links -->                    <div class="grid md:grid-cols-3 gap-4">                        <!-- Learning Guidance Section -->                        <div class="bg-white p-4 rounded-lg shadow">                            <div class="flex items-center justify-between mb-4">                                <h3 class="text-lg font-semibold text-gray-800">Learning Guide</h3>                            </div>                            <a                                class="flex items-center justify-between p-3 hover:bg-gray-50 rounded cursor-pointer"                                @click="visitPage(route('campus.courses.weeks.guides.weekGuide', { weekId: week.id,courseId: course.id }))"                            >                                <span class="text-indigo-600">View Learning Guides</span>                                <i class="fas fa-arrow-right text-gray-400"></i>                            </a>                        </div>                        <!-- Assignments Section -->                        <div class="bg-white p-4 rounded-lg shadow">                            <div class="flex items-center justify-between mb-4">                                <h3 class="text-lg font-semibold text-gray-800">Assignments</h3>                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">                                    {{ week.assignments?.length || 0 }}                                </span>                            </div>                            <a                                class="flex items-center justify-between p-3 hover:bg-gray-50 rounded cursor-pointer"                                @click="visitPage(route('campus.assignments', { weekId: week.id }))"                            >                                <span class="text-indigo-600">View Assignments</span>                                <i class="fas fa-arrow-right text-gray-400"></i>                            </a>                        </div>                        <!-- Quizzes Section -->                        <div class="bg-white p-4 rounded-lg shadow">                            <div class="flex items-center justify-between mb-4">                                <h3 class="text-lg font-semibold text-gray-800">Quizzes</h3>                                <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">                                    {{ week.quizzes?.length || 0 }}                                </span>                            </div>                            <a                                class="flex items-center justify-between p-3 hover:bg-gray-50 rounded cursor-pointer"                                @click="visitPage(route('campus.quizzes', { weekId: week.id }))"                            >                                <span class="text-indigo-600">View Quizzes</span>                                <i class="fas fa-arrow-right text-gray-400"></i>                            </a>                        </div>                    </div>                    <!-- Optional: Preview of Latest Items -->                    <div class="mt-6 space-y-4">                        <!-- Latest Assignment Preview -->                        <div v-if="week.assignments?.length" class="border-l-4 border-blue-500 pl-4">                            <h4 class="text-sm font-medium text-gray-500">Latest Assignment</h4>                            <p class="text-gray-800">{{ week.assignments[0]?.title }}</p>                        </div>                        <!-- Latest Quiz Preview -->                        <div v-if="week.quizzes?.length" class="border-l-4 border-green-500 pl-4">                            <h4 class="text-sm font-medium text-gray-500">Latest Quiz</h4>                            <p class="text-gray-800">{{ week.quizzes[0]?.title }}</p>                        </div>                        <!-- Latest Announcement Preview -->                        <div v-if="week.announcements?.length" class="border-l-4 border-yellow-500 pl-4">                            <h4 class="text-sm font-medium text-gray-500">Latest Announcement</h4>                            <p class="text-gray-800">{{ week.announcements[0]?.title }}</p>                        </div>                    </div>                </div>            </div>        </section>    </div></template><script>import {route} from "ziggy-js";import LearningGuides from "@/Pages/Campus/LearningGuide/Index.vue";export default {    name: "CoursePageWithContent",    components: {LearningGuides},    props: {        weeks: {            type: Array,            required: true        },        course: {            type: Object,            required: true        },        learningGuidance: Array,        courseAnnouncements: {            type: Array,            default: () => []        },        courseResources: {            type: Array,            default: () => []        }    },    data() {        return {            currentTab: 'announcements',            tabs: [                {                    id: 'announcements',                    name: 'Announcements',                    url: route('campus.course.announcements.index', {id: this.course.id})                },                {                    id: 'resources',                    name: 'Resources',                    url: route('campus.resources', {id: this.course.id})                },                {                    id: 'syllabus',                    name: 'Syllabus',                    url: route('campus.syllabus', {id: this.course.id})                },                {                    id: 'learning',                    name: 'Learning Guidance',                    url: route('campus.courses.weeks.guides.index',                        {courseId: this.course.id, weekId: this.course.id})                }            ]        }    },    mounted() {        this.weeks.forEach(week => {            week.isOpen = false;        });    },    methods: {        route,        toggleWeek(index) {            this.weeks[index].isOpen = !this.weeks[index].isOpen;        },        visitPage(url) {            this.$inertia.visit(url);        }    }};</script>

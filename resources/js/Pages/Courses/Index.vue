@@ -82,8 +82,7 @@
             <!-- Dynamic Tab Content -->
             <div class="tab-content">
                 <!-- Manage Courses Tab -->
-                <manage/>
-
+                <!--                <manage/>-->
                 <!-- Registration Tab -->
                 <div
                     v-if="currentTab === 'registration'"
@@ -460,10 +459,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.router-link-active {
-    @apply border-b-2 border-purple-600 text-purple-600;
-}
-
 input[type="checkbox"] {
     @apply w-4 h-4 cursor-pointer;
 }
