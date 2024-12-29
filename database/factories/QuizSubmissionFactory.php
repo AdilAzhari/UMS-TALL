@@ -25,8 +25,8 @@ class QuizSubmissionFactory extends Factory
             'student_id' => Student::inRandomOrder()->first()->id ?? Student::factory()->create()->id,
             'score' => $this->faker->numberBetween(0, 100), // Assuming score is out of 100
             'status' => $this->faker->randomElement(['pending', 'submitted', 'graded']),
-            'submitted_at' => $this->faker->optional()->dateTimeBetween('-1 month', 'now'),
-            'graded_at' => $this->faker->optional()->dateTimeBetween('-1 month', 'now'),
+            'submitted_at' => $this->faker->optional()->dateTimeBetween('-1 month'),
+            'graded_at' => $this->faker->optional()->dateTimeBetween('-1 month'),
             'graded_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
             'feedback' => $this->faker->optional()->sentence(),
             'remarks' => $this->faker->optional()->paragraph(),
