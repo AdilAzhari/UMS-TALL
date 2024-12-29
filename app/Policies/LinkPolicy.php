@@ -12,7 +12,7 @@ class LinkPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -20,7 +20,7 @@ class LinkPolicy
      */
     public function view(User $user, Link $link): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -28,7 +28,8 @@ class LinkPolicy
      */
     public function create(User $user): bool
     {
-        //
+
+        return true;
     }
 
     /**
@@ -36,7 +37,8 @@ class LinkPolicy
      */
     public function update(User $user, Link $link): bool
     {
-        //
+
+        return true;
     }
 
     /**
@@ -44,7 +46,8 @@ class LinkPolicy
      */
     public function delete(User $user, Link $link): bool
     {
-        //
+
+        return true;
     }
 
     /**
@@ -52,7 +55,8 @@ class LinkPolicy
      */
     public function restore(User $user, Link $link): bool
     {
-        //
+
+        return true;
     }
 
     /**
@@ -60,6 +64,7 @@ class LinkPolicy
      */
     public function forceDelete(User $user, Link $link): bool
     {
-        //
+
+        return true;
     }
 }
