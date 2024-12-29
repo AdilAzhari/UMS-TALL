@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,14 +14,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->foreignId('assignment_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('quiz_id')->nullable()->constrained('quizzes')->cascadeOnDelete();
-            $table->text('announcement')->nullable();
             $table->foreignId('term_id')->constrained()->cascadeOnDelete();
+            $table->text('announcement')->nullable();
             $table->string('title');
             $table->text('description');
             $table->date('start_date');
             $table->date('end_date');
-            $table->integer('week_number')->default(0)->nullable();
+            $table->integer('week_number')->default(1)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

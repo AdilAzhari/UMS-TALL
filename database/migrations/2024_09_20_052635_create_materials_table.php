@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('updated_by')->constrained('teachers')->cascadeOnDelete();
             $table->foreignId('week_id')->constrained()->cascadeOnDelete();
             $table->enum('type', ['video', 'pdf', 'audio', 'image'])->nullable();
+            $table->enum('content_type', ['lecture', 'assignment', 'resource', 'quiz', 'discussion'])->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('size')->nullable();
             $table->string('path')->nullable();
