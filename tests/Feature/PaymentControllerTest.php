@@ -26,7 +26,7 @@ test('displays historical and upcoming payments', function () {
         'status' => 'Pending',
         'student_id' => $student->id,
     ]);
-    $this->get('/payments?tab=history')->assertInertia(fn($page) => $page
+    $this->get('/payments?tab=history')->assertInertia(fn ($page) => $page
         ->component('Payments/Index')
         ->has('historicalPayments')
         ->has('upcomingPayments')
@@ -39,7 +39,7 @@ it('renders the payments index page', function () {
     $response = $this->get('/payments');
 
     Payment::factory()->count(3)->state([
-        'status' => 'completed',])
+        'status' => 'completed', ])
         ->create(['course_id' => $course->id,
             'student_id' => student::factory(1)->create(['user_id' => $user->id])->id,
             'program_id' => Program::factory()->create()->id]);
@@ -106,13 +106,10 @@ it('it correctly separates past and upcoming payments', function () {
     $response->assertStatus(200);
 });
 
-it('Successful payment handling', function () {
-});
+it('Successful payment handling', function () {});
 
-it('test it show the payment handling page', function () {
-});
-it('Payment cancellation', function () {
-});
+it('test it show the payment handling page', function () {});
+it('Payment cancellation', function () {});
 it('Payment creation', function () {
     todo('make payment');
 });

@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Campus\CampusController;
 use App\Http\Controllers\Dashboard\AchievementsController;
-use App\Http\Controllers\Dashboard\CampusController;
 use App\Http\Controllers\Dashboard\CourseController;
 use App\Http\Controllers\Dashboard\PaymentController;
 use App\Http\Controllers\Dashboard\StoryController;
@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::inertia('/assign/proctorForm', 'ProctorDetailsForm');
 
     Route::get('/achievements', [AchievementsController::class, 'index'])->name('achievements');
-    Route::get('/online-campus', [CampusController::class, 'index'])->name('online-campus');
+    Route::get('/campus', [CampusController::class, 'index'])->name('online-campus');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -83,7 +83,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/story/{storyId}/comments', [storyCommentController::class, 'index']);
     Route::get('/api/stories/{storyId}/comments', [storyCommentController::class, 'show']);
 
-    require __DIR__.'/CampusCourse.php';
 });
 
 require __DIR__.'/auth.php';
+
+require __DIR__.'/CampusCourse.php';
