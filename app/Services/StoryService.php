@@ -35,9 +35,9 @@ class StoryService
 
         //        todo: send an email to subscribed student to be notified tho email or notification message
         return (new Story)->create($validatedData + [
-                'student_id' => auth()->user()->student->id ?? rand(1, 10),
-                'published_at' => $validatedData['status'] !== 'draft' ? now() : null,
-            ]);
+            'student_id' => auth()->user()->student->id ?? rand(1, 10),
+            'published_at' => $validatedData['status'] !== 'draft' ? now() : null,
+        ]);
     }
 
     protected function sanitizeContent($content): string
@@ -75,8 +75,8 @@ class StoryService
         }
 
         $story->update($data + [
-                'published_at' => $data['status'] !== 'draft' ? now() : null,
-            ]);
+            'published_at' => $data['status'] !== 'draft' ? now() : null,
+        ]);
 
         return $story;
     }

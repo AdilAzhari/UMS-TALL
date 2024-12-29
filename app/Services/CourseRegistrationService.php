@@ -26,7 +26,7 @@ class CourseRegistrationService
 
         foreach ($validated['courses'] as $courseId) {
             $course = (new Course)->find($courseId);
-            if (!$course) {
+            if (! $course) {
                 return ['status' => 'error', 'message' => 'Invalid course selected.'];
             }
 
@@ -133,13 +133,13 @@ class CourseRegistrationService
                 'code' => $programName->student->department->code,
             ] : null,
             'totalCredit' => collect($programName->student->courses ?? [])->sum('credit'),
-            'gpa' => $programName->student->academicProgress->map(fn($progress) => $progress->gpa)->first() ?? null,
+            'gpa' => $programName->student->academicProgress->map(fn ($progress) => $progress->gpa)->first() ?? null,
         ];
     }
 
     protected function mapCourses($courses): array
     {
-        return $courses->map(fn($course) => [
+        return $courses->map(fn ($course) => [
             'id' => $course->id,
             'name' => $course->course->name,
             'status' => $course->status,
