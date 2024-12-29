@@ -18,9 +18,9 @@ class StoryCommentController extends Controller
         $story = (new Story)->findOrFail($request->story_id);
 
         $story->comments()->create($request->all() + [
-                'student_id' => $story->student_id,
-                'published_at' => now(),
-            ]);
+            'student_id' => $story->student_id,
+            'published_at' => now(),
+        ]);
 
         return redirect()->back()->with('message', 'Comment created successfully.');
     }

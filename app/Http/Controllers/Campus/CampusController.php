@@ -71,14 +71,26 @@ class CampusController extends Controller
         ])->findOrFail(3);
 
         return inertia::render('Campus/Course', [
-            'weeks' => $course->weeks,
+            'weeks' => $course->weeks->map(function ($week) {
+                return [
+                    'id' => $week->id,
+                    'week_number' => $week->week_number,
+                    'learningGuidance' => $week->learningGuidance ?? [
+                            'overview' => null,
+                            'topics' => [],
+                            'objectives' => [],
+                            'tasks' => []
+                        ],
+                    'quizzes' => $week->quizzes,
+                    'assignments' => $week->assignments,
+                    'materials' => $week->materials
+                ];
+            }),
             'course' => [
                 'name' => $course->name,
                 'code' => $course->code,
                 'id' => $course->id,
-            ],
-            'courseAnnouncements' => [],
-            'courseResources' => [],
+            ]
         ]);
     }
 
