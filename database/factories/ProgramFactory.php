@@ -34,8 +34,7 @@ class ProgramFactory extends Factory
             'program_code' => $program['code'],
             'description' => $program['description'],
             'duration_years' => $this->faker->randomElement([2, 3, 4, 5]),
-            'program_status_id' => ProgramStatus::inRandomOrder()->first()?->id
-                ?? ProgramStatus::factory()->create()->id,
+            'program_status_id' => ProgramStatus::inRandomOrder()->first()?->id,
             'program_type_id' => ProgramType::inRandomOrder()->first()?->id
                 ?? ProgramType::factory()->create()->id,
             'department_id' => Department::inRandomOrder()->first()?->id

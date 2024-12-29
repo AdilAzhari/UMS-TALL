@@ -22,9 +22,9 @@ class StoryFactory extends Factory
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraphs(3, true),
             'image' => $this->faker->imageUrl(),
-            'student_id' => Student::inRandomOrder()->id ?? Student::factory()->create()->id,
+            'student_id' => Student::inRandomOrder()->first()->id,
             'status' => $this->faker->randomElement(['draft', 'published']),
-            'published_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'published_at' => $this->faker->dateTimeBetween('-1 year'),
         ];
     }
 }

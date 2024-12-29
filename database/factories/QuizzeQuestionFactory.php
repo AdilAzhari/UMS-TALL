@@ -20,7 +20,7 @@ class QuizzeQuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            'quizze_id' => Quiz::inRandomOrder()->first()->id,
+            'quiz_id' => Quiz::inRandomOrder()->first()->id,
             'question' => $this->faker->sentence(),
             'created_by' => Teacher::inRandomOrder()->first()->id,
             'updated_by' => Teacher::inRandomOrder()->first()->id,

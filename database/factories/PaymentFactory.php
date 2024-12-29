@@ -26,7 +26,7 @@ class PaymentFactory extends Factory
             'course_id' => Course::inRandomOrder()->first()->id ?? course::factory()->create()->id,
             'status' => $this->faker->randomElement(['Pending', 'Completed', 'Failed', 'Refunded', 'Cancelled']),
             'transaction_type' => $this->faker->randomElement(['Exam/Course Processing Fee', 'Transferring Credit Fee', 'application Fee']),
-            'method' => $this->faker->randomElement(['Strip', 'Paypal', 'Credit Card']),
+            'method' => $this->faker->randomElement(['Strip', 'Paypal']),
             'failure_reason' => $this->faker->sentence(),
             'payment_intent' => $this->faker->uuid(),
             'refund_id' => $this->faker->uuid(),
