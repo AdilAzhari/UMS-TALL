@@ -21,7 +21,10 @@ class Classes extends Model
         'teacher_id',
         'term_id',
     ];
-
+    protected $attributes = [
+        'current_students' => 0,
+        'max_students' => 30,
+    ];
     protected $casts = [
         'max_students' => 'integer',
         'current_students' => 'integer',
@@ -51,5 +54,4 @@ class Classes extends Model
     {
         return $this->hasMany(Assignment::class);
     }
-
 }

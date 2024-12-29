@@ -17,6 +17,9 @@ class ExamResult extends Model
         'status',
         'notes',
     ];
+    protected $attributes = [
+        'status' => 'absent'
+    ];
 
     public function exam(): BelongsTo
     {

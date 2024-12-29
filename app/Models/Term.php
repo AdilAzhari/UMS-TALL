@@ -27,6 +27,9 @@ class Term extends Model
         'end_date' => 'datetime',
         'is_current' => 'boolean',
     ];
+    protected $attributes = [
+        'max_courses' => 40,
+    ];
 
     public function classes(): HasMany
     {

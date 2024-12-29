@@ -9,14 +9,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StoryComment extends Model
 {
     /** @use HasFactory<StoryCommentFactory> */
-    use HasFactory;
+    use HasFactory, softDeletes;
 
     protected $fillable = ['content', 'story_id', 'student_id',
         'parent_id', 'status', 'published_at'];
+    protected $attributes = [
+        'status' => 'draft',
+    ];
 
     public function student(): BelongsTo
     {
@@ -41,8 +45,8 @@ class StoryComment extends Model
     protected function publishedAt(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->diffForHumans(),
-            set: fn ($value) => Carbon::parse($value),
+            get: fn($value) => Carbon::parse($value)->diffForHumans(),
+            set: fn($value) => Carbon::parse($value),
         );
     }
 }

@@ -20,6 +20,13 @@ class Payment extends Model
         'transaction_type',
     ];
 
+    protected $attributes =
+        [
+            'transaction_type' => 'Exam/Course Processing Fee',
+            'method' => 'Credit Card',
+            'status' => 'pending',
+        ];
+
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);

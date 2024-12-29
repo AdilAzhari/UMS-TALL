@@ -34,6 +34,10 @@ class Teacher extends Model
         'experience' => 'integer',
     ];
 
+    protected $attributes = [
+        'status' => 'active',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

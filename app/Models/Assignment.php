@@ -18,6 +18,11 @@ class Assignment extends Model
         'total_marks',
         'course_id',
         'created_by',
+        'week_id',
+    ];
+
+    protected $attributes = [
+        'status' => 'pending',
     ];
 
     protected $casts = [

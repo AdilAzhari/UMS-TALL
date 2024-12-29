@@ -16,6 +16,11 @@ class Week extends Model
         'start_date',
         'end_date',
         'course_id',
+        'assignment_id',
+        'term_id',
+        'title',
+        'description',
+        'announcement',
     ];
 
     public function course(): BelongsTo
@@ -33,8 +38,13 @@ class Week extends Model
         return $this->hasMany(Quiz::class);
     }
 
-    public function announcements(): HasMany
+    public function term(): BelongsTo
     {
-        return $this->hasMany(Announcement::class);
+        return $this->belongsTo(Term::class);
+    }
+
+    public function materials(): HasMany
+    {
+        return $this->hasMany(Material::class);
     }
 }

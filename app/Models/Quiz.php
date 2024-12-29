@@ -19,6 +19,7 @@ class Quiz extends Model
         'duration',
         'passing_score',
         'teacher_id',
+        'week_id',
         'class_id',
         'type',
         'status',
@@ -27,7 +28,10 @@ class Quiz extends Model
         'start_date',
         'end_date',
     ];
-
+    protected $attributes = [
+        'type' => 'ungraded',
+        'status' => 'draft',
+    ];
     protected $casts = [
         'start_date' => 'datetime',
         'end_date' => 'datetime',
@@ -81,5 +85,10 @@ class Quiz extends Model
     public function QuizAnswer(): HasMany
     {
         return $this->hasMany(QuizzeAnswer::class);
+    }
+
+    public function week(): BelongsTo
+    {
+        return $this->belongsTo(Week::class);
     }
 }

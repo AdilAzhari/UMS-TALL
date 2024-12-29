@@ -19,6 +19,9 @@ class Attendance extends Model
         'notes',
     ];
 
+    protected $attributes = [
+        'status' => 'present',
+    ];
     protected $casts = [
         'date' => 'datetime',
     ];

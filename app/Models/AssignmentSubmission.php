@@ -20,6 +20,9 @@ class AssignmentSubmission extends Model
         'graded_by',
         'feedback',
     ];
+    protected $attributes = [
+        'status' => 'absent',
+    ];
 
     public function assignment(): BelongsTo
     {
