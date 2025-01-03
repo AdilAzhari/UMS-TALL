@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCourseRequirementsRequest;
 use App\Http\Requests\UpdateCourseRequirementsRequest;
-use App\Models\CourseRequirements;
+use App\Models\CourseRequirement;
 
 class CourseRequirementsController extends Controller
 {
@@ -13,7 +13,7 @@ class CourseRequirementsController extends Controller
      */
     public function index()
     {
-        $courseRequirements = CourseRequirements::all();
+        $courseRequirements = CourseRequirement::all();
 
         return inertia('CourseRequirements/Index', [
             'courseRequirements' => $courseRequirements,
@@ -39,7 +39,7 @@ class CourseRequirementsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CourseRequirements $courseRequirements)
+    public function show(CourseRequirement $courseRequirement)
     {
         //
     }
@@ -47,7 +47,7 @@ class CourseRequirementsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CourseRequirements $courseRequirements)
+    public function edit(CourseRequirement $courseRequirement)
     {
         //
     }
@@ -55,7 +55,7 @@ class CourseRequirementsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCourseRequirementsRequest $request, CourseRequirements $courseRequirements)
+    public function update(UpdateCourseRequirementsRequest $request, CourseRequirement $courseRequirement)
     {
         //
     }
@@ -63,7 +63,7 @@ class CourseRequirementsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CourseRequirements $courseRequirements)
+    public function destroy(CourseRequirement $courseRequirement)
     {
         //
     }

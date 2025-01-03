@@ -25,8 +25,9 @@ class Proctor extends Model
     ];
 
     protected $attributes = [
-        'status' => 'active'
+        'status' => 'active',
     ];
+
     protected $casts = [
         'status' => 'boolean',
     ];

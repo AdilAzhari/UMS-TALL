@@ -7,7 +7,6 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Auth;
 
 class UserRelationManager extends RelationManager
 {
@@ -66,7 +65,7 @@ class UserRelationManager extends RelationManager
                 Forms\Components\Section::make('Personal Details')
                     ->description('Enter additional personal information')
                     ->schema([
-                        Forms\Components\select::make('gender')
+                        Forms\Components\Select::make('gender')
                             ->options([
                                 'male',
                                 'female',
@@ -78,7 +77,7 @@ class UserRelationManager extends RelationManager
                         Forms\Components\TextInput::make('nationality')
                             ->maxLength(255)
                             ->default(null),
-                        Forms\Components\select::make('marital_status')
+                        Forms\Components\Select::make('marital_status')
                             ->options([
                                 'single',
                                 'married',
@@ -107,45 +106,18 @@ class UserRelationManager extends RelationManager
                 Forms\Components\Section::make('Account Settings')
                     ->description('Configure user account settings')
                     ->schema([
-                        Forms\Components\select::make('role')
+                        Forms\Components\Select::make('role')
                             ->options([
                                 'student',
                                 'teacher',
                                 'admin',
                                 'technical_team',
                             ]),
-                        Forms\Components\fileupload::make('avatar')
+                        Forms\Components\Fileupload::make('avatar')
                             ->label('Profile Picture')
                             ->image()
                             ->disk('public')
                             ->default(null),
-                    ])->columns(2),
-
-                Forms\Components\Section::make('System Information')
-                    ->description('System-managed fields')
-                    ->schema([
-                        Forms\Components\Select::make('created_by')
-                            ->label('Created By')
-                            ->relationship('createdBy', 'name')
-                            ->default(function () {
-                                if (Auth::check() && Auth::user()->created_by === null) {
-                                    return Auth::id();
-                                }
-
-                                return null;
-                            })
-                            ->disabled()
-                            ->dehydrated(false),
-                        Forms\Components\Select::make('updated_by')
-                            ->relationship('updatedBy', 'name')
-                            ->default(function () {
-                                if (Auth::check()) {
-                                    return Auth::id();
-                                }
-
-                                return null;
-                            })
-                            ->disabled(),
                     ])->columns(2),
             ]);
     }

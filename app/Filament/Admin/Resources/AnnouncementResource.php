@@ -22,15 +22,15 @@ class AnnouncementResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\select::make('user_id')
+                Forms\Components\Select::make('user_id')
                     ->required()
                     ->label('User')
                     ->relationship('user', 'name'),
-                Forms\Components\select::make('course_id')
+                Forms\Components\Select::make('course_id')
                     ->required()
                     ->label('Course')
                     ->relationship('course', 'course_name'),
-                Forms\Components\select::make('week_id')
+                Forms\Components\Select::make('week_id')
                     ->required()
                     ->label('Week')
                     ->relationship('week', 'week_number'),
@@ -39,7 +39,7 @@ class AnnouncementResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\Radio::make('status')
                     ->options([
-                        'actvie' => 'Active',
+                        'active' => 'Active',
                         'inactive' => 'Inactive',
                     ])
                     ->required(),

@@ -38,7 +38,7 @@ class MaterialResource extends Resource
                             ->label('Course Name')
                             ->required()
                             ->relationship('course', 'name'),
-                        Forms\Components\radio::make('type')
+                        Forms\Components\Radio::make('type')
                             ->inline()
                             ->label('Course Type')
                             ->options([
@@ -105,11 +105,10 @@ class MaterialResource extends Resource
                                 return Auth::user()->id;
                             })
                             ->disabled()
-                            ->dehydrated(true) // This ensures the field is included when the form is submitted
                             ->default(function () {
                                 return Auth::user()->id;
                             }),
-                    ])->columns(2),
+                    ])->columns(3),
             ]);
 
     }
@@ -187,8 +186,8 @@ class MaterialResource extends Resource
         ];
     }
 
-    public static function beforeSave($record)
+    public static function beforeSave($record): int|string|null
     {
-        $record->updated_by = Auth::id(); // Set the current user's ID as the updated_by value
+        return $record->updated_by = Auth::id(); // Set the current user's ID as the updated_by value
     }
 }

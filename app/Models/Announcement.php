@@ -21,12 +21,12 @@ class Announcement extends Model
         'audience',
         'title',
         'created_by',
-        'class_id',
+        'class_group_id',
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(related: User::class);
     }
 
     public function createdBy(): BelongsTo

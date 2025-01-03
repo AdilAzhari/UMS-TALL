@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\ExamQuestion;
 use App\Models\ExamQuestionOption;
+use App\Models\QuizQuestion;
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +21,11 @@ class ExamQuestionOptionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'option_text' => $this->faker->word(),
+            'is_correct' => $this->faker->boolean(25), // 25% chance of being correct
+            'created_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
+            'updated_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
+            'exam_question_id' => ExamQuestion::inRandomOrder()->first()->id,
         ];
     }
 }

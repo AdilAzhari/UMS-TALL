@@ -36,9 +36,9 @@ class AttendanceResource extends Resource
                 Forms\Components\TextInput::make('enrollment_id')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('class_id')
-                    ->required()
-                    ->numeric(),
+//                Forms\Components\TextInput::make('class_id')
+//                    ->required()
+//                    ->numeric(),
                 Forms\Components\TextInput::make('teacher_id')
                     ->required()
                     ->numeric(),
@@ -60,9 +60,9 @@ class AttendanceResource extends Resource
                 Tables\Columns\TextColumn::make('enrollment_id')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('class_id')
-                    ->numeric()
-                    ->sortable(),
+//                Tables\Columns\TextColumn::make('class_id')
+//                    ->numeric()
+//                    ->sortable(),
                 Tables\Columns\TextColumn::make('teacher_id')
                     ->numeric()
                     ->sortable(),

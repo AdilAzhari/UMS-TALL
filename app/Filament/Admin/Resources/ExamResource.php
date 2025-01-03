@@ -40,7 +40,7 @@ class ExamResource extends Resource
                     ->placeholder('Enter the rules of the exam')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\select::make('exam_passing_score')
+                Forms\Components\Select::make('exam_passing_score')
                     ->required()
                     ->default('60%')
                     ->options([
@@ -50,21 +50,21 @@ class ExamResource extends Resource
                         '65' => '65%',
                         '70' => '70%',
                     ]),
-                Forms\Components\select::make('exam_duration')
+                Forms\Components\Select::make('exam_duration')
                     ->required()
                     ->label('Exam Duration')
-                    ->placeholder('Choce the duration of the exam')
+                    ->placeholder('Choice the duration of the exam')
                     ->options([
-                        'one Houre' => '1/hr',
+                        'one Hour' => '1/hr',
                         'one and half' => '1.5/hr',
-                        'two Houre' => '2/hr',
+                        'two Hour' => '2/hr',
 
                     ]),
-                Forms\Components\select::make('class_id')
-                    ->label('Select The Class')
-                    ->relationship('class', 'group_number')
-                    ->required(),
-                Forms\Components\select::make('teacher_id')
+//                Forms\Components\Select::make('class_id')
+//                    ->label('Select The Class')
+//                    ->relationship('class', 'group_number')
+//                    ->required(),
+                Forms\Components\Select::make('teacher_id')
                     ->label('Select The Teacher')
                     ->searchable()
                     ->options(function () {
@@ -74,7 +74,7 @@ class ExamResource extends Resource
                     })
                     ->getSearchResultsUsing(function (string $search) {
                         return User::whereHas('teacher')
-                            ->where('name', 'like', "%{$search}%")
+                            ->where('name', 'like', "%$search%")
                             ->limit(50)
                             ->pluck('name', 'id');
                     })
@@ -83,23 +83,22 @@ class ExamResource extends Resource
                         $teacherId = Teacher::where('user_id', $state)->value('id');
                         $set('teacher_id', $teacherId);
                     }),
-                Forms\Components\select::make('course_id')
+                Forms\Components\Select::make('course_id')
                     ->label('Select The Course')
                     ->required()
                     ->relationship('course', 'name'),
-                Forms\Components\select::make('created_by')
+                Forms\Components\Select::make('created_by')
                     ->relationship('createdBy', 'name')
                     ->default(function () {
                         if (Auth::check() && Auth::user()->created_by === null) {
                             return Auth::id();
                         }
                     })->disabled(),
-                Forms\Components\select::make('updated_by')
+                Forms\Components\Select::make('updated_by')
                     ->relationship('updatedBy', 'name')
                     ->default(Auth::id())->disabled(),
             ]);
 
-        return $form;
     }
 
     public static function table(Table $table): Table
@@ -117,10 +116,10 @@ class ExamResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('exam_passing_score')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('class.group_number')
-                    ->label('Class')
-                    ->sortable(['classes.group_number'])
-                    ->searchable(),
+//                Tables\Columns\TextColumn::make('class.group_number')
+//                    ->label('Class')
+//                    ->sortable(['classes.group_number'])
+//                    ->searchable(),
                 Tables\Columns\TextColumn::make('teacher.user.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('course.code')
@@ -155,7 +154,6 @@ class ExamResource extends Resource
     public static function getRelations(): array
     {
         return [
-            'class' => RelationManagers\ClassRelationManager::class,
             'course' => RelationManagers\CourseRelationManager::class,
         ];
     }

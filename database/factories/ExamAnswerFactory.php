@@ -21,7 +21,6 @@ class ExamAnswerFactory extends Factory
     public function definition(): array
     {
         return [
-            'exam_id' => Exam::inRandomOrder()->first()->id ?? Exam::factory()->create()->id,
             'Exam_question_id' => ExamQuestion::inRandomOrder()->first()->id ?? ExamQuestion::factory()->create()->id,
             'created_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
             'updated_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,

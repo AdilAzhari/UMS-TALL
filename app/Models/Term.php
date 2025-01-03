@@ -27,13 +27,14 @@ class Term extends Model
         'end_date' => 'datetime',
         'is_current' => 'boolean',
     ];
+
     protected $attributes = [
         'max_courses' => 40,
     ];
 
     public function classes(): HasMany
     {
-        return $this->hasMany(Classes::class);
+        return $this->hasMany(ClassGroup::class);
     }
 
     public function currentStudents(): HasMany

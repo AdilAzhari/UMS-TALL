@@ -31,7 +31,7 @@ class ProgramResource extends Resource
                 Forms\Components\TextInput::make('duration_years')
                     ->required()
                     ->numeric(),
-                Forms\Components\select::make('department_id')
+                Forms\Components\Select::make('department_id')
                     ->required()
                     ->relationship('department', 'name'),
                 Forms\Components\TextInput::make('program_name')
@@ -45,7 +45,7 @@ class ProgramResource extends Resource
                         'Expelled' => 'Expelled',
                     ])
                     ->required(),
-                Forms\Components\select::make('program_type')
+                Forms\Components\Select::make('program_type')
                     ->options([
                         'Undergraduate' => 'Undergraduate',
                         'Postgraduate' => 'Postgraduate',

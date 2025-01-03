@@ -24,9 +24,9 @@ class AssignmentResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('class_id')
-                    ->required()
-                    ->numeric(),
+//                Forms\Components\TextInput::make('class_id')
+//                    ->required()
+//                    ->numeric(),
                 Forms\Components\TextInput::make('teacher_id')
                     ->required()
                     ->numeric(),
@@ -67,9 +67,9 @@ class AssignmentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('class_id')
-                    ->numeric()
-                    ->sortable(),
+//                Tables\Columns\TextColumn::make('class_id')
+//                    ->numeric()
+//                    ->sortable(),
                 Tables\Columns\TextColumn::make('teacher_id')
                     ->numeric()
                     ->sortable(),

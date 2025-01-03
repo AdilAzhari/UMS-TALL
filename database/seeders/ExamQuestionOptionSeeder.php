@@ -12,6 +12,6 @@ class ExamQuestionOptionSeeder extends Seeder
      */
     public function run(): void
     {
-        examquestionoption::factory(2000)->create();
+        ExamQuestionOption::factory(20)->create();
     }
 }

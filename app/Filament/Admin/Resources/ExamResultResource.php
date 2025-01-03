@@ -23,11 +23,11 @@ class ExamResultResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\select::make('exam_id')
+                Forms\Components\Select::make('exam_id')
                     ->label('Select The Exam')
                     ->required()
                     ->relationship('exam', 'id'),
-                Forms\Components\select::make('student_id')
+                Forms\Components\Select::make('student_id')
                     ->required()
                     ->relationship('student', 'user_id', function ($query) {
                         return $query->whereColumn('user_id', 'id');

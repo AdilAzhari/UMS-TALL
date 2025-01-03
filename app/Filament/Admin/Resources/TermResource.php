@@ -35,7 +35,7 @@ class TermResource extends Resource
                     ->required()
                     ->default(true)
                     ->columnSpan(2),
-                forms\Components\select::make('current_term_id')
+                forms\Components\Select::make('current_term_id')
                     ->label('Current Term')
                     ->relationship('currentTerm', 'name')
                     ->nullable()

@@ -22,7 +22,7 @@ class TechnicalTeamResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\select::make('user_id')
+                Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->required(),
                 Forms\Components\TextInput::make('role')
@@ -38,7 +38,7 @@ class TechnicalTeamResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
                     ->searchable()
-                    ->label('Teachician Name')
+                    ->label('Technician Name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('role')
                     ->searchable()

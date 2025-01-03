@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\department;
+use App\Models\Department;
 use App\Models\User;
 
 class DepartmentPolicy
@@ -46,7 +46,7 @@ class DepartmentPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, department $department): bool
+    public function delete(): bool
     {
         //
         return true;
@@ -55,7 +55,7 @@ class DepartmentPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, department $department): bool
+    public function restore(): bool
     {
         //
         return true;
@@ -64,7 +64,7 @@ class DepartmentPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, department $department): bool
+    public function forceDelete(): bool
     {
         //
         return true;

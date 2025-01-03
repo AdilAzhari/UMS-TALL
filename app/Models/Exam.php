@@ -20,15 +20,15 @@ class Exam extends Model
         'exam_passing_score',
         'created_by',
         'updated_by',
-        'class_id',
+        'class_group_id',
         'teacher_id',
         'course_id',
         'exam_code',
     ];
 
-    public function class(): BelongsTo
+    public function classGroup(): BelongsTo
     {
-        return $this->belongsTo(Classes::class);
+        return $this->belongsTo(ClassGroup::class);
     }
 
     public function teacher(): BelongsTo
@@ -68,6 +68,6 @@ class Exam extends Model
 
     public function questions(): HasMany
     {
-        return $this->hasMany(QuizzeQuestion::class);
+        return $this->hasMany(QuizQuestion::class);
     }
 }

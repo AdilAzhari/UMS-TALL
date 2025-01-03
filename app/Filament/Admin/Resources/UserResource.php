@@ -78,7 +78,7 @@ class UserResource extends Resource
                 Forms\Components\Section::make('Personal Details')
                     ->description('Enter additional personal information')
                     ->schema([
-                        Forms\Components\select::make('gender')
+                        Forms\Components\Select::make('gender')
                             ->options([
                                 'male',
                                 'female',
@@ -90,7 +90,7 @@ class UserResource extends Resource
                         Forms\Components\TextInput::make('nationality')
                             ->maxLength(255)
                             ->default(null),
-                        Forms\Components\select::make('marital_status')
+                        Forms\Components\Select::make('marital_status')
                             ->options([
                                 'single',
                                 'married',
@@ -119,14 +119,14 @@ class UserResource extends Resource
                 Forms\Components\Section::make('Account Settings')
                     ->description('Configure user account settings')
                     ->schema([
-                        Forms\Components\select::make('role')
+                        Forms\Components\Select::make('role')
                             ->options([
                                 'student',
                                 'teacher',
                                 'admin',
                                 'technical_team',
                             ]),
-                        Forms\Components\fileupload::make('avatar')
+                        Forms\Components\FileUpload::make('avatar')
                             ->label('Profile Picture')
                             ->image()
                             ->disk('public')

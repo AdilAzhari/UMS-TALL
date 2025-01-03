@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('assignment_submissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('assignment_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('student_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('assignment_id')->constrained('assignments')->cascadeOnDelete();
+            $table->foreignId('student_id')->constrained('students')->cascadeOnDelete();
             $table->integer('obtained_marks')->nullable();
-            $table->enum('status', ['pending', 'submitted', 'graded'])->default('pending');
+            $table->enum('status', ['pending', 'submitted', 'graded', 'late', 'in_review'])->default('pending');
+            $table->boolean('is_late')->default(false);
             $table->text('remarks')->nullable();
             $table->timestamp('submitted_at')->nullable();
             $table->timestamp('graded_at')->nullable();

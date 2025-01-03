@@ -47,7 +47,7 @@ class ProctorResource extends Resource
                 Forms\Components\TextInput::make('country')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\select::make('user_id')
+                Forms\Components\Select::make('user_id')
                     ->label('Student Name')
                     ->relationship('user', 'name')
                     ->required(),

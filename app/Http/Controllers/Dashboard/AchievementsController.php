@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\CourseGrades;
-use App\Models\enrollment;
+use App\Models\Enrollment;
 use Inertia\Inertia;
 
 class AchievementsController extends Controller
@@ -13,11 +12,11 @@ class AchievementsController extends Controller
     {
         $user = auth()->user();
 
-        $studentData = enrollment::where('student_id', $user->student->id)
+        $studentData = Enrollment::where('student_id', $user->student->id)
             ->with(['course', 'course.CourseGrade', 'student', 'term'])
-            ->PastCourses()
+            ->pastCourses()
             ->get();
-        $CourseGrade = CourseGrades::where('student_id', $user->student->id)->get();
+        //        CourseGrades::where('student_id', $user->student->id)->get()->dd();
         //            return $CourseGrade;
         $terms = $studentData->groupBy('term_id')->map(function ($termData) {
             $termGPA = $this->calculateTermGPA($termData);

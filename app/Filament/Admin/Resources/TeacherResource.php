@@ -35,7 +35,7 @@ class TeacherResource extends Resource
                         Forms\Components\TextInput::make('specialization')
                             ->required()
                             ->maxLength(255),
-                        Forms\Components\select::make('department_id')
+                        Forms\Components\Select::make('department_id')
                             ->relationship('department', 'name')
                             ->required(),
                         Forms\Components\TextInput::make('designation')
@@ -43,12 +43,12 @@ class TeacherResource extends Resource
                             ->maxLength(255),
                         Forms\Components\DatePicker::make('hire_date')
                             ->required(),
-                        Forms\Components\select::make('user_id')
+                        Forms\Components\Select::make('user_id')
                             ->relationship('user', 'name')
                             ->label('Teacher Name')
                             ->disabled()
                             ->required(),
-                    ])->columns(2),
+                    ])->columns(),
             ]);
     }
 
@@ -103,7 +103,6 @@ class TeacherResource extends Resource
     {
         return [
             'courses' => RelationManagers\CoursesRelationManager::class,
-            'classes' => RelationManagers\ClassesRelationManager::class,
             'exams' => RelationManagers\ExamsRelationManager::class,
             'gradedAssignments' => RelationManagers\GradedAssignmentsRelationManager::class,
             'user' => RelationManagers\UserRelationManager::class,

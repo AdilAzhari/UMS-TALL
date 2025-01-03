@@ -35,9 +35,9 @@ class EnrollmentResource extends Resource
                 Forms\Components\TextInput::make('student_id')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('class_id')
-                    ->required()
-                    ->numeric(),
+//                Forms\Components\TextInput::make('class_id')
+//                    ->required()
+//                    ->numeric(),
             ]);
     }
 
@@ -52,9 +52,9 @@ class EnrollmentResource extends Resource
                 Tables\Columns\TextColumn::make('student_id')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('class_id')
-                    ->numeric()
-                    ->sortable(),
+//                Tables\Columns\TextColumn::make('class_id')
+//                    ->numeric()
+//                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
