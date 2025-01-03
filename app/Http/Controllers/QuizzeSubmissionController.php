@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreQuizzeSubmissionRequest;
 use App\Http\Requests\UpdateQuizzeSubmissionRequest;
-use App\Models\QuizzeSubmission;
+use App\Models\QuizSubmission;
 
 class QuizzeSubmissionController extends Controller
 {
@@ -35,7 +35,7 @@ class QuizzeSubmissionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(QuizzeSubmission $quizzeSubmission)
+    public function show(QuizSubmission $quizzeSubmission)
     {
         //
     }
@@ -43,7 +43,7 @@ class QuizzeSubmissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(QuizzeSubmission $quizzeSubmission)
+    public function edit(QuizSubmission $quizzeSubmission)
     {
         //
     }
@@ -51,7 +51,7 @@ class QuizzeSubmissionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateQuizzeSubmissionRequest $request, QuizzeSubmission $quizzeSubmission)
+    public function update(UpdateQuizzeSubmissionRequest $request, QuizSubmission $quizzeSubmission)
     {
         //
     }
@@ -59,7 +59,7 @@ class QuizzeSubmissionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(QuizzeSubmission $quizzeSubmission)
+    public function destroy(QuizSubmission $quizzeSubmission)
     {
         //
     }

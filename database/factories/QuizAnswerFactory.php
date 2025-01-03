@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\QuizAnswer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\QuizzeAnswer>
+ * @extends Factory<QuizAnswer>
  */
-class QuizzeAnswerFactory extends Factory
+class QuizAnswerFactory extends Factory
 {
     /**
      * Define the model's default state.

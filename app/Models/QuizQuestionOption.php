@@ -20,6 +20,6 @@ class QuizQuestionOption extends Model
 
     public function quizQuestion(): BelongsTo
     {
-        return $this->belongsTo(QuizzeQuestion::class);
+        return $this->belongsTo(QuizQuestion::class);
     }
 }

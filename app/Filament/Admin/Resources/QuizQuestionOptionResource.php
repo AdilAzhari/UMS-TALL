@@ -2,17 +2,17 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\QuizzeQuestionResource\Pages;
-use App\Models\QuizQuestion;
+use App\Filament\Admin\Resources\QuizzeQuestionOptionResource\Pages;
+use App\Models\QuizQuestionOption;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class QuizzeQuestionResource extends Resource
+class QuizQuestionOptionResource extends Resource
 {
-    protected static ?string $model = QuizQuestion::class;
+    protected static ?string $model = QuizQuestionOption::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
 
@@ -22,18 +22,20 @@ class QuizzeQuestionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('quiz_id')
+                Forms\Components\Select::make('quiz_question_id')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('created_by')
+                    ->relationship('quizQuestion', 'question'),
+                Forms\Components\TextInput::make('option')
                     ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('updated_by')
+                    ->maxLength(255),
+                Forms\Components\Toggle::make('is_correct')
+                    ->required(),
+                Forms\Components\Select::make('created_by')
                     ->required()
-                    ->numeric(),
-                Forms\Components\Textarea::make('question')
+                    ->relationship(),
+                Forms\Components\Select::make('updated_by')
                     ->required()
-                    ->columnSpanFull(),
+                    ->relationship(),
             ]);
     }
 
@@ -41,15 +43,23 @@ class QuizzeQuestionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('quiz_id')
+                Tables\Columns\TextColumn::make('quiz_question_id')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('option')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('is_correct')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_by')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_by')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('deleted_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -82,9 +92,9 @@ class QuizzeQuestionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListQuizzeQuestions::route('/'),
-            'create' => Pages\CreateQuizzeQuestion::route('/create'),
-            'edit' => Pages\EditQuizzeQuestion::route('/{record}/edit'),
+            'index' => Pages\ListQuizzeQuestionOptions::route('/'),
+            'create' => Pages\CreateQuizzeQuestionOption::route('/create'),
+            'edit' => Pages\EditQuizzeQuestionOption::route('/{record}/edit'),
         ];
     }
 }
