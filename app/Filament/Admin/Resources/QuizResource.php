@@ -28,9 +28,9 @@ class QuizzeResource extends Resource
                 Forms\Components\TextInput::make('teacher_id')
                     ->required()
                     ->numeric(),
-//                Forms\Components\TextInput::make('class_id')
-//                    ->required()
-//                    ->numeric(),
+                Forms\Components\TextInput::make('class_group_id')
+                    ->required()
+                    ->numeric(),
                 Forms\Components\TextInput::make('code')
                     ->required()
                     ->maxLength(255),

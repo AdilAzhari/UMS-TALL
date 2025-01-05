@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\QuizzeQuestionResource\Pages;
+use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -10,9 +11,10 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class QuizzeQuestionResource extends Resource
+class QuizQuestionResource extends Resource
 {
     protected static ?string $model = QuizQuestion::class;
+    protected static ?string $navigationLabel = "Quizzes";
 
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
 
@@ -22,15 +24,18 @@ class QuizzeQuestionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('quiz_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('created_by')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('updated_by')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('quiz_id')
+                    ->label('Quiz')
+                    ->relationship('quiz', 'id')
+                    ->searchable()
+                ->options(Quiz::pluck('title')),
+                Forms\Components\Select::make('created_by')
+                    ->relationship('createdBy', 'name')
+                    ->required(),
+                Forms\Components\Select::make('updated_by')
+                    ->label('Updated By')
+                    ->relationship('updatedBy', 'name')
+                    ->required(),
                 Forms\Components\Textarea::make('question')
                     ->required()
                     ->columnSpanFull(),
@@ -41,13 +46,13 @@ class QuizzeQuestionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('quiz_id')
+                Tables\Columns\TextColumn::make('quiz.title')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_by')
+                Tables\Columns\TextColumn::make('createdBy.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('updated_by')
+                Tables\Columns\TextColumn::make('updatedBy.name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
