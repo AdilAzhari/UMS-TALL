@@ -190,4 +190,8 @@ class MaterialResource extends Resource
     {
         return $record->updated_by = Auth::id(); // Set the current user's ID as the updated_by value
     }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }

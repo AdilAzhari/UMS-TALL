@@ -115,4 +115,8 @@ class AssignmentSubmissionResource extends Resource
             'edit' => Pages\EditAssignmentSubmission::route('/{record}/edit'),
         ];
     }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }

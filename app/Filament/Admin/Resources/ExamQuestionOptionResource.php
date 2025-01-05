@@ -95,4 +95,8 @@ class ExamQuestionOptionResource extends Resource
             'edit' => Pages\EditExamQuestionOption::route('/{record}/edit'),
         ];
     }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }
