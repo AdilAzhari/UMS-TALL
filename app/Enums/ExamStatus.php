@@ -10,7 +10,6 @@ enum ExamStatus: string implements HasLabel
     case FAILED = 'Failed';
     case ABSENT = 'Absent';
 
-
     public function getLabel(): ?string
     {
         return match ($this) {

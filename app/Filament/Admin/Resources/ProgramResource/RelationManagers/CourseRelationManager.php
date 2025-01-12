@@ -8,7 +8,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class CoursesRelationManager extends RelationManager
+class CourseRelationManager extends RelationManager
 {
     protected static string $relationship = 'courses';
 
@@ -43,6 +43,16 @@ class CoursesRelationManager extends RelationManager
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ])
+            ->emptyStateHeading('No courses yet') // Custom heading for the empty state
+            ->emptyStateDescription('Once you add a course, it will appear here.') // Custom description for the empty state
+            ->emptyStateIcon('heroicon-o-bookmark') // Custom icon for the empty state
+            ->emptyStateActions([
+                Tables\Actions\Action::make('create')
+                    ->label('Create course')
+                    ->url(route('filament.admin.resources.programs.create'))
+                    ->icon('heroicon-o-plus')
+                    ->button(),
             ]);
     }
 }

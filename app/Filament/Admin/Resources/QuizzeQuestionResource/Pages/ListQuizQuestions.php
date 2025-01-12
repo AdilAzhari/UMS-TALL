@@ -6,7 +6,7 @@ use App\Filament\Admin\Resources\QuizzeQuestionResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListQuizzeQuestions extends ListRecords
+class ListQuizQuestions extends ListRecords
 {
     protected static string $resource = QuizzeQuestionResource::class;
 
