@@ -19,9 +19,9 @@ return new class extends Migration
             $table->foreignId('Class_group_id')->constrained('class_groups')->cascadeOnDelete();
             $table->text('message');
             $table->string('title');
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->enum('type', ['announcement', 'assignment', 'quiz'])->default('announcement');
-            $table->enum('audience', ['global', 'week', 'course'])->default('global');
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
+            $table->enum('type', ['Announcement', 'Assignment', 'Quiz'])->default('Announcement');
+            $table->enum('audience', ['Global', 'Week', 'Course'])->default('Global');
             $table->string('attachments')->nullable();
             $table->foreignId('created_by')->constrained('teachers')->cascadeOnDelete();
             $table->softDeletes();

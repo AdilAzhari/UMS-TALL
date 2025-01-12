@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\QuizDuration;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,14 +15,16 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('Class_group_id')->constrained('class_groups')->cascadeOnDelete();
+            $table->foreignId('class_group_id')->constrained('class_groups')->cascadeOnDelete();
             $table->string('code');
             $table->string('description');
-            $table->enum('type', ['graded', 'ungraded'])->default('ungraded');
+            $table->enum('type', ['Graded', 'Ungraded'])->default('Ungraded');
             $table->string('title');
             $table->string('instructions');
-            $table->enum('duration', ['5', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '60']);
-            $table->enum('status', ['draft', 'published', 'closed'])->default('draft');
+            $table->enum('duration', [QuizDuration::TEN->value, QuizDuration::SIXTY->value,
+                QuizDuration::THIRTY->value, QuizDuration::FORTY_FIVE->value, QuizDuration::TWENTY->value])
+                ->default(QuizDuration::TEN);
+            $table->enum('status', ['Draft', 'Published', 'Closed'])->default('Draft');
             $table->date('start_date');
             $table->date('end_date');
             $table->string('passing_score');

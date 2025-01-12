@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('exam_id')->constrained()->cascadeOnDelete();
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->integer('score');
-            $table->enum('status', ['passed', 'failed', 'absent'])->default('absent');
+            $table->enum('status', ['Passed', 'Failed', 'Absent'])->default('Passed');
             $table->string('notes')->nullable();
             $table->timestamps();
         });

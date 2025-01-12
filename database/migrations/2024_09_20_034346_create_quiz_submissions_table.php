@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('quiz_id')->constrained()->cascadeOnDelete();
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->integer('score')->default(0);
-            $table->enum('status', ['pending', 'submitted', 'graded'])->default('pending');
+            $table->enum('status', ['Pending', 'Submitted', 'Graded'])->default('Pending');
             $table->timestamp('submitted_at')->nullable();
             $table->timestamp('graded_at')->nullable();
             $table->foreignId('graded_by')->nullable()->constrained('teachers')->cascadeOnDelete();

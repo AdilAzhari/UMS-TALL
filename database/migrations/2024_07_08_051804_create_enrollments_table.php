@@ -12,7 +12,9 @@ return new class extends Migration {
     {
         Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['enrolled', 'pending', 'completed', 'dropped'])->default('pending');
+            $table->enum('enrollment_status', ['Enrolled', 'Pending', 'Completed', 'Dropped'])->default('Pending');
+            $table->enum('proctor_status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->boolean('proctored')->default(false);
             $table->date('enrollment_date');
             $table->date('completion_date')->nullable();
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
@@ -20,6 +22,7 @@ return new class extends Migration {
             $table->foreignId('term_id')->constrained()->cascadeOnDelete();
             $table->string('grade')->default('F');
             $table->Decimal('grade_points')->default(0.00);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

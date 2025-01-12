@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\TechnicalTeamRole;
+use App\Enums\TechnicalTeamStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +16,10 @@ return new class extends Migration
         Schema::create('technical_teams', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->enum('role', ['support', 'system_admin'])->default('support');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('role', [TechnicalTeamRole::SUPPORT->value, TechnicalTeamRole::MANAGER->value, TechnicalTeamRole::SUPER_ADMIN->value, TechnicalTeamRole::ADMIN->value])
+                ->default(TechnicalTeamRole::ADMIN->value);
+            $table->enum('status', [TechnicalTeamStatus::ACTIVE->value, TechnicalTeamStatus::INACTIVE->value])
+                ->default(TechnicalTeamStatus::ACTIVE->value);
             $table->timestamps();
         });
     }
