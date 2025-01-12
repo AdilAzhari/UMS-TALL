@@ -2,6 +2,8 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Enums\TechnicalTeamRole;
+use App\Enums\TechnicalTeamStatus;
 use App\Filament\Admin\Resources\TechnicalTeamResource\Pages;
 use App\Models\TechnicalTeam;
 use Filament\Forms;
@@ -25,9 +27,13 @@ class TechnicalTeamResource extends Resource
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->required(),
-                Forms\Components\TextInput::make('role')
+                Forms\Components\Select::make('role')
+                    ->options(TechnicalTeamRole::class)
+                    ->default(TechnicalTeamRole::SUPPORT)
                     ->required(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->default(TechnicalTeamStatus::ACTIVE)
+                    ->options(TechnicalTeamStatus::class)
                     ->required(),
             ]);
     }
@@ -82,5 +88,10 @@ class TechnicalTeamResource extends Resource
             'create' => Pages\CreateTechnicalTeam::route('/create'),
             'edit' => Pages\EditTechnicalTeam::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

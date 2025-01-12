@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Resources\QuizzeResource\Pages;
+namespace App\Filament\Admin\Resources\QuizResource\Pages;
 
 use App\Filament\Admin\Resources\QuizResource;
 use Filament\Actions;

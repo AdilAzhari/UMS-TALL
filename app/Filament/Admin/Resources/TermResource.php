@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class TermResource extends Resource
 {
@@ -25,22 +26,32 @@ class TermResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255)
-                    ->unique()
-                    ->placeholder('e.g. Spring 2022'),
+                    ->unique(ignoreRecord: true)
+                    ->placeholder('e.g. Spring 2022')
+                    ->live(onBlur: true) // Listen for changes to the name field
+                    ->afterStateUpdated(function ($state, Forms\Set $set): void {
+
+                        $slug = Str::slug($state);
+                        if (Term::where('slug', $slug)->exists()) {
+                            $slug .= '-' . time();
+                        }
+                        $set('slug', $slug); // Update the slug field
+                    }),
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->maxLength(255)
+                    ->unique(ignoreRecord: true)
+                    ->disabled()
+                    ->dehydrated(), // Ensure the value is saved to the database
                 Forms\Components\DatePicker::make('start_date')
                     ->required(),
                 Forms\Components\DatePicker::make('end_date')
                     ->required(),
-                Forms\Components\Toggle::make('is_current')
+                Forms\Components\TextInput::make('max_courses')
+                    ->label('Maximum Courses')
+                    ->placeholder('Enter the number of maximum course student can take')
                     ->required()
-                    ->default(true)
-                    ->columnSpan(2),
-                forms\Components\Select::make('current_term_id')
-                    ->label('Current Term')
-                    ->relationship('currentTerm', 'name')
-                    ->nullable()
-                    ->columnSpan(2)
-                    ->placeholder('Select the current term'),
+                    ->numeric(),
             ])->columns(3);
     }
 
@@ -50,14 +61,14 @@ class TermResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('slug')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('start_date')
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('end_date')
                     ->date()
                     ->sortable(),
-                Tables\Columns\IconColumn::make('is_current')
-                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -83,7 +94,7 @@ class TermResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+//            CourseRelationManager::class,
         ];
     }
 
@@ -94,5 +105,10 @@ class TermResource extends Resource
             'create' => Pages\CreateTerm::route('/create'),
             'edit' => Pages\EditTerm::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::$model::query()->count();
     }
 }

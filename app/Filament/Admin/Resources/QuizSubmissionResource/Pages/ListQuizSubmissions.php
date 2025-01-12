@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Filament\Admin\Resources\QuizzeSubmissionResource\Pages;
+namespace App\Filament\Admin\Resources\QuizSubmissionResource\Pages;
 
 use App\Filament\Admin\Resources\QuizSubmissionResource;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\ListRecords;
 
-class EditQuizSubmission extends EditRecord
+class ListQuizSubmissions extends ListRecords
 {
     protected static string $resource = QuizSubmissionResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\CreateAction::make(),
         ];
     }
 }

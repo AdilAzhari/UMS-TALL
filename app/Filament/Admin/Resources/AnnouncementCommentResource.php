@@ -104,6 +104,7 @@ class AnnouncementCommentResource extends Resource
             'edit' => Pages\EditAnnouncementComment::route('/{record}/edit'),
         ];
     }
+
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();

@@ -31,10 +31,14 @@ class TeacherResource extends Resource
                             ->maxLength(255),
                         Forms\Components\TextInput::make('experience')
                             ->required()
-                            ->maxLength(255),
+                            ->numeric()
+                            ->integer(),
                         Forms\Components\TextInput::make('specialization')
                             ->required()
                             ->maxLength(255),
+                        Forms\Components\Select::make('program_id')
+                            ->relationship('program', 'program_name')
+                            ->required(),
                         Forms\Components\Select::make('department_id')
                             ->relationship('department', 'name')
                             ->required(),
@@ -46,8 +50,8 @@ class TeacherResource extends Resource
                         Forms\Components\Select::make('user_id')
                             ->relationship('user', 'name')
                             ->label('Teacher Name')
-                            ->disabled()
                             ->required(),
+
                     ])->columns(),
             ]);
     }
@@ -56,27 +60,17 @@ class TeacherResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('qualification')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('experience')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('specialization')
+                Tables\Columns\TextColumn::make('user.name')
+                    ->searchable()
                     ->sortable()
-                    ->searchable(),
+                    ->label('Teacher Name'),
                 Tables\Columns\TextColumn::make('department.name')
                     ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('designation')
-                    ->searchable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('hire_date')
                     ->date()
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->searchable()
-                    ->sortable()
-                    ->label('Teacher Name'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -116,5 +110,10 @@ class TeacherResource extends Resource
             'create' => Pages\CreateTeacher::route('/create'),
             'edit' => Pages\EditTeacher::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

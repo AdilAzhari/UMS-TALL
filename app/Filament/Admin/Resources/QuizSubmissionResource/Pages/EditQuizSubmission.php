@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Resources\QuizzeSubmissionResource\Pages;
+namespace App\Filament\Admin\Resources\QuizSubmissionResource\Pages;
 
 use App\Filament\Admin\Resources\QuizSubmissionResource;
 use Filament\Actions;

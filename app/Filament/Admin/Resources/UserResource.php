@@ -3,12 +3,9 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\UserResource\Pages;
-use App\Filament\Admin\Resources\UserResource\RelationManagers\CreatedAssignmentsRelationManager;
-use App\Filament\Admin\Resources\UserResource\RelationManagers\CreatedCoursesRelationManager;
 use App\Filament\Admin\Resources\UserResource\RelationManagers\StudentRelationManager;
 use App\Filament\Admin\Resources\UserResource\RelationManagers\TeacherRelationManager;
 use App\Filament\Admin\Resources\UserResource\RelationManagers\TechnicalTeamRelationManager;
-use App\Filament\Admin\Resources\UserResource\RelationManagers\UpdatedAssignmentsRelationManager;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -61,9 +58,15 @@ class UserResource extends Resource
                             ->maxLength(255)
                             ->default(null),
                         Forms\Components\TextInput::make('phone_number')
+                            ->label('Phone Number')
                             ->tel()
-                            ->maxLength(255)
-                            ->default(null),
+                            ->rules([
+                                'nullable',
+                                'string',
+                                'regex:/^([0-9\s\-\+\(\)]*)$/',
+                            ])
+                            ->mask('+1 (999) 999-9999')
+                            ->placeholder('+1 (869) 863-5508'),
                     ])->columns(2),
 
                 Forms\Components\Section::make('Security')
@@ -186,32 +189,16 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('last_name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('Preferred_name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('phone_number')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('city_of_residence')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('state')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('zip_code')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('avatar')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('gender'),
-                Tables\Columns\TextColumn::make('date_of_birth')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('nationality')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('country_of_residence')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('marital_status'),
-                Tables\Columns\TextColumn::make('secondary_email_address')
-                    ->searchable(),
                 Tables\Columns\IconColumn::make('is_admin')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('role'),
-                Tables\Columns\TextColumn::make('created_by.name')
+                Tables\Columns\TextColumn::make('created_by.id')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_by.name')
                     ->sortable(),
@@ -232,12 +219,9 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CreatedAssignmentsRelationManager::class,
-            CreatedCoursesRelationManager::class,
             StudentRelationManager::class,
             TeacherRelationManager::class,
             TechnicalTeamRelationManager::class,
-            UpdatedAssignmentsRelationManager::class,
         ];
     }
 
@@ -248,5 +232,10 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

@@ -2,19 +2,22 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\QuizzeQuestionOptionResource\Pages;
+use App\Filament\Admin\Resources\QuizQuestionOptionResource\Pages;
+use App\Models\QuizQuestion;
 use App\Models\QuizQuestionOption;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class QuizQuestionOptionResource extends Resource
 {
     protected static ?string $model = QuizQuestionOption::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+    protected static ?string $activeNavigationIcon = 'heroicon-o-adjustments-horizontal';
 
     protected static ?string $navigationGroup = 'Assessment & Grading';
 
@@ -23,19 +26,20 @@ class QuizQuestionOptionResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('quiz_question_id')
+                    ->relationship('quizQuestion', 'id')
                     ->required()
-                    ->relationship('quizQuestion', 'question'),
+                    ->options(QuizQuestion::all()->pluck('question')),
                 Forms\Components\TextInput::make('option')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_correct')
                     ->required(),
-                Forms\Components\Select::make('created_by')
-                    ->required()
-                    ->relationship(),
-                Forms\Components\Select::make('updated_by')
-                    ->required()
-                    ->relationship(),
+                Forms\Components\Hidden::make('created_by')
+                    ->default(auth()->id())
+                    ->disabledOn('edit'),
+                Forms\Components\Hidden::make('updated_by')
+                    ->default(auth()->id())
+                    ->disabledOn('create'),
             ]);
     }
 
@@ -43,7 +47,7 @@ class QuizQuestionOptionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('quiz_question_id')
+                Tables\Columns\TextColumn::make('quizQuestion.question')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('option')
@@ -70,7 +74,7 @@ class QuizQuestionOptionResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -78,6 +82,8 @@ class QuizQuestionOptionResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ]);
     }
@@ -92,9 +98,22 @@ class QuizQuestionOptionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListQuizzeQuestionOptions::route('/'),
-            'create' => Pages\CreateQuizzeQuestionOption::route('/create'),
-            'edit' => Pages\EditQuizzeQuestionOption::route('/{record}/edit'),
+            'index' => Pages\ListQuizQuestionOptions::route('/'),
+            'create' => Pages\CreateQuizQuestionOption::route('/create'),
+            'edit' => Pages\EditQuizQuestionOption::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

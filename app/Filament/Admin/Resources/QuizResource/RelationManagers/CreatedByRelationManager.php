@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Resources\AssignmentResource\RelationManagers;
+namespace App\Filament\Admin\Resources\QuizResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -8,15 +8,15 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class WeekRelationManager extends RelationManager
+class CreatedByRelationManager extends RelationManager
 {
-    protected static string $relationship = 'week';
+    protected static string $relationship = 'createdBy';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id')
+                Forms\Components\TextInput::make('created_by')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -25,11 +25,9 @@ class WeekRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('id')
+            ->recordTitleAttribute('created_by')
             ->columns([
-                Tables\Columns\TextColumn::make('week_number'),
-                Tables\Columns\TextColumn::make('start_date'),
-                Tables\Columns\TextColumn::make('end_date'),
+                Tables\Columns\TextColumn::make('created_by'),
             ])
             ->filters([
                 //

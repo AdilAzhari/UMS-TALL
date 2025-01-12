@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Resources\AssignmentResource\RelationManagers;
+namespace App\Filament\Admin\Resources\QuizResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -27,9 +27,7 @@ class WeekRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('id')
             ->columns([
-                Tables\Columns\TextColumn::make('week_number'),
-                Tables\Columns\TextColumn::make('start_date'),
-                Tables\Columns\TextColumn::make('end_date'),
+                Tables\Columns\TextColumn::make('id'),
             ])
             ->filters([
                 //

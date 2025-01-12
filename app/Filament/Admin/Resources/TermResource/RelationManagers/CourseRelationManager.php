@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Filament\Admin\Resources\AssignmentResource\RelationManagers;
+namespace App\Filament\Admin\Resources\TermResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class WeekRelationManager extends RelationManager
+class CourseRelationManager extends RelationManager
 {
-    protected static string $relationship = 'week';
+    protected static string $relationship = 'course';
 
     public function form(Form $form): Form
     {
@@ -27,9 +29,7 @@ class WeekRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('id')
             ->columns([
-                Tables\Columns\TextColumn::make('week_number'),
-                Tables\Columns\TextColumn::make('start_date'),
-                Tables\Columns\TextColumn::make('end_date'),
+                Tables\Columns\TextColumn::make('id'),
             ])
             ->filters([
                 //

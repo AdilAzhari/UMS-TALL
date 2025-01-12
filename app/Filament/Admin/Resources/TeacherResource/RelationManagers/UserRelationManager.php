@@ -33,7 +33,7 @@ class UserRelationManager extends RelationManager
                             ->label('Preferred Name (Nickname) Optional')
                             ->maxLength(255)
                             ->default(null),
-                    ])->columns(2),
+                    ])->columns(),
 
                 Forms\Components\Section::make('Contact Information')
                     ->description('Enter user contact details')
@@ -51,7 +51,7 @@ class UserRelationManager extends RelationManager
                             ->tel()
                             ->maxLength(255)
                             ->default(null),
-                    ])->columns(2),
+                    ])->columns(),
 
                 Forms\Components\Section::make('Security')
                     ->description('Set user password')
@@ -84,7 +84,7 @@ class UserRelationManager extends RelationManager
                                 'divorced',
                                 'widowed',
                             ])->default('single'),
-                    ])->columns(2),
+                    ])->columns(),
 
                 Forms\Components\Section::make('Address Information')
                     ->description('Enter user address details')
@@ -101,7 +101,7 @@ class UserRelationManager extends RelationManager
                         Forms\Components\TextInput::make('country_of_residence')
                             ->maxLength(255)
                             ->default(null),
-                    ])->columns(2),
+                    ])->columns(),
 
                 Forms\Components\Section::make('Account Settings')
                     ->description('Configure user account settings')
@@ -113,12 +113,12 @@ class UserRelationManager extends RelationManager
                                 'admin',
                                 'technical_team',
                             ]),
-                        Forms\Components\Fileupload::make('avatar')
+                        Forms\Components\FileUpload::make('avatar')
                             ->label('Profile Picture')
                             ->image()
                             ->disk('public')
                             ->default(null),
-                    ])->columns(2),
+                    ])->columns(),
             ]);
     }
 

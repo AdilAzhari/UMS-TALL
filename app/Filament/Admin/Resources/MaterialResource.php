@@ -27,63 +27,54 @@ class MaterialResource extends Resource
                 Forms\Components\Section::make('Basic Information')
                     ->schema([
                         Forms\Components\TextInput::make('title')
-                            ->label('Course Title')
+                            ->label('Material Title')
                             ->required()
                             ->maxLength(255),
                         Forms\Components\RichEditor::make('description')
-                            ->label('Course Description')
+                            ->label('Material Description')
                             ->required()
                             ->columnSpanFull(),
                         Forms\Components\Select::make('course_id')
-                            ->label('Course Name')
+                            ->label('Course')
                             ->required()
-                            ->relationship('course', 'name'),
+                            ->relationship('course', 'name')
+                            ->searchable()
+                            ->preload(),
                         Forms\Components\Radio::make('type')
+                            ->label('Material Type')
                             ->inline()
-                            ->label('Course Type')
                             ->options([
-                                'video' => 'Video',
-                                'audio' => 'Audio',
-                                'pdf' => 'PDF',
-                                'doc' => 'DOC',
-                                'ppt' => 'PPT',
-                                'zip' => 'ZIP',
-                                'none' => 'none',
+                                'Video', 'PDF', 'ZIP', 'PPT','DOC','None',
                             ])
-                            ->default('none'),
+                            ->default('none')
+                            ->required(),
                     ]),
+
                 // Section: Media/Files
                 Forms\Components\Section::make('Media/Files')
                     ->schema([
                         Forms\Components\TextInput::make('thumbnail')
-                            ->label('Thumbnail')
-                            ->maxLength(255)
-                            ->default(null),
+                            ->label('Thumbnail URL')
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('size')
-                            ->label('Size')
-                            ->placeholder('Size in bytes')
+                            ->label('File Size (bytes)')
                             ->numeric()
                             ->default(0),
                         Forms\Components\TextInput::make('path')
-                            ->label('Path')
-                            ->maxLength(255)
-                            ->default(null),
+                            ->label('File Path')
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('url')
-                            ->label('Url')
-                            ->maxLength(255)
-                            ->default(null),
+                            ->label('File URL')
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('filename')
                             ->label('Filename')
-                            ->maxLength(255)
-                            ->default(null),
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('original_filename')
                             ->label('Original Filename')
-                            ->maxLength(255)
-                            ->default(null),
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('disk')
                             ->label('Storage Disk')
-                            ->maxLength(255)
-                            ->default(null),
+                            ->maxLength(255),
                     ]),
 
                 // Section: Audit Information
@@ -91,74 +82,59 @@ class MaterialResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('created_by')
                             ->label('Created By')
+                            ->relationship('createdBy.user', 'name')
+                            ->default(Auth::id())
                             ->required()
-                            ->relationship('createdBy', 'name')
-                            ->default(function () {
-                                if (Auth::check() && Auth::user()->created_by === null) {
-                                    return Auth::id();
-                                }
-                            })->disabled(),
+                            ->disabled(),
                         Forms\Components\Select::make('updated_by')
                             ->label('Updated By')
-                            ->relationship('updatedBy', 'name')
-                            ->default(function () {
-                                return Auth::user()->id;
-                            })
-                            ->disabled()
-                            ->default(function () {
-                                return Auth::user()->id;
-                            }),
-                    ])->columns(3),
+                            ->relationship('updatedBy.user', 'name')
+                            ->default(Auth::id())
+                            ->disabled(),
+                    ])
+                    ->columns(),
             ]);
-
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('course.name')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Material Title')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_by')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('course.name')
+                    ->label('Course')
+                    ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('updated_by')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('type')
+                    ->label('Type')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('type'),
-                Tables\Columns\TextColumn::make('thumbnail')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('size')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('path')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('url')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('filename')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('original_filename')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('disk')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime()
+                    ->label('Size (bytes)')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('createdBy.name')
+                    ->label('Created By')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updatedBy.name')
+                    ->label('Updated By')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Created At')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Updated At')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // Add filters if needed
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -173,7 +149,7 @@ class MaterialResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            // Add relation managers if needed
         ];
     }
 
@@ -186,12 +162,8 @@ class MaterialResource extends Resource
         ];
     }
 
-    public static function beforeSave($record): int|string|null
-    {
-        return $record->updated_by = Auth::id(); // Set the current user's ID as the updated_by value
-    }
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        return static::$model::query()->count();
     }
 }
