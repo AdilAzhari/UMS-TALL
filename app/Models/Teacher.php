@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TeacherStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,7 +23,6 @@ class Teacher extends Model
         'specialization',
         'designation',
         'hire_date',
-        'phone_number',
         'status',
         'created_by',
         'updated_by',
@@ -30,12 +30,12 @@ class Teacher extends Model
 
     protected $casts = [
         'hire_date' => 'datetime',
-        'status' => 'boolean',
+        'status' => TeacherStatus::class,
         'experience' => 'integer',
     ];
 
     protected $attributes = [
-        'status' => 'active',
+        'status' => TeacherStatus::ACTIVE,
     ];
 
     public function user(): BelongsTo
@@ -86,5 +86,10 @@ class Teacher extends Model
     public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    public function program(): BelongsTo
+    {
+        return $this->belongsTo(Program::class);
     }
 }
