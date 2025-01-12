@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->integer('max_courses')->default(5);
+            $table->boolean('is_current')->default(false);
             $table->date('start_date');
             $table->date('end_date');
             $table->date('registration_start_date')->nullable();
