@@ -58,8 +58,4 @@ class AdminResource extends Resource
             'edit' => Pages\EditAdmin::route('/{record}/edit'),
         ];
     }
-    // public static function getNavigationBadge(): ?string
-    // {
-    //     return static::getModel()::count();
-    // }
 }

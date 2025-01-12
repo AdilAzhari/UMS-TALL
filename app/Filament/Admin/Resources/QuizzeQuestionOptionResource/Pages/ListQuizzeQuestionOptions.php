@@ -2,13 +2,13 @@
 
 namespace App\Filament\Admin\Resources\QuizzeQuestionOptionResource\Pages;
 
-use App\Filament\Admin\Resources\QuizzeQuestionOptionResource;
+use App\Filament\Admin\Resources\QuizQuestionOptionResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListQuizzeQuestionOptions extends ListRecords
 {
-    protected static string $resource = QuizzeQuestionOptionResource::class;
+    protected static string $resource = QuizQuestionOptionResource::class;
 
     protected function getHeaderActions(): array
     {

@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Announcement;
-use App\Models\Classes;
+use App\Models\ClassGroup;
 use App\Models\Course;
 use App\Models\Teacher;
 use App\Models\User;
@@ -32,7 +32,7 @@ class AnnouncementFactory extends Factory
             'audience' => $this->faker->randomElement(['global', 'week', 'course']),
             'type' => $this->faker->randomElement(['announcement', 'assignment', 'quiz']),
             'created_by' => Teacher::query()->inRandomOrder()->first()->id,
-            'class_id' => Classes::query()->inRandomOrder()->first()->id,
+            'class_group_id' => ClassGroup::query()->inRandomOrder()->first()->id,
         ];
     }
 }

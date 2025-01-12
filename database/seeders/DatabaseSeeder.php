@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,54 +12,53 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //        User::factory()->create([
-        //            'name' => 'admin',
-        //            'email' => 'admin@example.com',
-        //            'password' => '12345678',
-        //        ]);
-        //        User::factory()->create([
-        //            'name' => 'teacher',
-        //            'email' => 'teacher@example.com',
-        //            'password' => '12345678',
-        //        ]);
+        User::factory()->create([
+            'name' => 'admin',
+            'email' => 'admin@example.com',
+            'password' => '12345678',
+        ]);
+        User::factory()->create([
+            'name' => 'teacher',
+            'email' => 'teacher@example.com',
+            'password' => '12345678',
+        ]);
         $this->call([
-            //            UserSeeder::class,
-            //            departmentSeeder::class,
-            //            ProgramTypeSeeder::class,
-            //            ProgramStatusSeeder::class,
-            //            programSeeder::class,
-            //            TermSeeder::class,
-            //            CourseCategorySeeder::class,
-            //            CourseSeeder::class,
-            //            TeacherSeeder::class,
-            //            StudentSeeder::class,
-            //            ProctorSeeder::class,
-            //            ClassSeeder::class,
-            //            enrollmentSeeder::class,
-            //            AttendanceSeeder::class,
+            UserSeeder::class,
+            departmentSeeder::class,
+            ProgramTypeSeeder::class,
+            ProgramStatusSeeder::class,
+            programSeeder::class,
+            TermSeeder::class,
+            CourseCategorySeeder::class,
+            CourseSeeder::class,
+            TeacherSeeder::class,
+            StudentSeeder::class,
+            ProctorSeeder::class,
+            enrollmentSeeder::class,
+            AttendanceSeeder::class,
 
-            //            WeekSeeder::class,
-            //            AssignmentSeeder::class,
+            WeekSeeder::class,
+            AssignmentSeeder::class,
             QuizSeeder::class,
-            //            GradingScaleSeeder::class,
+            GradingScaleSeeder::class,
             AssignmentSubmissionSeeder::class,
-            //            ExamSeeder::class,
-            //            ExamResultSeeder::class,
-            //            TechnicalTeamSeeder::class,
+            ExamSeeder::class,
+            ExamResultSeeder::class,
+            TechnicalTeamSeeder::class,
             announcementSeeder::class,
-            //            QuizQuestionSeeder::class,
-            //            QuizQuestionOptionSeeder::class,
-            //            QuizAnswerSeeder::class,
-            //            QuizSubmissionSeeder::class,
+            QuizQuestionSeeder::class,
+            QuizQuestionOptionSeeder::class,
+            QuizAnswerSeeder::class,
+            QuizSubmissionSeeder::class,
             MaterialSeeder::class,
-            //            ExamQuestionSeeder::class,
-            //            ExamAnswerSeeder::class,
-            //            ExamQuestionOptionSeeder::class,
+            ExamQuestionSeeder::class,
+            ExamAnswerSeeder::class,
+            ExamQuestionOptionSeeder::class,
             AnnouncementCommentSeeder::class,
-            //            AcademicProgressSeeder::class,
-            //            RegistrationSeeder::class,
+            AcademicProgressSeeder::class,
+            RegistrationSeeder::class,
             StudentCourseSeeder::class,
-            CourseTeacherseeder::class,
+//            CourseTeacherseeder::class,
             CourseRequirementsSeeder::class,
             //            linkSeeder::class,
             //            CourseGradesSeeder::class,
@@ -67,7 +67,12 @@ class DatabaseSeeder extends Seeder
             //            StorySeeder::class,
             //            StoryTagSeeder::class,
             //            StoryCommentSeeder::class,
-            LearningGuidancesSeeder::class,
+            LearningGuidanceSeeder::class,
+            AssignmentAttachmentSeeder::class,
+            AssignmentCommentSeeder::class,
+            AssignmentSubmissionFileSeeder::class,
+            PeerReviewSeeder::class,
+            ClassGroupSeeder::class,
         ]);
     }
 }

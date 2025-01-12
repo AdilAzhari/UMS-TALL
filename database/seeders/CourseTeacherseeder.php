@@ -11,10 +11,6 @@ class CourseTeacherseeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Course::all()->each(function ($course) {
-            $course->teachers()->attach(
-                \App\Models\Teacher::inRandomOrder()->first()
-            );
-        });
+        CourseTeacher::factory()->create();
     }
 }

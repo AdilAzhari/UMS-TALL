@@ -1,95 +1,82 @@
 <template>
-    <div v-for="week in weeks" :key="week.id" class="week-content">
-        <!-- Learning Guidance Section -->
-        <section class="p-4 bg-blue-50 rounded-lg border border-blue-200 mb-4">
-            <h3 class="text-md font-medium text-blue-700">Learning Guidance: Week {{ week.week_number }}</h3>
-            <p class="text-sm text-blue-600 mt-2">{{ week.learningGuidance.overview }}</p>
+    <Head>
+        <title class="page-title">
 
-            <ul class="list-disc list-inside mt-4 space-y-2">
-                <li v-for="topic in week.learningGuidance.topics" :key="topic" class="text-gray-700">
-                    {{ topic }}
-                </li>
-            </ul>
-
-            <div class="mt-4">
-                <h4 class="font-medium text-gray-700">Learning Objectives:</h4>
-                <ul class="list-disc list-inside space-y-2 text-gray-600">
-                    <li v-for="objective in week.learningGuidance.objectives" :key="objective">
-                        {{ objective }}
-                    </li>
-                </ul>
+        </title>
+    </Head>
+    <Header weeks="{{weeks.id}}"/>
+    <breadcrumb breadcrumbs=""/>
+    <div class="max-w-5xl mx-auto p-6 space-y-8">
+        <div v-for="week in weeks" :key="week.id" class="bg-white rounded-xl shadow-sm border">
+            <!-- Header -->
+            <div class="border-b p-6">
+                <h2 class="text-xl font-semibold text-gray-900">Week {{ week.week_id }}</h2>
+                <p class="mt-2 text-gray-600">{{ week.overview }}</p>
             </div>
 
-            <div class="mt-4">
-                <h4 class="font-medium text-gray-700">Tasks:</h4>
-                <ul class="list-disc list-inside space-y-2 text-gray-600">
-                    <li v-for="task in week.learningGuidance.tasks" :key="task">
-                        {{ task }}
-                    </li>
-                </ul>
-            </div>
-        </section>
+            <!-- Content Grid -->
+            <div class="grid md:grid-cols-2 gap-6 p-6">
+                <!-- Topics -->
+                <div class="bg-gray-50 rounded-lg p-5">
+                    <div class="flex items-center gap-2 mb-4">
+                        <h3 class="text-lg font-medium text-gray-900">Topics</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li v-for="topic in week.topics" :key="topic"
+                            class="flex items-start gap-2">
+                            <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-blue-600 flex-shrink-0"></span>
+                            <span class="text-gray-700">{{ topic }}</span>
+                        </li>
+                    </ul>
+                </div>
 
-        <!-- Other Week Content: Resources, Assignments, etc. -->
-        <div class="bg-gray-50 rounded-lg border border-gray-200 p-4">
-            <h4 class="text-lg font-medium text-gray-700">Additional Content</h4>
-            <p>Other week content like resources, assignments, and quizzes goes here.</p>
+                <!-- Learning Objectives -->
+                <div class="bg-gray-50 rounded-lg p-5">
+                    <div class="flex items-center gap-2 mb-4">
+                        <h3 class="text-lg font-medium text-gray-900">Learning Objectives</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li v-for="objective in week.objectives" :key="objective"
+                            class="flex items-start gap-2">
+                            <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-green-600 flex-shrink-0"></span>
+                            <span class="text-gray-700">{{ objective }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tasks Section -->
+            <div class="border-t p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Tasks</h3>
+                <div class="bg-gray-50 rounded-lg p-5">
+                    <ul class="space-y-4">
+                        <li v-for="(task, index) in week.tasks" :key="task"
+                            class="flex items-start gap-3">
+                            <span class="flex items-center justify-center h-6 w-6 rounded-full bg-blue-100 text-blue-600 text-sm font-medium flex-shrink-0">
+                                {{ index + 1 }}
+                            </span>
+                            <span class="text-gray-700">{{ task }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import Header from "@/Components/Campus/Header.vue";
+import breadcrumb from "@/Components/Campus/Breadcrumb.vue";
 export default {
-    // props: {
-    //     weeks: {
-    //         type: Array,
-    //         required: true
-    //     }
-    // }
-    data() {
-        return {
-            weeks: [
-                {
-                    id: 1,
-                    week_number: 1,
-                    learningGuidance: {
-                        overview: "General concepts of cybersecurity",
-                        topics: [
-                            "Introduction",
-                            "Network security",
-                            "Security Protocols: SSL and HTTPS",
-                            "C.I.A. Triad"
-                        ],
-                        objectives: [
-                            "Describe the key concepts of cybersecurity, their importance, and the most current cyber-security attacks.",
-                            "Discuss the challenges faced by individuals regarding network security.",
-                            "Discuss the C.I.A. triad as a core stone of cybersecurity based on research."
-                        ],
-                        tasks: [
-                            "Read the Learning Guide and Reading Assignments",
-                            "Participate in the Discussion Assignment",
-                            "Complete and submit the Written Assignment",
-                            "Make entries to the Learning Journal",
-                            "Take the Self-Quiz"
-                        ]
-                    }
-                },
-                {
-                    id: 2,
-                    week_number: 2,
-                    learningGuidance: {
-                        overview: "Advanced networking concepts",
-                        topics: ["Firewall management", "IDS/IPS"],
-                        objectives: [
-                            "Learn firewall rules.",
-                            "Understand intrusion detection systems."
-                        ],
-                        tasks: ["Setup firewall in lab", "Research IDS/IPS solutions"]
-                    }
-                }
-            ]
-        };
+    components: {
+        Header,
+        breadcrumb,
+    },
+    props: {
+        weeks: {
+            type: Array,
+            required: true
+        }
     }
-
 };
 </script>

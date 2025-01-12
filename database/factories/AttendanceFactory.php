@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Attendance;
-use App\Models\Classes;
+use App\Models\ClassGroup;
 use App\Models\Enrollment;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -28,7 +28,7 @@ class AttendanceFactory extends Factory
             'notes' => $this->faker->text(),
             'student_id' => Student::inRandomOrder()->first()->id ?? Student::factory()->create()->id,
             'enrollment_id' => Enrollment::inRandomOrder()->first()->id ?? Enrollment::factory()->create()->id,
-            'class_id' => Classes::inRandomOrder()->first()->id ?? Classes::factory()->create()->id,
+            'class_group_id' => ClassGroup::inRandomOrder()->first()->id ?? ClassGroup::factory()->create()->id,
             'teacher_id' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
         ];
     }

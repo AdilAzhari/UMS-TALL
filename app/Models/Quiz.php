@@ -16,11 +16,12 @@ class Quiz extends Model
         'course_id',
         'title',
         'instructions',
+        'description',
         'duration',
         'passing_score',
         'teacher_id',
         'week_id',
-        'class_id',
+        'class_group_id',
         'type',
         'status',
         'created_by',
@@ -28,10 +29,12 @@ class Quiz extends Model
         'start_date',
         'end_date',
     ];
+
     protected $attributes = [
         'type' => 'ungraded',
-        'status' => 'draft',
+        'status' => 'published',
     ];
+
     protected $casts = [
         'start_date' => 'datetime',
         'end_date' => 'datetime',
@@ -47,14 +50,14 @@ class Quiz extends Model
         return $this->belongsTo(Teacher::class);
     }
 
-    public function class(): BelongsTo
+    public function classGroup(): BelongsTo
     {
-        return $this->belongsTo(Classes::class);
+        return $this->belongsTo(ClassGroup::class);
     }
 
     public function submissions(): HasMany
     {
-        return $this->hasMany(QuizzeSubmission::class);
+        return $this->hasMany(QuizSubmission::class);
     }
 
     public function createdBy(): BelongsTo
@@ -67,24 +70,19 @@ class Quiz extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    public function QuizQuestion(): HasMany
+    public function questions(): HasMany
     {
-        return $this->hasMany(QuizzeQuestion::class);
+        return $this->hasMany(QuizQuestion::class);
+    }
+
+    public function answers(): HasMany
+    {
+        return $this->hasMany(QuizAnswer::class);
     }
 
     public function students(): BelongsToMany
     {
         return $this->belongsToMany(Student::class);
-    }
-
-    public function QuizSubmission(): HasMany
-    {
-        return $this->hasMany(QuizzeSubmission::class);
-    }
-
-    public function QuizAnswer(): HasMany
-    {
-        return $this->hasMany(QuizzeAnswer::class);
     }
 
     public function week(): BelongsTo

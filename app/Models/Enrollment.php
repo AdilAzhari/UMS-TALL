@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class enrollment extends Model
+class Enrollment extends Model
 {
     use HasFactory;
 
@@ -23,10 +23,12 @@ class enrollment extends Model
         'grade_points',
         'grade',
     ];
+
     protected $attributes = [
         'grade_points' => 0.00,
         'grade' => 0,
     ];
+
     protected $casts = [
         'enrollment_date' => 'datetime',
         'completion_date' => 'datetime',
@@ -54,6 +56,6 @@ class enrollment extends Model
 
     public function term(): BelongsTo
     {
-        return $this->belongsTo(term::class);
+        return $this->belongsTo(Term::class);
     }
 }

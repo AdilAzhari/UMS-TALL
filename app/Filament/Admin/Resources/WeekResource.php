@@ -43,7 +43,7 @@ class WeekResource extends Resource
                                     ->required()
                                     ->afterOrEqual('start_date'),
                             ])
-                            ->columns(2),
+                            ->columns(),
 
                         Forms\Components\Section::make('Week Description')
                             ->schema([
@@ -67,14 +67,14 @@ class WeekResource extends Resource
 
                         Forms\Components\Section::make('Related Content')
                             ->schema([
-                                Forms\Components\Select::make('assignment_id')
-                                    ->relationship('assignments', 'title')
+                                Forms\Components\Select::make('term_id')
+                                    ->relationship('term', 'name')
                                     ->searchable()
                                     ->placeholder('Select an assignment (optional)'),
-                                Forms\Components\Select::make('quizz_id')
-                                    ->relationship('quizzes', 'title')
-                                    ->searchable()
-                                    ->placeholder('Select a quiz (optional)'),
+//                                Forms\Components\Select::make('quiz_id')
+//                                    ->relationship('quizzes', 'title')
+//                                    ->searchable()
+//                                    ->placeholder('Select a quiz (optional)'),
                             ]),
                     ])
                     ->columnSpan(['lg' => 1]),
@@ -104,7 +104,7 @@ class WeekResource extends Resource
                 Tables\Columns\TextColumn::make('assignment.title')
                     ->placeholder('No assignment')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('quizze.title')
+                Tables\Columns\TextColumn::make('quiz.title')
                     ->placeholder('No quiz')
                     ->searchable(),
             ])
@@ -114,7 +114,7 @@ class WeekResource extends Resource
                 Tables\Filters\Filter::make('has_assignment')
                     ->query(fn (Builder $query): Builder => $query->whereNotNull('assignment_id')),
                 Tables\Filters\Filter::make('has_quiz')
-                    ->query(fn (Builder $query): Builder => $query->whereNotNull('quizz_id')),
+                    ->query(fn (Builder $query): Builder => $query->whereNotNull('quiz_id')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -132,7 +132,7 @@ class WeekResource extends Resource
             'course' => RelationManagers\CourseRelationManager::class,
             'assignments' => RelationManagers\AssignmentsRelationManager::class,
             'quizzes' => RelationManagers\QuizzesRelationManager::class,
-            'announcements' => RelationManagers\AnnouncementsRelationManager::class,
+//            'announcements' => RelationManagers\AnnouncementsRelationManager::class,
         ];
     }
 
@@ -143,5 +143,10 @@ class WeekResource extends Resource
             'create' => Pages\CreateWeek::route('/create'),
             'edit' => Pages\EditWeek::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

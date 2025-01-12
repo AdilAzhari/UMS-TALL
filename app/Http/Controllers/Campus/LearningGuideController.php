@@ -3,48 +3,30 @@
 namespace App\Http\Controllers\Campus;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Week;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class LearningGuideController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         return inertia::render('Campus/LearningGuide/Index');
     }
 
-    public function show(string $id)
+    public function show(string $id): Response
     {
+        $week = week::with('learningGuide')
+            ->where('week_number', $id)
+            ->has('learningGuide')
+            ->get()
+            ->pluck('learningGuide');
+
         return inertia::render('Campus/LearningGuide/Show', [
-//            'weeks' =>
-
+            'weeks' => $week,
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

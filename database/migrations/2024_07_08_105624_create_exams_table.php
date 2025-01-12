@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('exam_duration');
             $table->text('exam_rules');
             $table->string('exam_passing_score');
-            $table->foreignId('class_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('class_group_id')->constrained('class_groups')->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->unsignedBigInteger('created_by')->nullable();

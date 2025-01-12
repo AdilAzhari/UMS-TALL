@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->foreignId('week_id')->constrained('weeks')->cascadeOnDelete();
-            $table->foreignId('class_id')->constrained('classes')->cascadeOnDelete();
+            $table->foreignId('Class_group_id')->constrained('class_groups')->cascadeOnDelete();
             $table->text('message');
             $table->string('title');
             $table->enum('status', ['active', 'inactive'])->default('active');

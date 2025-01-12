@@ -50,7 +50,7 @@ class Teacher extends Model
 
     public function classes(): HasMany
     {
-        return $this->hasMany(Classes::class);
+        return $this->hasMany(ClassGroup::class);
     }
 
     public function assignments(): HasMany

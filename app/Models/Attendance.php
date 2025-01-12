@@ -12,7 +12,7 @@ class Attendance extends Model
 
     protected $fillable = [
         'enrollment_id',
-        'class_id',
+        'class_group_id',
         'date',
         'status',
         'reason',
@@ -22,6 +22,7 @@ class Attendance extends Model
     protected $attributes = [
         'status' => 'present',
     ];
+
     protected $casts = [
         'date' => 'datetime',
     ];
@@ -31,8 +32,8 @@ class Attendance extends Model
         return $this->belongsTo(Enrollment::class);
     }
 
-    public function class(): BelongsTo
+    public function classGroup(): BelongsTo
     {
-        return $this->belongsTo(Classes::class);
+        return $this->belongsTo(ClassGroup::class);
     }
 }

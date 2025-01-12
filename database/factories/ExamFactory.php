@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Classes;
+use App\Models\ClassGroup;
 use App\Models\Course;
 use App\Models\Exams;
 use App\Models\Teacher;
@@ -23,7 +23,7 @@ class ExamFactory extends Factory
     {
         return [
             'course_id' => Course::inRandomOrder()->first()->id ?? Course::factory()->create()->id,
-            'class_id' => Classes::inRandomOrder()->first()->id ?? Classes::factory()->create()->id,
+            'class_group_id' => ClassGroup::inRandomOrder()->first()->id ?? ClassGroup::factory()->create()->id,
             'teacher_id' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
             'created_at' => $this->faker->dateTimeThisYear(),
             'exam_date' => $this->faker->dateTimeThisYear(),
@@ -33,6 +33,7 @@ class ExamFactory extends Factory
             'created_by' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
             'updated_by' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
             'exam_passing_score' => $this->faker->randomNumber(),
-            'exam_code' => $this->faker->word(), ];
+            'exam_code' => $this->faker->unique()->randomNumber(),
+        ];
     }
 }

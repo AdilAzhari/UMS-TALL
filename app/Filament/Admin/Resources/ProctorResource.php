@@ -16,41 +16,79 @@ class ProctorResource extends Resource
 
     protected static ?string $navigationGroup = 'Enrollments & Student Progress';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-circle';
+
+    protected static ?string $navigationLabel = 'Proctors';
+
+    protected static ?string $modelLabel = 'Proctor';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('phone_number')
-                    // ->tel()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('address')
-                    ->label('Full Address')
-                    ->placeholder('Enter full address')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('city')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('state')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('country')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\select::make('user_id')
-                    ->label('Student Name')
-                    ->relationship('user', 'name')
-                    ->required(),
+                // Proctor Information Section
+                Forms\Components\Section::make('Proctor Information')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->label('Full Name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('email')
+                            ->label('Email Address')
+                            ->email()
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('phone_number')
+                            ->label('Phone Number')
+                            ->required()
+                            ->maxLength(20)
+                            ->rules([
+                                function ($attribute, $value, $fail): void {
+                                    $phoneUtil = PhoneNumberUtil::getInstance();
+                                    try {
+                                        $phoneNumber = $phoneUtil->parse($value, null);
+                                        if (!$phoneUtil->isValidNumber($phoneNumber)) {
+                                            $fail('The phone number format is invalid.');
+                                        }
+                                    } catch (NumberParseException $e) {
+                                        $fail('The phone number format is invalid.');
+                                    }
+                                },
+                            ]),
+                    ])->columns(2),
+
+                // Address Information Section
+                Forms\Components\Section::make('Address Information')
+                    ->schema([
+                        Forms\Components\TextInput::make('address')
+                            ->label('Full Address')
+                            ->placeholder('Enter full address')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('city')
+                            ->label('City')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('state')
+                            ->label('State')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('country')
+                            ->label('Country')
+                            ->required()
+                            ->maxLength(255),
+                    ])->columns(2),
+
+                // Student Assignment Section
+                Forms\Components\Section::make('Student Assignment')
+                    ->schema([
+                        Forms\Components\Select::make('student_id')
+                            ->label('Assigned Student')
+                            ->relationship('student.user', 'name')
+                            ->required()
+                            ->searchable()
+                            ->preload(),
+                    ])->columns(1),
             ]);
     }
 
@@ -59,48 +97,70 @@ class ProctorResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('phone_number')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('address')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('city')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('state')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('country')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Name')
                     ->searchable()
-                    ->label('Student Name')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Email')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('phone_number')
+                    ->label('Phone Number')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('address')
+                    ->label('Address')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('city')
+                    ->label('City')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('state')
+                    ->label('State')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('country')
+                    ->label('Country')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('student.user.name')
+                    ->label('Assigned Student')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Created At')
+                    ->dateTime('M d, Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Updated At')
+                    ->dateTime('M d, Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                // Add filters here if needed
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->icon('heroicon-o-pencil')
+                    ->color('primary'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->icon('heroicon-o-trash')
+                        ->requiresConfirmation(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
     {
         return [
+            // Add relations here if needed
         ];
     }
 
@@ -111,5 +171,15 @@ class ProctorResource extends Resource
             'create' => Pages\CreateProctor::route('/create'),
             'edit' => Pages\EditProctor::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'primary'; // Customize the badge color
     }
 }

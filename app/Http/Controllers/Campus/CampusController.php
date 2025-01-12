@@ -67,7 +67,7 @@ class CampusController extends Controller
             },
             'weeks.quizzes',
             'weeks.assignments',
-            'weeks.materials'
+            'weeks.materials',
         ])->findOrFail(3);
 
         return inertia::render('Campus/Course', [
@@ -76,21 +76,21 @@ class CampusController extends Controller
                     'id' => $week->id,
                     'week_number' => $week->week_number,
                     'learningGuidance' => $week->learningGuidance ?? [
-                            'overview' => null,
-                            'topics' => [],
-                            'objectives' => [],
-                            'tasks' => []
-                        ],
+                        'overview' => null,
+                        'topics' => [],
+                        'objectives' => [],
+                        'tasks' => [],
+                    ],
                     'quizzes' => $week->quizzes,
                     'assignments' => $week->assignments,
-                    'materials' => $week->materials
+                    'materials' => $week->materials,
                 ];
             }),
             'course' => [
                 'name' => $course->name,
                 'code' => $course->code,
                 'id' => $course->id,
-            ]
+            ],
         ]);
     }
 

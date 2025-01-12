@@ -7,7 +7,6 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Auth;
 
 class UserRelationManager extends RelationManager
 {
@@ -34,7 +33,7 @@ class UserRelationManager extends RelationManager
                             ->label('Preferred Name (Nickname) Optional')
                             ->maxLength(255)
                             ->default(null),
-                    ])->columns(2),
+                    ])->columns(),
 
                 Forms\Components\Section::make('Contact Information')
                     ->description('Enter user contact details')
@@ -52,7 +51,7 @@ class UserRelationManager extends RelationManager
                             ->tel()
                             ->maxLength(255)
                             ->default(null),
-                    ])->columns(2),
+                    ])->columns(),
 
                 Forms\Components\Section::make('Security')
                     ->description('Set user password')
@@ -66,7 +65,7 @@ class UserRelationManager extends RelationManager
                 Forms\Components\Section::make('Personal Details')
                     ->description('Enter additional personal information')
                     ->schema([
-                        Forms\Components\select::make('gender')
+                        Forms\Components\Select::make('gender')
                             ->options([
                                 'male',
                                 'female',
@@ -78,14 +77,14 @@ class UserRelationManager extends RelationManager
                         Forms\Components\TextInput::make('nationality')
                             ->maxLength(255)
                             ->default(null),
-                        Forms\Components\select::make('marital_status')
+                        Forms\Components\Select::make('marital_status')
                             ->options([
                                 'single',
                                 'married',
                                 'divorced',
                                 'widowed',
                             ])->default('single'),
-                    ])->columns(2),
+                    ])->columns(),
 
                 Forms\Components\Section::make('Address Information')
                     ->description('Enter user address details')
@@ -102,51 +101,24 @@ class UserRelationManager extends RelationManager
                         Forms\Components\TextInput::make('country_of_residence')
                             ->maxLength(255)
                             ->default(null),
-                    ])->columns(2),
+                    ])->columns(),
 
                 Forms\Components\Section::make('Account Settings')
                     ->description('Configure user account settings')
                     ->schema([
-                        Forms\Components\select::make('role')
+                        Forms\Components\Select::make('role')
                             ->options([
                                 'student',
                                 'teacher',
                                 'admin',
                                 'technical_team',
                             ]),
-                        Forms\Components\fileupload::make('avatar')
+                        Forms\Components\FileUpload::make('avatar')
                             ->label('Profile Picture')
                             ->image()
                             ->disk('public')
                             ->default(null),
-                    ])->columns(2),
-
-                Forms\Components\Section::make('System Information')
-                    ->description('System-managed fields')
-                    ->schema([
-                        Forms\Components\Select::make('created_by')
-                            ->label('Created By')
-                            ->relationship('createdBy', 'name')
-                            ->default(function () {
-                                if (Auth::check() && Auth::user()->created_by === null) {
-                                    return Auth::id();
-                                }
-
-                                return null;
-                            })
-                            ->disabled()
-                            ->dehydrated(false),
-                        Forms\Components\Select::make('updated_by')
-                            ->relationship('updatedBy', 'name')
-                            ->default(function () {
-                                if (Auth::check()) {
-                                    return Auth::id();
-                                }
-
-                                return null;
-                            })
-                            ->disabled(),
-                    ])->columns(2),
+                    ])->columns(),
             ]);
     }
 

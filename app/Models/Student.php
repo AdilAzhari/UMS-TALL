@@ -22,8 +22,9 @@ class Student extends Model
         'term_id',
         'status',
     ];
+
     protected $attributes = [
-        'CGPA' => 0.00
+        'CGPA' => 0.00,
     ];
 
     public function user(): BelongsTo

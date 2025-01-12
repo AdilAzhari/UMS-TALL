@@ -51,13 +51,12 @@ Route::name('campus.')
                 // Quiz Routes
                 Route::controller(QuizController::class)
                     ->prefix('quizzes')
-                    ->name('quizzes.')
+                    ->name('quiz.')
                     ->group(function () {
                         Route::get('/', 'index')->name('index');
-                        Route::get('/{quiz}', 'show')->name('show');
-                        Route::post('/{quiz}/start', 'start')->name('start');
-                        Route::post('/{quiz}/submit', 'submit')->name('submit');
-                        Route::get('/{quiz}/results', 'results')->name('results');
+                        Route::get('/{quizId}', 'show')->name('show');
+                        Route::post('/{quizId}/submit', 'submit')->name('submit');
+                        Route::get('/{quizId}/results', 'results')->name('results');
                     });
 
                 // Assignment Routes
