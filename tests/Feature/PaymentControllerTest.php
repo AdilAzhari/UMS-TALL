@@ -8,12 +8,12 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
-beforeEach(function () {
+beforeEach(function (): void {
     $this->user = User::factory()->create();
     $this->student = Student::factory()->create(['user_id' => $this->user->id]);
     $this->actingAs($this->user);
 });
-test('displays historical and upcoming payments', function () {
+test('displays historical and upcoming payments', function (): void {
     $student = Student::factory()->create();
     Payment::factory()->create([
         'payment_date' => now()->subDay(),
@@ -32,7 +32,7 @@ test('displays historical and upcoming payments', function () {
         ->has('upcomingPayments')
     );
 });
-it('renders the payments index page', function () {
+it('renders the payments index page', function (): void {
     $user = User::factory(1)->create();
     $course = Course::factory()->create();
     //    $this->actingAs($user);
@@ -49,7 +49,7 @@ it('renders the payments index page', function () {
 
 })->skip();
 
-it('processes a successful payment', function () {
+it('processes a successful payment', function (): void {
     Http::fake([
         'https://api.stripe.com/*' => Http::response([
             'id' => 'pi_123',
@@ -68,7 +68,7 @@ it('processes a successful payment', function () {
     $response->assertSessionHas('success', 'Payment successful!');
 });
 
-it('it correctly separates past and upcoming payments', function () {
+it('it correctly separates past and upcoming payments', function (): void {
     $student = Student::factory()->create();
     $user = User::factory()->create();
     // Create courses
@@ -106,14 +106,17 @@ it('it correctly separates past and upcoming payments', function () {
     $response->assertStatus(200);
 });
 
-it('Successful payment handling', function () {});
+it('Successful payment handling', function (): void {
+});
 
-it('test it show the payment handling page', function () {});
-it('Payment cancellation', function () {});
-it('Payment creation', function () {
+it('test it show the payment handling page', function (): void {
+});
+it('Payment cancellation', function (): void {
+});
+it('Payment creation', function (): void {
     todo('make payment');
 });
-it('handles a failed payment gracefully', function () {
+it('handles a failed payment gracefully', function (): void {
     Http::fake([
         'https://api.stripe.com/*' => Http::response([
             'error' => ['message' => 'Your card was declined.'],

@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::name('campus.')
     ->prefix('campus/')
-    ->group(function () {
-        Route::controller(CampusController::class)->group(function () {
+    ->group(function (): void {
+        Route::controller(CampusController::class)->group(function (): void {
             Route::get('/course/{id}', 'course')->name('course.show');
             Route::get('/course/{courseId}/syllabus', 'syllabus')->name('syllabus');
             Route::get('/course/{courseId}/resources', 'resources')->name('resources');
@@ -21,7 +21,7 @@ Route::name('campus.')
         Route::controller(AnnouncementController::class)
             ->prefix('course/{id}/announcements')
             ->name('course.announcements.')
-            ->group(function () {
+            ->group(function (): void {
                 Route::get('/', 'index')->name('index');
                 Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
@@ -29,12 +29,12 @@ Route::name('campus.')
             });
         Route::prefix('/courses/{courseId}/weeks/{weekId}')
             ->name('courses.weeks.')
-            ->group(function () {
+            ->group(function (): void {
                 // Learning Guide Routes
                 Route::controller(LearningGuideController::class)
                     ->prefix('/guides')
                     ->name('guides.')
-                    ->group(function () {
+                    ->group(function (): void {
                         Route::get('/', 'index')->name('index');
                         Route::get('/week', 'show')->name('weekGuide');
                     });
@@ -42,7 +42,7 @@ Route::name('campus.')
                 // Forum Discussion Routes
                 Route::controller(ForumDiscussionController::class)
                     ->prefix('discussions')
-                    ->name('discussions.')->group(function () {
+                    ->name('discussions.')->group(function (): void {
                         Route::get('/', 'index')->name('index');
                         Route::get('/comment', 'storeComment')->name('store.create');
                         Route::post('/{discussion}/replies', 'storeReply')->name('replies.store');
@@ -52,7 +52,7 @@ Route::name('campus.')
                 Route::controller(QuizController::class)
                     ->prefix('quizzes')
                     ->name('quiz.')
-                    ->group(function () {
+                    ->group(function (): void {
                         Route::get('/', 'index')->name('index');
                         Route::get('/{quizId}', 'show')->name('show');
                         Route::post('/{quizId}/submit', 'submit')->name('submit');
@@ -60,7 +60,7 @@ Route::name('campus.')
                     });
 
                 // Assignment Routes
-                Route::controller(AssignmentController::class)->prefix('assignments')->name('assignments.')->group(function () {
+                Route::controller(AssignmentController::class)->prefix('assignments')->name('assignments.')->group(function (): void {
                     Route::get('/', 'index')->name('index');
                     Route::get('/{assignment}', 'show')->name('show');
                     Route::post('/{assignment}/submit', 'submit')->name('submit');

@@ -22,10 +22,12 @@ class PeerReview extends Model
     protected $attributes = [
         'rating' => 0,
     ];
+
     public function submission(): BelongsTo
     {
         return $this->belongsTo(AssignmentSubmission::class, 'submission_id');
     }
+
     public function reviewer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reviewer_id');
