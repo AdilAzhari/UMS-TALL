@@ -21,16 +21,16 @@ class ExamQuestionOption extends Model
 
     public function question(): BelongsTo
     {
-        return $this->belongsTo(ExamQuestion::class);
+        return $this->belongsTo(ExamQuestion::class, 'exam_question_id');
     }
 
     public function createdBy(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(Teacher::class, 'created_by');
     }
 
     public function updatedBy(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'updated_by');
+        return $this->belongsTo(Teacher::class, 'updated_by');
     }
 }

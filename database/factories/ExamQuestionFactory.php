@@ -25,7 +25,7 @@ class ExamQuestionFactory extends Factory
             'updated_by' => Teacher::factory()->create()->id,
             'question_text' => $this->faker->text(),
             'type' => $this->faker->randomElement([
-                'true_false', 'multiple_choice', 'open_ended'
+                'true_false', 'multiple_choice', 'open_ended',
             ]),
         ];
     }

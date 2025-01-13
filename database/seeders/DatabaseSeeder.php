@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@example.com',
             'password' => '12345678',
+            //            ''
         ]);
         User::factory()->create([
             'name' => 'teacher',
@@ -36,7 +37,6 @@ class DatabaseSeeder extends Seeder
             ProctorSeeder::class,
             enrollmentSeeder::class,
             AttendanceSeeder::class,
-
             WeekSeeder::class,
             AssignmentSeeder::class,
             QuizSeeder::class,
@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
             AcademicProgressSeeder::class,
             RegistrationSeeder::class,
             StudentCourseSeeder::class,
-//            CourseTeacherseeder::class,
+            //            CourseTeacherSeeder::class,
             CourseRequirementsSeeder::class,
             //            linkSeeder::class,
             //            CourseGradesSeeder::class,

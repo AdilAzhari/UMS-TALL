@@ -26,7 +26,7 @@ class ExamAnswer extends Model
 
     public function question(): BelongsTo
     {
-        return $this->belongsTo(ExamQuestion::class);
+        return $this->belongsTo(ExamQuestion::class, 'Exam_question_id');
     }
 
     public function createdBy(): BelongsTo
