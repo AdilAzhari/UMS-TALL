@@ -15,21 +15,21 @@ class AssignmentController extends Controller
      */
     public function index($week_id, $course_id)
     {
-//        todo('
-//        1/ get the assignment for this week
-//        2/ show the submitting status of the assignment
-//        3/ display Submissions opened,Submissions closed,Assessments opened,Assessments closed
-//        4/ dipsplay the result of the assignment if submitted
-//        5/ allowing the submission whether by submitting a word, PDF, Doc, or manually written
-//        6/ showing a section for notes if the teacher have a not on the submission
-//        ');
-//        $weekAssignments = week::
-//        with('assignment')
-//            ->whereCourseId($course_id)
-//            ->has('assignment')
-//            get();
-//                ->dd();
-                return inertia::render('Campus/Assignment/Index', []);
+        //        todo('
+        //        1/ get the assignment for this week
+        //        2/ show the submitting status of the assignment
+        //        3/ display Submissions opened,Submissions closed,Assessments opened,Assessments closed
+        //        4/ dipsplay the result of the assignment if submitted
+        //        5/ allowing the submission whether by submitting a word, PDF, Doc, or manually written
+        //        6/ showing a section for notes if the teacher have a not on the submission
+        //        ');
+        //        $weekAssignments = week::
+        //        with('assignment')
+        //            ->whereCourseId($course_id)
+        //            ->has('assignment')
+        //            get();
+        //                ->dd();
+        return inertia::render('Campus/Assignment/Index', []);
     }
 
     /**

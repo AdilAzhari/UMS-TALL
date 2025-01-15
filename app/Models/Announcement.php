@@ -43,4 +43,9 @@ class Announcement extends Model
     {
         return $this->belongsTo(Week::class);
     }
+
+    public function classGroup(): BelongsTo
+    {
+        return $this->belongsTo(ClassGroup::class);
+    }
 }

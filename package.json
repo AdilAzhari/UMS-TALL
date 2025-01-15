@@ -21,6 +21,7 @@
     "dependencies": {
         "@heroicons/vue": "^2.1.5",
         "@inertiajs/inertia-vue3": "^0.6.0",
+        "chart.js": "^4.4.7",
         "date-fns": "^4.1.0",
         "lodash": "^4.17.21",
         "lucide-vue-next": "^0.456.0",

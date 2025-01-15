@@ -29,7 +29,6 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             ->passwordReset()
             ->emailVerification()
-            // ->profile()
             ->login()
             ->default()
             ->colors([
@@ -54,13 +53,10 @@ class AdminPanelProvider extends PanelProvider
             ->plugins([
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
                 FilamentEditProfilePlugin::make()
-                // ->slug('my-profile')
                     ->setTitle('My Profile')
                     ->setNavigationLabel('My Profile')
                     ->setNavigationGroup('Group Profile')
-                // ->shouldRegisterNavigation(false)
                     ->shouldShowDeleteAccountForm(true)
-                    ->shouldShowSanctumTokens()
                     ->shouldShowBrowserSessionsForm()
                     ->shouldShowAvatarForm(),
             ])
@@ -77,6 +73,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->sidebarCollapsibleOnDesktop()
+            ->collapsedSidebarWidth('9rem');
     }
 }

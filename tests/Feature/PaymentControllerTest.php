@@ -106,13 +106,10 @@ it('it correctly separates past and upcoming payments', function (): void {
     $response->assertStatus(200);
 });
 
-it('Successful payment handling', function (): void {
-});
+it('Successful payment handling', function (): void {});
 
-it('test it show the payment handling page', function (): void {
-});
-it('Payment cancellation', function (): void {
-});
+it('test it show the payment handling page', function (): void {});
+it('Payment cancellation', function (): void {});
 it('Payment creation', function (): void {
     todo('make payment');
 });

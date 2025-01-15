@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\TechnicalTeamRole;
+use App\Enums\TechnicalTeamStatus;
 use App\Models\TechnicalTeam;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,8 +22,8 @@ class TechnicalTeamFactory extends Factory
     {
         return [
             'user_id' => User::inRandomOrder()->first()->id ?? User::factory()->create()->id,
-            'role' => $this->faker->randomElement(['support', 'system_admin']),
-            'status' => $this->faker->randomElement(['active', 'inactive']),
+            'role' => $this->faker->randomElement([TechnicalTeamRole::SUPPORT, TechnicalTeamRole::ADMIN, TechnicalTeamRole::MANAGER]),
+            'status' => $this->faker->randomElement([TechnicalTeamStatus::ACTIVE, TechnicalTeamStatus::INACTIVE]),
         ];
     }
 }

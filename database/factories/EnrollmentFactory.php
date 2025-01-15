@@ -3,32 +3,35 @@
 namespace Database\Factories;
 
 use App\Models\Course;
-use App\Models\enrollment;
+use App\Models\Enrollment;
 use App\Models\Student;
 use App\Models\Term;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends Factory<enrollment>
- */
 class EnrollmentFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Enrollment::class;
+
     public function definition(): array
     {
+        $course = Course::inRandomOrder()->first() ?? Course::factory()->create();
+        $student = Student::inRandomOrder()->first() ?? Student::factory()->create();
+        $term = Term::inRandomOrder()->first() ?? Term::factory()->create();
+
+        // Ensure valid date ranges
+        $enrollmentDate = $this->faker->dateTimeBetween($term->start_date, $term->end_date);
+        $completionDate = $this->faker->dateTimeBetween($enrollmentDate, $term->end_date);
+
         return [
-            'enrollment_date' => $this->faker->dateTimeThisYear(),
-            'completion_date' => $this->faker->dateTimeThisYear(),
-            'course_id' => Course::inRandomOrder()->first()->id ?? Course::factory()->create()->id,
-            'student_id' => Student::inRandomOrder()->first()->id ?? Student::factory()->create()->id,
-            'status' => $this->faker->randomElement(['enrolled', 'pending', 'completed', 'dropped']),
+            'enrollment_date' => $enrollmentDate,
+            'completion_date' => $completionDate,
+            'course_id' => $course->id,
+            'student_id' => $student->id,
+            'enrollment_status' => $this->faker->randomElement(['Enrolled', 'Pending', 'Completed', 'Dropped']),
             'grade' => $this->faker->numberBetween(60, 100),
             'grade_points' => $this->faker->randomFloat(2, 0, 100),
-            'term_id' => Term::inRandomOrder()->first()->id,
+            'term_id' => $term->id,
+            'proctor_status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
         ];
     }
 }

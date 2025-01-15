@@ -12,8 +12,6 @@ enum ProctorStatus: string implements HasLabel
 
     /**
      * Get all the values of the enum.
-     *
-     * @return array
      */
     public static function values(): array
     {
@@ -23,6 +21,7 @@ enum ProctorStatus: string implements HasLabel
             self::REJECTED,
         ];
     }
+
     public function getLabel(): ?string
     {
         return match ($this) {

@@ -21,7 +21,7 @@ class Story extends Model
 
     protected static function booted(): void
     {
-        static::deleting(function ($story) {
+        static::deleting(function ($story): void {
             $story->comments()->delete();
             $story->replies()->delete();
         });

@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
-beforeEach(function () {
+beforeEach(function (): void {
     $this->course = Course::factory()->create();
     $this->student = Student::factory()->create();
     $this->user = User::factory()->create();
@@ -39,7 +39,7 @@ beforeEach(function () {
         'status' => 'Pending',
     ]);
 });
-test('test student can create story', function () {
+test('test student can create story', function (): void {
     $this->actingAs($this->user)
         ->post('/stories', [
             'title' => 'Test story',
@@ -53,7 +53,7 @@ test('test student can create story', function () {
         ->assertSessionHasNoErrors()
         ->assertSessionHas('message');
 })->skip();
-test('test student can update story', function () {
+test('test student can update story', function (): void {
     $this->actingAs($this->user)
         ->put('/stories/'.$this->story->id, [
             'title' => 'Test story',
@@ -66,14 +66,14 @@ test('test student can update story', function () {
         ->assertSessionHasNoErrors()
         ->assertSessionHas('message');
 });
-test('test student can delete his story', function () {
+test('test student can delete his story', function (): void {
     $this->actingAs($this->user)
         ->delete('/stories/'.$this->story->id)
         ->assertRedirect('/stories')
         ->assertSessionHasNoErrors()
         ->assertSessionHas('message');
 });
-test('test student can write a comment on story', function () {
+test('test student can write a comment on story', function (): void {
 
     $this->actingAs($this->user)
         ->post('/storyComment/'.$this->story->id.'/comments', [
@@ -86,7 +86,7 @@ test('test student can write a comment on story', function () {
         ->assertSessionHas('message')
         ->assertSessionHasNoErrors();
 });
-test('test student can view all stories', function () {
+test('test student can view all stories', function (): void {
 
     $res = $this->actingAs($this->user)->get('/stories');
 
@@ -96,7 +96,7 @@ test('test student can view all stories', function () {
         ->has('tags')
     );
 });
-test('test student can view a story with its comments', function () {
+test('test student can view a story with its comments', function (): void {
 
     $comment = StoryComment::factory()->create([
         'story_id' => $this->story->id,
@@ -111,10 +111,10 @@ test('test student can view a story with its comments', function () {
         'status' => $comment->status,
     ]);
 });
-test('test guest or unauthenticated users cannot access stories', function () {
+test('test guest or unauthenticated users cannot access stories', function (): void {
     $this->get('/stories')->assertRedirect('login');
 });
-test('test student cannot create story with invalid data', function () {
+test('test student cannot create story with invalid data', function (): void {
     $this->actingAs($this->user)
         ->post('/stories', [
             'title' => '',
@@ -122,7 +122,7 @@ test('test student cannot create story with invalid data', function () {
         ])
         ->assertSessionHasErrors(['title', 'content']);
 });
-test('test student cannot delete another student\'s story', function () {
+test('test student cannot delete another student\'s story', function (): void {
     $anotherStory = Story::factory()->create();
     $this->actingAs($this->user)
         ->delete('/stories/'.$anotherStory->id)
@@ -130,7 +130,7 @@ test('test student cannot delete another student\'s story', function () {
         ->assertSessionHas('message')
         ->assertRedirect('/stories');
 });
-test('test student cannot view draft stories', function () {
+test('test student cannot view draft stories', function (): void {
     $draftStory = Story::factory()->create(['status' => 'draft']);
     $this->actingAs($this->user)
         ->get('/stories/'.$draftStory->id)

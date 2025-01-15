@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\assignProctorFormRequest;
 use App\Http\Requests\CourseRegiserRequest;
 use App\Models\Proctor;
-use App\Models\Registration;
 use App\Services\CourseRegistrationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,11 +13,30 @@ use Inertia\Inertia;
 
 class CourseController extends Controller
 {
-    protected $courseRegistrationService;
+    protected CourseRegistrationService $courseRegistrationService;
 
     public function __construct(CourseRegistrationService $courseRegistrationService)
     {
         $this->courseRegistrationService = $courseRegistrationService;
+    }
+
+    public function index()
+    {
+        return Inertia::render('Courses/Manage', $this->getCommonData());
+    }
+
+    private function getCommonData()
+    {
+        return [
+            'user' => Auth::user(),
+            'courses' => $this->courseRegistrationService->getStudentData(Auth::user()),
+            'registrationStatus' => [
+                'isOpen' => true,
+                'closingDate' => '2024-10-23',
+            ],
+            'availableCourses' => $this->courseRegistrationService->getAvailableCourses(Auth::user()),
+            'studentProgram' => $this->courseRegistrationService->getStudentData(Auth::user()),
+        ];
     }
 
     public function register(CourseRegiserRequest $request)
@@ -32,24 +50,7 @@ class CourseController extends Controller
         return redirect()->back()->with('success', 'Courses registered successfully!');
     }
 
-    public function index()
-    {
-        $studentData = $this->courseRegistrationService->getStudentData(Auth::user());
-        $availableCourses = $this->courseRegistrationService->getAvailableCourses(Auth::user());
-
-        return Inertia::render('Courses/Index', [
-            'user' => Auth::user(),
-            'courses' => $studentData,
-            'registrationStatus' => [
-                'isOpen' => true,
-                'closingDate' => '2024-10-23',
-            ],
-            'availableCourses' => $availableCourses,
-            'studentProgram' => $studentData,
-        ]);
-    }
-
-    public function showAssignProctorForm($courseID)
+    public function createAssignProctorForm($courseID)
     {
         return Inertia::render('ProctorDetailsForm', [
             'courseID' => $courseID,
@@ -60,9 +61,9 @@ class CourseController extends Controller
     {
         $data = $request->validated();
         $data['course_id'] = $courseID;
-        $registration = Registration::where('id', $courseID)->first();
+        //        $registration = Registration::where('id', $courseID)->first();
 
-        $proctor = $this->courseRegistrationService->assignProctor($data);
+        $this->courseRegistrationService->assignProctor($data);
 
         return redirect()->back()->with('success', 'Proctor assigned successfully!');
     }
@@ -88,23 +89,6 @@ class CourseController extends Controller
         return redirect()->route('courses')->with('error', 'Invalid response.');
     }
 
-    public function manage()
-    {
-        $studentData = $this->courseRegistrationService->getStudentData(Auth::user());
-        $availableCourses = $this->courseRegistrationService->getAvailableCourses(Auth::user());
-
-        return Inertia::render('Courses/Manage', [
-            'user' => Auth::user(),
-            'courses' => $studentData,
-            'registrationStatus' => [
-                'isOpen' => true,
-                'closingDate' => '2024-10-23',
-            ],
-            'availableCourses' => $availableCourses,
-            'studentProgram' => $studentData,
-        ]);
-    }
-
     public function registration()
     {
         $studentData = $this->courseRegistrationService->getStudentData(Auth::user());
@@ -124,35 +108,11 @@ class CourseController extends Controller
 
     public function proctors()
     {
-        $studentData = $this->courseRegistrationService->getStudentData(Auth::user());
-        $availableCourses = $this->courseRegistrationService->getAvailableCourses(Auth::user());
-
-        return Inertia::render('Courses/Proctors', [
-            'user' => Auth::user(),
-            'courses' => $studentData,
-            'registrationStatus' => [
-                'isOpen' => true,
-                'closingDate' => '2024-10-23',
-            ],
-            'availableCourses' => $availableCourses,
-            'studentProgram' => $studentData,
-        ]);
+        return Inertia::render('Courses/Proctors', $this->getCommonData());
     }
 
     public function howTo()
     {
-        $studentData = $this->courseRegistrationService->getStudentData(Auth::user());
-        $availableCourses = $this->courseRegistrationService->getAvailableCourses(Auth::user());
-
-        return Inertia::render('Courses/HowTo', [
-            'user' => Auth::user(),
-            'courses' => $studentData,
-            'registrationStatus' => [
-                'isOpen' => true,
-                'closingDate' => '2024-10-23',
-            ],
-            'availableCourses' => $availableCourses,
-            'studentProgram' => $studentData,
-        ]);
+        return Inertia::render('Courses/HowTo', $this->getCommonData());
     }
 }

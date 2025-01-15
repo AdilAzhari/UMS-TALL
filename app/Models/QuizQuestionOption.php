@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class QuizQuestionOption extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'quiz_question_id',
@@ -21,5 +22,17 @@ class QuizQuestionOption extends Model
     public function quizQuestion(): BelongsTo
     {
         return $this->belongsTo(QuizQuestion::class);
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        // Update the updated_by and created_by field when saving
+        static::saving(function ($model): void {
+            $model->updated_by = auth()->id();
+            $model->created_by = auth()->id();
+        });
+
     }
 }

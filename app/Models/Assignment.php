@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Enums\AssignmentStatus;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 
 class Assignment extends Model
@@ -80,12 +81,12 @@ class Assignment extends Model
      * @var array
      */
     protected $attributes = [
-        'status' => 'pending',
+        'status' => AssignmentStatus::PENDING,
         'is_visible' => true,
         'max_attempts' => 1,
         'attachment_limit' => 1,
         'grading_type' => 'numeric', // numeric, letter, pass_fail
-        'late_submission_policy' => 'not_allowed', // not_allowed, allowed_with_penalty, allowed
+        'late_submission_policy' => 'NotAllowed', // not_allowed, allowed_with_penalty, allowed
     ];
 
     /**
@@ -101,9 +102,9 @@ class Assignment extends Model
     /**
      * Get the class that the assignment belongs to.
      */
-    public function ClassGroup(): BelongsTo
+    public function classGroup(): BelongsTo
     {
-        return $this->belongsTo(ClassGroup::class, 'class_group_id');
+        return $this->belongsTo(ClassGroup::class);
     }
 
     /**
@@ -188,6 +189,7 @@ class Assignment extends Model
         } elseif (now() > $this->submission_end) {
             return 'closed';
         }
+
         return 'open';
     }
 

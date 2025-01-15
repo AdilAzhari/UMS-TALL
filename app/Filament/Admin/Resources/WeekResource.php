@@ -71,10 +71,10 @@ class WeekResource extends Resource
                                     ->relationship('term', 'name')
                                     ->searchable()
                                     ->placeholder('Select an assignment (optional)'),
-//                                Forms\Components\Select::make('quiz_id')
-//                                    ->relationship('quizzes', 'title')
-//                                    ->searchable()
-//                                    ->placeholder('Select a quiz (optional)'),
+                                //                                Forms\Components\Select::make('quiz_id')
+                                //                                    ->relationship('quizzes', 'title')
+                                //                                    ->searchable()
+                                //                                    ->placeholder('Select a quiz (optional)'),
                             ]),
                     ])
                     ->columnSpan(['lg' => 1]),
@@ -132,7 +132,7 @@ class WeekResource extends Resource
             'course' => RelationManagers\CourseRelationManager::class,
             'assignments' => RelationManagers\AssignmentsRelationManager::class,
             'quizzes' => RelationManagers\QuizzesRelationManager::class,
-//            'announcements' => RelationManagers\AnnouncementsRelationManager::class,
+            //            'announcements' => RelationManagers\AnnouncementsRelationManager::class,
         ];
     }
 

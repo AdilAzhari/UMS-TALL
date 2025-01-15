@@ -5,10 +5,10 @@ namespace App\Services;
 use App\Models\Story;
 use HTMLPurifier;
 use HTMLPurifier_Config;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Collection;
 
 class StoryService
 {

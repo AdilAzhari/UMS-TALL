@@ -11,10 +11,12 @@ class AssignmentSubmissionFile extends Model
 {
     /** @use HasFactory<AssignmentSubmissionFileFactory> */
     use HasFactory;
+
     protected $fillable = [
         'assignment_submission_id',
         'file_path',
     ];
+
     public function assignmentSubmission(): BelongsTo
     {
         return $this->belongsTo(AssignmentSubmission::class);

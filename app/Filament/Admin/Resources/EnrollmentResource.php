@@ -93,7 +93,7 @@ class EnrollmentResource extends Resource
                 Tables\Columns\TextColumn::make('enrollment_status')
                     ->label('Enrollment Status')
                     ->badge()
-                    ->color(fn(string $state): string => match ($state) {
+                    ->color(fn (string $state): string => match ($state) {
                         'enrolled' => 'warning',
                         'pending' => 'gray',
                         'completed' => 'success',
@@ -105,12 +105,12 @@ class EnrollmentResource extends Resource
                 Tables\Columns\TextColumn::make('proctor_status')
                     ->label('Proctor Status')
                     ->badge()
-                    ->color(fn(ProctorStatus $state): string => match ($state) {
+                    ->color(fn (ProctorStatus $state): string => match ($state) {
                         ProctorStatus::PENDING => 'warning',
                         ProctorStatus::APPROVED => 'success',
                         ProctorStatus::REJECTED => 'danger',
                     })
-                    ->formatStateUsing(fn(ProctorStatus $state): string => $state->value)
+                    ->formatStateUsing(fn (ProctorStatus $state): string => $state->value)
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('enrollment_date')

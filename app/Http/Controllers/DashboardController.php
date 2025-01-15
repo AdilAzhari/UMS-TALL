@@ -2,118 +2,107 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Registration;
-use App\Models\Term;
+use App\Models\Student;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class DashboardController extends Controller
 {
+    /**
+     * Display the dashboard with student data.
+     *
+     * @return Response
+     */
     public function index()
     {
         $user = Auth::user();
+        // Fetch the student data with caching
+        $studentData = $this->getStudentData($user);
 
-        $programName = User::where('id', $user->id)
-            ->with([
-                'student.program:id,program_name',
-                'student.academicProgress',
-                'student.enrollments',
-                'student.courses',
-                'student.registrations',
-                'student.department:id,name,code',
-            ])
-            ->first();
-
-        $studentData = $this->buildStudentData($programName);
-
-        // return $studentData;
+        //        dd($studentData);
         return Inertia::render('Dashboard', [
             'studentProgram' => $studentData,
         ]);
     }
 
-    private function buildStudentData($programName)
+    /**
+     * Fetch and format student data.
+     *
+     * @return array
+     */
+    private function getStudentData(User $user)
     {
-        $term = Term::where('end_date', '<', now())
-            ->orderBy('end_date', 'desc')
-            ->first();
-        $user = Auth::user();
-        $programName = User::where('id', $user->id)
-            ->with([
-                'student.program:id,program_name',
-                'student.academicProgress',
-                'student.enrollments',
-                'student.courses',
-                'student.registrations',
-                'student.department:id,name,code',
-            ])
-            ->first();
+        // Cache the student data for 1 hour to reduce database queries
+        //        return Cache::remember("student_data_$user->id", 3600, function () use ($user) {
 
-        $term = Term::where('end_date', '<', now())
-            ->orderBy('end_date', 'desc')
-            ->first();
+        $student = Student::with(['program.programType', 'enrollments.course', 'term'])
+            ->where('user_id', $user->id)
+            ->firstOrFail();
 
-        $pastCourses = Registration::where('student_id', $user->student->id)->PastCourses()->get();
-        $futureCourses = Registration::where('student_id', $user->student->id)->futureCourses()->get();
+        // Fetch future, current, and past courses
+        $futureCourses = $this->getCoursesByDateRange($student, 'future');
+        $currentCourses = $this->getCoursesByDateRange($student, 'current');
+        $pastCourses = $this->getCoursesByDateRange($student, 'past');
 
         return [
+            'program_name' => $student->program->program_name,
+            'program_type' => $student->program->programType->type,
+            'registration_deadline' => $student->term->registration_end_date,
             'courses' => [
-                'pastCourses' => $this->mapCourses($pastCourses),
-                'futureCourses' => $this->mapCourses($futureCourses),
+                'futureCourses' => $this->formatCourses($futureCourses),
+                'currentCourses' => $this->formatCourses($currentCourses),
+                'pastCourses' => $this->formatCourses($pastCourses),
             ],
-            'program_name' => $programName->student->program->program_name ?? null,
-            'currentTerm' => $term->name ?? null,
-            'academicProgress' => $programName->student->academicProgress,
-            'programType' => $programName->program->programType ?? null,
-            'studentDepartment' => $programName->student->department ? [
-                'name' => $programName->student->department->name,
-                'code' => $programName->student->department->code,
-            ] : null,
-            'totalCredit' => collect($programName->student->courses ?? [])->sum('credit'),
-            'gpa' => $programName->student->academicProgress->map(fn ($progress) => $progress->gpa)->first() ?? null,
         ];
+        //        });
     }
 
-    protected function mapCourses($courses)
+    /**
+     * Fetch courses based on the date range (future, current, or past).
+     *
+     * @return Collection
+     */
+    private function getCoursesByDateRange(Student $student, string $range)
     {
-        return $courses->map(fn ($course) => [
-            'id' => $course->id,
-            'name' => $course->course->name,
-            'status' => $course->registration,
-            'proctor' => $course->proctor_status,
-            'paid' => $course->course->paid,
-            'credit' => $course->course->credit,
-            'proctorType' => $course->proctorType,
-            'code' => $course->course->code,
-            'examDate' => $course->course->exam->exam_date ?? 'This course exam data has not been set yet',
-            'description' => $course->course->description,
-        ]) ?? [];
+        $now = Carbon::now();
+
+        return $student->enrollments()
+            ->whereHas('term', function ($query) use ($range, $now) {
+                if ($range === 'future') {
+                    $query->where('start_date', '>', $now)
+                        ->whereNotIn('enrollment_status', ['Completed']);
+                } elseif ($range === 'current') {
+                    $query->where('start_date', '<=', $now)
+                        ->where('end_date', '>=', $now);
+                } elseif ($range === 'past') {
+                    $query->where('end_date', '<', $now);
+                }
+            })
+            ->with('course')
+            ->get();
     }
 
-    private function getStudentDepartment($student)
+    /**
+     * Format the courses for the response.
+     *
+     * @return Collection|\Illuminate\Support\Collection
+     */
+    private function formatCourses(Collection $courses)
     {
-        if (! $student->department) {
-            return null;
-        }
-
-        return [
-            'name' => $student->department->name,
-            'code' => $student->department->code,
-        ];
-    }
-
-    private function mapEnrollments($enrollments, $status)
-    {
-        return $enrollments->filter(fn ($enrollment) => $enrollment->status === $status)
-            ->map(fn ($enrollment) => [
-                'id' => $enrollment->id,
-                'course_name' => optional($enrollment->course)->name,
-                'course_code' => optional($enrollment->course)->code,
-                'status' => $enrollment->status,
-                'proctor' => optional(optional($enrollment->registrations->first())->proctor)->name,
-                'payment_status' => optional($enrollment->registrations->first())->payment_status,
-                'total_credits' => optional($enrollment->course)->credit,
-            ]);
+        return $courses->map(function ($enrollment) {
+            return [
+                'id' => $enrollment->course->id,
+                'name' => $enrollment->course->name,
+                'code' => $enrollment->course->code,
+                'status' => $enrollment->enrollment_status,
+                'proctor' => $enrollment->proctor_status,
+                'proctored' => $enrollment->proctored,
+            ];
+        });
     }
 }

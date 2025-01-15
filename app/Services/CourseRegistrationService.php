@@ -9,6 +9,7 @@ use App\Models\Term;
 use App\Models\User;
 use App\Notifications\AssignProctorNotification;
 use App\Notifications\CourseRegistrationNotification;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Notification;
 
 class CourseRegistrationService
@@ -40,7 +41,7 @@ class CourseRegistrationService
                 'course_id' => $courseId,
                 'proctor_id' => 1,
                 'term_id' => $currentTerm->id,
-                'status' => 'registered',
+                'registration_status' => 'registered',
                 'proctor_status' => 'pending',
                 'registered_at' => now(),
                 'payment_status' => 'unpaid',
@@ -73,6 +74,7 @@ class CourseRegistrationService
             ->where('course_id', $courseId)
             ->where('status', 'passed')
             ->first();
+
         if ($passedCourse) {
             return 'You have already passed this course.';
         }
@@ -137,23 +139,23 @@ class CourseRegistrationService
         ];
     }
 
-    protected function mapCourses($courses): array
+    protected function mapCourses($courses)
     {
         return $courses->map(fn ($course) => [
             'id' => $course->id,
             'name' => $course->course->name,
-            'status' => $course->status,
-            'proctor' => $course->proctor_status,
+            'status' => $course->registration_status,
+            'proctor' => $course->proctor_approval_status,
             'paid' => $course->course->paid,
-            'credit' => $course->course->credit,
-            'proctorType' => $course->proctorType,
+            //            'credit' => $course->course->credit,
+            //            'proctorType' => $course->proctorType,
             'code' => $course->course->code,
             'examDate' => $course->course->exam->exam_date ?? 'This course exam data has not been set yet',
             'description' => $course->course->description,
         ]) ?? [];
     }
 
-    public function getAvailableCourses($user): Course
+    public function getAvailableCourses($user): Collection
     {
         $pastCourses = (new Registration)->where('student_id', $user->student->id)->PastCourses()->pluck('course_id');
         $currentCourses = (new Registration)->where('student_id', $user->student->id)->currentCourses()->pluck('course_id');

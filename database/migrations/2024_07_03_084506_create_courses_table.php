@@ -25,9 +25,9 @@ return new class extends Migration
             $table->foreignId('prerequisite_course_id')->nullable()->constrained('courses')->cascadeOnDelete();
             $table->foreignId('course_category_id')->constrained()->cascadeOnDelete();
             $table->boolean('require_proctor')->default(false);
-            $table->enum('paid', ['paid', 'unpaid', 'future_payment'])->default('unpaid');
-            $table->decimal('cost', 10, 2)->nullable();
-            $table->integer('sequence')->default(1);
+            $table->enum('paid', ['Paid', 'Unpaid', 'FuturePayment'])->default('Unpaid');
+            $table->decimal('cost', 10)->nullable();
+            $table->integer('sequence')->default(1); // represent the number of times student had taking this course
             $table->softDeletes();
             $table->timestamps();
         });

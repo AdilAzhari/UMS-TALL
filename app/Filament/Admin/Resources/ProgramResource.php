@@ -5,12 +5,12 @@ namespace App\Filament\Admin\Resources;
 use App\Filament\Admin\Resources\ProgramResource\Pages;
 use App\Models\Program;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
-use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Table;
 
 class ProgramResource extends Resource
 {

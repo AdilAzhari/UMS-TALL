@@ -21,7 +21,7 @@ class QuizController extends Controller
 
         return inertia::render('Campus/Quiz/Index', [
             'quizzes' => $quizzes,
-            'weekId' => $weekId
+            'weekId' => $weekId,
         ]);
     }
 
@@ -33,7 +33,8 @@ class QuizController extends Controller
         $quiz = Quiz::with([
             'questions.quizQuestionOptions',
         ])->find($quizId);
-        dd($quizId,$weekId);
+        dd($quizId, $weekId);
+
         return inertia::render('Campus/Quiz/Start', [
             'quiz' => $quiz,
             'quizId' => $weekId,
@@ -46,17 +47,17 @@ class QuizController extends Controller
     {
         $request->validate([
             'answers' => 'required|array',
-//            'answers.*' => 'required|integer|exists:quiz_answers,id',
+            //            'answers.*' => 'required|integer|exists:quiz_answers,id',
         ]);
 
         $quiz = Quiz::with('questions.quizQuestionOptions')->find($quizId);
 
-        dd($request->all(),$quizId,$quiz);
+        dd($request->all(), $quizId, $quiz);
 
         $totalQuestions = $quiz->questions->count();
         $correctAnswers = 0;
 
-        dd($totalQuestions . $correctAnswers, $quiz->questions->count());
+        dd($totalQuestions.$correctAnswers, $quiz->questions->count());
         foreach ($quiz->questions as $question) {
             $submittedAnswerId = $request->answers[$question->id] ?? null;
             if ($submittedAnswerId) {

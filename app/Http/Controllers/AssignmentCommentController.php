@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AssignmentComment;
 use App\Http\Requests\StoreAssignmentCommentRequest;
 use App\Http\Requests\UpdateAssignmentCommentRequest;
+use App\Models\AssignmentComment;
 
 class AssignmentCommentController extends Controller
 {

@@ -6,12 +6,12 @@ use App\Filament\Admin\Resources\ExamResultResource\Pages;
 use App\Filament\Admin\Resources\ExamResultResource\RelationManagers;
 use App\Models\ExamResult;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Table;
-use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Table;
 
 class ExamResultResource extends Resource
 {
@@ -60,7 +60,7 @@ class ExamResultResource extends Resource
                             ->label('Status')
                             ->required()
                             ->options([
-                                'Passed', 'Failed', 'Absent'
+                                'Passed', 'Failed', 'Absent',
                             ])
                             ->default('pass'),
                         Forms\Components\Textarea::make('notes')

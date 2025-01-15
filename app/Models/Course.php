@@ -65,6 +65,11 @@ class Course extends Model
         return $this->belongsToMany(Teacher::class);
     }
 
+    public function teacher(): BelongsTo
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
@@ -88,6 +93,11 @@ class Course extends Model
     public function enrollments(): HasMany
     {
         return $this->hasMany(Enrollment::class);
+    }
+
+    public function enrollment(): HasOne
+    {
+        return $this->hasOne(Enrollment::class);
     }
 
     public function createdBy(): BelongsTo
@@ -127,7 +137,7 @@ class Course extends Model
 
     public function scopeNotStarted($query)
     {
-        return $query->whereDoesntHave('studentCourses', function ($query) {
+        return $query->whereDoesntHave('studentCourses', function ($query): void {
             $query->where('status', 'not_started');
         });
     }
@@ -175,5 +185,10 @@ class Course extends Model
     public function CourseGrade(): BelongsTo
     {
         return $this->belongsTo(CourseGrades::class);
+    }
+
+    public function ClassGroups(): HasMany
+    {
+        return $this->hasMany(ClassGroup::class);
     }
 }

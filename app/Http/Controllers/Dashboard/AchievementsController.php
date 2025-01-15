@@ -13,12 +13,12 @@ class AchievementsController extends Controller
         $user = auth()->user();
 
         $studentData = Enrollment::where('student_id', $user->student->id)
-            ->with(['course', 'course.CourseGrade', 'student', 'term'])
-            ->pastCourses()
+            ->with(['course', 'student', 'term'])
+            ->pastEnrollments()
             ->get();
-        //        CourseGrades::where('student_id', $user->student->id)->get()->dd();
-        //            return $CourseGrade;
+
         $terms = $studentData->groupBy('term_id')->map(function ($termData) {
+
             $termGPA = $this->calculateTermGPA($termData);
             $creditsPassed = $this->calculatePassedCredits($termData);
 
@@ -29,7 +29,7 @@ class AchievementsController extends Controller
                 }),
                 'creditsPassed' => $creditsPassed,
                 'gpa' => number_format($termGPA, 2),
-                'CourseGrade' => $termData->CourseGrade,
+                'CourseGrade' => $termData->enrollment->grade,
                 'courses' => $termData->map(function ($registration) {
                     return [
                         'course' => $registration->course,
@@ -38,7 +38,6 @@ class AchievementsController extends Controller
                 }),
             ];
         });
-
         // Calculate overall statistics
         $totalCredit = $terms->sum('totalCredit');
         $cumulativeGPA = $this->calculateCGPA($terms);

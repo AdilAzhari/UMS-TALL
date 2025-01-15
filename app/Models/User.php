@@ -69,12 +69,12 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->is_admin == 0;
+        return true;
     }
 
     public function getFilamentAvatarUrl(): ?string
     {
-        return $this->avatar_url ? Storage::url("$this->avatar_url") : null;
+        return $this->avatar_url ? Storage::url($this->avatar_url) : null;
     }
 
     public function student(): HasOne
@@ -122,5 +122,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
             'role' => 'string',
             'date_of_birth' => 'datetime',
         ];
+    }
+
+    public function getFilamentName(): string
+    {
+        return "$this->name";
     }
 }

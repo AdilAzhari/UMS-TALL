@@ -27,9 +27,10 @@ class PaymentController extends Controller
             ->where('student_id', auth()->user()->student->id)
             ->when($request->search, fn ($query, $search) => $query->search($search))
             ->orderBy('payment_date', 'asc')
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
 
-        return Inertia::render('Payments/Index', [
+        return Inertia::render('Payments/index', [
             'historicalPayments' => $historicalPayments,
             'upcomingPayments' => $upcomingPayments,
             'initialTab' => $request->query('tab', 'history'),

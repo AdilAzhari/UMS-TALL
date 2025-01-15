@@ -1,142 +1,118 @@
 <template>
     <AppLayout>
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Page Summary -->
-            <div
-                class="bg-white border border-gray-200 rounded-lg shadow-md p-6 mb-8"
-            >
-                <h1 class="text-3xl font-bold text-purple-700 text-center mb-4">
+        <div class="bg-gray-50 min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+            <!-- Page Header -->
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-3xl font-bold text-gray-900 mb-8">
                     Academic Achievements
                 </h1>
-                <div class="flex justify-between items-center text-gray-800">
-                    <div>
-                        <p class="text-lg font-medium">Total Credits Earned:</p>
-                        <p class="text-2xl font-bold text-green-600">
-                            {{ terms.totalCredit }}
-                        </p>
+
+                <!-- Cumulative GPA and Academic Progress -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">
+                        Overall Progress
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Total Credits Taken -->
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Total Credits Taken</p>
+                            <p class="text-2xl font-bold text-gray-900">
+                                {{ academicProgress.totalCreditsTaken }}
+                            </p>
+                        </div>
+                        <!-- Credits Passed -->
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Credits Passed</p>
+                            <p class="text-2xl font-bold text-gray-900">
+                                {{ academicProgress.creditsPassed }}
+                            </p>
+                        </div>
+                        <!-- Credits Remaining -->
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Credits Remaining</p>
+                            <p class="text-2xl font-bold text-gray-900">
+                                {{ academicProgress.creditsRemaining }}
+                            </p>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <p class="text-lg font-medium">
-                            Cumulative GPA (CGPA):
-                        </p>
-                        <p class="text-2xl font-bold text-purple-700">
+                    <!-- Cumulative GPA -->
+                    <div class="mt-6">
+                        <p class="text-sm text-gray-600">Cumulative GPA</p>
+                        <p class="text-3xl font-bold text-purple-600">
                             {{ cumulativeGPA }}
                         </p>
                     </div>
-                    <div>
-                        <p class="text-lg font-medium">Completed Terms:</p>
-                        <p class="text-2xl font-bold text-blue-600">
-                            {{ terms.length }}
+                    <!-- Last Updated -->
+                    <div class="mt-6">
+                        <p class="text-sm text-gray-600">Last Updated</p>
+                        <p class="text-lg font-semibold text-gray-900">
+                            {{ formatDate(lastUpdated) }}
                         </p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Terms List -->
-            <div v-for="(term, index) in terms" :key="index" class="mb-6">
-                <!-- Collapsible Card -->
-                <div
-                    class="bg-white border border-gray-200 rounded-lg shadow-md p-5 hover:shadow-lg transition-shadow cursor-pointer"
-                    @click="toggleTerm(index)"
-                >
-                    <!-- Summary Section -->
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800">
-                                {{ term.term.name }}
-                            </h3>
-                            <p class="text-sm text-gray-600 mt-1">
-                                Credits Taken:
-                                <span class="font-medium text-gray-800">{{
-                                    term.term.max_courses
-                                }}</span
-                                >, Credits Passed:
-                                <span class="font-medium text-green-600">{{
-                                    term.creditsPassed
-                                }}</span>
+                <!-- Term-wise Breakdown -->
+                <div v-for="(term, index) in terms" :key="index" class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">
+                        {{ term.term.name }} (GPA: {{ term.gpa }})
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <!-- Total Credits -->
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Total Credits</p>
+                            <p class="text-2xl font-bold text-gray-900">
+                                {{ term.totalCredit }}
                             </p>
                         </div>
-                        <div class="text-right">
-                            <p class="text-sm text-gray-600">Term GPA:</p>
-                            <p class="text-lg font-bold text-purple-700">
-                                {{ term.gpa }}
+                        <!-- Credits Passed -->
+                        <div class="bg-gray-100 p-4 rounded-lg">
+                            <p class="text-sm text-gray-600">Credits Passed</p>
+                            <p class="text-2xl font-bold text-gray-900">
+                                {{ term.creditsPassed }}
                             </p>
-                        </div>
-                        <div
-                            class="ml-4 text-gray-500 transition-transform transform"
-                            :class="{ 'rotate-180': openTerm === index }"
-                        >
-                            <!-- Dropdown Icon -->
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-6 w-6"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                            >
-                                <path
-                                    fill-rule="evenodd"
-                                    d="M5.293 9.293a1 1 0 011.414 0L10 12.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"
-                                />
-                            </svg>
                         </div>
                     </div>
-                </div>
-
-                <!-- Expanded Details Section -->
-                <div
-                    v-if="openTerm === index"
-                    class="mt-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg shadow-inner p-4"
-                >
-                    <h4 class="text-lg font-semibold text-gray-800 mb-4">
-                        Courses:
-                    </h4>
-                    <!-- Courses List -->
-                    <div
-                        v-for="(course, courseIndex) in term.courses"
-                        :key="courseIndex"
-                        class="mb-4"
-                    >
-                        <div
-                            class="flex justify-between items-center p-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow"
-                        >
-                            <div>
-                                <p class="text-base font-bold text-gray-800">
-                                    {{ course.course.name }}
-                                </p>
-                                <p class="text-sm text-gray-600">
-                                    Code: {{ course.course.code }}
-                                </p>
-                                <p class="text-sm text-gray-600">
-                                    Credit Hours: {{ course.course.credit }}
-                                </p>
-                            </div>
-                            <div>
-                                <p class="text-sm text-gray-600">Status:</p>
-                                <span
-                                    :class="{
-                                        'text-green-600 font-bold':
-                                            course.course.status === 1,
-                                        'text-red-600 font-bold':
-                                            course.course.status === 0,
-                                    }"
-                                >
-                                    {{
-                                        course.course.status === 1
-                                            ? "Active"
-                                            : "Inactive"
-                                    }}
-                                </span>
-                            </div>
-                        </div>
+                    <!-- Courses and Grades -->
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                        Courses and Grades
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                            <thead class="bg-gray-50">
+                            <tr>
+                                <th class="py-3 px-6 text-left text-sm font-semibold text-gray-800">
+                                    Course
+                                </th>
+                                <th class="py-3 px-6 text-left text-sm font-semibold text-gray-800">
+                                    Grade
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr
+                                v-for="(course, courseIndex) in term.courses"
+                                :key="courseIndex"
+                                class="border-b border-gray-100 hover:bg-gray-50 transition duration-200"
+                            >
+                                <td class="py-4 px-6 text-gray-700">
+                                    {{ course.course.name }} ({{ course.course.code }})
+                                </td>
+                                <td class="py-4 px-6 text-gray-700 font-semibold">
+                                    {{ course.grade }}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </AppLayout>
 </template>
+
 <script>
 import AppLayout from "@/Layouts/AppLayout.vue";
+import { format } from 'date-fns';
 
 export default {
     components: {
@@ -147,20 +123,36 @@ export default {
             type: Array,
             required: true,
         },
+        academicProgress: {
+            type: Object,
+            required: true,
+        },
         cumulativeGPA: {
             type: String,
             required: true,
         },
-    },
-    data() {
-        return {
-            openTerm: null, // Tracks the currently expanded term
-        };
+        lastUpdated: {
+            type: String,
+            required: true,
+        },
     },
     methods: {
-        toggleTerm(index) {
-            this.openTerm = this.openTerm === index ? null : index;
+        formatDate(date) {
+            try {
+                // Ensure the date is valid before formatting
+                if (!date || isNaN(new Date(date).getTime())) {
+                    return "N/A"; // Return a fallback value for invalid dates
+                }
+                return format(new Date(date), 'MMM dd, yyyy');
+            } catch (error) {
+                console.error("Error formatting date:", error);
+                return "N/A"; // Return a fallback value if formatting fails
+            }
         },
     },
 };
 </script>
+
+<style scoped>
+/* Add custom styles if needed */
+</style>

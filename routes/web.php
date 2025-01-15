@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AcademicProgressController;
 use App\Http\Controllers\Campus\CampusController;
 use App\Http\Controllers\Dashboard\AchievementsController;
 use App\Http\Controllers\Dashboard\CourseController;
@@ -26,8 +27,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 
 Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('user.profile');
 
-Route::middleware('auth')->group(function () {
-    Route::controller(CourseController::class)->group(function () {
+Route::middleware('auth')->group(function (): void {
+    Route::controller(CourseController::class)->group(function (): void {
         Route::get('/courses', 'index')->name('courses');
         Route::post('/courses/register', 'register')->name('courses.register');
         Route::get('/courses/manage', 'manage')->name('courses.manage');
@@ -36,13 +37,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/courses/howto', 'howTo')->name('courses.howto');
 
         // web.php
-        Route::get('/assign/proctorForm/{id}', 'showAssignProctorForm')->name('show.assign.proctorForm');
+        Route::get('/assign/proctorForm/{id}', 'createAssignProctorForm')->name('show.assign.proctorForm');
         Route::post('/assign/proctorForm/{courseID}', 'storeAssignProctorForm')->name('assign.proctorForm');
         Route::get('/proctor-response', 'response')->name('proctor.response')->middleware('signed');
 
     });
     Route::inertia('/assign/proctorForm', 'ProctorDetailsForm');
 
+    Route::get('/academic-progress', [AcademicProgressController::class, 'index'])
+        ->name('academic.progress');
     Route::get('/achievements', [AchievementsController::class, 'index'])->name('achievements');
     Route::get('/campus', [CampusController::class, 'index'])->name('online-campus');
 
@@ -50,12 +53,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('payments', PaymentController::class)->only(['index', 'create', 'store']);
-    Route::controller(PaymentController::class)->group(function () {
+    Route::controller(PaymentController::class)->group(function (): void {
         Route::get('/payments', 'index')->name('payments');
     });
 
-    Route::controller(StripeController::class)->group(function () {
+    //    Route::resource('payments', PaymentController::class)->only(['index', 'create', 'store']);
+    Route::controller(StripeController::class)->group(function (): void {
         Route::get('/payments/pay', 'pay')->name('payments.pay');
         Route::get('/payments/make', 'create')->name('payments.make');
         Route::get('/payments/success/{paymentId}', 'paymentSuccess')->name('payments.success');
@@ -65,7 +68,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(StoryController::class)
         ->prefix('stories')
         ->name('stories.')
-        ->group(function () {
+        ->group(function (): void {
             Route::get('/', 'index')->name('index');
             Route::get('/create', 'create')->name('create');
             Route::get('/{story}/edit', 'create')->name('edit');
@@ -75,7 +78,7 @@ Route::middleware('auth')->group(function () {
             Route::delete('/{id}', 'destroy')->name('destroy');
         });
 
-    Route::controller(StoryCommentController::class)->prefix('storyComment')->name('storyComment')->group(function () {
+    Route::controller(StoryCommentController::class)->prefix('storyComment')->name('storyComment')->group(function (): void {
         Route::post('/{storyId}/comments', 'storeComment')->name('.store');
         Route::put('/{storyId}/comments/{commentId}', 'updateComment')->name('.update');
         Route::delete('/{storyId}/comments/{commentId}', 'destroyComment')->name('.destroy');

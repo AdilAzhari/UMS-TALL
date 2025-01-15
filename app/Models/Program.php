@@ -26,6 +26,10 @@ class Program extends Model
         'updated_by',
     ];
 
+    protected $casts = [
+
+    ];
+
     public function department(): BelongsTo
     {
         return $this->belongsTo(Department::class);
@@ -34,16 +38,6 @@ class Program extends Model
     public function courses(): HasMany
     {
         return $this->hasMany(Course::class);
-    }
-
-    public function students(): HasMany
-    {
-        return $this->hasMany(Student::class);
-    }
-
-    public function programType(): BelongsTo
-    {
-        return $this->belongsTo(ProgramType::class);
     }
 
     public function programStatus(): BelongsTo
@@ -59,5 +53,15 @@ class Program extends Model
     public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(Teacher::class, 'updated_by');
+    }
+
+    public function students(): HasMany
+    {
+        return $this->hasMany(Student::class);
+    }
+
+    public function programType(): BelongsTo
+    {
+        return $this->belongsTo(ProgramType::class);
     }
 }

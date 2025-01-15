@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\AttendanceReason;
 use App\Models\Attendance;
 use App\Models\ClassGroup;
 use App\Models\Enrollment;
@@ -24,7 +25,7 @@ class AttendanceFactory extends Factory
         return [
             'date' => $this->faker->dateTimeThisYear(),
             'status' => $this->faker->randomElement(['present', 'absent']),
-            'reason' => $this->faker->randomElement(['sick', 'vacation', 'other']),
+            'reason' => $this->faker->randomElement(AttendanceReason::values()),
             'notes' => $this->faker->text(),
             'student_id' => Student::inRandomOrder()->first()->id ?? Student::factory()->create()->id,
             'enrollment_id' => Enrollment::inRandomOrder()->first()->id ?? Enrollment::factory()->create()->id,

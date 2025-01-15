@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained();
             $table->foreignId('program_id')->nullable()->constrained();
-            $table->decimal('gpa', 4, 2)->nullable();
-            $table->decimal('cgpa', 4, 2)->nullable();
+            $table->decimal('gpa', 4)->nullable();
+            $table->decimal('cgpa', 4)->nullable();
             $table->integer('total_credits')->default(0);
             $table->integer('total_courses')->default(0);
             $table->integer('total_courses_completed')->default(0);

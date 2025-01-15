@@ -11,15 +11,18 @@ class AssignmentComment extends Model
 {
     /** @use HasFactory<AssignmentCommentFactory> */
     use HasFactory;
+
     protected $fillable = [
         'assignment_id',
         'commented_by',
         'comment',
     ];
+
     public function assignment(): BelongsTo
     {
         return $this->belongsTo(Assignment::class);
     }
+
     public function comment(): BelongsTo
     {
         return $this->belongsTo(Student::class);

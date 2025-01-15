@@ -12,6 +12,6 @@ class WeekSeeder extends Seeder
      */
     public function run(): void
     {
-        Week::factory()->count(2000)->create();
+        Week::factory()->count(1000)->create();
     }
 }

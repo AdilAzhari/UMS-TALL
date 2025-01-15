@@ -37,6 +37,7 @@ class QuizQuestion extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
     public function quizQuestionOptions(): HasMany
     {
         return $this->hasMany(QuizQuestionOption::class);

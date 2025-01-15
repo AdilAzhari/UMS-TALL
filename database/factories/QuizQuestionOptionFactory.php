@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use App\Models\QuizQuestionOption;
 use App\Models\Teacher;
@@ -22,7 +21,7 @@ class QuizQuestionOptionFactory extends Factory
     {
 
         return [
-            'quiz_question_id' => QuizQuestion::inRandomOrder()->first()->id ?? QuizQuestion::factory()->create()->id,
+            'quiz_question_id' => QuizQuestion::query()->inRandomOrder()->first()->id ?? QuizQuestion::factory()->create()->id,
             'option' => $this->faker->sentence(6),
             'is_correct' => $this->faker->boolean(25), // 25% chance of being correct
             'created_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,

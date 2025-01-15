@@ -44,7 +44,7 @@ class MaterialResource extends Resource
                             ->label('Material Type')
                             ->inline()
                             ->options([
-                                'Video', 'PDF', 'ZIP', 'PPT','DOC','None',
+                                'Video', 'PDF', 'ZIP', 'PPT', 'DOC', 'None',
                             ])
                             ->default('none')
                             ->required(),

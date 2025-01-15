@@ -47,7 +47,7 @@ class ProctorResource extends Resource
                                     $phoneUtil = PhoneNumberUtil::getInstance();
                                     try {
                                         $phoneNumber = $phoneUtil->parse($value, null);
-                                        if (!$phoneUtil->isValidNumber($phoneNumber)) {
+                                        if (! $phoneUtil->isValidNumber($phoneNumber)) {
                                             $fail('The phone number format is invalid.');
                                         }
                                     } catch (NumberParseException $e) {

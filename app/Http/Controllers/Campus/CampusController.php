@@ -15,8 +15,17 @@ class CampusController extends Controller
      */
     public function index(): Response
     {
-        //        todo('list all the courses student taking this term');
-        return inertia::render('Campus/Index');
+        $student = auth()->user()->student;
+
+        $courses = $student->courses()->whereHas('term', function ($query): void {
+            $query->where('is_current', true);
+        })
+            ->with('classes', 'term', 'teacher')
+            ->get();
+
+        return inertia::render('Campus/Index', [
+            'courses' => $courses,
+        ]);
     }
 
     /**
@@ -62,7 +71,7 @@ class CampusController extends Controller
     public function course(): Response
     {
         $course = Course::with([
-            'weeks' => function ($query) {
+            'weeks' => function ($query): void {
                 $query->orderBy('week_number');
             },
             'weeks.quizzes',

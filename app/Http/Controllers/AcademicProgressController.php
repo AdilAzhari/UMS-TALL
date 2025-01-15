@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAcademicProgressRequest;
 use App\Http\Requests\UpdateAcademicProgressRequest;
 use App\Models\AcademicProgress;
+use Inertia\Inertia;
 
 class AcademicProgressController extends Controller
 {
@@ -13,7 +14,13 @@ class AcademicProgressController extends Controller
      */
     public function index()
     {
-        //
+        $academicProgress = AcademicProgress::where('student_id', auth()->id())->first();
+        $studentProgram = auth()->user()->student->program();
+
+        return Inertia::render('AcademicProgress', [
+            'academicProgress' => $academicProgress,
+            'studentProgram' => $studentProgram,
+        ]);
     }
 
     /**
