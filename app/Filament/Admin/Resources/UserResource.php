@@ -13,6 +13,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
+use Ysfkaya\FilamentPhoneInput\PhoneInputNumberType;
 
 class UserResource extends Resource
 {
@@ -57,16 +59,12 @@ class UserResource extends Resource
                             ->email()
                             ->maxLength(255)
                             ->default(null),
-                        Forms\Components\TextInput::make('phone_number')
+                        PhoneInput::make('phone_number')
                             ->label('Phone Number')
-                            ->tel()
-                            ->rules([
-                                'nullable',
-                                'string',
-                                'regex:/^([0-9\s\-\+\(\)]*)$/',
-                            ])
-                            ->mask('+1 (999) 999-9999')
-                            ->placeholder('+1 (869) 863-5508'),
+                            ->placeholder('+1 (869) 863-5508')
+                            ->useFullscreenPopup()
+                            ->autoPlaceholder('aggressive')
+                        ->defaultCountry('US'),
                     ])->columns(2),
 
                 Forms\Components\Section::make('Security')

@@ -33,7 +33,7 @@ class TermResource extends Resource
 
                         $slug = Str::slug($state);
                         if (Term::where('slug', $slug)->exists()) {
-                            $slug .= '-'.time();
+                            $slug .= '-' . time();
                         }
                         $set('slug', $slug); // Update the slug field
                     }),
@@ -46,6 +46,7 @@ class TermResource extends Resource
                 Forms\Components\DatePicker::make('start_date')
                     ->required(),
                 Forms\Components\DatePicker::make('end_date')
+                    ->rules(['after_or_equal:start_date'])
                     ->required(),
                 Forms\Components\TextInput::make('max_courses')
                     ->label('Maximum Courses')

@@ -98,6 +98,7 @@ class QuizResource extends Resource
                 Forms\Components\DateTimePicker::make('start_date')
                     ->required(),
                 Forms\Components\DateTimePicker::make('end_date')
+                    ->rules(['after:start_date'])
                     ->required(),
                 Forms\Components\TextInput::make('passing_score')
                     ->required()

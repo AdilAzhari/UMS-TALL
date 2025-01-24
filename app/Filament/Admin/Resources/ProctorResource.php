@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
 
 class ProctorResource extends Resource
 {
@@ -38,23 +39,13 @@ class ProctorResource extends Resource
                             ->email()
                             ->required()
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('phone_number')
+                        PhoneInput::make('phone_number')
                             ->label('Phone Number')
-                            ->required()
-                            ->maxLength(20)
-                            ->rules([
-                                function ($attribute, $value, $fail): void {
-                                    $phoneUtil = PhoneNumberUtil::getInstance();
-                                    try {
-                                        $phoneNumber = $phoneUtil->parse($value, null);
-                                        if (! $phoneUtil->isValidNumber($phoneNumber)) {
-                                            $fail('The phone number format is invalid.');
-                                        }
-                                    } catch (NumberParseException $e) {
-                                        $fail('The phone number format is invalid.');
-                                    }
-                                },
-                            ]),
+                            ->placeholder('+1 (869) 863-5508')
+                            ->useFullscreenPopup()
+                            ->autoPlaceholder('aggressive')
+                            ->defaultCountry('US'),
+
                     ])->columns(2),
 
                 // Address Information Section
