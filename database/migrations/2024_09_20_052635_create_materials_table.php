@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,7 +17,7 @@ return new class extends Migration
             $table->foreignId('updated_by')->constrained('teachers')->cascadeOnDelete();
             $table->foreignId('week_id')->constrained()->cascadeOnDelete();
             $table->enum('type', ['Video', 'PDF', 'ZIP', 'PPT', 'DOC'])->nullable();
-            $table->enum('content_type', ['lecture', 'assignment', 'resource', 'quiz', 'discussion'])->nullable();
+            $table->enum('content_type', ['lecture', 'assignment', 'resource', 'quiz', 'discussion', 'syllabus'])->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('size')->nullable();
             $table->string('path')->nullable();

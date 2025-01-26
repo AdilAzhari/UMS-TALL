@@ -25,6 +25,8 @@ return new class extends Migration
             $table->decimal('progress_percentage', 5, 2)->default(0.00);
             $table->enum('academic_standing', ['good', 'warning', 'probation', 'suspension'])->nullable();
             $table->enum('status', ['On Track', 'Probation', 'At Risk'])->default('On Track');
+            $table->index('student_id');
+            $table->index('program_id');
             $table->timestamps();
         });
     }
