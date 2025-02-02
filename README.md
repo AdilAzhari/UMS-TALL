@@ -1,6 +1,16 @@
----
+<div align="center">
 
 # 🎓 University Management System (UMS)
+
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
+![Inertia.js](https://img.shields.io/badge/Inertia.js-000000?style=for-the-badge&logo=inertia&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![PestPHP](https://img.shields.io/badge/PestPHP-FF2D20?style=for-the-badge&logo=pest&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Stripe](https://img.shields.io/badge/Stripe-008CDD?style=for-the-badge&logo=stripe&logoColor=white)
+
+</div>
 
 A comprehensive **University Management System (UMS)** built using **Laravel, Vue.js, Inertia.js, MySQL, and Pest for testing**. This project follows the **service pattern architecture** and aims to provide an efficient, scalable, and modern solution for managing university operations.
 
@@ -13,33 +23,36 @@ A comprehensive **University Management System (UMS)** built using **Laravel, Vu
 - Secure authentication powered by **Laravel Breeze**.
 
 ### **Course Management**
-- Course registration, dropping, and achievement tracking.
-- Seamless enrollment and progress monitoring for students.
+- **Course Registration**: Students can register for courses, and admins can manage course offerings.
+- **Proctor Management**: Assign proctors to courses and manage proctor responses.
+- **Course Resources**: Access syllabus, learning guides, and resources for each course.
 
 ### **Student Portal**
-- Apply for leave of absence.
-- View academic progress and manage course enrollment.
-- Access the **Online Campus** to:
-  - View registered courses.
-  - Submit assignments.
-  - Check weekly activities and deadlines.
+- **Online Campus**: Access course materials, announcements, and weekly activities.
+- **Assignments**: Submit assignments and view feedback.
+- **Quizzes**: Take quizzes, view results, and track progress.
+- **Forum Discussions**: Participate in course-related discussions and reply to comments.
 
 ### **Teacher & Admin Dashboard**
-- Manage classes, exams, quizzes, and assignments.
-- Oversee student progress and academic performance.
+- **Announcements**: Create and manage course announcements.
+- **Learning Guides**: Upload and manage weekly learning guides.
+- **Assignments & Quizzes**: Create and grade assignments and quizzes.
+- **Proctor Management**: Assign proctors and manage their responses.
+
+### **Academic Progress & Achievements**
+- Track academic progress and view achievements.
+- Monitor course completion and performance.
+
+### **Payment Integration**
+- **Stripe Integration**: Securely handle course payments and view payment history.
+- Payment success and cancellation handling.
+
+### **Stories & Community Engagement**
+- **Stories**: Share and manage stories within the university community.
+- **Comments**: Engage with stories by posting and managing comments.
 
 ### **Automated Notifications**
 - Email notifications for course updates, homework deadlines, and announcements.
-
-### **Payment Integration**
-- Secure payment processing via **Stripe** for tuition fees and other transactions.
-
-### **Background Job Processing**
-- Efficient handling of tasks using Laravel’s queue system.
-
-### **Clean Code & Best Practices**
-- Adherence to Laravel’s coding standards.
-- Robust database management with **Eloquent ORM**.
 
 ### **Developer Tooling**
 - Pre-configured testing with **PestPHP**.
@@ -107,7 +120,16 @@ DB_PASSWORD=your_database_password
 php artisan migrate
 ```
 
-### 6. Start the development server:
+### 6. Seed Data for Testing:
+To populate the database with dummy data for testing, run:
+```bash
+php artisan db:seed
+```
+###OR 
+```bash
+php artisan migrate --seed
+```
+### 7. Start the development server:
 ```bash
 php artisan serve
 npm run dev
