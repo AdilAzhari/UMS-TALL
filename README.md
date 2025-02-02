@@ -1,56 +1,154 @@
-<p align="center"><a href="https://yourprojecturl.com" target="_blank"><img src="https://yourprojecturl.com/logo.png" width="400" alt="UMS Logo"></a></p>
+---
 
-<p align="center">
-<a href="https://github.com/yourusername/UMS-TALL/actions"><img src="https://github.com/yourusername/UMS-TALL/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/yourusername/UMS-TALL"><img src="https://img.shields.io/packagist/dt/yourusername/UMS-TALL" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/yourusername/UMS-TALL"><img src="https://img.shields.io/packagist/v/yourusername/UMS-TALL" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/yourusername/UMS-TALL"><img src="https://img.shields.io/packagist/l/yourusername/UMS-TALL" alt="License"></a>
-</p>
+# 🎓 University Management System (UMS)
 
-## About UMS
+A comprehensive **University Management System (UMS)** built using **Laravel, Vue.js, Inertia.js, MySQL, and Pest for testing**. This project follows the **service pattern architecture** and aims to provide an efficient, scalable, and modern solution for managing university operations.
 
-UMS (User Management System) is a web application framework built with Laravel, providing a robust and scalable solution for managing users. It includes features such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🌟 Key Features
 
-UMS is accessible, powerful, and provides tools required for large, robust applications.
+### **User Roles & Authentication**
+- **Role-based access control** for Students, Teachers, and Admins.
+- Secure authentication powered by **Laravel Breeze**.
 
-## Learning UMS
+### **Course Management**
+- Course registration, dropping, and achievement tracking.
+- Seamless enrollment and progress monitoring for students.
 
-UMS has extensive and thorough [documentation](https://yourprojecturl.com/docs) and video tutorial library, making it easy to get started with the framework.
+### **Student Portal**
+- Apply for leave of absence.
+- View academic progress and manage course enrollment.
+- Access the **Online Campus** to:
+  - View registered courses.
+  - Submit assignments.
+  - Check weekly activities and deadlines.
 
-You may also try the [UMS Bootcamp](https://bootcamp.yourprojecturl.com), where you will be guided through building a modern UMS application from scratch.
+### **Teacher & Admin Dashboard**
+- Manage classes, exams, quizzes, and assignments.
+- Oversee student progress and academic performance.
 
-If you prefer video tutorials, [UMSCasts](https://umscasts.com) contains thousands of video tutorials on a range of topics including UMS, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### **Automated Notifications**
+- Email notifications for course updates, homework deadlines, and announcements.
 
-## UMS Sponsors
+### **Payment Integration**
+- Secure payment processing via **Stripe** for tuition fees and other transactions.
 
-We would like to extend our thanks to the following sponsors for funding UMS development. If you are interested in becoming a sponsor, please visit the [UMS Partners program](https://partners.yourprojecturl.com).
+### **Background Job Processing**
+- Efficient handling of tasks using Laravel’s queue system.
 
-### Premium Partners
+### **Clean Code & Best Practices**
+- Adherence to Laravel’s coding standards.
+- Robust database management with **Eloquent ORM**.
 
-- **[Partner1](https://partner1.com/)**
-- **[Partner2](https://partner2.com)**
-- **[Partner3](https://partner3.com/)**
+### **Developer Tooling**
+- Pre-configured testing with **PestPHP**.
+- Code quality enforcement using **PHPStan**, **Pint**, and **Rector**.
 
-## Contributing
+---
 
-Thank you for considering contributing to the UMS framework! The contribution guide can be found in the [UMS documentation](https://yourprojecturl.com/docs/contributions).
+## 🛠️ Tech Stack
 
-## Code of Conduct
+### **Backend**
+- **Laravel 11** (PHP framework)
+- **MySQL** (Database)
+- **Inertia.js** (Server-side routing)
 
-In order to ensure that the UMS community is welcoming to all, please review and abide by the [Code of Conduct](https://yourprojecturl.com/docs/contributions#code-of-conduct).
+### **Frontend**
+- **Vue.js** (JavaScript framework)
+- **Tailwind CSS** (Styling)
 
-## Security Vulnerabilities
+### **Authentication**
+- **Laravel Breeze** (Authentication scaffolding)
 
-If you discover a security vulnerability within UMS, please send an e-mail to [security@yourprojecturl.com](mailto:security@yourprojecturl.com). All security vulnerabilities will be promptly addressed.
+### **Testing**
+- **PestPHP** (Testing framework)
 
-## License
+### **Code Quality**
+- **PHPStan** (Static analysis)
+- **Pint** (Laravel code styling)
+- **Rector** (Automated code refactoring)
 
-The UMS framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### **Payment Integration**
+- **Stripe** (Payment gateway)
+
+---
+
+## 🚀 Installation
+
+### 1. Clone the repository:
+```bash
+git clone https://github.com/your-username/project-name.git
+cd project-name
+```
+
+### 2. Install dependencies:
+```bash
+composer install
+npm install
+```
+
+### 3. Set up the environment:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 4. Configure the database:
+Update the `.env` file with your database credentials:
+```env
+DB_DATABASE=your_database_name
+DB_USERNAME=your_database_user
+DB_PASSWORD=your_database_password
+```
+
+### 5. Run migrations:
+```bash
+php artisan migrate
+```
+
+### 6. Start the development server:
+```bash
+php artisan serve
+npm run dev
+```
+
+---
+
+## 🧪 Development Commands
+
+The project includes a **custom composer script** to streamline testing and code quality checks:
+
+```json
+"scripts": {
+    "test": [
+        "@pint",
+        "@rector",
+        "@phpstan"
+    ],
+    "pint": "vendor/bin/pint",
+    "rector": "vendor/bin/rector",
+    "phpstan": "vendor/bin/phpstan analyse --configuration=phpstan.neon"
+}
+```
+
+Run all tests and format code with:
+```bash
+composer test
+```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Here’s how you can help:
+
+1. **Fork the repository**.
+2. **Create a new branch** for your feature or bugfix:
+   ```bash
+   git checkout -b feature-new-functionality
+   ```
+3. **Commit your changes** with descriptive messages.
+4. **Submit a pull request** with a detailed description of your changes.
+
+---
