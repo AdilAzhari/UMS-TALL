@@ -9,8 +9,6 @@ class QuizQuestionPolicy
      */
     public function viewAny(): bool
     {
-        //
-
         return true;
     }
 

@@ -33,7 +33,7 @@ class TermResource extends Resource
 
                         $slug = Str::slug($state);
                         if (Term::where('slug', $slug)->exists()) {
-                            $slug .= '-' . time();
+                            $slug .= '-'.time();
                         }
                         $set('slug', $slug); // Update the slug field
                     }),

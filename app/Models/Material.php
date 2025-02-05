@@ -52,4 +52,17 @@ class Material extends Model
     {
         return $this->belongsTo(Week::class);
     }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(function ($announcement): void {
+            $announcement->created_by = auth()->id(); // Set created_by to the current authenticated user's ID
+            $announcement->updated_by = auth()->id(); // Set updated_by to the current authenticated user's ID
+        });
+        static::updating(function ($announcement): void {
+            $announcement->updated_by = auth()->id();
+        });
+    }
 }

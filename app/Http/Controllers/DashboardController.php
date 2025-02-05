@@ -72,7 +72,7 @@ class DashboardController extends Controller
         $now = Carbon::now();
 
         return $student->enrollments()
-            ->whereHas('term', function ($query) use ($range, $now) {
+            ->whereHas('term', function ($query) use ($range, $now): void {
                 if ($range === 'future') {
                     $query->where('start_date', '>', $now)
                         ->whereNotIn('enrollment_status', ['Completed']);

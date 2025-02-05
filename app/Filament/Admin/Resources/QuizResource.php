@@ -34,7 +34,7 @@ class QuizResource extends Resource
                     ->relationship('course', 'name')
                     ->required(),
                 Forms\Components\Select::make('teacher_id')
-                    ->relationship('teacher', 'id')
+                    ->relationship('teacher.user', 'name')
                     ->required(),
                 Forms\Components\Select::make('class_group_id')
                     ->relationship('classGroup', 'group_number')

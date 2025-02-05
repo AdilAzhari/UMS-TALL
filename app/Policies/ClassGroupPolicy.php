@@ -12,7 +12,7 @@ class ClassGroupPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -20,7 +20,7 @@ class ClassGroupPolicy
      */
     public function view(User $user, ClassGroup $classGroup): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -28,7 +28,7 @@ class ClassGroupPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -36,7 +36,7 @@ class ClassGroupPolicy
      */
     public function update(User $user, ClassGroup $classGroup): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -44,7 +44,7 @@ class ClassGroupPolicy
      */
     public function delete(User $user, ClassGroup $classGroup): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -52,7 +52,7 @@ class ClassGroupPolicy
      */
     public function restore(User $user, ClassGroup $classGroup): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -60,6 +60,6 @@ class ClassGroupPolicy
      */
     public function forceDelete(User $user, ClassGroup $classGroup): bool
     {
-        return false;
+        return true;
     }
 }

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('honors_awards')->nullable();
             $table->foreignId('student_id')->constrained()->cascadeOnDelete();
             $table->foreignId('term_id')->constrained()->cascadeOnDelete();
+            $table->index('student_id');
+            $table->index('term_id');
             $table->timestamps();
         });
     }

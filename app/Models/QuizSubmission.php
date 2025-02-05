@@ -22,6 +22,11 @@ class QuizSubmission extends Model
         'answers',
     ];
 
+    public static function create(array $array): QuizSubmission
+    {
+        return QuizSubmission::create($array);
+    }
+
     public function quiz(): BelongsTo
     {
         return $this->belongsTo(Quiz::class);

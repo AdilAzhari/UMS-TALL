@@ -7,8 +7,9 @@
         <h1 class="text-3xl font-bold text-gray-800 mb-8 pl-4">My Courses This Term</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Loop through the student's courses -->
             <div
-                v-for="course in courses"
+                v-for="course in student.courses"
                 :key="course.id"
                 class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
             >
@@ -31,7 +32,6 @@
                                 stroke-width="2"/>
                         </svg>
                     </div>
-
                     <!-- Course Details -->
                     <div class="p-6">
                         <h2 class="text-xl font-semibold text-gray-900 mb-2">
@@ -49,7 +49,7 @@
                                         stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2"/>
                                 </svg>
-                                <span>{{ course.term.name }}</span>
+                                <span>{{ student.term.name }}</span>
                             </div>
                         </div>
                         <div class="mt-4">
@@ -63,7 +63,7 @@
         </div>
 
         <!-- Empty State -->
-        <div v-if="courses.length === 0" class="text-center py-12">
+        <div v-if="student.courses.length === 0" class="text-center py-12">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                  xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -88,8 +88,8 @@ export default {
     layout: CampusLayout,
     name: 'CourseList',
     props: {
-        courses: {
-            type: Array,
+        student: {
+            type: Object,
             required: true,
         },
     },

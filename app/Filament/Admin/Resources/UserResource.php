@@ -14,7 +14,6 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
 use Ysfkaya\FilamentPhoneInput\Forms\PhoneInput;
-use Ysfkaya\FilamentPhoneInput\PhoneInputNumberType;
 
 class UserResource extends Resource
 {
@@ -64,7 +63,7 @@ class UserResource extends Resource
                             ->placeholder('+1 (869) 863-5508')
                             ->useFullscreenPopup()
                             ->autoPlaceholder('aggressive')
-                        ->defaultCountry('US'),
+                            ->defaultCountry('US'),
                     ])->columns(2),
 
                 Forms\Components\Section::make('Security')

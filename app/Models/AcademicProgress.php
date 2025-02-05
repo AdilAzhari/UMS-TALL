@@ -25,11 +25,24 @@ class AcademicProgress extends Model
         'total_courses_withdrawn',
     ];
 
+    public function getAcademicStandingAttribute($value): string
+    {
+        return ucfirst(strtolower($value));
+    }
+
+    public function setGpaAttribute($value): void
+    {
+        $this->attributes['gpa'] = round($value, 2);
+    }
+
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
     }
 
+    /**
+     * The program associated with the academic progress
+     */
     public function program(): BelongsTo
     {
         return $this->belongsTo(Program::class);

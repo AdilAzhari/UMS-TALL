@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreQuizzeSubmissionRequest;
-use App\Http\Requests\UpdateQuizzeSubmissionRequest;
-use App\Models\QuizSubmission;
+use App\Models\QuizQuestionResponse;
+use App\Http\Requests\StoreQuizQuestionResponseRequest;
+use App\Http\Requests\UpdateQuizQuestionResponseRequest;
 
-class QuizzeSubmissionController extends Controller
+class QuizQuestionResponseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class QuizzeSubmissionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreQuizzeSubmissionRequest $request)
+    public function store(StoreQuizQuestionResponseRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class QuizzeSubmissionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(QuizSubmission $quizzeSubmission)
+    public function show(QuizQuestionResponse $quizQuestionResponse)
     {
         //
     }
@@ -43,7 +43,7 @@ class QuizzeSubmissionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(QuizSubmission $quizzeSubmission)
+    public function edit(QuizQuestionResponse $quizQuestionResponse)
     {
         //
     }
@@ -51,7 +51,7 @@ class QuizzeSubmissionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateQuizzeSubmissionRequest $request, QuizSubmission $quizzeSubmission)
+    public function update(UpdateQuizQuestionResponseRequest $request, QuizQuestionResponse $quizQuestionResponse)
     {
         //
     }
@@ -59,7 +59,7 @@ class QuizzeSubmissionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(QuizSubmission $quizzeSubmission)
+    public function destroy(QuizQuestionResponse $quizQuestionResponse)
     {
         //
     }

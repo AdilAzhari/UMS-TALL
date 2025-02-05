@@ -104,7 +104,8 @@ class Assignment extends Model
      */
     public function classGroup(): BelongsTo
     {
-        return $this->belongsTo(ClassGroup::class);
+        return $this->belongsTo(ClassGroup::class)
+            ->withDefault(['name' => '']);
     }
 
     /**

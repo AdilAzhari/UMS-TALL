@@ -24,6 +24,7 @@ class MaterialFactory extends Factory
             'course_id' => Course::inRandomOrder()->first()->id ?? course::factory()->create()->id,
             'created_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
             'updated_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
+            'content_type' => $this->faker->randomElement(['lecture', 'assignment', 'resource', 'quiz', 'discussion', 'resource', 'syllabus']),
             'type' => $this->faker->randomElement(['Video', 'PDF', 'ZIP', 'PPT', 'DOC']),
             'thumbnail' => $this->faker->word(),
             'title' => $this->faker->word(),

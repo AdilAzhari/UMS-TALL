@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreAnnouncementCommentRequest extends FormRequest
@@ -11,18 +12,20 @@ class StoreAnnouncementCommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            //
+            'comment' => 'required|string|max:500',
+            'announcement_id' => 'required|integer|exists:announcements,id',
+            'course_id' => 'required|integer|exists:courses,id',
         ];
     }
 }

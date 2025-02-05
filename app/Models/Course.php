@@ -50,6 +50,11 @@ class Course extends Model
         return $this->belongsToMany(Student::class);
     }
 
+    public function materials(): HasMany
+    {
+        return $this->hasMany(Material::class);
+    }
+
     public function exam(): HasOne
     {
         return $this->hasOne(Exam::class);
@@ -190,5 +195,10 @@ class Course extends Model
     public function ClassGroups(): HasMany
     {
         return $this->hasMany(ClassGroup::class);
+    }
+
+    public function announcements(): HasMany
+    {
+        return $this->hasMany(Announcement::class);
     }
 }

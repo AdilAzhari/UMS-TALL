@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\MaterialResource\Pages;
 use App\Models\Material;
+use App\Models\Week;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -47,6 +48,28 @@ class MaterialResource extends Resource
                                 'Video', 'PDF', 'ZIP', 'PPT', 'DOC', 'None',
                             ])
                             ->default('none')
+                            ->required(),
+                        Forms\Components\Radio::make('content_type')
+                            ->label('Material Content Type')
+                            ->inline()
+                            ->options([
+                                'lecture', 'assignment', 'resource', 'quiz', 'discussion', 'syllabus',
+                            ])
+                            ->default('lecture')
+                            ->required(),
+                        Forms\Components\Select::make('week_id')
+                            ->label('Week')
+                            ->relationship('week', 'week_number')
+                            ->searchable()
+                            ->preload()
+                            ->reactive()
+                            ->live()
+                            ->options(function (callable $get) {
+                                $courseId = $get('course_id'); // Get the currently selected course ID
+
+                                return ! $courseId ? [] : Week::where('course_id', $courseId)
+                                    ->pluck('week_number', 'id'); // Fetch week numbers for the course;
+                            })
                             ->required(),
                     ]),
 

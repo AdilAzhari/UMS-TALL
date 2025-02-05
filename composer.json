@@ -24,7 +24,8 @@
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
         "stripe/stripe-php": "^16.2",
-        "tightenco/ziggy": "^2.3"
+        "tightenco/ziggy": "^2.3",
+        "ysfkaya/filament-phone-input": "^3.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",
@@ -66,7 +67,15 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
-        ]
+        ],
+        "test": [
+            "@pint",
+            "@rector",
+            "@phpstan"
+        ],
+        "pint": "vendor/bin/pint",
+        "rector": "vendor/bin/rector",
+        "phpstan": "vendor/bin/phpstan analyse --configuration=phpstan.neon"
     },
     "extra": {
         "laravel": {

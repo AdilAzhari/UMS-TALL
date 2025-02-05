@@ -16,12 +16,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@example.com',
             'password' => '12345678',
-            //            ''
+            'role' => 'admin',
         ]);
         User::factory()->create([
             'name' => 'teacher',
             'email' => 'teacher@example.com',
             'password' => '12345678',
+            'role' => 'teacher',
         ]);
         $this->call([
             UserSeeder::class,
@@ -58,7 +59,7 @@ class DatabaseSeeder extends Seeder
             AcademicProgressSeeder::class,
             RegistrationSeeder::class,
             StudentCourseSeeder::class,
-            //            CourseTeacherSeeder::class,
+            //                        CourseTeacherSeeder::class,
             CourseRequirementsSeeder::class,
             //            linkSeeder::class,
             //            CourseGradesSeeder::class,

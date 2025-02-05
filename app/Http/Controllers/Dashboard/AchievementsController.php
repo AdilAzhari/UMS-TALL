@@ -12,32 +12,26 @@ class AchievementsController extends Controller
     {
         $user = auth()->user();
 
-        $studentData = Enrollment::where('student_id', $user->student->id)
+        // Fetch the student's enrollments with related data
+        $enrollments = Enrollment::where('student_id', $user->student->id)
             ->with(['course', 'student', 'term'])
             ->pastEnrollments()
             ->get();
 
-        $terms = $studentData->groupBy('term_id')->map(function ($termData) {
-
-            $termGPA = $this->calculateTermGPA($termData);
-            $creditsPassed = $this->calculatePassedCredits($termData);
-
+        // Group enrollments by term and calculate term-wise data
+        $terms = $enrollments->groupBy('term_id')->map(function ($termData) {
             return [
                 'term' => $termData->first()->term,
-                'totalCredit' => $termData->sum(function ($registration) {
-                    return $registration->course->credit ?? 0;
-                }),
-                'creditsPassed' => $creditsPassed,
-                'gpa' => number_format($termGPA, 2),
-                'CourseGrade' => $termData->enrollment->grade,
-                'courses' => $termData->map(function ($registration) {
-                    return [
-                        'course' => $registration->course,
-                        'grade' => $registration->grade,
-                    ];
-                }),
+                'totalCredit' => $termData->sum(fn ($enrollment) => $enrollment->course->credit_hours ?? 0),
+                'creditsPassed' => $this->calculatePassedCredits($termData),
+                'gpa' => number_format($this->calculateTermGPA($termData), 2),
+                'courses' => $termData->map(fn ($enrollment) => [
+                    'course' => $enrollment->course,
+                    'grade' => $enrollment->grade,
+                ]),
             ];
         });
+
         // Calculate overall statistics
         $totalCredit = $terms->sum('totalCredit');
         $cumulativeGPA = $this->calculateCGPA($terms);
@@ -52,8 +46,8 @@ class AchievementsController extends Controller
         return Inertia::render('AcademicAchievements', [
             'terms' => $terms->values(),
             'academicProgress' => $academicProgress,
-            'totalCredit' => $totalCredit,
             'cumulativeGPA' => number_format($cumulativeGPA, 2),
+            'lastUpdated' => now()->toDateTimeString(),
         ]);
     }
 
@@ -62,9 +56,9 @@ class AchievementsController extends Controller
         $totalPoints = 0;
         $totalCredits = 0;
 
-        foreach ($termData as $registration) {
-            $credit = $registration->course->credit ?? 0;
-            $grade = $this->getGradePoint($registration->grade);
+        foreach ($termData as $enrollment) {
+            $credit = $enrollment->course->credit_hours ?? 0;
+            $grade = $this->getGradePoint($enrollment->grade);
 
             $totalPoints += ($credit * $grade);
             $totalCredits += $credit;
@@ -92,10 +86,10 @@ class AchievementsController extends Controller
 
     protected function calculatePassedCredits($termData)
     {
-        return $termData->sum(function ($registration) {
-            $grade = $this->getGradePoint($registration->grade);
+        return $termData->sum(function ($enrollment) {
+            $grade = $this->getGradePoint($enrollment->grade);
 
-            return $grade >= 1.0 ? ($registration->course->credit ?? 0) : 0;
+            return $grade >= 1.0 ? ($enrollment->course->credit_hours ?? 0) : 0;
         });
     }
 

@@ -16,14 +16,14 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->foreignId('week_id')->constrained('weeks')->cascadeOnDelete();
-            $table->foreignId('Class_group_id')->constrained('class_groups')->cascadeOnDelete();
+            $table->foreignId('class_group_id')->constrained('class_groups')->cascadeOnDelete();
             $table->text('message');
             $table->string('title');
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->enum('type', ['Announcement', 'Assignment', 'Quiz'])->default('Announcement');
             $table->enum('audience', ['Global', 'Week', 'Course'])->default('Global');
             $table->string('attachments')->nullable();
-            $table->foreignId('created_by')->constrained('teachers')->cascadeOnDelete();
+            $table->foreignId('created_by')->nullable()->constrained('teachers');
             $table->softDeletes();
             $table->timestamps();
         });

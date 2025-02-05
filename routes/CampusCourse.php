@@ -11,22 +11,23 @@ use Illuminate\Support\Facades\Route;
 Route::name('campus.')
     ->prefix('campus/')
     ->group(function (): void {
+        // Announcement Routes
+        Route::controller(AnnouncementController::class)
+            ->prefix('course/{courseId}/announcements')
+            ->name('course.announcements.')
+            ->group(function (): void {
+                Route::get('/', 'index')->name('index');
+                Route::get('/{announcementId}', 'show')->name('show');
+                Route::post('/', 'store')->name('storeComment');
+            });
+
+        // CampusController Routes
         Route::controller(CampusController::class)->group(function (): void {
             Route::get('/course/{id}', 'course')->name('course.show');
             Route::get('/course/{courseId}/syllabus', 'syllabus')->name('syllabus');
             Route::get('/course/{courseId}/resources', 'resources')->name('resources');
             Route::post('/course/{id}/announcements', 'storeAnnouncement')->name('course.announcements.store');
         });
-        //Announcement Routes
-        Route::controller(AnnouncementController::class)
-            ->prefix('course/{id}/announcements')
-            ->name('course.announcements.')
-            ->group(function (): void {
-                Route::get('/', 'index')->name('index');
-                Route::get('/create', 'create')->name('create');
-                Route::post('/', 'store')->name('store');
-                Route::get('/{announcementId}', 'show')->name('show');
-            });
         Route::prefix('/courses/{courseId}/weeks/{weekId}')
             ->name('courses.weeks.')
             ->group(function (): void {

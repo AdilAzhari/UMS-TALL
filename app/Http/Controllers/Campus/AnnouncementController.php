@@ -3,41 +3,42 @@
 namespace App\Http\Controllers\Campus;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAnnouncementCommentRequest;
+use App\Models\Announcement;
+use App\Models\AnnouncementComment;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AnnouncementController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return inertia::render('Campus/Announcement/Show');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAnnouncementCommentRequest $request, Announcement $announcement)
     {
-        //
+        $request->validated();
+        $comment = AnnouncementComment::create([
+            'announcement_id' => $request->announcement_id,
+            'comment' => $request->comment,
+            'user_id' => $request->user()->id,
+            'commented_by' => $request->user()->id,
+        ]);
+
+        return redirect()->back()->with('message', 'Reply submitted successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $courseId, string $announcementId)
     {
-        //
+        $announcement = Announcement::findOrFail($announcementId)
+            ->load('comments.user', 'user');
+
+        return inertia::render('Campus/Announcement/Show', [
+            'announcement' => $announcement,
+            'courseId' => $courseId,
+        ]);
     }
 
     /**
