@@ -24,7 +24,7 @@ class QuizQuestionOptionFactory extends Factory
             'quiz_question_id' => QuizQuestion::query()->inRandomOrder()->first()->id ?? QuizQuestion::factory()->create()->id,
             'option' => $this->faker->sentence(6),
             'is_correct' => $this->faker->boolean(25), // 25% chance of being correct
-            'created_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
+            'created_by' => Teacher::inRandomOrder()->first()->id ?? null,
             'updated_by' => Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id,
         ];
 

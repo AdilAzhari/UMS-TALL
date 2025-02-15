@@ -53,10 +53,10 @@ class QuizQuestion extends Model
         // Automatically set created_by when creating a new Quiz Question
         static::creating(function ($QuizQuestion): void {
             $QuizQuestion->created_by = auth()->id(); // Set created_by to the current authenticated user's ID
-            $QuizQuestion->updated_by = auth()->id();
+            $QuizQuestion->updated_by = auth()->id(); // Set updated_by to the current authenticated user's ID
         });
         static::updating(function ($QuizQuestion): void {
-            $QuizQuestion->updated_by = auth()->id();
+            $QuizQuestion->updated_by = auth()->id(); // update updated_by to the current authenticated user's ID
         });
     }
 }

@@ -33,6 +33,10 @@ class QuizQuestionOption extends Model
             $model->updated_by = auth()->id();
             $model->created_by = auth()->id();
         });
+        static::creating(function ($model): void {
+            $model->created_by = auth()->id();
+            $model->updated_by = auth()->id();
+        });
 
     }
     public function createdBy(): BelongsTo

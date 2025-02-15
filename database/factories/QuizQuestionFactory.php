@@ -21,9 +21,9 @@ class QuizQuestionFactory extends Factory
     {
         return [
             'quiz_id' => Quiz::inRandomOrder()->first()->id,
-            'question' => $this->faker->sentence(),
-            'created_by' => Teacher::inRandomOrder()->first()->id,
-            'updated_by' => Teacher::inRandomOrder()->first()->id,
+            'question' => $this->faker->sentence() ?? $this->faker->sentence(),
+            'created_by' => Teacher::inRandomOrder()->first()->id ?? null,
+            'updated_by' => Teacher::inRandomOrder()->first()->id ?? null,
         ];
     }
 }
