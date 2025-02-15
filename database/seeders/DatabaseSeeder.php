@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,46 +11,46 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@example.com',
-            'password' => '12345678',
-            'role' => 'admin',
-        ]);
-        User::factory()->create([
-            'name' => 'teacher',
-            'email' => 'teacher@example.com',
-            'password' => '12345678',
-            'role' => 'teacher',
-        ]);
+//        User::factory()->create([
+//            'name' => 'admin',
+//            'email' => 'admin@example.com',
+//            'password' => '12345678',
+//            'role' => 'admin',
+//        ]);
+//        User::factory()->create([
+//            'name' => 'teacher',
+//            'email' => 'teacher@example.com',
+//            'password' => '12345678',
+//            'role' => 'teacher',
+//        ]);
         $this->call([
-            UserSeeder::class,
-            departmentSeeder::class,
-            ProgramTypeSeeder::class,
-            ProgramStatusSeeder::class,
-            programSeeder::class,
-            TermSeeder::class,
-            CourseCategorySeeder::class,
-            CourseSeeder::class,
-            TeacherSeeder::class,
-            StudentSeeder::class,
-            ProctorSeeder::class,
-            enrollmentSeeder::class,
-            AttendanceSeeder::class,
-            WeekSeeder::class,
-            AssignmentSeeder::class,
-            QuizSeeder::class,
-            GradingScaleSeeder::class,
-            AssignmentSubmissionSeeder::class,
-            ExamSeeder::class,
-            ExamResultSeeder::class,
-            TechnicalTeamSeeder::class,
-            announcementSeeder::class,
-            QuizQuestionSeeder::class,
-            QuizQuestionOptionSeeder::class,
-            QuizAnswerSeeder::class,
-            QuizSubmissionSeeder::class,
-            MaterialSeeder::class,
+//            UserSeeder::class,
+//            departmentSeeder::class,
+//            ProgramTypeSeeder::class,
+//            ProgramStatusSeeder::class,
+//            programSeeder::class,
+//            TermSeeder::class,
+//            CourseCategorySeeder::class,
+//            CourseSeeder::class,
+//            TeacherSeeder::class,
+//            StudentSeeder::class,
+//            ProctorSeeder::class,
+//            enrollmentSeeder::class,
+//            AttendanceSeeder::class,
+//            WeekSeeder::class,
+//            AssignmentSeeder::class,
+//            QuizSeeder::class,
+//            GradingScaleSeeder::class,
+//            AssignmentSubmissionSeeder::class,
+//            ExamSeeder::class,
+//            ExamResultSeeder::class,
+//            TechnicalTeamSeeder::class,
+//            announcementSeeder::class,
+//            QuizQuestionSeeder::class,
+//            QuizQuestionOptionSeeder::class,
+//            QuizAnswerSeeder::class,
+//            QuizSubmissionSeeder::class,
+//            MaterialSeeder::class,
             ExamQuestionSeeder::class,
             ExamAnswerSeeder::class,
             ExamQuestionOptionSeeder::class,
@@ -59,15 +58,15 @@ class DatabaseSeeder extends Seeder
             AcademicProgressSeeder::class,
             RegistrationSeeder::class,
             StudentCourseSeeder::class,
-            //                        CourseTeacherSeeder::class,
+//            CourseTeacherSeeder::class,
             CourseRequirementsSeeder::class,
             //            linkSeeder::class,
             //            CourseGradesSeeder::class,
             AcademicAchievementSeeder::class,
             PaymentSeeder::class,
-            //            StorySeeder::class,
-            //            StoryTagSeeder::class,
-            //            StoryCommentSeeder::class,
+            StorySeeder::class,
+            StoryTagSeeder::class,
+            StoryCommentSeeder::class,
             LearningGuidanceSeeder::class,
             AssignmentAttachmentSeeder::class,
             AssignmentCommentSeeder::class,

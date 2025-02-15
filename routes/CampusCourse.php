@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::name('campus.')
     ->prefix('campus/')
+    ->middleware('auth')
     ->group(function (): void {
         // Announcement Routes
         Route::controller(AnnouncementController::class)

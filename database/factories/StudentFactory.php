@@ -30,7 +30,6 @@ class StudentFactory extends Factory
             'department_id' => Department::inRandomOrder()->first()?->id ?? \App\Models\Department::factory()->create()->id,
             'term_id' => Term::inRandomOrder()->first()?->id ?? Term::factory()->create()->id,
             'user_id' => User::inRandomOrder()->first()?->id ?? User::factory()->create()->id,
-            //            'student_id' => 'STU' . Str()->uuid()->toString(),
             'student_id' => 'STU'.Str::uuid()->toString(),
             'address' => $this->faker->address(),
             'phone_number' => $this->faker->phoneNumber(),

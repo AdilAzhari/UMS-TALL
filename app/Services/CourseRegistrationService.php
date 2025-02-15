@@ -9,7 +9,6 @@ use App\Models\Term;
 use App\Models\User;
 use App\Notifications\AssignProctorNotification;
 use App\Notifications\CourseRegistrationNotification;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Notification;
 
 class CourseRegistrationService
@@ -100,7 +99,7 @@ class CourseRegistrationService
 
     public function getStudentData($user): array
     {
-        $programName = (new User)->where('id', $user->id)
+        $programName = User::where('id', $user->id)
             ->with([
                 'student.program:id,program_name',
                 'student.academicProgress',
@@ -141,6 +140,7 @@ class CourseRegistrationService
 
     protected function mapCourses($courses)
     {
+        $courses->load('course.exam');
         return $courses->map(fn ($course) => [
             'id' => $course->id,
             'name' => $course->course->name,
@@ -155,7 +155,7 @@ class CourseRegistrationService
         ]) ?? [];
     }
 
-    public function getAvailableCourses($user): Collection
+    public function getAvailableCourses($user)
     {
         $pastCourses = (new Registration)->where('student_id', $user->student->id)->PastCourses()->pluck('course_id');
         $currentCourses = (new Registration)->where('student_id', $user->student->id)->currentCourses()->pluck('course_id');
