@@ -17,6 +17,7 @@ class Assignment extends Model
 
     /**
      * The attributes that are mass assignable.
+     * These fields can be filled using mass assignment.
      *
      * @var array<string>
      */
@@ -47,6 +48,7 @@ class Assignment extends Model
 
     /**
      * The attributes that should be hidden for serialization.
+     * These fields will not be included when converting the model to an array or JSON.
      *
      * @var array<int, string>
      */
@@ -56,7 +58,8 @@ class Assignment extends Model
     ];
 
     /**
-     * The attributes that should be cast.
+     * The attributes that should be cast to native types.
+     * Automatically converts fields to appropriate data types.
      *
      * @var array<string, string>
      */
@@ -85,12 +88,13 @@ class Assignment extends Model
         'is_visible' => true,
         'max_attempts' => 1,
         'attachment_limit' => 1,
-        'grading_type' => 'numeric', // numeric, letter, pass_fail
-        'late_submission_policy' => 'NotAllowed', // not_allowed, allowed_with_penalty, allowed
+        'grading_type' => 'numeric', // Options: numeric, letter, pass_fail
+        'late_submission_policy' => 'NotAllowed', // Options: not_allowed, allowed_with_penalty, allowed
     ];
 
     /**
      * The accessors to append to the model's array form.
+     * These attributes are dynamically added when retrieving the model as an array.
      *
      * @var array
      */
@@ -100,7 +104,7 @@ class Assignment extends Model
     ];
 
     /**
-     * Get the class that the assignment belongs to.
+     * Get the class group associated with the assignment.
      */
     public function classGroup(): BelongsTo
     {
@@ -109,7 +113,7 @@ class Assignment extends Model
     }
 
     /**
-     * Get the teacher that created the assignment.
+     * Get the teacher who created the assignment.
      */
     public function teacher(): BelongsTo
     {
@@ -133,7 +137,7 @@ class Assignment extends Model
     }
 
     /**
-     * Get the course that the assignment belongs to.
+     * Get the course associated with the assignment.
      */
     public function course(): BelongsTo
     {
@@ -141,15 +145,7 @@ class Assignment extends Model
     }
 
     /**
-     * Get the week that the assignment belongs to.
-     */
-    public function week(): BelongsTo
-    {
-        return $this->belongsTo(Week::class);
-    }
-
-    /**
-     * Get all submissions for this assignment.
+     * Get all submissions made for this assignment.
      */
     public function submissions(): HasMany
     {
@@ -166,6 +162,7 @@ class Assignment extends Model
 
     /**
      * Scope a query to only include active assignments.
+     * Active means the submission end date has not yet passed.
      */
     public function scopeActive(Builder $query): Builder
     {
@@ -173,7 +170,7 @@ class Assignment extends Model
     }
 
     /**
-     * Get the active status of the assignment.
+     * Determine if the assignment is currently active.
      */
     public function getIsActiveAttribute(): bool
     {
@@ -181,21 +178,15 @@ class Assignment extends Model
     }
 
     /**
-     * Get the submission status of the assignment.
+     * Get the current submission status of the assignment.
      */
     public function getSubmissionStatusAttribute(): string
     {
-        if (now() < $this->submission_start) {
-            return 'upcoming';
-        } elseif (now() > $this->submission_end) {
-            return 'closed';
-        }
-
-        return 'open';
+        return now() < $this->submission_start ? 'upcoming' : (now() > $this->submission_end ? 'closed' : 'open');
     }
 
     /**
-     * Check if late submissions are allowed.
+     * Check if late submissions are allowed based on the policy.
      */
     public function allowsLateSubmissions(): bool
     {
@@ -203,7 +194,7 @@ class Assignment extends Model
     }
 
     /**
-     * Get the file url attribute.
+     * Get the URL of the attached file, if available.
      */
     public function getFileUrlAttribute(): ?string
     {

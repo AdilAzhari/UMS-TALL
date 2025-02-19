@@ -10,6 +10,7 @@ class AcademicProgress extends Model
 {
     use HasFactory;
 
+    // Specifies the attributes that can be mass assigned
     protected $fillable = [
         'student_id',
         'program_id',
@@ -25,29 +26,42 @@ class AcademicProgress extends Model
         'total_courses_withdrawn',
     ];
 
-    public function getAcademicStandingAttribute($value): string
+    /**
+     * Accessor to format the academic standing attribute.
+     * Ensures the first letter is capitalized and the rest are lowercase.
+     */
+    public function getAcademicStandingAttribute(string $value): string
     {
         return ucfirst(strtolower($value));
     }
 
-    public function setGpaAttribute($value): void
+    /**
+     * Mutator to round the GPA value to two decimal places before storing it.
+     */
+    public function setGpaAttribute(float $value): void
     {
         $this->attributes['gpa'] = round($value, 2);
     }
 
+    /**
+     * Define a relationship where an academic progress record belongs to a student.
+     */
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
     }
 
     /**
-     * The program associated with the academic progress
+     * Define a relationship where an academic progress record belongs to a program.
      */
     public function program(): BelongsTo
     {
         return $this->belongsTo(Program::class);
     }
 
+    /**
+     * Define a relationship where an academic progress record belongs to a term.
+     */
     public function term(): BelongsTo
     {
         return $this->belongsTo(Term::class);

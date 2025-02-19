@@ -39,10 +39,12 @@ class QuizQuestionOption extends Model
         });
 
     }
+
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(Teacher::class, 'created_by');
     }
+
     public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(Teacher::class, 'updated_by');

@@ -17,6 +17,9 @@ class AssignmentAttachment extends Model
         'assignment_id',
     ];
 
+    /**
+     * Define a BelongsTo relationship between AssignmentAttachment and Assignment.
+     */
     public function assignment(): BelongsTo
     {
         return $this->belongsTo(Assignment::class);

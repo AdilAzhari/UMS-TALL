@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Auth;
 class AssignmentResource extends Resource
 {
     protected static ?string $model = Assignment::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+
     protected static ?string $navigationGroup = 'Assignments & Submissions';
 
     public static function form(Form $form): Form
@@ -134,7 +136,7 @@ class AssignmentResource extends Resource
                     ->visible(fn ($livewire) => $livewire instanceof Pages\EditAssignment),
             ])
             ->columns()
-            ->hidden(fn ($livewire) => !$livewire instanceof Pages\EditAssignment);
+            ->hidden(fn($livewire) => !$livewire instanceof Pages\EditAssignment);
     }
 
     /**
