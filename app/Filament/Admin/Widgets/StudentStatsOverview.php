@@ -9,7 +9,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class StudentStatsOverview extends BaseWidget
 {
-//    protected static string $view = 'filament.widgets.student-stats-overview';
+    //    protected static string $view = 'filament.widgets.student-stats-overview';
     protected function getStats(): array
     {
         $totalStudents = Student::count();
