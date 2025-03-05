@@ -141,6 +141,7 @@ class CourseRegistrationService
     protected function mapCourses($courses)
     {
         $courses->load('course.exam');
+
         return $courses->map(fn ($course) => [
             'id' => $course->id,
             'name' => $course->course->name,
