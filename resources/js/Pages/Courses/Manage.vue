@@ -199,7 +199,7 @@ import {Link} from "@inertiajs/vue3";
 import Courses from "@/Components/Courses.vue";
 
 export default defineComponent({
-    applayout: AppLayout,
+    layout: AppLayout,
     components: {
         AppLayout,
         Link,

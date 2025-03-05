@@ -25,8 +25,9 @@ class LearningGuideController extends Controller
             ->get()
             ->pluck('learningGuide');
 
+        //        dd($week);
         return inertia::render('Campus/LearningGuide/Show', [
-            'weeks' => $week,
+            'weeks' => $week ? $week->toArray() : [],
         ]);
     }
 }

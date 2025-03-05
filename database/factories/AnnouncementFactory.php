@@ -30,8 +30,8 @@ class AnnouncementFactory extends Factory
             'status' => $this->faker->randomElement(['active', 'inactive']),
             'title' => $this->faker->word(),
             'audience' => $this->faker->randomElement(['global', 'week', 'course']),
+            'created_by' => Teacher::query()->inRandomOrder()->value('id') ?? Teacher::factory()->create()->id,
             'type' => $this->faker->randomElement(['announcement', 'assignment', 'quiz']),
-            'created_by' => Teacher::query()->inRandomOrder()->first()->id,
             'class_group_id' => ClassGroup::query()->inRandomOrder()->first()->id,
         ];
     }

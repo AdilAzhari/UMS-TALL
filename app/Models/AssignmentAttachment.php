@@ -11,10 +11,15 @@ class AssignmentAttachment extends Model
 {
     /** @use HasFactory<AssignmentAttachmentFactory> */
     use HasFactory;
+
     protected $fillable = [
         'file_path',
         'assignment_id',
     ];
+
+    /**
+     * Define a BelongsTo relationship between AssignmentAttachment and Assignment.
+     */
     public function assignment(): BelongsTo
     {
         return $this->belongsTo(Assignment::class);

@@ -85,8 +85,8 @@ class CourseResource extends Resource
                                     ->default(false)
                                     ->required(),
                                 Forms\Components\Select::make('course_category_id')
-                                ->relationship('category', 'name')
-                                ->required()
+                                    ->relationship('category', 'name')
+                                    ->required(),
                             ]),
 
                         Forms\Components\Section::make('Payment Information')
@@ -94,7 +94,7 @@ class CourseResource extends Resource
                                 Forms\Components\Select::make('paid')
                                     ->label('Paid Course')
                                     ->options([
-                                        'Paid', 'Unpaid', 'FuturePayment'
+                                        'Paid', 'Unpaid', 'FuturePayment',
                                     ])
                                     ->default('Paid')
                                     ->required(),
@@ -102,7 +102,7 @@ class CourseResource extends Resource
                                     ->numeric()
                                     ->prefix('$')
                                     ->minValue(0)
-                                    ->visible(fn(Forms\Get $get) => $get('cost')),
+                                    ->visible(fn (Forms\Get $get) => $get('cost')),
                             ]),
                     ])
                     ->columnSpan(['lg' => 1]),
@@ -141,13 +141,12 @@ class CourseResource extends Resource
                 Tables\Columns\TextColumn::make('cost')
                     ->money('usd')
                     ->sortable()
-                    ->visible(fn(Builder $query) => $query->where('paid', 'Paid')->exists()),
+                    ->visible(fn (Builder $query) => $query->where('paid', 'Paid')->exists()),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('program')
                     ->relationship('program', 'program_name')
-                    ->searchable()
-                ,
+                    ->searchable(),
                 Tables\Filters\TernaryFilter::make('status'),
                 Tables\Filters\TernaryFilter::make('paid')
                     ->label('Payment Required'),

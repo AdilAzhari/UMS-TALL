@@ -18,6 +18,7 @@ class Term extends Model
         'end_date',
         'slug',
         'max_courses',
+        'is_current',
         'registration_start_date',
         'registration_end_date',
     ];

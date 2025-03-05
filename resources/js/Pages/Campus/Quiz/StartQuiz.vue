@@ -55,7 +55,7 @@ export default {
     methods: {
         async submitQuiz() {
             try {
-                await this.$inertia.post(`/quiz/${this.quiz.id}/submit`, {
+                this.$inertia.post(`/quiz/${this.quiz.id}/submit`, {
                     answers: this.answers,
                 });
             } catch (error) {

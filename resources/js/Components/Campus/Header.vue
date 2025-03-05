@@ -1,18 +1,10 @@
-<!-- CampusHeader.vue -->
 <template>
-    <header class="bg-gradient-to-r from-white to-blue-50 shadow-md px-6 py-4 flex items-center justify-between sticky top-0 z-50">
-        <!-- Logo -->
-        <div class="flex items-center space-x-4">
-            <img src="/logo.png" alt="Campus Logo" class="h-10 w-auto">
-            <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Campus Portal
-            </h1>
-        </div>
+    <header class="bg-white shadow-sm px-6 py-4 flex items-center justify-between sticky top-0 z-50">
 
         <!-- Quick Links -->
         <div class="hidden md:flex items-center space-x-6">
             <a href="/contact" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Contact Info</a>
-            <a href="/student-portal" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Student Portal</a>
+            <a href="/campus" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Student Portal</a>
         </div>
 
         <!-- Search Bar -->
@@ -45,8 +37,8 @@
                         v-if="notifications.length > 0"
                         class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse"
                     >
-            {{ notifications.length }}
-          </span>
+                        {{ notifications.length }}
+                    </span>
                 </button>
 
                 <!-- Notifications Dropdown -->
@@ -133,9 +125,7 @@
 </template>
 
 <script>
-
 export default {
-    name: 'CampusHeader',
     data() {
         return {
             showNotifications: false,
@@ -170,3 +160,31 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+/* Custom styles for smoother transitions */
+header {
+    transition: background-color 0.3s ease;
+}
+
+.notification-dropdown {
+    transform-origin: top;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.profile-dropdown {
+    transform-origin: top;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+/* Pulse animation for notification badge */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.animate-pulse {
+    animation: pulse 1.5s infinite;
+}
+</style>

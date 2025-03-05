@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AssignmentSubmissionFile;
 use App\Http\Requests\StoreAssignmentSubmissionFileRequest;
 use App\Http\Requests\UpdateAssignmentSubmissionFileRequest;
+use App\Models\AssignmentSubmissionFile;
 
 class AssignmentSubmissionFileController extends Controller
 {

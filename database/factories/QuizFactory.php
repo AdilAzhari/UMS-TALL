@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\QuizDuration;
+use App\Enums\QuizStatus;
+use App\Enums\QuizType;
 use App\Models\ClassGroup;
 use App\Models\Course;
 use App\Models\Quiz;
@@ -28,11 +31,11 @@ class QuizFactory extends Factory
             'teacher_id' => Teacher::inRandomOrder()->first()->id,
             'code' => $this->faker->word(),
             'description' => $this->faker->sentence(),
-            'type' => $this->faker->randomElement(['graded', 'ungraded']),
+            'type' => $this->faker->randomElement([QuizType::GRADED, QuizType::UNGRADED]),
             'title' => $this->faker->sentence(),
             'instructions' => $this->faker->sentence(),
-            'duration' => $this->faker->randomElement(['5', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '60']),
-            'status' => $this->faker->randomElement(['draft', 'published', 'closed']),
+            'duration' => $this->faker->randomElement(QuizDuration::values()),
+            'status' => $this->faker->randomElement([QuizStatus::DRAFT, QuizStatus::PUBLISHED, QuizStatus::Closed]),
             'start_date' => $this->faker->dateTimeThisYear(),
             'end_date' => $this->faker->dateTimeThisYear(),
             'passing_score' => $this->faker->randomNumber(),

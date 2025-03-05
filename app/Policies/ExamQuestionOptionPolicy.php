@@ -12,7 +12,7 @@ class ExamQuestionOptionPolicy
      */
     public function viewAny(User $user): bool
     {
-        //r
+        // r
         return true;
 
     }

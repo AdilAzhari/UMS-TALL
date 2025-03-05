@@ -9,12 +9,12 @@ use App\Models\Teacher;
 use App\Models\User;
 use Exception;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
-use Filament\Forms\Components\Section;
 
 class ExamResource extends Resource
 {
@@ -101,7 +101,7 @@ class ExamResource extends Resource
                                     ->limit(50)
                                     ->pluck('name', 'id');
                             })
-                            ->getOptionLabelUsing(fn($value): ?string => User::find($value)?->name)
+                            ->getOptionLabelUsing(fn ($value): ?string => User::find($value)?->name)
                             ->afterStateUpdated(function ($state, callable $set): void {
                                 $teacherId = Teacher::where('user_id', $state)->value('id');
                                 $set('teacher_id', $teacherId);

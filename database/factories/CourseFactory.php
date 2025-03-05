@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\CoursePaid;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Program;
@@ -28,7 +29,7 @@ class CourseFactory extends Factory
             'image' => $this->faker->url(),
             'status' => $this->faker->boolean(),
             'require_proctor' => $this->faker->boolean(),
-            'paid' => $this->faker->randomElement(['paid', 'unpaid', 'future_payment']),
+            'paid' => $this->faker->randomElement([CoursePaid::PAID, CoursePaid::UNPAID, CoursePaid::FUTURE]),
             'cost' => $this->faker->randomFloat(2, 0, 150),
             'program_id' => Program::inRandomOrder()->first()?->id
                 ?? Program::factory()->create()->id,

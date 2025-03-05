@@ -26,10 +26,11 @@ class RegistrationFactory extends Factory
             'course_id' => Course::inRandomOrder()->first()->id ?? Course::factory()->create()->id,
             'proctor_id' => Proctor::inRandomOrder()->first()->id ?? Proctor::factory()->create()->id,
             'term_id' => Term::inRandomOrder()->first()->id ?? Term::factory()->create()->id,
-            'status' => $this->faker->randomElement(['registered', 'in_progress', 'completed', 'withdrawn']),
-            'proctor_status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
+            'registration_status' => $this->faker->randomElement(['registered', 'in_progress', 'completed', 'withdrawn']),
+            'proctor_approval_status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
             'proctored' => $this->faker->boolean(),
             'payment_status' => $this->faker->randomElement(['unpaid', 'pending', 'paid', 'future']),
+            'completion_date' => $this->faker->date(),
         ];
     }
 }

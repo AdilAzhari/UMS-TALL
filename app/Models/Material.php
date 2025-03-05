@@ -40,16 +40,29 @@ class Material extends Model
 
     public function createdBy(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(Teacher::class, 'created_by');
     }
 
     public function updatedBy(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'updated_by');
+        return $this->belongsTo(Teacher::class, 'updated_by');
     }
 
     public function week(): BelongsTo
     {
         return $this->belongsTo(Week::class);
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(function ($announcement): void {
+            $announcement->created_by = auth()->id(); // Set created_by to the current authenticated user's ID
+            $announcement->updated_by = auth()->id(); // Set updated_by to the current authenticated user's ID
+        });
+        static::updating(function ($announcement): void {
+            $announcement->updated_by = auth()->id();
+        });
     }
 }

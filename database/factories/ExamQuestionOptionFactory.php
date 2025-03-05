@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\ExamQuestion;
 use App\Models\ExamQuestionOption;
-use App\Models\QuizQuestion;
 use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

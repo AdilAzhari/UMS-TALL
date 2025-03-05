@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\TechnicalTeamRole;
+use App\Enums\TechnicalTeamStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,7 +19,13 @@ class TechnicalTeam extends Model
     ];
 
     protected $casts = [
-        'status' => 'boolean',
+        'status' => TechnicalTeamStatus::class,
+        'role' => TechnicalTeamRole::class,
+    ];
+
+    protected $attributes = [
+        'status' => TechnicalTeamStatus::ACTIVE,
+        'role' => TechnicalTeamRole::ADMIN,
     ];
 
     public function user(): BelongsTo

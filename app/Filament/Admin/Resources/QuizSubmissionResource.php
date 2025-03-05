@@ -6,19 +6,22 @@ use App\Filament\Admin\Resources\QuizSubmissionResource\Pages;
 use App\Models\QuizSubmission;
 use Exception;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Forms\Components\Section;
 
 class QuizSubmissionResource extends Resource
 {
     protected static ?string $model = QuizSubmission::class;
+
     protected static ?string $activeNavigationIcon = 'heroicon-o-document-text';
 
     protected static ?string $navigationGroup = 'Assessment & Grading';
+
     protected static ?string $navigationLabel = 'Quiz Submissions';
+
     protected static ?string $modelLabel = 'Quiz Submission';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -148,11 +151,11 @@ class QuizSubmissionResource extends Resource
                         return $query
                             ->when(
                                 $data['submitted_from'],
-                                fn($query) => $query->whereDate('submitted_at', '>=', $data['submitted_from'])
+                                fn ($query) => $query->whereDate('submitted_at', '>=', $data['submitted_from'])
                             )
                             ->when(
                                 $data['submitted_until'],
-                                fn($query) => $query->whereDate('submitted_at', '<=', $data['submitted_until'])
+                                fn ($query) => $query->whereDate('submitted_at', '<=', $data['submitted_until'])
                             );
                     }),
             ])
@@ -193,5 +196,4 @@ class QuizSubmissionResource extends Resource
     {
         return static::$model::query()->count() > 0 ? 'primary' : 'gray';
     }
-
 }

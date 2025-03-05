@@ -17,12 +17,13 @@ return new class extends Migration
             $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->foreignId('proctor_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('term_id')->constrained()->cascadeOnDelete();
-            $table->enum('status', ['registered', 'in_progress', 'completed', 'withdrawn'])->default('in_progress')->index();
-            $table->enum('proctor_status', ['pending', 'approved', 'rejected'])->default('pending')->index();
+            $table->enum('registration_status', ['registered', 'in_progress', 'completed', 'withdrawn'])->default('in_progress')->index();
+            $table->enum('proctor_approval_status', ['pending', 'approved', 'rejected'])->default('pending')->index();
             $table->boolean('proctored')->default(false);
             $table->timestamp('registered_at')->nullable()->default(now());
             $table->date('completion_date')->nullable();
             $table->enum('payment_status', ['unpaid', 'pending', 'paid', 'future'])->default('unpaid')->index();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

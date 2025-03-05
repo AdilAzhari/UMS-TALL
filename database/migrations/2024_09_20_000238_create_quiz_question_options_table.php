@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('quiz_question_id')->constrained('quiz_questions')->cascadeOnDelete();
             $table->string('option');
             $table->boolean('is_correct')->default(false);
-            $table->foreignId('created_by')->constrained('teachers')->cascadeOnDelete();
-            $table->foreignId('updated_by')->constrained('teachers')->cascadeOnDelete();
+            $table->foreignId('created_by')->nullable()->constrained('teachers')->cascadeOnDelete();
+            $table->foreignId('updated_by')->nullable()->constrained('teachers')->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

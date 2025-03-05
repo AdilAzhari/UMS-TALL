@@ -5,12 +5,13 @@ namespace App\Filament\Admin\Resources;
 use App\Enums\AnnouncementType;
 use App\Filament\Admin\Resources\AnnouncementResource\Pages;
 use App\Models\Announcement;
+use App\Models\ClassGroup;
+use App\Models\Week;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Auth;
 
 class AnnouncementResource extends Resource
 {
@@ -36,24 +37,54 @@ class AnnouncementResource extends Resource
                 // Course and Week Section
                 Forms\Components\Section::make('Course & Week')
                     ->schema([
+                        // Course Dropdown
                         Forms\Components\Select::make('course_id')
                             ->label('Course')
                             ->relationship('course', 'name')
-                            ->required(),
+                            ->required()
+                            ->live() // Enable live updates
+                            ->afterStateUpdated(function ($state, Forms\Set $set): void {
+                                $set('week_id', null);
+                                $set('class_group_id', null);
+                            }),
+
+                        // Week Dropdown (filtered by selected course)
                         Forms\Components\Select::make('week_id')
                             ->label('Week')
-                            ->relationship('week', 'week_number')
-                            ->required(),
-                    ])->columns(2),
+                            ->options(function (Forms\Get $get) {
+                                // Get the selected course_id
+                                $courseId = $get('course_id');
 
-                // Class Group Section
-                Forms\Components\Section::make('Class Group')
-                    ->schema([
-                        Forms\Components\Select::make('Class_group_id')
+                                // If no course is selected, return an empty array
+                                if (! $courseId) {
+                                    return [];
+                                }
+
+                                // Fetch weeks for the selected course
+                                return Week::where('course_id', $courseId)
+                                    ->pluck('week_number', 'id');
+                            })
+                            ->required()
+                            ->live(), // Enable live updates
+
+                        // Class Group Dropdown (filtered by selected course)
+                        Forms\Components\Select::make('class_group_id')
                             ->label('Class Group')
-                            ->relationship('classGroup', 'group_number')
-                            ->required(),
-                    ])->columns(1),
+                            ->options(function (Forms\Get $get) {
+                                // Get the selected course_id
+                                $courseId = $get('course_id');
+
+                                // If no course is selected, return an empty array
+                                if (! $courseId) {
+                                    return [];
+                                }
+
+                                // Fetch class groups for the selected course
+                                return ClassGroup::where('course_id', $courseId)
+                                    ->pluck('group_number', 'id');
+                            })
+                            ->default(1),
+                    ])->columns(2),
 
                 // Announcement Details Section
                 Forms\Components\Section::make('Announcement Details')
@@ -85,15 +116,9 @@ class AnnouncementResource extends Resource
                             ->required(),
                     ])->columns(2),
 
-                // System Information Section (Visible only in Edit Mode)
-                Forms\Components\Section::make('System Information')
-                    ->schema([
-                        Forms\Components\TextInput::make('created_by')
-                            ->label('Created By')
-                            ->default(Auth::id())
-                            ->disabled()
-                            ->visible(fn ($livewire) => $livewire instanceof Pages\EditAnnouncement),
-                    ])->columns(1),
+                // Hidden created_by field (automatically populated)
+                Forms\Components\Hidden::make('created_by')
+                    ->default(auth()->id()), // Set created_by to the current authenticated user's ID
             ]);
     }
 
