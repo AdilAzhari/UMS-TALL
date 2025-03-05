@@ -56,4 +56,6 @@ Route::middleware('auth')->group(function (): void {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+
+    route::post('update-info', [AuthenticatedSessionController::class, 'updateInfo'])->name('update-info');
 });

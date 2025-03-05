@@ -25,9 +25,17 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('user.profile');
-
 Route::middleware('auth')->group(function (): void {
+
+    Route::group(['middleware' => ['auth', 'verified']], function (): void {
+        Route::controller(ProfileController::class)
+            ->prefix('profile')
+            ->name('profile.')
+            ->group(function (): void {
+                Route::get('/{user}', 'show')->name('user.profile');
+                route::post('/', 'passwordUpdate')->name('user.passwordUpdate');
+            });
+    });
     Route::controller(CourseController::class)->group(function (): void {
         Route::get('/courses', 'index')->name('courses');
         Route::post('/courses/register', 'register')->name('courses.register');
