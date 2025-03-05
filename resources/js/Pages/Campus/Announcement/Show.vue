@@ -21,7 +21,7 @@
                 <div class="flex items-center justify-between text-gray-600">
                     <div class="flex items-center space-x-3">
                         <img
-                            :src="announcement.user.avatar || '/default-avatar.png'"
+                            :src="announcement.user.avatar || '/default-avatars.png'"
                             class="w-10 h-10 rounded-full object-cover"
                             :alt="announcement.user.name"
                         />
@@ -64,7 +64,7 @@
                 >
                     <div class="flex items-start space-x-3">
                         <img
-                            :src="reply.user.avatar || '/default-avatar.png'"
+                            :src="reply.user.avatar || '/default-avatars.png'"
                             class="w-8 h-8 rounded-full object-cover mt-1"
                             :alt="reply.user.name"
                         />

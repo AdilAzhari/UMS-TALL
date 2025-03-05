@@ -33,12 +33,12 @@
                     class="text-gray-600 hover:text-blue-600 transition-colors duration-200 relative"
                 >
                     <i class="fas fa-bell text-xl"></i>
-                    <span
-                        v-if="notifications.length > 0"
-                        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse"
-                    >
-                        {{ notifications.length }}
-                    </span>
+<!--                    <span-->
+<!--&lt;!&ndash;                        v-if="notifications.length > 0"&ndash;&gt;-->
+<!--                        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse"-->
+<!--                    >-->
+<!--                        {{ // notifications.length }}-->
+<!--                    </span>-->
                 </button>
 
                 <!-- Notifications Dropdown -->
@@ -49,17 +49,17 @@
                     <div class="p-4 border-b border-gray-100">
                         <h3 class="font-semibold text-gray-800">Notifications</h3>
                     </div>
-                    <div v-if="notifications.length > 0" class="max-h-96 overflow-y-auto">
-                        <div
-                            v-for="(notification, index) in notifications"
-                            :key="index"
-                            class="p-4 border-b border-gray-50 hover:bg-blue-50 transition-colors duration-200"
-                        >
-                            <p class="text-sm text-gray-700">{{ notification.message }}</p>
-                            <p class="text-xs text-gray-400 mt-1">{{ notification.time }}</p>
-                        </div>
-                    </div>
-                    <div v-else class="p-4 text-center text-gray-500">No new notifications</div>
+<!--                    <div v-if="notifications.length > 0" class="max-h-96 overflow-y-auto">-->
+<!--                        <div-->
+<!--                            v-for="(notification, index) in notifications"-->
+<!--                            :key="index"-->
+<!--                            class="p-4 border-b border-gray-50 hover:bg-blue-50 transition-colors duration-200"-->
+<!--                        >-->
+<!--                            <p class="text-sm text-gray-700">{{ notification.message }}</p>-->
+<!--                            <p class="text-xs text-gray-400 mt-1">{{ notification.time }}</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div v-else class="p-4 text-center text-gray-500">No new notifications</div>-->
                 </div>
             </div>
 
