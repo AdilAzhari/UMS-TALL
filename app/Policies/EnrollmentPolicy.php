@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\enrollment;
+use App\Models\Enrollment;
 use App\Models\User;
 
 class EnrollmentPolicy

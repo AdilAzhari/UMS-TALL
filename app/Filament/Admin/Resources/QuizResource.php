@@ -1,8 +1,13 @@
 <?php
 
 namespace App\Filament\Admin\Resources;
-
-use App\Filament\Admin\Resources\QuizzeResource\Pages;
+use App\Enums\QuizDuration;
+use App\Enums\QuizStatus;
+use App\Enums\QuizType;
+use App\Filament\Admin\Resources\AssignmentResource\RelationManagers\WeekRelationManager;
+use App\Filament\Admin\Resources\ExamResource\RelationManagers\CourseRelationManager;
+use App\Filament\Admin\Resources\QuizResource\Pages;
+use App\Filament\Admin\Resources\QuizResource\RelationManagers\SubmissionsRelationManager;
 use App\Models\Quiz;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,45 +18,84 @@ use Filament\Tables\Table;
 class QuizResource extends Resource
 {
     protected static ?string $model = Quiz::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
+    protected static ?string $activeNavigationIcon = 'heroicon-o-adjustments-horizontal';
 
     protected static ?string $navigationGroup = 'Assessment & Grading';
+
+    protected static ?string $navigationParentItem = 'Notifications';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('course_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('teacher_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('class_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('course_id')
+                    ->relationship('course', 'name')
+                    ->required(),
+                Forms\Components\Select::make('teacher_id')
+                    ->relationship('teacher', 'id')
+                    ->required(),
+                Forms\Components\Select::make('class_group_id')
+                    ->relationship('classGroup', 'group_number')
+                    ->required(),
                 Forms\Components\TextInput::make('code')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('description')
+                Forms\Components\MarkdownEditor::make('description')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('type')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
+                    ->columnSpanFull(),
+                Forms\Components\Select::make('type')
+                    ->enum(QuizType::class)
+                    ->options(QuizType::class)
                     ->required(),
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('instructions')
+                Forms\Components\MarkdownEditor::make('instructions')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('duration')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
+                    ->columnSpanFull(),
+                Forms\Components\Select::make('duration')
+                    ->options(QuizDuration::class)
                     ->required(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Radio::make('status')
+                    ->options(QuizStatus::class)
+                    ->enum(QuizStatus::class)
+                    ->default('published')
+                    ->inlineLabel(),
+                Forms\Components\DateTimePicker::make('start_date')
                     ->required(),
-                Forms\Components\DatePicker::make('start_date')
-                    ->required(),
-                Forms\Components\DatePicker::make('end_date')
+                Forms\Components\DateTimePicker::make('end_date')
                     ->required(),
                 Forms\Components\TextInput::make('passing_score')
                     ->required()
@@ -81,6 +125,11 @@ class QuizResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('instructions')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('course.name')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('title')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('duration'),
                 Tables\Columns\TextColumn::make('status'),
                 Tables\Columns\TextColumn::make('start_date')
@@ -89,8 +138,6 @@ class QuizResource extends Resource
                 Tables\Columns\TextColumn::make('end_date')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('passing_score')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -116,7 +163,10 @@ class QuizResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CourseRelationManager::class,
+            WeekRelationManager::class,
+            //            QuestionsRelationManager::class,
+            SubmissionsRelationManager::class,
         ];
     }
 
@@ -124,8 +174,13 @@ class QuizResource extends Resource
     {
         return [
             'index' => Pages\ListQuizzes::route('/'),
-            'create' => Pages\CreateQuizze::route('/create'),
-            'edit' => Pages\EditQuizze::route('/{record}/edit'),
+            'create' => Pages\CreateQuiz::route('/create'),
+            'edit' => Pages\EditQuiz::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

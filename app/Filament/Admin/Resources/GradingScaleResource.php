@@ -34,12 +34,12 @@ class GradingScaleResource extends Resource
                 Forms\Components\TextInput::make('gpa_point')
                     ->required()
                     ->numeric(),
-                Forms\Components\select::make('student_id')
+                Forms\Components\Select::make('student_id')
                     ->required()
                     ->relationship('student', 'user_id', function ($query) {
                         return $query->where('user_id', 'id');
                     }),
-                Forms\Components\select::make('course_id')
+                Forms\Components\Select::make('course_id')
                     ->required()
                     ->relationship('course', 'name'),
             ]);
@@ -102,5 +102,10 @@ class GradingScaleResource extends Resource
             'create' => Pages\CreateGradingScale::route('/create'),
             'edit' => Pages\EditGradingScale::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

@@ -8,12 +8,11 @@ use HTMLPurifier_Config;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
-use LaravelIdea\Helper\App\Models\_IH_Story_C;
-use LaravelIdea\Helper\App\Models\_IH_Story_QB;
+use Illuminate\Database\Eloquent\Collection;
 
 class StoryService
 {
-    public function getAllStories($paginate = 10): \Illuminate\Contracts\Pagination\LengthAwarePaginator|LengthAwarePaginator|array|_IH_Story_C
+    public function getAllStories($paginate = 10): LengthAwarePaginator
     {
         return Story::with('student', 'student.user')
             ->published()
@@ -94,9 +93,10 @@ class StoryService
         return $story;
     }
 
-    public function getRecommendedStories(): _IH_Story_QB
+    public function getRecommendedStories(): Collection
     {
-        return Story::with('student', 'student.user', 'comments', 'replies')->published()
+        return Story::with('student', 'student.user', 'comments', 'replies')
+            ->published()
             ->take(3)
             ->get();
     }

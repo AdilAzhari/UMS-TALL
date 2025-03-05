@@ -26,19 +26,19 @@ class AnnouncementCommentResource extends Resource
                 Forms\Components\Textarea::make('comment')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\select::make('announcement_id')
+                Forms\Components\Select::make('announcement_id')
                     ->label('Announcement')
                     ->relationship('announcement', 'message')
                     ->required(),
-                Forms\Components\select::make('parent_id')
+                Forms\Components\Select::make('parent_id')
                     ->label('Parent Comment')
                     ->relationship('parent', 'comment')
                     ->default(null),
-                Forms\Components\select::make('commented_by')
+                Forms\Components\Select::make('commented_by')
                     ->label('Commented By')
                     ->relationship('commentedBy', 'name')
                     ->required(),
-                Forms\Components\select::make('user_id')
+                Forms\Components\Select::make('user_id')
                     ->label('User')
                     ->relationship('user', 'name')
                     ->required(),
@@ -103,5 +103,10 @@ class AnnouncementCommentResource extends Resource
             'create' => Pages\CreateAnnouncementComment::route('/create'),
             'edit' => Pages\EditAnnouncementComment::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

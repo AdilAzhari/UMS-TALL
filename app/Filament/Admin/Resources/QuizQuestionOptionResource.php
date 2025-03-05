@@ -2,7 +2,6 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\QuizzeQuestionOptionResource\Pages;
 use App\Models\QuizQuestionOption;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -14,7 +13,6 @@ class QuizQuestionOptionResource extends Resource
 {
     protected static ?string $model = QuizQuestionOption::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
 
     protected static ?string $navigationGroup = 'Assessment & Grading';
 
@@ -22,20 +20,12 @@ class QuizQuestionOptionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\select::make('quiz_question_id')
                     ->required()
-                    ->relationship('quizQuestion', 'question'),
                 Forms\Components\TextInput::make('option')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Toggle::make('is_correct')
                     ->required(),
-                Forms\Components\select::make('created_by')
-                    ->required()
-                    ->relationship(),
-                Forms\Components\select::make('updated_by')
-                    ->required()
-                    ->relationship(),
             ]);
     }
 
@@ -43,7 +33,6 @@ class QuizQuestionOptionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('quiz_question_id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('option')
@@ -70,7 +59,6 @@ class QuizQuestionOptionResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -92,9 +80,6 @@ class QuizQuestionOptionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListQuizzeQuestionOptions::route('/'),
-            'create' => Pages\CreateQuizzeQuestionOption::route('/create'),
-            'edit' => Pages\EditQuizzeQuestionOption::route('/{record}/edit'),
         ];
     }
 }

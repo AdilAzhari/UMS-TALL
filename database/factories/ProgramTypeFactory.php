@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\ProgramType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ProgramType>
+ * @extends Factory<ProgramType>
  */
 class ProgramTypeFactory extends Factory
 {
@@ -17,7 +18,7 @@ class ProgramTypeFactory extends Factory
     public function definition(): array
     {
         return [
-            'type' => $this->faker->randomElement(['Diploma', 'BACHELORS', 'MASTERS', 'DOCTORATE', 'CERTIFICATE']),
+            'type' => $this->faker->unique()->word(),
         ];
     }
 }

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorematerialsRequest;
-use App\Http\Requests\UpdatematerialsRequest;
-use App\Models\materials;
+use App\Models\Material;
 
 class MaterialsController extends Controller
 {
@@ -35,7 +34,7 @@ class MaterialsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(materials $materials)
+    public function show(material $material)
     {
         //
     }
@@ -43,7 +42,7 @@ class MaterialsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(materials $materials)
+    public function edit(material $material)
     {
         //
     }
@@ -51,7 +50,7 @@ class MaterialsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatematerialsRequest $request, materials $materials)
+    public function update(material $material)
     {
         //
     }
@@ -59,7 +58,7 @@ class MaterialsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(materials $materials)
+    public function destroy(material $material)
     {
         //
     }

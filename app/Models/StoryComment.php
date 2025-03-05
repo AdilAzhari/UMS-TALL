@@ -18,6 +18,7 @@ class StoryComment extends Model
 
     protected $fillable = ['content', 'story_id', 'student_id',
         'parent_id', 'status', 'published_at'];
+
     protected $attributes = [
         'status' => 'draft',
     ];
@@ -45,8 +46,8 @@ class StoryComment extends Model
     protected function publishedAt(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Carbon::parse($value)->diffForHumans(),
-            set: fn($value) => Carbon::parse($value),
+            get: fn ($value) => Carbon::parse($value)->diffForHumans(),
+            set: fn ($value) => Carbon::parse($value),
         );
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Week extends Model
 {
@@ -46,5 +47,15 @@ class Week extends Model
     public function materials(): HasMany
     {
         return $this->hasMany(Material::class);
+    }
+
+    public function learningGuide(): HasOne
+    {
+        return $this->HasOne(LearningGuidance::class);
+    }
+
+    public function assignment(): HasOne
+    {
+        return $this->HasOne(Assignment::class);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Filament\Admin\Resources\QuizzeResource\Pages;
 
-use App\Filament\Admin\Resources\QuizzeResource;
+use App\Filament\Admin\Resources\QuizResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateQuizze extends CreateRecord
 {
-    protected static string $resource = QuizzeResource::class;
+    protected static string $resource = QuizResource::class;
 }

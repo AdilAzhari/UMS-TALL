@@ -19,7 +19,7 @@ class LearningGuidanceFactory extends Factory
                 'Introduction',
                 'Network Security',
                 'Security Protocols: SSL and HTTPS',
-                'C.I.A. Triad'
+                'C.I.A. Triad',
             ], 3),
             'objectives' => $this->faker->sentences(3),
             'tasks' => $this->faker->sentences(3),

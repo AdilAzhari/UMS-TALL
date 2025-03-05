@@ -3,13 +3,13 @@
 namespace Database\Factories;
 
 use App\Models\Quiz;
-use App\Models\QuizzeSubmission;
+use App\Models\QuizSubmission;
 use App\Models\Student;
 use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<QuizzeSubmission>
+ * @extends Factory<QuizSubmission>
  */
 class QuizSubmissionFactory extends Factory
 {

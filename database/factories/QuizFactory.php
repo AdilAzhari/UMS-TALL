@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Classes;
+use App\Models\ClassGroup;
 use App\Models\Course;
 use App\Models\Quiz;
 use App\Models\Teacher;
@@ -23,7 +23,7 @@ class QuizFactory extends Factory
     {
         return [
             'course_id' => Course::inRandomOrder()->first()->id,
-            'class_id' => Classes::inRandomOrder()->first()->id,
+            'class_group_id' => ClassGroup::inRandomOrder()->first()->id,
             'week_id' => week::inRandomOrder()->first()->id,
             'teacher_id' => Teacher::inRandomOrder()->first()->id,
             'code' => $this->faker->word(),

@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\Term;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Term>
+ * @extends Factory<Term>
  */
 class TermFactory extends Factory
 {
@@ -16,16 +17,14 @@ class TermFactory extends Factory
      */
     public function definition(): array
     {
-        $name = $this->faker->monthName().' '.$this->faker->year();
-
         return [
-            'name' => $name,
-            'slug' => str($name)->slug(),
-            'start_date' => now()->addMonths(1),
-            'end_date' => now()->addMonths(3),
-            'max_courses' => 5,
-            'registration_start_date' => now()->addMonths(1),
-            'registration_end_date' => now()->addMonths(2),
+            'name' => $this->faker->unique()->words(2, true),
+            'slug' => Str()->slug($this->faker->unique()->words(2, true)),
+            'start_date' => now()->addMonths(2),
+            'end_date' => now()->addMonths(4),
+            'max_courses' => $this->faker->numberBetween(20, 40),
+            'registration_start_date' => now()->addMonths(2),
+            'registration_end_date' => now()->addMonths(3),
         ];
     }
 }

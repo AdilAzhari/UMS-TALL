@@ -4,6 +4,7 @@ namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\CourseResource\Pages;
 use App\Models\Course;
+use Exception;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -40,14 +41,14 @@ class CourseResource extends Resource
                                     ->relationship('program', 'program_name')
                                     ->required()
                                     ->searchable(),
-                                Forms\Components\TextInput::make('credit')
+                                Forms\Components\TextInput::make('credit_hours')
                                     ->required()
                                     ->numeric()
                                     ->default(3)
                                     ->minValue(0)
                                     ->maxValue(10),
                             ])
-                            ->columns(2),
+                            ->columns(),
 
                         Forms\Components\Section::make('Course Details')
                             ->schema([
@@ -67,7 +68,7 @@ class CourseResource extends Resource
                                     ->maxSize(5120)
                                     ->directory('course-images'),
                             ])
-                            ->columns(2),
+                            ->columns(),
                     ])
                     ->columnSpan(['lg' => 2]),
 
@@ -83,19 +84,25 @@ class CourseResource extends Resource
                                     ->label('Requires Proctoring')
                                     ->default(false)
                                     ->required(),
+                                Forms\Components\Select::make('course_category_id')
+                                ->relationship('category', 'name')
+                                ->required()
                             ]),
 
                         Forms\Components\Section::make('Payment Information')
                             ->schema([
-                                Forms\Components\Toggle::make('is_paid')
+                                Forms\Components\Select::make('paid')
                                     ->label('Paid Course')
-                                    ->default(false)
+                                    ->options([
+                                        'Paid', 'Unpaid', 'FuturePayment'
+                                    ])
+                                    ->default('Paid')
                                     ->required(),
                                 Forms\Components\TextInput::make('cost')
                                     ->numeric()
                                     ->prefix('$')
                                     ->minValue(0)
-                                    ->visible(fn (Forms\Get $get) => $get('is_paid')),
+                                    ->visible(fn(Forms\Get $get) => $get('cost')),
                             ]),
                     ])
                     ->columnSpan(['lg' => 1]),
@@ -103,6 +110,9 @@ class CourseResource extends Resource
             ->columns(3);
     }
 
+    /**
+     * @throws Exception
+     */
     public static function table(Table $table): Table
     {
         return $table
@@ -117,7 +127,7 @@ class CourseResource extends Resource
                 Tables\Columns\TextColumn::make('program.program_name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('credit')
+                Tables\Columns\TextColumn::make('credit_hours')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('status')
@@ -126,19 +136,20 @@ class CourseResource extends Resource
                 Tables\Columns\IconColumn::make('require_proctor')
                     ->boolean()
                     ->sortable(),
-                Tables\Columns\IconColumn::make('is_paid')
-                    ->boolean()
+                Tables\Columns\TextColumn::make('paid')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('cost')
                     ->money('usd')
                     ->sortable()
-                    ->visible(fn (Builder $query) => $query->where('is_paid', true)->exists()),
+                    ->visible(fn(Builder $query) => $query->where('paid', 'Paid')->exists()),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('program')
-                    ->relationship('program', 'program_name'),
+                    ->relationship('program', 'program_name')
+                    ->searchable()
+                ,
                 Tables\Filters\TernaryFilter::make('status'),
-                Tables\Filters\TernaryFilter::make('is_paid')
+                Tables\Filters\TernaryFilter::make('paid')
                     ->label('Payment Required'),
             ])
             ->actions([
@@ -168,8 +179,8 @@ class CourseResource extends Resource
         ];
     }
 
-    // public static function getNavigationBadge(): ?string
-    // {
-    //     return static::getModel()::count();
-    // }
+    public static function getNavigationBadge(): ?string
+    {
+        return static::$model::query()->count();
+    }
 }

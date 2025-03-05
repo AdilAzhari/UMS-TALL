@@ -22,20 +22,20 @@ class ExamQuestionOptionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('exam_question_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('exam_question_id')
+                    ->relationship('question', 'question_text')
+                    ->required(),
                 Forms\Components\Textarea::make('option_text')
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\Toggle::make('is_correct')
                     ->required(),
-                Forms\Components\TextInput::make('created_by')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('updated_by')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('created_by')
+                    ->relationship('createdBy.user', 'name')
+                    ->required(),
+                Forms\Components\Select::make('updated_by')
+                    ->relationship('updatedBy.user', 'name')
+                    ->required(),
             ]);
     }
 
@@ -43,16 +43,18 @@ class ExamQuestionOptionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('exam_question_id')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('question.question_text')
+                    ->label('Question')
+                    ->searchable()
+                    ->limit(50),
                 Tables\Columns\IconColumn::make('is_correct')
+                    ->label('Correct')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('created_by')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('createdBy.user.name')
+                    ->label('Created By')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('updated_by')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('updatedBy.user.name')
+                    ->label('Updated By')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
@@ -94,5 +96,10 @@ class ExamQuestionOptionResource extends Resource
             'create' => Pages\CreateExamQuestionOption::route('/create'),
             'edit' => Pages\EditExamQuestionOption::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }

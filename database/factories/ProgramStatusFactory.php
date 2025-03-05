@@ -18,14 +18,7 @@ class ProgramStatusFactory extends Factory
     public function definition(): array
     {
         return [
-            'status' => $this->faker->randomElement([
-                'Enrolled',
-                'Suspended',
-                'Expelled',
-                'Dropped',
-                'Withdrawn',
-                'Completed',
-            ]),
+            'status' => $this->faker->unique()->word,
         ];
     }
 }
