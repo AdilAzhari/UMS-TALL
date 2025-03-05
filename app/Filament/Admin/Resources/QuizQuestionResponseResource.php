@@ -14,11 +14,17 @@ use Illuminate\Database\Eloquent\Builder;
 class QuizQuestionResponseResource extends Resource
 {
     protected static ?string $model = QuizQuestionResponse::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
+
     protected static ?string $navigationGroup = 'Quiz Management';
+
     protected static ?int $navigationSort = 4;
+
     protected static ?string $modelLabel = 'Student Response';
+
     protected static ?string $pluralModelLabel = 'Student Responses';
+
     protected static bool $shouldRegisterNavigation = false; // Hide from navigation as this is managed through relationships
 
     public static function form(Form $form): Form
@@ -146,7 +152,7 @@ class QuizQuestionResponseResource extends Resource
     {
         return [
             'index' => Pages\ListQuizQuestionResponses::route('/'),
-//            'view' => Pages\ViewQuizQuestionResponse::route('/{record}'),
+            //            'view' => Pages\ViewQuizQuestionResponse::route('/{record}'),
         ];
     }
 

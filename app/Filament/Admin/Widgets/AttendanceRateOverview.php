@@ -28,7 +28,7 @@ class AttendanceRateOverview extends BaseWidget
 
         $teacherStats = $attendanceByTeacher->map(function ($item) {
             return Stat::make($item->teacher->user->name, $item->count)
-                ->description('Attendance records for ' . $item->teacher->user->name)
+                ->description('Attendance records for '.$item->teacher->user->name)
                 ->color('primary');
         })->toArray();
 
@@ -37,11 +37,11 @@ class AttendanceRateOverview extends BaseWidget
                 ->description('All attendance records in the system')
                 ->color('success'),
 
-            Stat::make('Present Rate', $presentRate . '%')
+            Stat::make('Present Rate', $presentRate.'%')
                 ->description('Percentage of present records')
                 ->color('success'),
 
-            Stat::make('Absent Rate', $absentRate . '%')
+            Stat::make('Absent Rate', $absentRate.'%')
                 ->description('Percentage of absent records')
                 ->color('danger'),
 

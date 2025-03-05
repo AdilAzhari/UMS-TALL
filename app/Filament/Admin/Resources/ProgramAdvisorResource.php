@@ -18,8 +18,11 @@ use Filament\Tables\Table;
 class ProgramAdvisorResource extends Resource
 {
     protected static ?string $model = ProgramAdvisor::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+
     protected static ?string $navigationGroup = 'Academic Management';
+
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
@@ -90,7 +93,7 @@ class ProgramAdvisorResource extends Resource
             ->filters([
                 Tables\Filters\Filter::make('status')
                     ->label('Active Advisors')
-                    ->query(fn($query) => $query->where('status', true)),
+                    ->query(fn ($query) => $query->where('status', true)),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

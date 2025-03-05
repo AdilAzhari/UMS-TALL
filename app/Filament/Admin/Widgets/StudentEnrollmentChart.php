@@ -25,10 +25,10 @@ class StudentEnrollmentChart extends ChartWidget
             'datasets' => [
                 [
                     'label' => 'Students Enrolled',
-                    'data' => $data->map(fn(TrendValue $value) => $value->aggregate),
+                    'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
                 ],
             ],
-            'labels' => $data->map(fn(TrendValue $value) => $value->date),
+            'labels' => $data->map(fn (TrendValue $value) => $value->date),
         ];
     }
 

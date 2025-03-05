@@ -16,7 +16,7 @@ class QuizQuestionResponse extends Model
         'quiz_submission_id',
         'quiz_question_id',
         'quiz_question_option_id',
-        'is_correct'
+        'is_correct',
     ];
 
     public static function create(array $array): QuizQuestionResponse
@@ -28,10 +28,12 @@ class QuizQuestionResponse extends Model
     {
         return $this->belongsTo(QuizSubmission::class);
     }
+
     public function quizQuestion(): BelongsTo
     {
         return $this->belongsTo(QuizQuestion::class);
     }
+
     public function quizQuestionOption(): BelongsTo
     {
         return $this->belongsTo(QuizQuestionOption::class);

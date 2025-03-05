@@ -22,7 +22,7 @@ class QuizResource extends Resource
 
     protected static ?string $activeNavigationIcon = 'heroicon-o-adjustments-horizontal';
 
-    protected static ?string $navigationGroup = 'Assessment & Grading';
+    protected static ?string $navigationGroup = 'Quiz Management';
 
     protected static ?string $navigationParentItem = 'Notifications';
 

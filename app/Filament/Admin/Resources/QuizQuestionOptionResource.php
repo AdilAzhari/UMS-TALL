@@ -3,9 +3,7 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\QuizQuestionOptionResource\Pages;
-use App\Models\QuizQuestion;
 use App\Models\QuizQuestionOption;
-use Exception;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,15 +12,19 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 
 class QuizQuestionOptionResource extends Resource
 {
     protected static ?string $model = QuizQuestionOption::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-adjustments-horizontal';
-    protected static ?string $navigationGroup = 'Assessment & Grading';
+
+    protected static ?string $navigationGroup = 'Quiz Management';
+
     protected static ?int $navigationSort = 3;
+
     protected static ?string $modelLabel = 'Question Option';
+
     protected static ?string $pluralModelLabel = 'Question Options';
 
     public static function form(Form $form): Form
@@ -56,17 +58,6 @@ class QuizQuestionOptionResource extends Resource
                             ->required()
                             ->helperText('Is this the correct answer?')
                             ->columnSpanFull(),
-
-                        Forms\Components\Select::make('created_by')
-                            ->relationship('createdBy.user', 'name')
-                            ->default(Auth::id())
-                            ->disabled()
-                            ->dehydrated(false)
-                            ->visible(fn ($livewire) => $livewire instanceof Pages\EditQuizQuestionOption),
-
-                        Forms\Components\Hidden::make('updated_by')
-                            ->default(auth()->id())
-                            ->required(),
                     ])
                     ->columns(2),
             ]);
@@ -148,7 +139,7 @@ class QuizQuestionOptionResource extends Resource
                     Tables\Actions\DeleteAction::make(),
                     Tables\Actions\ForceDeleteAction::make(),
                     Tables\Actions\RestoreAction::make(),
-                ])
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -160,8 +151,8 @@ class QuizQuestionOptionResource extends Resource
                         ->icon('heroicon-o-check-circle')
                         ->requiresConfirmation()
                         ->action(function (Collection $records): void {
-                            $records->each(function ($record) {
-                                $record->update(['is_correct' => !$record->is_correct]);
+                            $records->each(function ($record): void {
+                                $record->update(['is_correct' => ! $record->is_correct]);
                             });
                         })
                         ->deselectRecordsAfterCompletion(),

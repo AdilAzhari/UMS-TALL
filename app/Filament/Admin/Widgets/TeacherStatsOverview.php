@@ -28,7 +28,7 @@ class TeacherStatsOverview extends BaseWidget
 
         $departmentStats = $teachersByDepartment->map(function ($item) {
             return Stat::make($item->department->name, $item->count)
-                ->description('Teachers in ' . $item->department->name)
+                ->description('Teachers in '.$item->department->name)
                 ->color('primary');
         })->toArray();
 
@@ -41,7 +41,7 @@ class TeacherStatsOverview extends BaseWidget
                 ->description('Teachers hired this year')
                 ->color('warning'),
 
-            Stat::make('Average Experience', round($averageExperience, 1) . ' years')
+            Stat::make('Average Experience', round($averageExperience, 1).' years')
                 ->description('Average experience of teachers')
                 ->color('info'),
 

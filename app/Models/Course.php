@@ -13,6 +13,12 @@ class Course extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     * These fields can be filled using mass assignment.
+     *
+     * @var array<string>
+     */
     protected $fillable = [
         'name',
         'code',
@@ -35,6 +41,9 @@ class Course extends Model
         'term_id',
     ];
 
+    /**
+     * bel
+     */
     public function program(): BelongsTo
     {
         return $this->belongsTo(Program::class);
@@ -162,22 +171,22 @@ class Course extends Model
         return $query->where('status', 'registered');
     }
 
-    public function scopePastCourses($query)
+    public function scopePastCourses($query): mixed
     {
         return $query->where('status', 'completed');
     }
 
-    public function scopeInProgress($query)
+    public function scopeInProgress($query): mixed
     {
         return $query->where('status', 'in_progress');
     }
 
-    public function scopeCompleted($query)
+    public function scopeCompleted($query): mixed
     {
         return $query->where('status', 'completed');
     }
 
-    public function scopeFuturePayment($query)
+    public function scopeFuturePayment($query): mixed
     {
         return $query->where('status', 'future_payment');
     }

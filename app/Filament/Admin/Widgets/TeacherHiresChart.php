@@ -22,10 +22,10 @@ class TeacherHiresChart extends ChartWidget
             'datasets' => [
                 [
                     'label' => 'Teachers Hired',
-                    'data' => $data->map(fn(TrendValue $value) => $value->aggregate),
+                    'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
                 ],
             ],
-            'labels' => $data->map(fn(TrendValue $value) => $value->date),
+            'labels' => $data->map(fn (TrendValue $value) => $value->date),
         ];
     }
 

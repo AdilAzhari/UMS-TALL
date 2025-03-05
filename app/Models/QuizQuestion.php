@@ -42,21 +42,37 @@ class QuizQuestion extends Model
     {
         return $this->hasMany(QuizQuestionOption::class);
     }
+
     public function quizQuestionAnswers(): HasMany
     {
         return $this->hasMany(QuizAnswer::class);
     }
+
     protected static function boot(): void
     {
         parent::boot();
 
-        // Automatically set created_by when creating a new Quiz Question
         static::creating(function ($QuizQuestion): void {
-            $QuizQuestion->created_by = auth()->id(); // Set created_by to the current authenticated user's ID
-            $QuizQuestion->updated_by = auth()->id(); // Set updated_by to the current authenticated user's ID
+            // Skip the logic if the model is being created via a factory
+            if (isset($QuizQuestion->__laravel_creating_via_factory) && $QuizQuestion->__laravel_creating_via_factory) {
+                return;
+            }
+
+            if (auth()->check()) {
+                $QuizQuestion->created_by = auth()->id();
+                $QuizQuestion->updated_by = auth()->id();
+            }
         });
+
         static::updating(function ($QuizQuestion): void {
-            $QuizQuestion->updated_by = auth()->id(); // update updated_by to the current authenticated user's ID
+
+            if (isset($QuizQuestion->__laravel_creating_via_factory) && $QuizQuestion->__laravel_creating_via_factory) {
+                return;
+            }
+
+            if (auth()->check()) {
+                $QuizQuestion->updated_by = auth()->id();
+            }
         });
     }
 }

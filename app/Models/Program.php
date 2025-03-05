@@ -27,7 +27,7 @@ class Program extends Model
     ];
 
     protected $casts = [
-
+        'total_courses' => 'integer',
     ];
 
     public function department(): BelongsTo

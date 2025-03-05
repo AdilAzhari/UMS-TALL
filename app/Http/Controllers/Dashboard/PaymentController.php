@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\AbstractPaginator;
 use Inertia\Inertia;
+use LaravelIdea\Helper\App\Models\_IH_Payment_C;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
@@ -14,21 +17,9 @@ class PaymentController extends Controller
 {
     public function index(Request $request)
     {
-        $historicalPayments = Payment::with('course')
-            ->where('payment_date', '<=', now())
-            ->where('student_id', auth()->user()->student->id)
-            ->when($request->search, fn ($query, $search) => $query->search($search))
-            ->orderBy('payment_date', 'desc')
-            ->paginate(10)
-            ->withQueryString(); // Preserve filters in pagination links
+        $historicalPayments = $this->getHistoricalPayments($request);
 
-        $upcomingPayments = Payment::with('course')
-            ->where('status', 'pending')
-            ->where('student_id', auth()->user()->student->id)
-            ->when($request->search, fn ($query, $search) => $query->search($search))
-            ->orderBy('payment_date', 'asc')
-            ->paginate(10)
-            ->withQueryString();
+        $upcomingPayments = $this->getUpcomingPayments($request);
 
         return Inertia::render('Payments/index', [
             'historicalPayments' => $historicalPayments,
@@ -80,5 +71,33 @@ class PaymentController extends Controller
         return Inertia::render('Payments/History', [
             'payments' => $payments,
         ]);
+    }
+
+    /**
+     * @return Payment[]|LengthAwarePaginator|AbstractPaginator|\Illuminate\Pagination\LengthAwarePaginator|_IH_Payment_C
+     */
+    public function getHistoricalPayments(Request $request): AbstractPaginator|_IH_Payment_C|array|\Illuminate\Pagination\LengthAwarePaginator|LengthAwarePaginator
+    {
+        return Payment::with('course')
+            ->where('payment_date', '<=', now())
+            ->where('student_id', auth()->user()->student->id)
+            ->when($request->search, fn ($query, $search) => $query->search($search))
+            ->orderBy('payment_date', 'desc')
+            ->paginate(10)
+            ->withQueryString(); // Preserve filters in pagination links
+    }
+
+    /**
+     * @return Payment[]|LengthAwarePaginator|AbstractPaginator|\Illuminate\Pagination\LengthAwarePaginator|_IH_Payment_C
+     */
+    public function getUpcomingPayments(Request $request): AbstractPaginator|_IH_Payment_C|array|\Illuminate\Pagination\LengthAwarePaginator|LengthAwarePaginator
+    {
+        return Payment::with('course')
+            ->where('status', 'pending')
+            ->where('student_id', auth()->user()->student->id)
+            ->when($request->search, fn ($query, $search) => $query->search($search))
+            ->orderBy('payment_date')
+            ->paginate(10)
+            ->withQueryString();
     }
 }

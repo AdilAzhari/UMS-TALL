@@ -107,4 +107,9 @@ class Student extends Model
     {
         return $this->hasMany(AcademicProgress::class);
     }
+
+    public function programAdvisors(): belongsTo
+    {
+        return $this->belongsTo(ProgramAdvisor::class);
+    }
 }

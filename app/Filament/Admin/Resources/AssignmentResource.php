@@ -136,7 +136,7 @@ class AssignmentResource extends Resource
                     ->visible(fn ($livewire) => $livewire instanceof Pages\EditAssignment),
             ])
             ->columns()
-            ->hidden(fn($livewire) => !$livewire instanceof Pages\EditAssignment);
+            ->hidden(fn ($livewire) => ! $livewire instanceof Pages\EditAssignment);
     }
 
     /**

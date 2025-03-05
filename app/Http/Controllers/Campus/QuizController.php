@@ -8,23 +8,22 @@ use App\Models\QuizQuestionResponse;
 use App\Models\QuizSubmission;
 use App\Models\Week;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
+use LaravelIdea\Helper\App\Models\_IH_Week_QB;
 use Log;
 
 class QuizController extends Controller
 {
     public function index($courseId, $weekId): Response
     {
-        {
-            $quizzes = Week::with('course')
-                ->where('course_id', $courseId)
-                ->where('id', $weekId)
-                ->get();
-        }
+        $quizzes = $this->getQuizzes($courseId, $weekId);
 
         return inertia::render('Campus/Quiz/Index', [
             'quizzes' => $quizzes,
@@ -38,18 +37,9 @@ class QuizController extends Controller
     public function show($quizId, $weekId): Response
     {
         // Debugging: Check the quizId and weekId
-        logger()->info('Quiz ID:', ['quizId' => $quizId]);
-        logger()->info('Week ID:', ['weekId' => $weekId]);
+        $this->extracted($quizId, $weekId);
 
-        $quiz = Quiz::select('id', 'course_id', 'title', 'description', 'duration', 'passing_score','code'.'instructions')
-            ->where('id', $quizId)
-            ->whereHas('questions.quizQuestionOptions')
-            ->with([
-                'course:id,name',
-                'questions:id,quiz_id,question',
-                'questions.quizQuestionOptions:id,quiz_question_id,option,is_correct',
-            ])
-            ->firstOrFail();
+        $quiz = $this->getQuiz($quizId);
         // Filter out questions without options
         $quiz->questions = $quiz->questions->filter(function ($question) {
             return $question->quizQuestionOptions->isNotEmpty();
@@ -62,11 +52,11 @@ class QuizController extends Controller
             'courseId' => $quiz->course_id,
         ]);
     }
+
     public function submit(Request $request, int $quizId, int $weekId): RedirectResponse
     {
         // Debugging: Check the quizId and weekId
-        logger()->info('Quiz ID:', ['quizId' => $quizId]);
-        logger()->info('Week ID:', ['weekId' => $weekId]);
+        $this->extracted($quizId, $weekId);
 
         // Validate the request
         $request->validate([
@@ -76,7 +66,7 @@ class QuizController extends Controller
 
         // Fetch the quiz with its questions and options
         $quiz = Quiz::where('id', $quizId) // Ensure the quizId is used correctly
-        ->whereHas('questions.quizQuestionOptions')
+            ->whereHas('questions.quizQuestionOptions')
             ->with([
                 'course',
                 'questions.quizQuestionOptions',
@@ -97,7 +87,7 @@ class QuizController extends Controller
         // Calculate the score
         $totalQuestions = $quiz->questions->count();
         $correctAnswers = 0;
-dd($quiz->questions);
+        dd($quiz->questions);
         foreach ($quiz->questions as $question) {
             $submittedAnswerId = $request->answers[$question->id] ?? null;
             $correctAnswerId = $question->quizQuestionOptions->first()?->id;
@@ -109,7 +99,7 @@ dd($quiz->questions);
 
         // Calculate score percentage (safe division)
         $score = $totalQuestions > 0 ? ($correctAnswers / $totalQuestions) * 100 : 0;
-dd($score);
+        dd($score);
         // Save the quiz submission
         DB::beginTransaction();
         try {
@@ -130,10 +120,10 @@ dd($score);
                     'quiz_question_id' => $questionId,
                     'quiz_question_option_id' => $answerId,
                     'is_correct' => $quiz->questions
-                            ->firstWhere('id', $questionId)
-                            ->quizQuestionOptions
-                            ->first()
-                            ->id === $answerId,
+                        ->firstWhere('id', $questionId)
+                        ->quizQuestionOptions
+                        ->first()
+                        ->id === $answerId,
                 ]);
             }
 
@@ -144,6 +134,7 @@ dd($score);
                 'quiz_id' => $quizId,
                 'error' => $e->getMessage(),
             ]);
+
             return redirect()->back()
                 ->with('message', 'Failed to save your quiz submission. Please try again.');
         }
@@ -154,6 +145,7 @@ dd($score);
             'quizId' => $quizId,
         ])->with('success', "Quiz submitted successfully! You scored $score%");
     }
+
     /**
      * Show the quiz results.
      */
@@ -167,5 +159,32 @@ dd($score);
         return inertia('Campus/Quiz/ResultsPage', [
             'submission' => $submission,
         ]);
+    }
+
+    public function getQuizzes($courseId, $weekId): _IH_Week_QB|Builder|Collection
+    {
+        return Week::with('course')
+            ->where('course_id', $courseId)
+            ->where('id', $weekId)
+            ->get();
+    }
+
+    public function extracted($quizId, $weekId): void
+    {
+        logger()->info('Quiz ID:', ['quizId' => $quizId]);
+        logger()->info('Week ID:', ['weekId' => $weekId]);
+    }
+
+    public function getQuiz($quizId): Quiz|Model
+    {
+        return Quiz::select('id', 'course_id', 'title', 'description', 'duration', 'passing_score', 'code'.'instructions')
+            ->where('id', $quizId)
+            ->whereHas('questions.quizQuestionOptions')
+            ->with([
+                'course:id,name',
+                'questions:id,quiz_id,question',
+                'questions.quizQuestionOptions:id,quiz_question_id,option,is_correct',
+            ])
+            ->firstOrFail();
     }
 }

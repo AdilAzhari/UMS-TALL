@@ -10,14 +10,16 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Auth;
 
 class QuizQuestionResource extends Resource
 {
     protected static ?string $model = QuizQuestion::class;
-    protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';  // More appropriate icon
-    protected static ?string $navigationGroup = 'Quiz Management';  // Better organization
-    protected static ?int $navigationSort = 2;  // Organized placement in navigation
+
+    protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
+
+    protected static ?string $navigationGroup = 'Quiz Management';
+
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -49,43 +51,14 @@ class QuizQuestionResource extends Resource
                                     ])
                                     ->columnSpanFull(),
 
-                                Forms\Components\Toggle::make('is_active')
-                                    ->label('Active')
-                                    ->default(true)
-                                    ->helperText('Inactive questions won\'t appear in quizzes'),
+                                //                                Forms\Components\Toggle::make('is_active')
+                                //                                    ->label('Active')
+                                //                                    ->default(true)
+                                //                                    ->helperText('Inactive questions won\'t appear in quizzes'),
                             ])
                             ->columns(2),
                     ])
                     ->columnSpan(['lg' => 2]),
-
-                Forms\Components\Group::make()
-                    ->schema([
-                        Forms\Components\Section::make('Metadata')
-                            ->schema([
-                                Forms\Components\Select::make('created_by')
-                                    ->relationship('createdBy.user', 'name')
-                                    ->default(Auth::id())
-                                    ->disabled()
-                                    ->dehydrated(false)
-                                    ->visible(fn ($livewire) => $livewire instanceof Pages\EditQuizQuestion),
-
-                                Forms\Components\Select::make('updated_by')
-                                    ->relationship('updatedBy.user', 'name')
-                                    ->disabled()
-                                    ->dehydrated(false)
-                                    ->visible(fn ($livewire) => $livewire instanceof Pages\EditQuizQuestion),
-
-                                Forms\Components\Placeholder::make('created_at')
-                                    ->label('Created at')
-                                    ->content(fn (QuizQuestion $record): string => $record->created_at?->diffForHumans() ?? '-'),
-
-                                Forms\Components\Placeholder::make('updated_at')
-                                    ->label('Last modified at')
-                                    ->content(fn (QuizQuestion $record): string => $record->updated_at?->diffForHumans() ?? '-'),
-                            ])
-                            ->collapsible(),
-                    ])
-                    ->columnSpan(['lg' => 1]),
             ])
             ->columns(3);
     }
@@ -147,8 +120,8 @@ class QuizQuestionResource extends Resource
                         ->label('Toggle Active Status')
                         ->icon('heroicon-o-power')
                         ->action(function (Collection $records): void {
-                            $records->each(function ($record) {
-                                $record->update(['is_active' => !$record->is_active]);
+                            $records->each(function ($record): void {
+                                $record->update(['is_active' => ! $record->is_active]);
                             });
                         })
                         ->deselectRecordsAfterCompletion(),

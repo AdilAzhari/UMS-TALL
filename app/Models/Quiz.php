@@ -15,6 +15,9 @@ class Quiz extends Model
 {
     use HasFactory;
 
+    /**
+     * @type array<string>
+     */
     protected $fillable = [
         'course_id',
         'title',
@@ -26,6 +29,7 @@ class Quiz extends Model
         'week_id',
         'class_group_id',
         'type',
+        'code',
         'status',
         'created_by',
         'updated_by',
@@ -38,6 +42,9 @@ class Quiz extends Model
         'status' => QuizStatus::PUBLISHED,
     ];
 
+    /**
+     * @type array<string,array>
+     */
     protected $casts = [
         'start_date' => 'datetime',
         'end_date' => 'datetime',

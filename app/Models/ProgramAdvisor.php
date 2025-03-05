@@ -18,8 +18,9 @@ class ProgramAdvisor extends Model
         'department_id',
         'max_students',
         'name',
-        'email'
+        'email',
     ];
+
     protected $casts = [
         'status' => 'boolean',
         'max_students' => 'integer',

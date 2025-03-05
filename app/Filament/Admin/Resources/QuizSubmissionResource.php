@@ -18,11 +18,9 @@ class QuizSubmissionResource extends Resource
 
     protected static ?string $activeNavigationIcon = 'heroicon-o-document-text';
 
-    protected static ?string $navigationGroup = 'Assessment & Grading';
+    protected static ?string $navigationGroup = 'Quiz Management';
 
     protected static ?string $navigationLabel = 'Quiz Submissions';
-
-    protected static ?string $modelLabel = 'Quiz Submission';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
