@@ -9,14 +9,13 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use LaravelIdea\Helper\App\Models\_IH_Payment_C;
 use Stripe\Exception\ApiErrorException;
 use Stripe\StripeClient;
 
 class StripeController extends Controller
 {
-    public StripeClient $stripe;
-
-    public function __construct()
+    public function __construct(public StripeClient $stripe)
     {
         $this->stripe = new StripeClient(
             config('services.stripe.secret')
@@ -34,28 +33,9 @@ class StripeController extends Controller
 
         $studentPayment = Payment::findOrFail($request->id);
 
-        if ($studentPayment->status == 'paid') {
-            return redirect()->back()->with('error', 'Payment already made');
-        }
-
-        $session = $this->stripe->checkout->sessions->create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => 'usd',
-                    'product_data' => [
-                        'name' => $studentPayment->course->name,
-                    ],
-                    'unit_amount' => $studentPayment->amount * 100,
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => route('payments.success', ['paymentId' => $studentPayment->id]),
-            'cancel_url' => route('payments.cancel', ['paymentId' => $studentPayment->id]),
-        ]);
-
-        return redirect($session->url);
+        return $studentPayment->status == 'paid'
+            ? back()->with('error', 'Payment already made')
+            : redirect($this->getSession($studentPayment)->url);
     }
 
     public function paymentSuccess($paymentId)
@@ -95,12 +75,12 @@ class StripeController extends Controller
         // Refund through Stripe
         try {
             $refund = $this->stripe->refunds->create([
-                'payment_intent' => $payment->payment_intent, // Store `payment_intent` from Stripe in your Payment model
+                'payment_intent' => $payment->payment_intent,
             ]);
 
             // Update payment status
             $payment->status = 'Refunded';
-            $payment->refund_id = $refund->id; // Store the refund ID for tracking
+            $payment->refund_id = $refund->id;
             $payment->save();
 
             Mail::to($$payment->student->email)->send(new PaymentStatusChanged($payment));
@@ -109,5 +89,28 @@ class StripeController extends Controller
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Refund failed: '.$e->getMessage());
         }
+    }
+
+    /**
+     * @throws ApiErrorException
+     */
+    public function getSession(Payment|_IH_Payment_C|array $studentPayment): \Stripe\Checkout\Session
+    {
+        return $this->stripe->checkout->sessions->create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'usd',
+                    'product_data' => [
+                        'name' => $studentPayment->course->name,
+                    ],
+                    'unit_amount' => $studentPayment->amount * 100,
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('payments.success', ['paymentId' => $studentPayment->id]),
+            'cancel_url' => route('payments.cancel', ['paymentId' => $studentPayment->id]),
+        ]);
     }
 }
