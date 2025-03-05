@@ -164,7 +164,6 @@ export default {
                 },
                 onSuccess: () => {
                     console.log("Story updated successfully!");
-                    // Add any success logic like redirection here
                 },
             });
         };

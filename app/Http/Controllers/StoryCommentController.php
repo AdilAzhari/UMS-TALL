@@ -15,7 +15,7 @@ class StoryCommentController extends Controller
      */
     public function storeComment(StoreStoryCommentRequest $request): RedirectResponse
     {
-        $story = (new Story)->findOrFail($request->story_id);
+        $story = Story::findOrFail($request->story_id);
 
         $story->comments()->create($request->all() + [
             'student_id' => $story->student_id,
@@ -30,7 +30,7 @@ class StoryCommentController extends Controller
      */
     public function updateComment(UpdateStoryCommentRequest $request, $commentId): RedirectResponse
     {
-        $comment = (new StoryComment)->findOrFail($commentId);
+        $comment = StoryComment::findOrFail($commentId);
         $request->merge([
             'published_at' => now(),
         ]);
@@ -44,7 +44,7 @@ class StoryCommentController extends Controller
      */
     public function destroyComment($storyId, $commentId): RedirectResponse
     {
-        $storyComment = (new StoryComment)->where('id', $commentId)->where('story_id', $storyId)->firstOrFail();
+        $storyComment = StoryComment::where('id', $commentId)->where('story_id', $storyId)->firstOrFail();
         $storyComment->delete();
 
         return redirect()->back()->with('message', 'Comment deleted successfully.');
