@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('country_of_residence')->nullable();
             $table->string(column: 'state')->nullable();
             $table->string('zip_code')->nullable();
-            $table->string('avatar')->nullable();
+            $table->string('avatars')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->enum('role', ['student', 'teacher', 'admin', 'technical_team'])->default('student');
             $table->foreignId('created_by')->nullable()->constrained('users')->cascadeOnDelete();
