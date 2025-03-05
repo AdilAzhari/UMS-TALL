@@ -1,130 +1,177 @@
-<p align="center"><img src="public/images/logo.png" width="400" alt="UMS Logo"></p>
+<div align="center">
 
-<p align="center">
-<a href="https://laravel.com/docs/11.x"><img src="https://img.shields.io/badge/Laravel-11.x-FF2D20?style=flat-square&logo=laravel" alt="Laravel Version"></a>
-<a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind%20CSS-3.x-38B2AC?style=flat-square&logo=tailwind-css" alt="Tailwind CSS"></a>
-<a href="https://alpinejs.dev/"><img src="https://img.shields.io/badge/Alpine.js-3.x-8BC0D0?style=flat-square&logo=alpine.js" alt="Alpine.js"></a>
-<a href="https://livewire.laravel.com"><img src="https://img.shields.io/badge/Livewire-3.x-FB70A9?style=flat-square&logo=livewire" alt="Livewire"></a>
-</p>
+# 🎓 University Management System (UMS)
 
-## About UMS
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![Vue.js](https://img.shields.io/badge/Vue.js-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
+![Inertia.js](https://img.shields.io/badge/Inertia.js-000000?style=for-the-badge&logo=inertia&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![PestPHP](https://img.shields.io/badge/PestPHP-FF2D20?style=for-the-badge&logo=pest&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Stripe](https://img.shields.io/badge/Stripe-008CDD?style=for-the-badge&logo=stripe&logoColor=white)
 
-UMS (University Management System) is a comprehensive web application built with the TALL stack (Tailwind CSS, Alpine.js, Laravel, Livewire) and Filament admin panel. It provides a robust and scalable solution for managing all aspects of a university or educational institution. 
+</div>
 
-## Features
+A comprehensive **University Management System (UMS)** built using **Laravel, Vue.js, Inertia.js, MySQL, and Pest for testing**. This project follows the **service pattern architecture** and aims to provide an efficient, scalable, and modern solution for managing university operations.
 
-- **Modern Tech Stack**: Built on Laravel 11 with the TALL stack (Tailwind, vue.js, Laravel)
-- **Elegant Admin Panel**: Powered by Filament 3.x for intuitive and powerful administration
-- **Responsive Design**: Fully responsive interface that works on all devices
-- **Role-based Access Control**: Comprehensive permissions system with Filament Shield
-- **Real-time Updates**: Using Laravel Reverb for real-time notifications and updates
-- **Advanced Form Handling**: Complex forms with validation and dynamic components
-- **Media Management**: Upload and manage files and images with ease
-- **RESTful API**: Built-in API endpoints for integration with other systems
-- **Comprehensive Reporting**: Generate reports on students, courses, grades, and more
+---
 
-## Modules
+## 🌟 Key Features
 
-### Academic Structure
-- Manage departments, programs, courses, terms, and academic calendar
-- Create and organize class groups and schedules
-- Define course prerequisites and requirements
+### **User Roles & Authentication**
+- **Role-based access control** for Students, Teachers, and Admins.
+- Secure authentication powered by **Laravel Breeze**.
 
-### User Management
-- Student registration and profiles
-- Teacher and staff management
-- Role-based permissions for administrators, teachers, students, proctors, and advisors
+### **Course Management**
+- **Course Registration**: Students can register for courses, and admins can manage course offerings.
+- **Proctor Management**: Assign proctors to courses and manage proctor responses.
+- **Course Resources**: Access syllabus, learning guides, and resources for each course.
 
-### Learning Management
-- Course materials and resources
-- Assignment creation, submission, and grading
-- Peer reviews and collaborative learning
-- Learning guidance and tracking
+### **Student Portal**
+- **Online Campus**: Access course materials, announcements, and weekly activities.
+- **Assignments**: Submit assignments and view feedback.
+- **Quizzes**: Take quizzes, view results, and track progress.
+- **Forum Discussions**: Participate in course-related discussions and reply to comments.
 
-### Assessment System
-- Quiz and exam creation with multiple question types
-- Online test taking with secure proctoring
-- Automated and manual grading options
-- Comprehensive grade management and reporting
+### **Teacher & Admin Dashboard**
+- **Announcements**: Create and manage course announcements.
+- **Learning Guides**: Upload and manage weekly learning guides.
+- **Assignments & Quizzes**: Create and grade assignments and quizzes.
+- **Proctor Management**: Assign proctors and manage their responses.
 
-### Student Management
-- Enrollment and registration tracking
-- Attendance monitoring
-- Academic progress tracking
-- Grade management and transcripts
-- Achievement recognition
+### **Academic Progress & Achievements**
+- Track academic progress and view achievements.
+- Monitor course completion and performance.
 
-### Communication
-- Announcements and notifications
-- Discussion forums and comments
-- Messaging between users
-- Story sharing and social features
+### **Payment Integration**
+- **Stripe Integration**: Securely handle course payments and view payment history.
+- Payment success and cancellation handling.
 
-## Technology Stack
+### **Stories & Community Engagement**
+- **Stories**: Share and manage stories within the university community.
+- **Comments**: Engage with stories by posting and managing comments.
 
-UMS is built using the following technologies:
+### **Automated Notifications**
+- Email notifications for course updates, homework deadlines, and announcements.
 
-- **Laravel 11**: The latest version of the PHP framework for web artisans
-- **Tailwind CSS**: A utility-first CSS framework for rapid UI development
-- **Alpine.js**: A lightweight JavaScript framework for adding interactivity
-- **Livewire/Volt**: For building dynamic interfaces with PHP
-- **Filament 3**: Admin panel and form builder framework
-- **Filament Shield**: For advanced permissions and access control
-- **Intervention Image**: For image manipulation and optimization
-- **Laravel Sanctum**: For API authentication
-- **Stripe**: For payment processing
-- **Laravel Notify**: For user notifications
-- **Laravel Telescope**: For debugging and performance monitoring
+### **Developer Tooling**
+- Pre-configured testing with **PestPHP**.
+- Code quality enforcement using **PHPStan**, **Pint**, and **Rector**.
 
-## Installation
+---
 
+## 🛠️ Tech Stack
+
+### **Backend**
+- **Laravel 11** (PHP framework)
+- **MySQL** (Database)
+- **Inertia.js** (Server-side routing)
+
+### **Frontend**
+- **Vue.js** (JavaScript framework)
+- **Tailwind CSS** (Styling)
+
+### **Authentication**
+- **Laravel Breeze** (Authentication scaffolding)
+
+### **Testing**
+- **PestPHP** (Testing framework)
+
+### **Code Quality**
+- **PHPStan** (Static analysis)
+- **Pint** (Laravel code styling)
+- **Rector** (Automated code refactoring)
+
+### **Payment Integration**
+- **Stripe** (Payment gateway)
+
+---
+
+## 🚀 Installation
+
+### 1. Clone the repository:
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/UMS-TALL.git
-
-# Navigate to the project directory
-cd UMS-TALL
-
-# Install PHP dependencies
-composer install
-
-# Install NPM dependencies
-npm install
-
-# Copy environment file
-cp .env.example .env
-
-# Generate application key
-php artisan key:generate
-
-# Run migrations and seed the database
-php artisan migrate --seed
-
-# Build assets
-npm run dev
-
-# Start the server
-php artisan serve
+git clone https://github.com/your-username/project-name.git
+cd project-name
 ```
 
-## Usage
+### 2. Install dependencies:
+```bash
+composer install
+npm install
+```
 
-After installation, you can access:
-- Main application: http://localhost:8000
-- Admin panel: http://localhost:8000/admin
+### 3. Set up the environment:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Default admin credentials:
-- Email: admin@example.com
-- Password: password
+### 4. Configure the database:
+Update the `.env` file with your database credentials:
+```env
+DB_DATABASE=your_database_name
+DB_USERNAME=your_database_user
+DB_PASSWORD=your_database_password
+```
 
-## Contributing
+### 5. Run migrations:
+```bash
+php artisan migrate
+```
 
-Thank you for considering contributing to the UMS project! Contributions are welcome and appreciated.
+### 6. Seed Data for Testing:
+To populate the database with dummy data for testing, run:
+```bash
+php artisan db:seed
+```
+###OR 
+```bash
+php artisan migrate --seed
+```
+### 7. Start the development server:
+```bash
+php artisan serve
+npm run dev
+```
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within UMS, please send an e-mail to the project maintainers. All security vulnerabilities will be promptly addressed.
+## 🧪 Development Commands
 
-## License
+The project includes a **custom composer script** to streamline testing and code quality checks:
 
-The UMS project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```json
+"scripts": {
+    "test": [
+        "@pint",
+        "@rector",
+        "@phpstan"
+    ],
+    "pint": "vendor/bin/pint",
+    "rector": "vendor/bin/rector",
+    "phpstan": "vendor/bin/phpstan analyse --configuration=phpstan.neon"
+}
+```
+
+Run all tests and format code with:
+```bash
+composer test
+```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Here’s how you can help:
+
+1. **Fork the repository**.
+2. **Create a new branch** for your feature or bugfix:
+   ```bash
+   git checkout -b feature-new-functionality
+   ```
+3. **Commit your changes** with descriptive messages.
+4. **Submit a pull request** with a detailed description of your changes.
+
+---
+
