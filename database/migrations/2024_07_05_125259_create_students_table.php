@@ -26,6 +26,7 @@ return new class extends Migration
             $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();
             $table->foreignId('department_id')->constrained('departments')->cascadeOnDelete();
             $table->foreignId('term_id')->constrained('terms')->cascadeOnDelete();
+            $table->foreignId('program_advisor_id')->nullable()->constrained('program_advisors')->onDelete('set null');
             $table->softDeletes();
             $table->timestamps();
         });
