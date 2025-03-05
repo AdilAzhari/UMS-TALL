@@ -134,9 +134,9 @@ export default {
     components: {Pagination},
     layout: AppLayoutVue,
     props: {
-        stories: Object, // Stories data with pagination from the backend
-        tags: Array, // Tags data from the backend
-        flash: Object, // Flash data from the backend
+        stories: Object,
+        tags: Array,
+        flash: Object,
     },
     data() {
         return {
@@ -184,7 +184,7 @@ export default {
             if (confirm("Are you sure you want to delete this story?")) {
                 this.$inertia.delete(`/stories/${id}`, {
                     onSuccess: () => {
-                        // Redirects or session logic will handle flash messages
+
                     },
                 });
             }
@@ -197,7 +197,6 @@ export default {
 </script>
 
 <style scoped>
-/* Utility class for truncating text to 3 lines */
 .line-clamp-3 {
     overflow: hidden;
     display: -webkit-box;
@@ -205,7 +204,6 @@ export default {
     -webkit-box-orient: vertical;
 }
 
-/* Add hover effect to the story cards */
 .story-card:hover {
     transform: scale(1.02);
     transition: transform 0.2s ease-in-out;

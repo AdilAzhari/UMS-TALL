@@ -33,14 +33,14 @@ class StudentCourse extends Model
 
     public function scopeNotStarted($query)
     {
-        return $query->whereDoesntHave('enrollment', function ($query) {
+        return $query->whereDoesntHave('enrollment', function ($query): void {
             $query->where('status', 'not_started');
         });
     }
 
     public function scopeCompleted($query)
     {
-        return $query->whereHas('enrollment', function ($query) {
+        return $query->whereHas('enrollment', function ($query): void {
             $query->where('status', 'completed');
         });
     }

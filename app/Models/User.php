@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Carbon\Carbon;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
@@ -69,12 +70,13 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->is_admin == 0;
+        return true;
+        //        return $this->role === 'admin' || $this->role === 'super-admin' || $this->roles == 'teacher';
     }
 
     public function getFilamentAvatarUrl(): ?string
     {
-        return $this->avatar_url ? Storage::url("$this->avatar_url") : null;
+        return $this->avatar_url ? Storage::url($this->avatar_url) : null;
     }
 
     public function student(): HasOne
@@ -122,5 +124,15 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
             'role' => 'string',
             'date_of_birth' => 'datetime',
         ];
+    }
+
+    public function getFilamentName(): string
+    {
+        return "$this->name";
+    }
+
+    public function getDateOfBirthFormattedAttribute()
+    {
+        return Carbon::parse($this->date_of_birth)->format('d M, Y');
     }
 }

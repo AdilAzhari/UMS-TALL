@@ -42,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // Configure queue failed job handling
-        Queue::failing(function (JobFailed $event) {
+        Queue::failing(function (JobFailed $event): void {
             // Send notification on job failure
             Notification::send(
                 User::where('is_admin', true)->get(),

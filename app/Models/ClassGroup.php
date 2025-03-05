@@ -12,6 +12,11 @@ class ClassGroup extends Model
     /** @use HasFactory<ClassGroupFactory> */
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<string>
+     */
     protected $fillable = [
         'group_number',
         'semester',
@@ -25,18 +30,31 @@ class ClassGroup extends Model
     ];
 
     /**
-     * Relationships
+     * Define the relationships between ClassGroup and other models.
+     */
+
+    /**
+     * Get the course associated with this class group.
+     * Each class group belongs to a single course.
      */
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
+    /**
+     * Get the teacher assigned to this class group.
+     * Each class group has one teacher.
+     */
     public function teacher(): BelongsTo
     {
         return $this->belongsTo(Teacher::class);
     }
 
+    /**
+     * Get the academic term associated with this class group.
+     * Each class group is linked to a specific academic term.
+     */
     public function term(): BelongsTo
     {
         return $this->belongsTo(Term::class);

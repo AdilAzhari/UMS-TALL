@@ -95,15 +95,15 @@
                                     Passing Score: {{ quiz.passing_score }}%
                                 </span>
                             </div>
-                            quiz Id: {{ quiz.id }}
-                            <br>
-                            Course Id: {{ quiz.course.id }}
+<!--                            quiz Id: {{ quiz.id }}-->
+<!--                            <br>-->
+<!--                            Course Id: {{ quiz.course.id }}-->
 
                             <button
                                 @click="viewQuiz(route('campus.courses.weeks.quiz.show', {
-                                    quizId: quiz.id,
                                     courseId: quiz.course.id,
                                     weekId: weekId,
+                                    quizId: quiz.id,
                                 }))"
                                 :disabled="quiz.status == 'published'"
                                 class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-300 disabled:cursor-not-allowed"
@@ -132,8 +132,9 @@
 
 <script>
 import { format } from 'date-fns';
-
+import campusLayout from "@/Layouts/CampusLayout.vue";
 export default {
+    layout: campusLayout,
     name: "QuizIndex",
     props: {
         quizzes: {

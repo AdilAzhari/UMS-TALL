@@ -1,18 +1,10 @@
-<!-- CampusHeader.vue -->
 <template>
-    <header class="bg-gradient-to-r from-white to-blue-50 shadow-md px-6 py-4 flex items-center justify-between sticky top-0 z-50">
-        <!-- Logo -->
-        <div class="flex items-center space-x-4">
-            <img src="/logo.png" alt="Campus Logo" class="h-10 w-auto">
-            <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Campus Portal
-            </h1>
-        </div>
+    <header class="bg-white shadow-sm px-6 py-4 flex items-center justify-between sticky top-0 z-50">
 
         <!-- Quick Links -->
         <div class="hidden md:flex items-center space-x-6">
             <a href="/contact" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Contact Info</a>
-            <a href="/student-portal" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Student Portal</a>
+            <a href="/campus" class="text-gray-600 hover:text-blue-600 transition-colors duration-200">Student Portal</a>
         </div>
 
         <!-- Search Bar -->
@@ -41,12 +33,12 @@
                     class="text-gray-600 hover:text-blue-600 transition-colors duration-200 relative"
                 >
                     <i class="fas fa-bell text-xl"></i>
-                    <span
-                        v-if="notifications.length > 0"
-                        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse"
-                    >
-            {{ notifications.length }}
-          </span>
+<!--                    <span-->
+<!--&lt;!&ndash;                        v-if="notifications.length > 0"&ndash;&gt;-->
+<!--                        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse"-->
+<!--                    >-->
+<!--                        {{ // notifications.length }}-->
+<!--                    </span>-->
                 </button>
 
                 <!-- Notifications Dropdown -->
@@ -57,17 +49,17 @@
                     <div class="p-4 border-b border-gray-100">
                         <h3 class="font-semibold text-gray-800">Notifications</h3>
                     </div>
-                    <div v-if="notifications.length > 0" class="max-h-96 overflow-y-auto">
-                        <div
-                            v-for="(notification, index) in notifications"
-                            :key="index"
-                            class="p-4 border-b border-gray-50 hover:bg-blue-50 transition-colors duration-200"
-                        >
-                            <p class="text-sm text-gray-700">{{ notification.message }}</p>
-                            <p class="text-xs text-gray-400 mt-1">{{ notification.time }}</p>
-                        </div>
-                    </div>
-                    <div v-else class="p-4 text-center text-gray-500">No new notifications</div>
+<!--                    <div v-if="notifications.length > 0" class="max-h-96 overflow-y-auto">-->
+<!--                        <div-->
+<!--                            v-for="(notification, index) in notifications"-->
+<!--                            :key="index"-->
+<!--                            class="p-4 border-b border-gray-50 hover:bg-blue-50 transition-colors duration-200"-->
+<!--                        >-->
+<!--                            <p class="text-sm text-gray-700">{{ notification.message }}</p>-->
+<!--                            <p class="text-xs text-gray-400 mt-1">{{ notification.time }}</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div v-else class="p-4 text-center text-gray-500">No new notifications</div>-->
                 </div>
             </div>
 
@@ -133,9 +125,7 @@
 </template>
 
 <script>
-
 export default {
-    name: 'CampusHeader',
     data() {
         return {
             showNotifications: false,
@@ -170,3 +160,31 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+/* Custom styles for smoother transitions */
+header {
+    transition: background-color 0.3s ease;
+}
+
+.notification-dropdown {
+    transform-origin: top;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.profile-dropdown {
+    transform-origin: top;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+/* Pulse animation for notification badge */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.animate-pulse {
+    animation: pulse 1.5s infinite;
+}
+</style>

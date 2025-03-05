@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Assignment;
 use App\Models\AssignmentComment;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AssignmentCommentSeeder extends Seeder

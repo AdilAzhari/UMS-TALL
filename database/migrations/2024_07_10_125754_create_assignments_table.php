@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->integer('total_marks');
             $table->foreignId('updated_by')->nullable()->constrained('teachers')->cascadeOnDelete();
-            $table->enum('status', ['pending', 'completed', 'overdue'])->default('pending');
+            $table->enum('status', ['Pending', 'Completed', 'Overdue'])->default('Pending');
             $table->string('title');
             $table->string('file')->nullable();
             $table->text('description');
@@ -29,8 +29,8 @@ return new class extends Migration
             $table->integer('attachment_limit')->default(3);
             $table->timestamp('submission_start')->nullable();
             $table->timestamp('submission_end')->nullable();
-            $table->enum('late_submission_policy', ['not_allowed', 'allowed'])->default('not_allowed');
-            $table->enum('grading_type',['numeric','letter','pass_fail'])->default('numeric');
+            $table->enum('late_submission_policy', ['NotAllowed', 'Allowed'])->default('NotAllowed');
+            $table->enum('grading_type', ['Numeric', 'Letter', 'PassFail'])->default('Numeric');
             $table->timestamp('assessment_start')->nullable();
             $table->timestamp('assessment_end')->nullable();
             $table->integer('passing_score')->default(0);

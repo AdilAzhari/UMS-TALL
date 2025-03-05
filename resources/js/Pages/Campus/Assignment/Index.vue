@@ -99,8 +99,6 @@
 </template>
 
 <script>
-import Header from '@/Components/Campus/Header.vue';
-import Breadcrumbs from "@/Components/Campus/Breadcrumb.vue";
 import CampusLayout from "@/Layouts/CampusLayout.vue";
 export default {
     layout: CampusLayout,

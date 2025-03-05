@@ -2,13 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Enums\ExamStatus;
 use App\Models\Exam;
-use App\Models\Exam_result;
+use App\Models\ExamResult;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Exam_result>
+ * @extends Factory<ExamResult>
  */
 class ExamResultFactory extends Factory
 {
@@ -23,7 +24,7 @@ class ExamResultFactory extends Factory
             'exam_id' => Exam::inRandomOrder()->first()->id ?? Exam::factory()->create()->id,
             'student_id' => Student::inRandomOrder()->first()->id ?? Student::factory()->create()->id,
             'score' => $this->faker->randomFloat(2, 0, 100),
-            'status' => $this->faker->randomElement(['passed', 'failed', 'absent']),
+            'status' => $this->faker->randomElement([ExamStatus::PASSED, ExamStatus::FAILED, ExamStatus::ABSENT]),
             'notes' => $this->faker->sentence(),
         ];
     }

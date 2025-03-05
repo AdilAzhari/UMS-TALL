@@ -6,12 +6,12 @@ use App\Filament\Admin\Resources\ExamQuestionResource\Pages;
 use App\Models\ExamQuestion;
 use Exception;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Table;
-use Filament\Forms\Components\Section;
 
 class ExamQuestionResource extends Resource
 {

@@ -10,9 +10,17 @@ class AssignmentSubmission extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     * These fields can be filled using mass assignment.
+     *
+     * @var array<string>
+     */
     protected $fillable = [
         'obtained_marks',
         'assignment_id',
+        'student_id',
+        'is_late',
         'status',
         'remarks',
         'submitted_at',

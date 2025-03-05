@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PeerReview;
 use App\Http\Requests\StorePeerReviewRequest;
 use App\Http\Requests\UpdatePeerReviewRequest;
+use App\Models\PeerReview;
 
 class PeerReviewController extends Controller
 {

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\AssignmentSubmissionFile;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class AssignmentSubmissionFileSeeder extends Seeder

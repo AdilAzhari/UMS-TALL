@@ -123,7 +123,7 @@ export default {
     props: {
         story: Object,
         comments: Array,
-        recommendedStories: Array, // Add this prop to receive recommended stories
+        recommendedStories: Array,
     },
     data() {
         return {

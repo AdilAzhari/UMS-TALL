@@ -6,18 +6,19 @@ use Filament\Forms\Components\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Registration extends Model
 {
-    use HasFactory;
+    use HasFactory, softdeletes;
 
     protected $fillable = [
         'student_id',
         'course_id',
         'proctor_id',
         'term_id',
-        'status',
-        'proctor_status',
+        'registration_status',
+        'proctor_approval_status',
         'proctored',
         'payment_status',
         'registered_at',
@@ -57,27 +58,27 @@ class Registration extends Model
 
     public function scopeInProgress($query)
     {
-        return $query->where('status', 'in_progress');
+        return $query->where('registration_status', 'in_progress');
     }
 
     public function scopePastCourses($query)
     {
-        return $query->where('status', 'completed');
+        return $query->where('registration_status', 'completed');
     }
 
     public function scopeFutureCourses($query)
     {
-        return $query->where('status', 'registered');
+        return $query->where('registration_status', 'registered');
     }
 
     public function scopeCurrentCourses($query)
     {
-        return $query->where('status', 'in_progress');
+        return $query->where('registration_status', 'in_progress');
     }
 
     public function scopeAvailableCourses($query)
     {
-        return $query->where('status', 'registered');
+        return $query->where('registration_status', 'registered');
     }
 
     public function scopeProctored($query): void

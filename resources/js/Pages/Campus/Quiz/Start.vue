@@ -6,75 +6,81 @@
             <p class="text-gray-600 mt-2">{{ quiz.description }}</p>
         </header>
 
-        <!-- Question Navigation -->
-        <div class="bg-white shadow rounded-lg p-4 mb-6 flex justify-between items-center">
-            <div>
-                <p class="text-gray-700">Question {{ currentQuestionIndex + 1 }} of {{ quiz.questions.length }}</p>
-            </div>
-            <button
-                @click="submitQuiz"
-                :disabled="!isQuizComplete"
-                class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-                Submit Quiz
-            </button>
-<!--            {{ currentQuestion.valueOf(question) }}-->
+        <!-- Display message if no questions -->
+        <div v-if="quiz.questions.length === 0" class="bg-white shadow rounded-lg p-6 mb-6">
+            <p class="text-red-500">This quiz has no questions yet. Please try again later.</p>
         </div>
 
-        <!-- Current Question -->
-        <div v-if="currentQuestion" class="bg-white shadow rounded-lg p-6 mb-6">
-            <h2 class="text-lg font-semibold text-gray-800">
-                {{ currentQuestion.question }}
-            </h2>
-            <div class="mt-4 space-y-2">
-                <label
-                    v-for="(option, index) in currentQuestion.quiz_question_options"
-                    :key="index"
-                    class="block bg-gray-50 border border-gray-200 rounded-lg p-3 cursor-pointer hover:bg-gray-100"
+        <!-- Quiz Content -->
+        <div v-else>
+            <!-- Question Navigation -->
+            <div class="bg-white shadow rounded-lg p-4 mb-6 flex justify-between items-center">
+                <div>
+                    <p class="text-gray-700">Question {{ currentQuestionIndex + 1 }} of {{ quiz.questions.length }}</p>
+                </div>
+                <button
+                    @click="submitQuiz"
+                    :disabled="!isQuizComplete"
+                    class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    <input
-                        type="radio"
-                        :name="`question-${currentQuestionIndex}`"
-                        :value="option.id"
-                        v-model="answers[currentQuestionIndex]"
-                        class="mr-2"
-                    />
-                    {{ option.option }}
-                </label>
+                    Submit Quiz
+                </button>
             </div>
-        </div>
 
-        <!-- Navigation Buttons -->
-        <div class="flex justify-between" v-if="quiz.questions.length">
-            <button
-                @click="prevQuestion"
-                :disabled="currentQuestionIndex === 0"
-                class="bg-gray-200 text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-300 disabled:opacity-50"
-            >
-                Previous
-            </button>
-            <button
-                @click="nextQuestion"
-                :disabled="currentQuestionIndex === quiz.questions.length - 1"
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
-            >
-                Next
-            </button>
-        </div>
+            <!-- Current Question -->
+            <div v-if="currentQuestion" class="bg-white shadow rounded-lg p-6 mb-6">
+                <h2 class="text-lg font-semibold text-gray-800">
+                    {{ currentQuestion.question }}
+                </h2>
+                <div class="mt-4 space-y-2">
+                    <label
+                        v-for="(option, index) in currentQuestion.quiz_question_options"
+                        :key="index"
+                        class="block bg-gray-50 border border-gray-200 rounded-lg p-3 cursor-pointer hover:bg-gray-100"
+                    >
+                        <input
+                            type="radio"
+                            :name="`question-${currentQuestionIndex}`"
+                            :value="option.id"
+                            v-model="answers[currentQuestion.id]"
+                            class="mr-2"
+                        />
+                        {{ option.option }}
+                    </label>
+                </div>
+            </div>
 
-        <!-- Progress Indicator -->
-        <div class="mt-6">
-            <div class="flex justify-center space-x-2">
-                <div
-                    v-for="(question, index) in quiz.questions"
-                    :key="index"
-                    :class="[ 'w-3 h-3 rounded-full', answers[index] ? 'bg-green-500' : 'bg-gray-300' ]"
-                ></div>
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between">
+                <button
+                    @click="prevQuestion"
+                    :disabled="currentQuestionIndex === 0"
+                    class="bg-gray-200 text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-300 disabled:opacity-50"
+                >
+                    Previous
+                </button>
+                <button
+                    @click="nextQuestion"
+                    :disabled="currentQuestionIndex === quiz.questions.length - 1"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                >
+                    Next
+                </button>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="mt-6">
+                <div class="flex justify-center space-x-2">
+                    <div
+                        v-for="(question, index) in quiz.questions"
+                        :key="index"
+                        :class="[ 'w-3 h-3 rounded-full', answers[question.id] ? 'bg-green-500' : 'bg-gray-300' ]"
+                    ></div>
+                </div>
             </div>
         </div>
     </div>
 </template>
-
 <script>
 import CampusLayout from "@/Layouts/CampusLayout.vue";
 
@@ -88,26 +94,26 @@ export default {
             default: () => ({
                 title: '',
                 description: '',
-                questions: []
-            })
+                questions: [],
+            }),
         },
         quizId: {
             type: [Number],
-            required: true
+            required: true,
         },
         courseId: {
             type: [String, Number],
-            required: true
+            required: true,
         },
         weekId: {
             type: [String, Number],
-            required: true
-        }
+            required: true,
+        },
     },
     data() {
         return {
             currentQuestionIndex: 0,
-            answers: [],
+            answers: {},
             submitting: false,
         };
     },
@@ -116,7 +122,7 @@ export default {
             return this.quiz.questions?.[this.currentQuestionIndex] || null;
         },
         isQuizComplete() {
-            return this.quiz.questions.every((_, index) => this.answers[index] !== undefined);
+                return this.quiz.questions.every((question) => this.answers[question.id] !== undefined);
         },
     },
     watch: {
@@ -124,13 +130,14 @@ export default {
             immediate: true,
             handler(newQuiz) {
                 if (newQuiz?.questions) {
-                    this.answers = Array(newQuiz.questions.length).fill(null);
+                    this.answers = {};
                 }
             },
         },
     },
     mounted() {
-        console.log(this.currentQuestion);
+        console.log('Quiz Data:', this.quiz);
+        console.log('Quiz Questions:', this.quiz.questions);
     },
     methods: {
         prevQuestion() {
@@ -156,7 +163,6 @@ export default {
                 quizId: this.quizId,
             }), {
                 answers: this.answers,
-                totalQuestions: this.quiz.questions.length,
             });
         },
     },

@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\QuizDuration;
+use App\Enums\QuizStatus;
+use App\Enums\QuizType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +15,9 @@ class Quiz extends Model
 {
     use HasFactory;
 
+    /**
+     * @type array<string>
+     */
     protected $fillable = [
         'course_id',
         'title',
@@ -23,6 +29,7 @@ class Quiz extends Model
         'week_id',
         'class_group_id',
         'type',
+        'code',
         'status',
         'created_by',
         'updated_by',
@@ -31,13 +38,19 @@ class Quiz extends Model
     ];
 
     protected $attributes = [
-        'type' => 'ungraded',
-        'status' => 'published',
+        'type' => QuizType::UNGRADED,
+        'status' => QuizStatus::PUBLISHED,
     ];
 
+    /**
+     * @type array<string,array>
+     */
     protected $casts = [
         'start_date' => 'datetime',
         'end_date' => 'datetime',
+        'status' => QuizStatus::class,
+        'type' => QuizType::class,
+        'duration' => QuizDuration::class,
     ];
 
     public function course(): BelongsTo
