@@ -110,9 +110,9 @@ php artisan key:generate
 ### 4. Configure the database:
 Update the `.env` file with your database credentials:
 ```env
-DB_DATABASE=your_database_name
-DB_USERNAME=your_database_user
-DB_PASSWORD=your_database_password
+DB_DATABASE=ums
+DB_USERNAME=roote
+DB_PASSWORD=
 ```
 
 ### 5. Run migrations:
