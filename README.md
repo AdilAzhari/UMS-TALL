@@ -91,7 +91,7 @@ A comprehensive **University Management System (UMS)** built using **Laravel, Vu
 
 ### 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/project-name.git
+git clone https://github.com/AdilAzhari/UMS-TALL.git
 cd project-name
 ```
 
@@ -158,19 +158,3 @@ Run all tests and format code with:
 ```bash
 composer test
 ```
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Here’s how you can help:
-
-1. **Fork the repository**.
-2. **Create a new branch** for your feature or bugfix:
-   ```bash
-   git checkout -b feature-new-functionality
-   ```
-3. **Commit your changes** with descriptive messages.
-4. **Submit a pull request** with a detailed description of your changes.
-
----
